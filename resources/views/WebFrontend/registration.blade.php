@@ -67,6 +67,7 @@
                                                                  class="img-fluid"/></a>
                         </div>
                     </div>
+                </div>
             </nav>
         </div>
 
