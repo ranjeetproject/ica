@@ -8,17 +8,17 @@
             <div class="top-cont">
                 <div class="lt-prt">
                     <div class="log-ar">
-                        <img class="img-fluid" src="./images/logo.svg" alt="logo" />
+                        <img class="img-fluid" src="{{asset('css/images/logo.svg')}}" alt="logo" />
                         <div class="text-part">Student<span>Home page</span></div>
                     </div>
                     <div class="std-qt">study that gives you success</div>
                 </div>
                 <div class="rt-prt">
-                    <img src="./images/q-mark.svg" class="img-fluid" />
-                    <img src="./images/video-icon.svg" class="img-fluid" />
+                    <img src="{{asset('css/images/q-mark.svg')}}" class="img-fluid" />
+                    <img src="{{asset('css/images/video-icon.svg')}}" class="img-fluid" />
                     <a href="#" class="login-btn">Login</a>
                     <div class="free-sec">
-                        <img src="./images/free-icon.svg" class="img-fluid" />
+                        <img src="{{asset('css/images/free-icon.svg')}}" class="img-fluid" />
                         <span class="regis">registration</span>
                     </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -57,14 +57,14 @@
                     <div class="follow-us">
                         <span>Follow us</span>
                         <a href="#" class="social-link">
-                            <img src="./images/fb-icon.svg" class="img-fluid" /></a>
-                        <a href="#" class="social-link"><img src="./images/twitter-icon.svg"
+                            <img src="{{asset('css/images/fb-icon.svg')}}" class="img-fluid" /></a>
+                        <a href="#" class="social-link"><img src="{{asset('css/images/twitter-icon.svg')}}"
                                                              class="img-fluid" /></a>
-                        <a href="#" class="social-link"><img src="./images/pinterest-icon.svg"
+                        <a href="#" class="social-link"><img src="{{asset('css/images/pinterest-icon.svg')}}"
                                                              class="img-fluid" /></a>
-                        <a href="#" class="social-link"><img src="./images/Linkedin-icon.svg"
+                        <a href="#" class="social-link"><img src="{{asset('css/images/Linkedin-icon.svg')}}"
                                                              class="img-fluid" /></a>
-                        <a href="#" class="social-link"><img src="./images/youtube-icon.svg"
+                        <a href="#" class="social-link"><img src="{{asset('css/images/youtube-icon.svg')}}"
                                                              class="img-fluid" /></a>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
 <!-- end header -->
 
 <section class="banner-wrp">
-    <img src="./images/dot-group-top.png" class="img-fluid top_icon" alt="#">
+    <img src="{{asset('css/images/dot-group-top.png')}}" class="img-fluid top_icon" alt="#">
     <div class="ban-content">
         <h1 class="cont-head">
             Over <span>20,000+ </span>online
@@ -86,8 +86,8 @@
             Iste Natus Error sit Voluptatem Accusantium....
         </p>
         <div class="but-wrap">
-            <img src="./images/point-arrow.svg" class="img-fluid point-arrow" alt="#">
-            <img src="./images/dot-group.png" class="img-fluid bottom_icon" alt="#">
+            <img src="{{asset('css/images/point-arrow.svg')}}" class="img-fluid point-arrow" alt="#">
+            <img src="{{asset('css/images/dot-group.png')}}" class="img-fluid bottom_icon" alt="#">
             <a href="#" class="btn common-button">Explore All Courses</a>
         </div>
     </div>
@@ -104,9 +104,9 @@
         <div class="h-cards-wrp">
             <div class="card">
                 <span class="count-no">1</span>
-                <img src="./images/how-connector.png" alt="#" class="img-fluid conntector" />
+                <img src="{{asset('css/images/how-connector.png')}}" alt="#" class="img-fluid conntector" />
                 <div class="card-body">
-                    <img src="./images/how-it-icon-1.svg" class="img-icon img-fluid" alt="#">
+                    <img src="{{asset('css/images/how-it-icon-1.svg')}}" class="img-icon img-fluid" alt="#">
                     <div class="content">
                         <h4 class="c-text">Numquam veli</h4>
                         <p>Don numq modi</p>
@@ -115,9 +115,9 @@
             </div>
             <div class="card">
                 <span class="count-no">2</span>
-                <img src="./images/how-connector.png" alt="#" class="img-fluid conntector" />
+                <img src="{{asset('css/images/how-connector.png')}}" alt="#" class="img-fluid conntector" />
                 <div class="card-body">
-                    <img src="./images/how-it-icon-2.svg" class="img-icon img-fluid" alt="#">
+                    <img src="{{asset('css/images/how-it-icon-2.svg')}}" class="img-icon img-fluid" alt="#">
                     <div class="content">
                         <h4 class="c-text">Numquam veli</h4>
                         <p>Don numq modi</p>
@@ -126,9 +126,9 @@
             </div>
             <div class="card">
                 <span class="count-no">3</span>
-                <img src="./images/how-connector.png" alt="#" class="img-fluid conntector" />
+                <img src="{{asset('css/images/how-connector.png')}}" alt="#" class="img-fluid conntector" />
                 <div class="card-body">
-                    <img src="./images/how-it-icon-3.svg" class="img-icon img-fluid" alt="#">
+                    <img src="{{asset('css/images/how-it-icon-3.svg')}}" class="img-icon img-fluid" alt="#">
                     <div class="content">
                         <h4 class="c-text">Numquam veli</h4>
                         <p>Don numq modi</p>
@@ -138,7 +138,7 @@
             <div class="card">
                 <span class="count-no">4</span>
                 <div class="card-body">
-                    <img src="./images/how-it-icon-4.svg" class="img-icon img-fluid" alt="#">
+                    <img src="{{asset('css/images/how-it-icon-4.svg')}}" class="img-icon img-fluid" alt="#">
                     <div class="content">
                         <h4 class="c-text">Numquam veli</h4>
                         <p>Don numq modi</p>
@@ -167,24 +167,24 @@
         </div>
         <div class="home-courses">
             <div class="course-card">
-                <img src="./images/course-image.jpg" class="course-image" alt="#" />
+                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
                 <div class="total-lesson">
-                    <img src="./images/lesson-icon.png" class="img-flid" alt="#">
+                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
                     <span>8 Lessons</span>
                 </div>
                 <h4 class="course-name">WordPress for Beginners
                     Master Word Press
                 </h4>
                 <div class="rating">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/outline-star.svg" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
                     <span>4.50(2)</span>
                 </div>
                 <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
 
                     <div class="avt-name">
                         <span>by</span>
@@ -193,24 +193,24 @@
                 </div>
             </div>
             <div class="course-card">
-                <img src="./images/course-image.jpg" class="course-image" alt="#" />
+                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
                 <div class="total-lesson">
-                    <img src="./images/lesson-icon.png" class="img-flid" alt="#">
+                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
                     <span>8 Lessons</span>
                 </div>
                 <h4 class="course-name">WordPress for Beginners
                     Master Word Press
                 </h4>
                 <div class="rating">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/outline-star.svg" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
                     <span>4.50(2)</span>
                 </div>
                 <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
 
                     <div class="avt-name">
                         <span>by</span>
@@ -219,24 +219,24 @@
                 </div>
             </div>
             <div class="course-card">
-                <img src="./images/course-image.jpg" class="course-image" alt="#" />
+                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
                 <div class="total-lesson">
-                    <img src="./images/lesson-icon.png" class="img-flid" alt="#">
+                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
                     <span>8 Lessons</span>
                 </div>
                 <h4 class="course-name">WordPress for Beginners
                     Master Word Press
                 </h4>
                 <div class="rating">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/outline-star.svg" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
                     <span>4.50(2)</span>
                 </div>
                 <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
 
                     <div class="avt-name">
                         <span>by</span>
@@ -245,24 +245,24 @@
                 </div>
             </div>
             <div class="course-card">
-                <img src="./images/course-image.jpg" class="course-image" alt="#" />
+                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
                 <div class="total-lesson">
-                    <img src="./images/lesson-icon.png" class="img-flid" alt="#">
+                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
                     <span>8 Lessons</span>
                 </div>
                 <h4 class="course-name">WordPress for Beginners
                     Master Word Press
                 </h4>
                 <div class="rating">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/outline-star.svg" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
                     <span>4.50(2)</span>
                 </div>
                 <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
 
                     <div class="avt-name">
                         <span>by</span>
@@ -271,24 +271,24 @@
                 </div>
             </div>
             <div class="course-card">
-                <img src="./images/course-image.jpg" class="course-image" alt="#" />
+                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
                 <div class="total-lesson">
-                    <img src="./images/lesson-icon.png" class="img-flid" alt="#">
+                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
                     <span>8 Lessons</span>
                 </div>
                 <h4 class="course-name">WordPress for Beginners
                     Master Word Press
                 </h4>
                 <div class="rating">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/outline-star.svg" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
                     <span>4.50(2)</span>
                 </div>
                 <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
 
                     <div class="avt-name">
                         <span>by</span>
@@ -297,24 +297,24 @@
                 </div>
             </div>
             <div class="course-card">
-                <img src="./images/course-image.jpg" class="course-image" alt="#" />
+                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
                 <div class="total-lesson">
-                    <img src="./images/lesson-icon.png" class="img-flid" alt="#">
+                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
                     <span>8 Lessons</span>
                 </div>
                 <h4 class="course-name">WordPress for Beginners
                     Master Word Press
                 </h4>
                 <div class="rating">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/outline-star.svg" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
                     <span>4.50(2)</span>
                 </div>
                 <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
 
                     <div class="avt-name">
                         <span>by</span>
@@ -323,24 +323,24 @@
                 </div>
             </div>
             <div class="course-card">
-                <img src="./images/course-image.jpg" class="course-image" alt="#" />
+                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
                 <div class="total-lesson">
-                    <img src="./images/lesson-icon.png" class="img-flid" alt="#">
+                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
                     <span>8 Lessons</span>
                 </div>
                 <h4 class="course-name">WordPress for Beginners
                     Master Word Press
                 </h4>
                 <div class="rating">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/full-star.svg" class="img-flid">
-                    <img src="./images/outline-star.svg" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
                     <span>4.50(2)</span>
                 </div>
                 <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
 
                     <div class="avt-name">
                         <span>by</span>
@@ -367,7 +367,91 @@
         <div class="home-courses">
             <div class="course-card">
                 <div class="t-quotes-card">
-                    <img src="./images/quote_icon.svg" class="img-fluid quote-icon" />
+                    <img src="{{asset('css/images/quote_icon.svg')}}" class="img-fluid quote-icon" />
+                    <h3>Best Support ever!</h3>
+                    <p>
+                        5 stars for design quality, but
+                        also for prompt new
+                        customer service and great
+                        attention to details work.
+
+                    </p>
+                </div>
+                <div class="course-by-wrp">
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
+                    <div class="avt-name">
+                        <label> Alex Brown</label>
+                        <p class="desg">Principal</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="t-quotes-card">
+                    <img src="{{asset('css/images/quote_icon.svg')}}" class="img-fluid quote-icon" />
+                    <h3>Best Support ever!</h3>
+                    <p>
+                        5 stars for design quality, but
+                        also for prompt new
+                        customer service and great
+                        attention to details work.
+
+                    </p>
+                </div>
+                <div class="course-by-wrp">
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
+                    <div class="avt-name">
+                        <label> Alex Brown</label>
+                        <p class="desg">Principal</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="t-quotes-card">
+                    <img src="{{asset('css/images/quote_icon.svg')}}" class="img-fluid quote-icon" />
+                    <h3>Best Support ever!</h3>
+                    <p>
+                        5 stars for design quality, but
+                        also for prompt new
+                        customer service and great
+                        attention to details work.
+
+                    </p>
+                </div>
+                <div class="course-by-wrp">
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
+                    <div class="avt-name">
+                        <label> Alex Brown</label>
+                        <p class="desg">Principal</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="t-quotes-card">
+                    <img src="{{asset('css/images/quote_icon.svg')}}" class="img-fluid quote-icon" />
+                    <h3>Best Support ever!</h3>
+                    <p>
+                        5 stars for design quality, but
+                        also for prompt new
+                        customer service and great
+                        attention to details work.
+
+                    </p>
+                </div>
+                <div class="course-by-wrp">
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
+                    <div class="avt-name">
+                        <label> Alex Brown</label>
+                        <p class="desg">Principal</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="t-quotes-card">
+                    <img src="{{asset('css/images/quote_icon.svg')}}" class="img-fluid quote-icon" />
                     <h3>Best Support ever!</h3>
                     <p>
                         5 stars for design quality, but
@@ -388,7 +472,7 @@
             </div>
             <div class="course-card">
                 <div class="t-quotes-card">
-                    <img src="./images/quote_icon.svg" class="img-fluid quote-icon" />
+                    <img src="{{asset('css/images/quote_icon.svg')}}" class="img-fluid quote-icon" />
                     <h3>Best Support ever!</h3>
                     <p>
                         5 stars for design quality, but
@@ -399,7 +483,7 @@
                     </p>
                 </div>
                 <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
                     <div class="avt-name">
                         <label> Alex Brown</label>
                         <p class="desg">Principal</p>
@@ -409,7 +493,7 @@
             </div>
             <div class="course-card">
                 <div class="t-quotes-card">
-                    <img src="./images/quote_icon.svg" class="img-fluid quote-icon" />
+                    <img src="{{asset('css/images/quote_icon.svg')}}" class="img-fluid quote-icon" />
                     <h3>Best Support ever!</h3>
                     <p>
                         5 stars for design quality, but
@@ -420,7 +504,7 @@
                     </p>
                 </div>
                 <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
                     <div class="avt-name">
                         <label> Alex Brown</label>
                         <p class="desg">Principal</p>
@@ -430,7 +514,7 @@
             </div>
             <div class="course-card">
                 <div class="t-quotes-card">
-                    <img src="./images/quote_icon.svg" class="img-fluid quote-icon" />
+                    <img src="{{asset('css/images/quote_icon.svg')}}" class="img-fluid quote-icon" />
                     <h3>Best Support ever!</h3>
                     <p>
                         5 stars for design quality, but
@@ -441,91 +525,7 @@
                     </p>
                 </div>
                 <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
-                    <div class="avt-name">
-                        <label> Alex Brown</label>
-                        <p class="desg">Principal</p>
-                    </div>
-
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="t-quotes-card">
-                    <img src="./images/quote_icon.svg" class="img-fluid quote-icon" />
-                    <h3>Best Support ever!</h3>
-                    <p>
-                        5 stars for design quality, but
-                        also for prompt new
-                        customer service and great
-                        attention to details work.
-
-                    </p>
-                </div>
-                <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
-                    <div class="avt-name">
-                        <label> Alex Brown</label>
-                        <p class="desg">Principal</p>
-                    </div>
-
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="t-quotes-card">
-                    <img src="./images/quote_icon.svg" class="img-fluid quote-icon" />
-                    <h3>Best Support ever!</h3>
-                    <p>
-                        5 stars for design quality, but
-                        also for prompt new
-                        customer service and great
-                        attention to details work.
-
-                    </p>
-                </div>
-                <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
-                    <div class="avt-name">
-                        <label> Alex Brown</label>
-                        <p class="desg">Principal</p>
-                    </div>
-
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="t-quotes-card">
-                    <img src="./images/quote_icon.svg" class="img-fluid quote-icon" />
-                    <h3>Best Support ever!</h3>
-                    <p>
-                        5 stars for design quality, but
-                        also for prompt new
-                        customer service and great
-                        attention to details work.
-
-                    </p>
-                </div>
-                <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
-                    <div class="avt-name">
-                        <label> Alex Brown</label>
-                        <p class="desg">Principal</p>
-                    </div>
-
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="t-quotes-card">
-                    <img src="./images/quote_icon.svg" class="img-fluid quote-icon" />
-                    <h3>Best Support ever!</h3>
-                    <p>
-                        5 stars for design quality, but
-                        also for prompt new
-                        customer service and great
-                        attention to details work.
-
-                    </p>
-                </div>
-                <div class="course-by-wrp">
-                    <img src="./images/inst-avatar.png" class="ins-avt" alt="#" />
+                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
                     <div class="avt-name">
                         <label> Alex Brown</label>
                         <p class="desg">Principal</p>

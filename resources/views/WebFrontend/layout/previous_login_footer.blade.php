@@ -2,7 +2,7 @@
     <div class="container">
         <div class="social-wrap">
             <div class="footer-logo-wrap">
-                <img src="./images/logo-footer.svg" class="footer-logo" alt="#" />
+                <img src="{{asset('css/images/logo-footer.svg')}}" class="footer-logo" alt="#" />
                 <p class="text-prt">Sectetur, adipisci velit, sed quia non numquam esectetur, adipisci velit, sed
                     quia
                     non numquam..</p>
@@ -12,7 +12,7 @@
             <div class="footer-address">
                 <h6 class="fo-head">Get in touch</h6>
                 <div class="add-bar">
-                    <img src="./images/location-icon.svg" class="add-icon">
+                    <img src="{{asset('css/images/location-icon.svg')}}" class="add-icon">
                     <div class="label">
                         <label>Address:</label>
                         <span>Teum iure reprehenderit qui in<br>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="add-bar">
-                    <img src="./images/call-icon.svg" class="add-icon">
+                    <img src="{{asset('css/images/call-icon.svg')}}" class="add-icon">
                     <div class="label">
                         <label>Phone:</label>
                         <a href="tel:+160 4825 6769">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="add-bar">
-                    <img src="./images/envelop-icon.svg" class="add-icon">
+                    <img src="{{asset('css/images/envelop-icon.svg')}}" class="add-icon">
                     <div class="label">
                         <label>Email:</label>
                         <a href="mailto: jasonlokau@gmail.oom">
@@ -41,16 +41,16 @@
                 <h6 class="fo-head">Quick Links</h6>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="./images/footer-arrow.png"> About Us</a>
+                        <a class="nav-link" href="#"><img src="{{asset('css/images/footer-arrow.png')}}"> About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="./images/footer-arrow.png"> Contact Us</a>
+                        <a class="nav-link" href="#"><img src="{{asset('css/images/footer-arrow.png')}}"> Contact Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="./images/footer-arrow.png"> Terms & Conditions</a>
+                        <a class="nav-link" href="#"><img src="{{asset('css/images/footer-arrow.png')}}"> Terms & Conditions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"><img src="./images/footer-arrow.png"> Privacy Policy</a>
+                        <a class="nav-link"><img src="{{asset('css/images/footer-arrow.png')}}"> Privacy Policy</a>
                     </li>
                 </ul>
             </div>
@@ -59,25 +59,25 @@
                 <div class="row">
                     <div class="col-md-6">
                         <a href="#" class="quick-links-social">
-                            <img src="./images/footer-fb-icon.svg" class="f-social-icon" alt="#" />
+                            <img src="{{asset('css/images/footer-fb-icon.svg')}}" class="f-social-icon" alt="#" />
                             Facebook &nbsp;&nbsp;&nbsp;
                         </a>
                     </div>
                     <div class="col-md-6">
                         <a href="#" class="quick-links-social">
-                            <img src="./images/footer-twitter-icon.svg" class="f-social-icon" alt="#" />
+                            <img src="{{asset('css/images/footer-twitter-icon.svg')}}" class="f-social-icon" alt="#" />
                             Twitter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                     </div>
                     <div class="col-md-6">
                         <a href="#" class="quick-links-social">
-                            <img src="./images/footer-pint-icon.svg" class="f-social-icon" alt="#" />
+                            <img src="{{asset('css/images/footer-pint-icon.svg')}}" class="f-social-icon" alt="#" />
                             Pinterest&nbsp;&nbsp;
                         </a>
                     </div>
                     <div class="col-md-6">
                         <a href="#" class="quick-links-social">
-                            <img src="./images/footer-insta-icon.svg" class="f-social-icon" alt="#" />
+                            <img src="{{asset('css/images/footer-insta-icon.svg')}}" class="f-social-icon" alt="#" />
                             Instagram
                         </a>
                     </div>
