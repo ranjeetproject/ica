@@ -94,6 +94,7 @@
 <script src="{{asset('js/WebFrontend/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('js/WebFrontend/slick.js')}}"></script>
 <script src="{{asset('js/WebFrontend/custom.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 </body>
 
 </html>

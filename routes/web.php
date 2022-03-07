@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','WebFrontend\HomePageController@homePageDisplay');
 Route::get('/signUp','WebFrontend\UserController@signUp');
+Route::prefix('ica')->group(function ()
+{
+    Route::get('/login','WebFrontend\UserController@loginForm')->name('ica-login');
+    Route::post('/post-login','WebFrontend\UserController@postLogin')->name('post-login');
+    Route::post('/send-otp','WebFrontend\UserController@sendOTP')->name('send-otp');
+
+});
+
 
 Auth::routes();
 

@@ -16,7 +16,7 @@
                 <div class="rt-prt">
                     <img src="{{asset('css/images/q-mark.svg')}}" class="img-fluid" />
                     <img src="{{asset('css/images/video-icon.svg')}}" class="img-fluid" />
-                    <a href="#" class="login-btn">Login</a>
+                    <a href="{{route('ica-login')}}" class="login-btn">Login</a>
                     <div class="free-sec">
                         <img src="{{asset('css/images/free-icon.svg')}}" class="img-fluid" />
                         <span class="regis">registration</span>
