@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','WebFrontend\HomePageController@homePageDisplay');
+Route::get('/signUp','WebFrontend\UserController@signUp');
 
 Auth::routes();
 
