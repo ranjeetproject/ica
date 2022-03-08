@@ -20,6 +20,7 @@ Route::prefix('ica')->group(function ()
     Route::get('/login','WebFrontend\UserController@loginForm')->name('ica-login');
     Route::post('/post-login','WebFrontend\UserController@postLogin')->name('post-login');
     Route::post('/send-otp','WebFrontend\UserController@sendOTP')->name('send-otp');
+    Route::post('/verify-otp','WebFrontend\UserController@verifyOTP')->name('verify-otp');
 
 });
 
