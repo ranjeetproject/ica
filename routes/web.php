@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','WebFrontend\HomePageController@homePageDisplay');
 Route::get('/signUp','WebFrontend\UserController@signUp');
+Route::post('/registration','WebFrontend\UserController@registration')->name('registration');
 Route::prefix('ica')->group(function ()
 {
     Route::get('/login','WebFrontend\UserController@loginForm')->name('ica-login');
@@ -28,3 +29,6 @@ Route::prefix('ica')->group(function ()
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

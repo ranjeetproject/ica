@@ -6,17 +6,17 @@
                 <div class="top-cont">
                     <div class="lt-prt">
                         <div class="log-ar">
-                            <img class="img-fluid" src="./images/logo.svg" alt="logo"/>
+                            <img class="img-fluid" src=".{{asset('css/images/logo.svg')}}" alt="logo"/>
                             <div class="text-part">Student<span>Home page</span></div>
                         </div>
                         <div class="std-qt">study that gives you success</div>
                     </div>
                     <div class="rt-prt">
-                        <img src="./images/q-mark.svg" class="img-fluid"/>
-                        <img src="./images/video-icon.svg" class="img-fluid"/>
+                        <img src="{{asset('css/images/q-mark.svg')}}" class="img-fluid"/>
+                        <img src="{{asset('css/images/video-icon.svg')}}" class="img-fluid"/>
                         <a href="#" class="login-btn">Login</a>
                         <div class="free-sec">
-                            <img src="./images/free-icon.svg" class="img-fluid"/>
+                            <img src="{{asset('css/images/free-icon.svg')}}" class="img-fluid"/>
                             <span class="regis">registration</span>
                         </div>
 
@@ -56,18 +56,17 @@
                         <div class="follow-us">
                             <span>Follow us</span>
                             <a href="#" class="social-link">
-                                <img src="/images/fb-icon.svg" class="img-fluid"/></a>
-                            <a href="#" class="social-link"><img src="./images/twitter-icon.svg"
+                                <img src="{{asset('css/images/fb-icon.svg')}}" class="img-fluid"/></a>
+                            <a href="#" class="social-link"><img src="{{asset('css/images/twitter-icon.svg')}}"
                                                                  class="img-fluid"/></a>
-                            <a href="#" class="social-link"><img src="./images/pinterest-icon.svg"
+                            <a href="#" class="social-link"><img src="{{asset('css/images/pinterest-icon.svg')}}"
                                                                  class="img-fluid"/></a>
-                            <a href="#" class="social-link"><img src="./images/Linkedin-icon.svg"
+                            <a href="#" class="social-link"><img src="{{asset('css/images/Linkedin-icon.svg')}}"
                                                                  class="img-fluid"/></a>
-                            <a href="#" class="social-link"><img src="./images/youtube-icon.svg"
+                            <a href="#" class="social-link"><img src="{{asset('css/images/youtube-icon.svg')}}"
                                                                  class="img-fluid"/></a>
                         </div>
                     </div>
-                </div>
             </nav>
         </div>
 
@@ -89,45 +88,61 @@
                     </div>
                 </div>
                 <div class="form-part">
-                    <img src="./images/linear-circle.png" class="top-left"/>
-                    <img src="./images/linear-circle.png" class="top-right"/>
-                    <img src="./images/linear-circle.png" class="bottom-left"/>
-                    <img src="./images/dot-group.png" class="dot-top-right"/>
-                    <img src="./images/dot-group.png" class="dot-left-bottom"/>
+                    <img src="{{asset('css/images/linear-circle.png')}}" class="top-left"/>
+                    <img src="{{asset('css/images/linear-circle.png')}}" class="top-right"/>
+                    <img src="{{asset('css/images/linear-circle.png')}}" class="bottom-left"/>
+                    <img src="{{asset('css/images/dot-group.png')}}" class="dot-top-right"/>
+                    <img src="{{asset('css/images/dot-group.png')}}" class="dot-left-bottom"/>
 
                     <div class="snup-logo-wrap">
-                        <img src="./images/logo-signup.png" class="snup-logo" alt="#">
+                        <img src="{{asset('css/images/logo-signup.png')}}" class="snup-logo" alt="#">
                         <div class="s-content">
                             <h3>Create an <span>account</span></h3>
                             <p>Iste Natus Error sit Voluptatem AccusantiumQuis autem
                                 eum iure reprehenderit qui in ea vol.....</p>
                         </div>
                     </div>
-                    <form class="form">
+                    <form class="form" method="post" action="{{ url('/registration') }}"> 
+                        @csrf
                         <div class="mb-3">
-                            <input type="Name" class="form-control" placeholder="Name">
+                            <input type="Name" class="form-control" placeholder="Name" id="name" name="name" required>
+                            @if ($errors->has('name'))
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                            @endif
                         </div>
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email ID">
+                            <input type="email" class="form-control" placeholder="Email ID" id="email" name="email" required>
+                            @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
                         </div>
                         <div class="mb-3">
-                            <input type="number" class="form-control" placeholder="Mobile Number">
+                            <input type="number" class="form-control" placeholder="Mobile Number" id="mobile" name="mobile" required>
+                            @if ($errors->has('mobile'))
+                                <span class="text-danger">{{ $errors->first('mobile') }}</span>
+                            @endif
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Address">
+                            <input type="text" class="form-control" placeholder="Address" id="address" name="address" required>
+                            @if ($errors->has('address'))
+                                <span class="text-danger">{{ $errors->first('address') }}</span>
+                            @endif
                         </div>
                         <div class="mb-3">
-                            <select class="form-control">
+                            <select class="form-control" name="state">
                                 <option>State</option>
-                                <option>State</option>
-                                <option>State</option>
+                                <option value="West Bengal">West Bengal</option>
+                                <option value="Jharkhand">Jharkhand</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="City">
+                            <input type="text" class="form-control" placeholder="City" id="city" name="city">
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Pincode">
+                            <input type="number" class="form-control" placeholder="Pincode" id="pincode" name="pincode">
+                            @if ($errors->has('pincode'))
+                                <span class="text-danger">{{ $errors->first('pincode') }}</span>
+                            @endif
                         </div>
                         <button type="submit" class="btn signup">Procceed</button>
                     </form>

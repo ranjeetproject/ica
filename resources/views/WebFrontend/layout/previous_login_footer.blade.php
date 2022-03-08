@@ -98,3 +98,25 @@
 </body>
 
 </html>
+<script>
+function validateform(){  
+    console.log('a');
+    var name=document.myform.name.value;  
+    var password=document.myform.password.value;  
+      
+    if (name==null || name==""){  
+      alert("Name can't be blank");  
+      return false;  
+    }else if(password.length<6){  
+      alert("Password must be at least 6 characters long.");  
+      return false;  
+    }
+    else if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(myForm.email.value))
+    {
+        return (true)
+    }else{
+        alert("You have entered an invalid email address!")
+        return false;
+    }  
+} 
+</script>
