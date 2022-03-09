@@ -1,3 +1,19 @@
+@media screen and (min-width:1920px) {
+    .banner-wrp {
+        max-width: 1588px;
+        margin: auto;
+    }
+
+    .ban-content {
+        max-width: 720px;
+        padding: 85px 0 145px 90px;
+    }
+
+    .db-banner .ban-content {
+        max-width: 680px;
+    }
+}
+
 @media screen and (max-width: 1640px) {
     .container {
         max-width: 90%;
@@ -118,9 +134,86 @@
     .signup-wrapper .signup-container {
         max-width: 90%;
     }
+
+    .course-card.db-cards {
+        padding: 25px;
+    }
+
+    .exam .db-cards .course-image {
+        height: 268px;
+    }
+
+    .crs-dtls-wrp .contents .sub-para {
+        font-size: 22px;
+        line-height: 34px;
+        margin-bottom: 40px;
+    }
+
+    .crs-dtls-wrp .contents .para-text {
+        font-size: 20px;
+        margin-bottom: 40px;
+        line-height: 32px;
+    }
+
+    .crs-dtls-wrp .contents .title-part {
+        color: #072F60;
+        font-weight: 800;
+        font-size: 28px;
+    }
+
+    .crs-dtls-wrp .contents .about-list .nav-item {
+        font-size: 20px;
+        line-height: 28px;
+        background-size: 27px;
+        padding-left: 60px;
+        margin-bottom: 12px
+    }
+
+    .crs-dtls-wrp .module-content .count-number {
+        width: 50px;
+        height: 48px;
+    }
+
+    .crs-dtls-wrp .module-content p {
+        margin: 0;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    .crs-dtls-wrp .module-content .lesson-prt {
+        padding: 10px 20px;
+    }
+
+    .crs-dtls-wrp .module-content .lesson-prt .lesson-number {
+        font-size: 16px;
+    }
+
+    .crs-dtls-wrp {
+        padding: 40px 0 70px;
+    }
+
+    .exam-list-wr .e-title {
+        font-size: 28px;
+        margin-bottom: 35px;
+    }
+
+    .exam-list-wr .list-item {
+        margin-bottom: 35px;
+    }
+
+    .exam-list-wr .list-item span {
+        width: 80px;
+        height: 78px;
+        font-size: 34px;
+    }
+
+    .exam-list-wr .list-item p {
+        font-size: 20px;
+    }
 }
 
-@media screen and (max-width: 1366px) {
+@media screen and (max-width: 1368px) {
     .ban-content {
         max-width: 630px;
     }
@@ -131,6 +224,54 @@
 
     .header .rt-prt .free-sec .regis {
         font-size: 16px;
+    }
+
+    .progress-sec,
+    .progress-wrap .award-part {
+        padding: 25px;
+    }
+
+    .progress-wrap .total-completed {
+        margin-top: 20px;
+    }
+
+    .progress-wrap .row {
+        --bs-gutter-x: 30px;
+    }
+
+    .progress-sec h4 {
+        font-size: 25px;
+        margin: 0 0 25px 0;
+    }
+
+    .progress-wrap .cat-progress .progress {
+        height: 40px;
+    }
+
+    .progress-wrap .cat-progress .progress-bar {
+        font-size: 12px;
+    }
+
+    .progress-wrap .cat-progress .v-percentage {
+        font-size: 14px;
+    }
+
+    .progress-wrap .award-part h4 {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+
+    .progress-wrap .award-part input {
+        height: 50px;
+    }
+
+    .progress-wrap .award-part .search-res .tests {
+        padding: 0 12px;
+        font-size: 16px;
+    }
+
+    .top-cont .lt-prt .log-ar .text-part {
+        margin-left: 20px;
     }
 }
 
@@ -159,6 +300,10 @@
         width: 100%;
         justify-content: center;
         margin-top: 15px;
+    }
+
+    .header-bottom .navbar .nav-link {
+        padding-right: 20px;
     }
 
     .how-it-works .h-cards-wrp {
@@ -254,6 +399,24 @@
 
     .header-bottom .navbar-collapse {
         padding: 20px 0;
+    }
+
+    .banner-wrp.db-banner {
+        padding-top: 59%;
+        background-size: 100%;
+    }
+
+    .db-block1 .col-md-4 {
+        width: 49%;
+    }
+
+    .progress-wrap .col-md-6 {
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .course-card.db-cards {
+        margin-bottom: 40px;
     }
 }
 
@@ -357,7 +520,39 @@
         box-shadow: 0px 4px 8px #ededed;
     }
 
+    .course-card.db-cards {
+        margin-bottom: 30px;
+        padding: 30px;
+    }
 
+    .progress-sec .grade-level {
+        margin-bottom: 20px;
+    }
+
+    .progress-wrap .total-completed {
+        margin-top: 16px;
+    }
+
+    .progress-sec {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .progress-wrap .award-part {
+        padding: 20px;
+    }
+
+    .row {
+        --bs-gutter-x: 24px;
+    }
+
+    .progress-wrap .award-part .search-res .tests {
+        padding: 0 8px;
+    }
+
+    .progress-wrap {
+        padding: 50px 0 70px;
+    }
 
     .footer-wrapper .add-bar {
         flex-direction: column;
@@ -444,6 +639,8 @@
 
     .navbar-toggler {
         padding: 0;
+        position: relative;
+        right: -15px;
     }
 
     .navbar-toggler:focus {
@@ -451,7 +648,74 @@
         box-shadow: none;
     }
 
+    .db-block1 .col-md-4 {
+        width: 100%;
+    }
 
+    .exam .db-cards .course-image {
+        height: 200px;
+    }
 
+    .crs-dtls-wrp .contents .about-list .nav-item {
+        font-size: 16px;
+        padding-left: 45px;
+    }
 
+    .crs-dtls-wrp .contents .para-text {
+        font-size: 17px;
+        margin-bottom: 26px;
+        line-height: 26px;
+    }
+
+    .crs-dtls-wrp .contents .title-part {
+        font-size: 20px;
+    }
+
+    .crs-dtls-wrp .contents .rating-star {
+        margin-left: 6px;
+    }
+
+    .crs-dtls-wrp .contents .title-part .bar {
+        width: 40px;
+        height: 4px;
+    }
+
+    .crs-dtls-wrp .module-content {
+        flex-direction: column;
+    }
+
+    .crs-dtls-wrp .module-content p {
+        text-align: center;
+        font-size: 16px;
+        line-height: 20px;
+        margin: 10px 0;
+    }
+
+    .crs-dtls-wrp .module-content .count-number,
+    .crs-dtls-wrp .module-content .lesson-prt {
+        margin: 0;
+    }
+
+    .video-wrp {
+        padding: 16px;
+    }
+
+    .video-wrp .btnplay img {
+        max-width: 60%;
+    }
+
+    .exam-list-wr .list-item span {
+        width: 66px;
+        height: 64px;
+        font-size: 26px;
+    }
+
+    .exam-list-wr .list-item p {
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .page-item .page-link, .page-item.disabled .page-link {
+        font-size: 18px;
+    }
 }
