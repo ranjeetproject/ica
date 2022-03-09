@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\WebFrontend;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Student;
 use Mail;
+use Hash;
 
 
 class UserController extends Controller
@@ -39,6 +41,8 @@ class UserController extends Controller
         ];
         dd(Auth::attempt($credentialsArray));
         if (Auth::attempt($credentialsArray))
+
+        if(Auth::attempt($credentialsArray))
         {
             dd('ghj');
 
@@ -58,7 +62,7 @@ class UserController extends Controller
             $update_student = Student::find($check_student->id);
             $update_student->otp = $otp;
             if($update_student->save()){
-                $email_send = Mail::send('WebFrontend.email.send_otp',  
+                $email_send = Mail::send('WebFrontend.email.send_otp',
                     array(
                         'name'          => $check_student->name,
                         'email'         => $check_student->email,
@@ -76,7 +80,7 @@ class UserController extends Controller
                 $to=urlencode($check_student->mobile);
                 $from=urlencode('ICAEDU');
                 $text=urlencode($text);
-                
+
                 //https://103.229.250.200/smpp/sendsms?username=icaedpho&password=icaedpho&to=9830190321&from=ICAEDU&udh=0&text=Your One Time Password (OTP) is 1234 for the mobile number 9830190321. Please enter this code on the ICA App to verify your mobile number. NEVER SHARE YOUR OTP WITH ANYONE.&dlr-mask=19&dlr-url=
                 //https://myvaluefirst.com/smpp/sendsms?username=icaedpho&password=icaedpho&to=9681021465&from=ICAEDU&udh=0&text=Your One Time Password (OTP) is 1234 for the mobile number 9681021465. Please enter this code on the ICA App to verify your mobile number. NEVER SHARE YOUR OTP WITH ANYONE.
                 // Prepare data for POST request
@@ -103,7 +107,7 @@ class UserController extends Controller
         $request->validate([
             'code' => 'required',
             'mobile_number' => 'required',
-            'verify_Otp' => 'required', 
+            'verify_Otp' => 'required',
         ]);
         $input = $request->all();
         $check_student = Student::where('code','=',$input['code'])->where('mobile','=',$input['mobile_number'])->first();
@@ -120,5 +124,32 @@ class UserController extends Controller
 
     }
     
+
+    public function registration(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'address' => 'required',
+            'pincode' => 'integer',
+            'mobile' => 'required'
+        ], [
+            'name.required' => 'Name is required',
+            'address' => 'Address is required',
+            'pincode.integer' => 'Pin Code should be a number',
+            'mobile' => 'Mobile No is required'
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->email),
+            'mobile' => $request->mobile,
+            'address' => $request->address,
+            'state' => $request->state,
+            'city' => $request->city,
+            'pincode' => $request->pincode
+        ]);
+    }
+
 
 }

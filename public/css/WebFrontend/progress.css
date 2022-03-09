@@ -1,0 +1,156 @@
+.progress-custom {
+    width: 254px;
+    height: 254px;
+    line-height: 254px;
+    background: none;
+    margin: 0 auto;
+    box-shadow: none;
+    position: relative;
+}
+
+.progress-custom:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 24px solid #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.progress-custom>span {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
+.progress-custom .progress-left {
+    left: 0;
+}
+
+.progress-custom .progress-bar {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border-width: 24px;
+    border-style: solid;
+    position: absolute;
+    top: 0;
+}
+
+.progress-custom .progress-left .progress-bar {
+    left: 100%;
+    border-top-right-radius: 130px;
+    border-bottom-right-radius: 130px;
+    border-left: 0;
+    -webkit-transform-origin: center left;
+    transform-origin: center left;
+}
+
+.progress-custom .progress-right {
+    right: 0;
+}
+
+.progress-custom .progress-right .progress-bar {
+    left: -100%;
+    border-top-left-radius: 130px;
+    border-bottom-left-radius: 130px;
+    border-right: 0;
+    -webkit-transform-origin: center right;
+    transform-origin: center right;
+    animation: loading-1 1.8s linear forwards;
+}
+
+.progress-custom .progress-value {
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 35px;
+    line-height: 50px;
+    font-weight: 800;
+    z-index: 2;
+}
+
+
+
+.progress-custom.yellow .progress-bar {
+    border-color: #FFD336;
+}
+
+.progress-custom.yellow .progress-left .progress-bar {
+    animation: loading-3 1s linear forwards 1.8s;
+}
+
+
+@keyframes loading-1 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes loading-2 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(144deg);
+        transform: rotate(144deg);
+    }
+}
+
+@keyframes loading-3 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes loading-4 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(36deg);
+        transform: rotate(36deg);
+    }
+}
+
+@keyframes loading-5 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(126deg);
+        transform: rotate(126deg);
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .progress-custom {
+        width: 200px;
+        height: 200px;
+    }
+}
