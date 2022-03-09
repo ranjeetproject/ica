@@ -32,24 +32,17 @@ class UserController extends Controller
         $credentialsArray = [
             'code' => $request->get('code'),
             'mobile' => $request->get('mobile_number'),
-            'password' => ''
-        ];
-       
-        if(Auth::attempt($credentialsArray))
-        {
-            $urlBase = url()->to('/');
-            $urlPrevious = session()->get('url.intended');
-            if (($urlPrevious == $urlBase . '/my/tickets')) {
-                return Redirect::intended();
-            } else {
-                return redirect()->action('HomePageController@getDashboard');
-            }
+            'otp' => $request->get('verify_Otp'),
+            
+            
 
-        } else {
-            dd(Auth::guard('web'));
-            $errors = new MessageBag(['password' => 'Please enter valid email and password for login']);
-            return Redirect::back()->withErrors($errors);
-        }
+        ];
+        dd(Auth::attempt($credentialsArray));
+        if (Auth::attempt($credentialsArray))
+        {
+            dd('ghj');
+
+        } 
     }
 
     public function sendOTP(Request $request)
@@ -126,6 +119,6 @@ class UserController extends Controller
         }
 
     }
-
+    
 
 }
