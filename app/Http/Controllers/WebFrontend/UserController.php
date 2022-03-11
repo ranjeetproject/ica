@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\WebFrontend;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Student;
+use App\Models\Student;
 use Illuminate\Support\Facades\Mail;
 use Hash;
 
@@ -146,7 +146,6 @@ class UserController extends Controller
             'code' => $request->mobile,
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->email),
             'mobile' => $request->mobile,
             'address' => $request->address,
             'state' => $request->state,
@@ -165,6 +164,8 @@ class UserController extends Controller
                 $m->from('ica@gmail.com','ica');
                 $m->to($inputData['email'],$inputData['name'])->subject('Registration Verification');
         });
+
+        return redirect()->route('dashboard');
     }
 
 }
