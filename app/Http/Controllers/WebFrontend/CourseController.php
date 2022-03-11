@@ -5,6 +5,10 @@ namespace App\Http\Controllers\WebFrontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Course;
+use App\Chapter;
+use App\ChapterDetail;
+
+
 
 
 class CourseController extends Controller
@@ -22,8 +26,13 @@ class CourseController extends Controller
 
     public function courseDetail($id)
     {
+        $topics = [];
         $courseDetails = Course::find($id);
-        //dd($courseDetails);
-        return view('WebFrontend.courseDetails',compact('courseDetails'));
+        $data['courseChapter'] = Chapter::where('course_id','=',$courseDetails->id)->get();
+        foreach($data['courseChapter'] as $chapter){
+            $topics[] = ChapterDetail::where('course','=',$courseDetails->id)->where('chapter','=',$chapter->id)->count();
+            
+        }
+        return view('WebFrontend.courseDetails',compact('courseDetails','topics'),$data);
     }
 }

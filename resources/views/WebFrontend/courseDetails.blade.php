@@ -16,7 +16,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Course</a></li>
-                    <li class="breadcrumb-item"><a href="#">Business Accounting</a></li>
+                    <li class="breadcrumb-item"><a href="#">{{$courseDetails->course_name}}</a></li>
                     <li class="breadcrumb-item active" aria-current="page"><a href="javascript:void(0)">Introduction</a>
                     </li>
                 </ol>
@@ -78,15 +78,19 @@
                         <span>-4.33(3)</span>
                     </div>
                 </div>
-                <div class="module-content">
-                    <span class="count-number">1</span>
-                    <p>Minima veniam, quis nostrum Exercitationem ullam Corpori</p>
-                    <div class="lesson-prt">
-                        <img src="{{asset('css/images/lesson-icon.png')}}" class="img-fluid" />
-                        <span class="lesson-number">10 Lessons</span>
+                @foreach ($courseChapter as $key=>$chapter)
+                    <div class="module-content">
+                        <span class="count-number">{{$key+1}}</span>
+                        
+                            <p>{{$chapter->chapter_name}}</p>
+                        
+                        <div class="lesson-prt">
+                            <img src="{{asset('css/images/lesson-icon.png')}}" class="img-fluid" />
+                            <span class="lesson-number">{{$topics[$loop->index]}} Lessons</span>
+                        </div>
                     </div>
-                </div>
-                <div class="module-content">
+                @endforeach
+                {{-- <div class="module-content">
                     <span class="count-number">1</span>
                     <p>Minima veniam, quis nostrum Exercitation.</p>
                     <div class="lesson-prt">
@@ -101,7 +105,7 @@
                         <img src="{{asset('css/images/lesson-icon.png')}}" class="img-fluid" />
                         <span class="lesson-number">10 Lessons</span>
                     </div>
-                </div>
+                </div> --}}
                 <p class="para-text mb-0">
                     Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
                     qui dolorem ipsum
