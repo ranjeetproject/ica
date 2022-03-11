@@ -1,12 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Course extends Model
+class Exam extends Model
 {
 
     /**
@@ -15,7 +14,7 @@ class Course extends Model
      * @var array
      */
     protected $fillable = [
-        'course_code', 'course_name', 'entry_from', 'course_photo', 'created_by', 'course_type', 'courseduration', 'calias', 'coursegroupname', 'tagging_for', 'tagging_text'
+        'exam_code', 'exam_name', 'exam_details', 'course', 'centre', 'chapter', 'subject', 'status', 'type', 'exam_zone', 'exam_for', 'duration', 'datet' ,'start_time', 'end_time', 'created_by', 'tagging_for', 'tagging_text', 'quesstion_tag', 'question_limit', 'attempt_time'
     ];
 
     /**
@@ -25,8 +24,12 @@ class Course extends Model
      */
     protected $dates = ['deleted_at', 'created_at', 'updated_at'];
 
-    public function user()
+    public function createdBy()
     {
         return $this->belongsTo('App\User', 'created_by', 'id');
+    }
+    public function courseDetails()
+    {
+        return $this->belongsTo('App\Course', 'course', 'id');
     }
 }
