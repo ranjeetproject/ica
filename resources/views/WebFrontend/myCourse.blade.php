@@ -45,12 +45,14 @@
 	        })
 	        .done(function(data)
 	        {
-	            if(data.html == " "){
+	            if(data.html != ""){
+                    $("#course-data").append(data.html);
+                    $('.load-more').hide();
+	            }else{
 	                $('.load-more').html("No more records found");
-	                return;
-	            }
-	            $('.load-more').hide();
-	            $("#course-data").append(data.html);
+                    return;
+                }
+	          
 	        })
 	        .fail(function(jqXHR, ajaxOptions, thrownError)
 	        {
