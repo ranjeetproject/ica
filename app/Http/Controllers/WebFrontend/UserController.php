@@ -34,24 +34,19 @@ class UserController extends Controller
         $credentialsArray = [
             'code' => $request->get('code'),
             'mobile' => $request->get('mobile_number'),
-            'password' => ''
+            'otp' => $request->get('verify_Otp'),
+            
+            
+
         ];
+        dd(Auth::attempt($credentialsArray));
+        if (Auth::attempt($credentialsArray))
 
         if(Auth::attempt($credentialsArray))
         {
-            $urlBase = url()->to('/');
-            $urlPrevious = session()->get('url.intended');
-            if (($urlPrevious == $urlBase . '/my/tickets')) {
-                return Redirect::intended();
-            } else {
-                return redirect()->action('HomePageController@getDashboard');
-            }
+            dd('ghj');
 
-        } else {
-            dd(Auth::guard('web'));
-            $errors = new MessageBag(['password' => 'Please enter valid email and password for login']);
-            return Redirect::back()->withErrors($errors);
-        }
+        } 
     }
 
     public function sendOTP(Request $request)
@@ -128,6 +123,7 @@ class UserController extends Controller
         }
 
     }
+    
 
     public function registration(Request $request){
         $request->validate([
@@ -166,4 +162,6 @@ class UserController extends Controller
                 $m->to($inputData['email'],$inputData['name'])->subject('Registration Verification');
         });
     }
+
 }
+
