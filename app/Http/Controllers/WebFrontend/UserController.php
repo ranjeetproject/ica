@@ -94,7 +94,7 @@ class UserController extends Controller
                 $response = curl_exec($ch);
                 curl_close($ch);
                 $data['status'] = true;
-                $data['message'] = "Otp send successfully";
+                $data['message'] = "OTP is sent to your Mobile number";
                 return $data;
             }
         } else {
@@ -165,4 +165,3 @@ class UserController extends Controller
     }
 
 }
-

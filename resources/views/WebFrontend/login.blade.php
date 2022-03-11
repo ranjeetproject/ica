@@ -52,9 +52,9 @@
                         </div>
 
                         <div class="otp-wrap">
-                            <p> OTP is sent to your Mobile number</p>
+                            <p id="otp-msg"> </p>
                             <div class="time">
-                                <span>00:40</span>
+                                {{-- <span>00:40</span> --}}
                                 <button type="button" class="btn reqOtp" id="sendOtp">
                                     Request OTP
                                 </button>
@@ -112,9 +112,9 @@
                 data: dataVal,
                 success: function (data) {
                     if (data.status == true) {
-                        $("#success_message").html(data.message);
+                        $("#otp-msg").html(data.message);
                         setTimeout(function () {
-                            $('#success_message').html('');
+                            $('#otp-msg').html('');
                         }, 3000);
                     } else {
                         $("#success_message").html(data.error);

@@ -26,11 +26,14 @@ Route::middleware(['withoutLogin'])->group(function ()//this middleware used for
     Route::post('/verify-otp', 'WebFrontend\UserController@verifyOTP')->name('verify-otp');
 });
 
+
+
 Route::middleware(['auth'])->group(function ()
 {
     Route::get('dashboard', 'WebFrontend\DashboardController@dashboardPageDisplay');
     Route::get('my-courses', 'WebFrontend\CourseController@myCourses')->name('my-courses');
     Route::get('course-details/{id}', 'WebFrontend\CourseController@courseDetail');
+    Route::get('my-exam','WebFrontend\ExamController@myExam')->name('my-exam');
 
 
 
