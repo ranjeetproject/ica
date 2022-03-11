@@ -129,10 +129,12 @@ class UserController extends Controller
     public function registration(Request $request){
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:students',
             'address' => 'required',
-            'pincode' => 'integer',
-            'mobile' => 'required'
+            'state' => 'required',
+            'city' => 'required',
+            'pincode' => 'required|integer',
+            'mobile' => 'required|unique:students'
         ], [
             'name.required' => 'Name is required',
             'address' => 'Address is required',
@@ -141,7 +143,8 @@ class UserController extends Controller
         ]);
 
         $otp = rand(100000,999999);
-        User::create([
+        Student::create([
+            'code' => $request->mobile,
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->email),
@@ -150,7 +153,8 @@ class UserController extends Controller
             'state' => $request->state,
             'city' => $request->city,
             'pincode' => $request->pincode,
-            'otp' => $request->otp,
+            'status' => 1,
+            'otp' => $otp,
             'verify_status' => 0,
         ]);
 
