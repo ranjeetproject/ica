@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Student;
+use App\Student;
 use Illuminate\Support\Facades\Mail;
 use Hash;
 
@@ -144,7 +144,7 @@ class UserController extends Controller
         ]);
 
         $otp = rand(100000,999999);
-        Student::create([
+        $studentRegistration = Student::create([
             'code' => $request->mobile,
             'name' => $request->name,
             'email' => $request->email,
@@ -167,7 +167,11 @@ class UserController extends Controller
                 $m->to($inputData['email'],$inputData['name'])->subject('Registration Verification');
         });
 
-        return redirect()->route('dashboard');
+        if($studentRegistration){
+            return redirect()->back()->with('success', 'Success! User created');
+        }else{
+            return redirect()->back()->with('failed', 'Failed! User not created');
+        }
     }
 
 }

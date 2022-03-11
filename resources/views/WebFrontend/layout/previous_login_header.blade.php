@@ -11,6 +11,8 @@
     <link href="{{asset('css/WebFrontend/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/WebFrontend/media.css')}}" rel="stylesheet">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>
     <title>Ica Educations</title>
 </head>
 <body>
