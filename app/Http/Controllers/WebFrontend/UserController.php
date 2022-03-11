@@ -34,7 +34,6 @@ class UserController extends Controller
         $checkStudentOtp = Student::where('code', '=', $input['code'])->where('mobile', '=', $input['mobile_number'])->where('otp', $input['verify_Otp'])->first();
         if ($checkStudentOtp)
         {
-
             Auth::login($checkStudentOtp);
             if (Auth::check())
             {
