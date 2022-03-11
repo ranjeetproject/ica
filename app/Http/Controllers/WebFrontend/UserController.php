@@ -141,7 +141,6 @@ class UserController extends Controller
             'pincode.integer' => 'Pin Code should be a number',
             'mobile' => 'Mobile No is required'
         ]);
-
         $otp = rand(100000,999999);
         Student::create([
             'code' => $request->mobile,
