@@ -38,43 +38,23 @@
                         <a href="#" class="btn view-all">View all</a>
                     </div>
                 </div>
+                @foreach($courses as $course)
                 <div class="col-md-4">
                     <div class="course-card db-cards">
+                        @if($course['course_photo'] != null)
+                        <img src="{{$course['course_photo']}}" class="course-image" alt="#">
+                        @else
                         <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#">
-
+                        @endif
                         <div class="title-w-icon">
-                            <h4 class="course-name">Business Accounting </h4>
+                            <h4 class="course-name">{{$course['course_name']}} </h4>
                             <a href="#">
                                 <img src="{{asset('css/images/plus-icon.svg')}}" class="img-fluid" />
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="course-card db-cards">
-                        <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#">
-
-                        <div class="title-w-icon">
-                            <h4 class="course-name">Live Project</h4>
-                            <a href="#">
-                                <img src="{{asset('css/images/plus-icon-fill.svg')}}" class="img-fluid" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="course-card db-cards">
-                        <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#">
-
-                        <div class="title-w-icon">
-                            <h4 class="course-name">Budget 2020</h4>
-                            <a href="#">
-                                <img src="{{asset('css/images/plus-icon.svg')}}" class="img-fluid" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
 
         </div>
@@ -89,16 +69,21 @@
                         <a href="#" class="btn view-all">View all</a>
                     </div>
                 </div>
+                @foreach($exams as $exam)
                 <div class="col-md-4">
                     <div class="course-card db-cards">
+                        @if($exam->courseDetails->course_photo == null)
                         <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#">
+                        @else
+                        <img src="{{$exam->courseDetails->course_photo}}" class="course-image" alt="#">
+                        @endif
                         <div class="total-lesson">
                             <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
-                            <span>Wordpress</span>
+                            <span>{{$exam->courseDetails->course_name}}</span>
                         </div>
                         <div class="title-w-icon">
-                            <h4 class="course-name">WordPress for Beginners -Master
-                                Word Press
+                            <h4 class="course-name">{{$exam->exam_name}}
+                                {{$exam->courseDetails->course_name}}
                             </h4>
                             <a href="#">
                                 <img src="{{asset('css/images/plus-icon.svg')}}" class="img-fluid" />
@@ -106,38 +91,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="course-card db-cards">
-                        <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#">
-                        <div class="total-lesson">
-                            <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
-                            <span>Marketing</span>
-                        </div>
-                        <div class="title-w-icon">
-                            <h4 class="course-name">Sales Training: Practical Sales
-                                Techniques</h4>
-                            <a href="#">
-                                <img src="{{asset('css/images/plus-icon.svg')}}" class="img-fluid" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="course-card db-cards">
-                        <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#">
-                        <div class="total-lesson">
-                            <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
-                            <span>3D Modelling</span>
-                        </div>
-                        <div class="title-w-icon">
-                            <h4 class="course-name">Complete Blender Creator: Learn 3D Modelling</h4>
-                            <a href="#">
-                                <img src="{{asset('css/images/plus-icon.svg')}}" class="img-fluid" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
 
         </div>

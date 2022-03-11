@@ -41,10 +41,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="center" style="padding:20px 20px 40px 20px;font-size:16px;line-height:22px">
+                    <!-- <td align="center" style="padding:20px 20px 40px 20px;font-size:16px;line-height:22px">
                         {{-- <p>Please click the link </p>
                         <a href="{{action('RecruitmentController@interviewFeedback', $row->id)}}" class="btn btn-primary">Interviewer Feedback</a> --}}
-                    </td>
+                    </td> -->
                 </tr>
                 <tr>
                     <td align="center" style="padding:20px 20px 40px 20px;font-size:16px;line-height:22px">
@@ -58,10 +58,10 @@
                     <td align="left" style="padding:20px 20px 40px 20px;font-size:16px;line-height:22px">
                         <p>
                             <h6>
-                                <p>
+                                <!-- <p>
                                     {{-- If you’re having trouble clicking the "Reset Password" button, copy and paste the URL below into your web browser: --}}
                                     {{-- {{URL::to('/').'/reset-password-form?email='.$user->email.'&token='.$user->remember_token}} --}}
-                                </p>
+                                </p> -->
                             </h6>
                         </p>
                     </td>

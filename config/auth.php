@@ -13,9 +13,14 @@ return [
     |
     */
 
+//    'defaults' => [
+//        'guard' => 'web',
+//        'passwords' => 'users',
+//    ],
+
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'otp' => 'students',
     ],
 
     /*
@@ -76,7 +81,7 @@ return [
             'model' => App\Student::class,
         ],
 
-        
+
     ],
 
     /*
@@ -94,10 +99,18 @@ return [
     |
     */
 
-    'passwords' => [
+    /*'passwords' => [
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+    ],*/
+    'otp' => [
+        'users' => [
+            'provider' => 'students',
+            'table' => 'students',
             'expire' => 60,
             'throttle' => 60,
         ],
