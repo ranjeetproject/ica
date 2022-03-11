@@ -26,13 +26,5 @@ Route::prefix('ica')->group(function ()
 });
 
 Route::get('dashboard','WebFrontend\DashboardController@dashboardPageDisplay');
-Route::get('my-courses','WebFrontend\CourseController@myCourses');
+Route::get('my-courses','WebFrontend\CourseController@myCourses')->name('my-courses');
 Route::get('course-details/{id}','WebFrontend\CourseController@courseDetail');
-
-
-
-
-
-
-
-
