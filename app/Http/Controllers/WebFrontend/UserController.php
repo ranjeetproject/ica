@@ -7,7 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Student;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use Hash;
 
 
@@ -127,8 +127,7 @@ class UserController extends Controller
     }
 
 
-    public function registration(Request $request)
-    {
+    public function registration(Request $request){
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -142,6 +141,7 @@ class UserController extends Controller
             'mobile' => 'Mobile No is required'
         ]);
 
+        $otp = rand(100000,999999);
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -150,9 +150,20 @@ class UserController extends Controller
             'address' => $request->address,
             'state' => $request->state,
             'city' => $request->city,
-            'pincode' => $request->pincode
+            'pincode' => $request->pincode,
+            'otp' => $request->otp,
+            'verify_status' => 0,
         ]);
+
+        $inputData = [];
+        $inputData['email'] = $request->email;
+        $inputData['name'] = $request->name;
+        $inputData['otp'] = $request->otp;
+        Mail::send('WebFrontend.email.send_otp', ['otp' => $otp] , function ($m) use ($inputData) {
+                $m->from('ica@gmail.com','ica');
+                $m->to($inputData['email'],$inputData['name'])->subject('Registration Verification');
+        });
     }
 
-
 }
+
