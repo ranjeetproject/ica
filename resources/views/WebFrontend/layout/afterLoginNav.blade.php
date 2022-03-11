@@ -15,7 +15,7 @@
                     <a class="nav-link" href="#">My Course </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Exams </a>
+                    <a class="nav-link" href="{{route('my-exam')}}">Exams </a>
                 </li>
             </ul>
             <div class="follow-us">
