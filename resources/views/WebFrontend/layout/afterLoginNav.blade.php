@@ -3,7 +3,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Dashboard </a>
+                    <a class="nav-link active" href="{{action('WebFrontend\DashboardController@dashboardPageDisplay')}}">Dashboard </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About Us</a>
@@ -12,7 +12,7 @@
                     <a class="nav-link" href="#">Contact Us </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Course </a>
+                    <a class="nav-link" href="{{action('WebFrontend\CourseController@myCourses')}}">My Course </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Exams </a>
