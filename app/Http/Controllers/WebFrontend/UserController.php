@@ -166,9 +166,11 @@ class UserController extends Controller
         });
 
         if($studentRegistration){
-            return redirect()->back()->with('success', 'Success! User created');
+            \Session::put('success','You are registered successfully');
+            return redirect()->back();
         }else{
-            return redirect()->back()->with('failed', 'Failed! User not created');
+            \Session::put('error','Failed! User not registered');
+            return redirect()->back();
         }
     }
 
