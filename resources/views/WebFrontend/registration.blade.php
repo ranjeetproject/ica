@@ -81,7 +81,7 @@
                         <button type="submit" class="btn signup">Procceed</button>
                     </form>
 
-                    <p class="already-account">Already have an account? <a href="#"> LOGIN</a></p>
+                    <p class="already-account">Already have an account? <a href="{{route('login')}}"> LOGIN</a></p>
                 </div>
             </div>
         </div>

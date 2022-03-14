@@ -18,6 +18,22 @@ Route::middleware(['withoutLogin'])->group(function ()//this middleware used for
     Route::get('/', 'WebFrontend\HomePageController@homePageDisplay');
     Route::get('/login', 'WebFrontend\UserController@loginForm')->name('login');
     Route::get('/sign-up', 'WebFrontend\UserController@signUp');
+    Route::get('/check-otp', function(){
+                $username = urlencode('icaedpho');
+                $password = urlencode('icaedpho');
+                $to = urlencode(9835275385);
+                $from = urlencode('ICAEDU');
+                
+
+                // Prepare data for POST request
+                $sms_data = 'username=' . $username . '&password=' . $password . '&to=' . $to . '&from=' . $from . '&dlr-mask=19&dlr-url=';
+                // Send the GET request with cURL
+                $ch = curl_init('https://103.229.250.200/smpp/sendsms?' . $sms_data);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $response = curl_exec($ch);
+                echo $response;
+                curl_close($ch);
+    });
 
 
     Route::post('/post-login', 'WebFrontend\UserController@postLogin')->name('post-login');
