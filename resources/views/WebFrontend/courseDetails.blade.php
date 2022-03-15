@@ -16,7 +16,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Course</a></li>
-                    <li class="breadcrumb-item"><a href="#">{{$courseDetails->course_name}}</a></li>
+                    <li class="breadcrumb-item"><a href="#">{{$course->course_name}}</a></li>
                     <li class="breadcrumb-item active" aria-current="page"><a href="javascript:void(0)">Introduction</a>
                     </li>
                 </ol>
@@ -78,7 +78,7 @@
                         <span>-4.33(3)</span>
                     </div>
                 </div>
-                @foreach ($courseChapter as $key=>$chapter)
+                @foreach ($course->courseChapter as $key=>$chapter)
                     <div class="module-content">
                         <span class="count-number">{{$key+1}}</span>
                         
@@ -86,7 +86,7 @@
                         
                         <div class="lesson-prt">
                             <img src="{{asset('css/images/lesson-icon.png')}}" class="img-fluid" />
-                            <span class="lesson-number">{{$topics[$loop->index]}} Lessons</span>
+                            <span class="lesson-number">{{$chapter->topicsCount}} Lessons</span>
                         </div>
                     </div>
                 @endforeach
