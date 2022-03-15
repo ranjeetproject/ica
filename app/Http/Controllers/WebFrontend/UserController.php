@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Student;
+use App\State;
 use Illuminate\Support\Facades\Mail;
 use Hash;
 
@@ -15,7 +16,8 @@ class UserController extends Controller
 {
     public function signUp()
     {
-        return view('WebFrontend.registration');
+        $states = State::get();
+        return view('WebFrontend.registration',compact('states'));
     }
 
     public function loginForm()

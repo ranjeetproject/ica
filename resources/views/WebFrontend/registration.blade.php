@@ -61,9 +61,10 @@
                         </div>
                         <div class="mb-3">
                             <select class="form-control" name="state">
-                                <option>State</option>
-                                <option value="West Bengal">West Bengal</option>
-                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="">Select State</option>
+                                @foreach ($states as $state)
+                                    <option value="{{$state->name_sort}}">{{$state->name_long}}</option>
+                                @endforeach
                             </select>
                             @if ($errors->has('state'))
                                 <span class="text-danger">{{ $errors->first('state') }}</span>
