@@ -25,8 +25,8 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        if (isset($request->admin) && ($request->admin != '')) $course  = Course::with('user')->whereHas('user')->with('lessons')->where('created_by', $request->admin)->where('entry_from','NEW')->get();
-        else $course  = Course::with('user')->whereHas('user')->with('lessons')->where('entry_from','NEW')->get();
+        if (isset($request->admin) && ($request->admin != '')) $course  = Course::with('user')->whereHas('user')->with('lessons')->where('created_by', $request->admin)->where('entry_from','NEW')->orderBy('created_at','DESC')->get();
+        else $course  = Course::with('user')->whereHas('user')->with('lessons')->where('entry_from','NEW')->orderBy('created_at','DESC')->get();
         $data = [];
         foreach ($course as $value) {
             // $stdcors = StdCourse::where('student', $request->student)->where('course', $value->id)->count();

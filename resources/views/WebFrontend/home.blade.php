@@ -18,7 +18,7 @@
         <div class="but-wrap">
             <img src="{{asset('css/images/point-arrow.svg')}}" class="img-fluid point-arrow" alt="#">
             <img src="{{asset('css/images/dot-group.png')}}" class="img-fluid bottom_icon" alt="#">
-            <a href="#" class="btn common-button">Explore All Courses</a>
+            <a href="{{route('login')}}" class="btn common-button">Explore All Courses</a>
         </div>
     </div>
 </section>
@@ -123,8 +123,11 @@
                     <span>4.50({{$value->stdCount}})</span>
                 </div>
                 <div class="course-by-wrp">
+                    @if($value->user->profile_image == null)
                     <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
-
+                    @else
+                    <img src="{{$value->user->profile_image}}" class="ins-avt" alt="#" />
+                    @endif
                     <div class="avt-name">
                         <span>by</span>
                         {{$value->user->name}}
