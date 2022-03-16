@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Course;
 use App\Chapter;
 use App\ChapterDetail;
+use App\StdCourse;
+
+use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -16,7 +20,13 @@ class CourseController extends Controller
    
     public function myCourses(Request $request)
     {
-        $data = Course::orderBy('id', 'DESC')->paginate(8);
+        $data = [];
+        $data = Course::join('std_courses','std_courses.course','=','courses.id')
+                   ->where('courses.entry_from','NEW')                   
+                   ->where('std_courses.student', Auth::user()->id)
+                   ->paginate(8); 
+                   
+                  // return $data;
         if($request->ajax()){
             $view = view('WebFrontend.all-course',compact('data'))->render();
             return response()->json(['html' => $view]);
@@ -27,12 +37,21 @@ class CourseController extends Controller
     public function courseDetail($id)
     {
         $topics = [];
-        $courseDetails = Course::find($id);
-        $data['courseChapter'] = Chapter::where('course_id','=',$courseDetails->id)->get();
-        foreach($data['courseChapter'] as $chapter){
-            $topics[] = ChapterDetail::where('course','=',$courseDetails->id)->where('chapter','=',$chapter->id)->count();
-            
+        $course = Course::find($id);
+        if($course){
+            $courseChapter = Chapter::where('course_id','=',$course->id)->get();
+            foreach($courseChapter as $chapter)
+            {
+                $chapter->topicsCount = ChapterDetail::where('course','=',$course->id)
+                ->where('chapter','=',$chapter->id)->count();                
+            }
+            $course->courseChapter=$courseChapter;            
+            return view('WebFrontend.courseDetails',compact('course'));
         }
-        return view('WebFrontend.courseDetails',compact('courseDetails','topics'),$data);
+        else
+        {
+            abort('404');
+        }
+        
     }
 }
