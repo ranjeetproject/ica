@@ -96,191 +96,45 @@
             </div>
         </div>
         <div class="home-courses">
+            @foreach($data['courses'] as $value)
             <div class="course-card">
+                @if($value->course_photo == null)
                 <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
+                @else
+                <img src="{{$value->course_photo}}" class="course-image" alt="#" />
+                @endif
                 <div class="total-lesson">
                     <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
-                    <span>8 Lessons</span>
+                    <span>{{$value->lessons->count()}} Lessons</span>
                 </div>
-                <h4 class="course-name">WordPress for Beginners
-                    Master Word Press
+                <h4 class="course-name">{{$value->course_name}}
                 </h4>
                 <div class="rating">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
-                    <span>4.50(2)</span>
+                    @if($value->rating == 0.5 || $value->rating == 1.5 || $value->rating == 2.5 || $value->rating == 3.5 || $value->rating == 4.5)
+                        @for($i=0 ; $i<$value->rating-1 ; $i++)
+                        <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                        @endfor
+                        <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
+                    @else
+                        @for($i=0 ; $i<$value->rating ; $i++)
+                        <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
+                        @endfor
+                    @endif
+                    <span>4.50({{$value->stdCount}})</span>
                 </div>
                 <div class="course-by-wrp">
                     <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
 
                     <div class="avt-name">
                         <span>by</span>
-                        Alex Brown
+                        {{$value->user->name}}
                     </div>
                 </div>
             </div>
-            <div class="course-card">
-                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
-                <div class="total-lesson">
-                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
-                    <span>8 Lessons</span>
-                </div>
-                <h4 class="course-name">WordPress for Beginners
-                    Master Word Press
-                </h4>
-                <div class="rating">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
-                    <span>4.50(2)</span>
-                </div>
-                <div class="course-by-wrp">
-                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
-
-                    <div class="avt-name">
-                        <span>by</span>
-                        Alex Brown
-                    </div>
-                </div>
-            </div>
-            <div class="course-card">
-                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
-                <div class="total-lesson">
-                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
-                    <span>8 Lessons</span>
-                </div>
-                <h4 class="course-name">WordPress for Beginners
-                    Master Word Press
-                </h4>
-                <div class="rating">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
-                    <span>4.50(2)</span>
-                </div>
-                <div class="course-by-wrp">
-                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
-
-                    <div class="avt-name">
-                        <span>by</span>
-                        Alex Brown
-                    </div>
-                </div>
-            </div>
-            <div class="course-card">
-                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
-                <div class="total-lesson">
-                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
-                    <span>8 Lessons</span>
-                </div>
-                <h4 class="course-name">WordPress for Beginners
-                    Master Word Press
-                </h4>
-                <div class="rating">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
-                    <span>4.50(2)</span>
-                </div>
-                <div class="course-by-wrp">
-                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
-
-                    <div class="avt-name">
-                        <span>by</span>
-                        Alex Brown
-                    </div>
-                </div>
-            </div>
-            <div class="course-card">
-                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
-                <div class="total-lesson">
-                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
-                    <span>8 Lessons</span>
-                </div>
-                <h4 class="course-name">WordPress for Beginners
-                    Master Word Press
-                </h4>
-                <div class="rating">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
-                    <span>4.50(2)</span>
-                </div>
-                <div class="course-by-wrp">
-                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
-
-                    <div class="avt-name">
-                        <span>by</span>
-                        Alex Brown
-                    </div>
-                </div>
-            </div>
-            <div class="course-card">
-                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
-                <div class="total-lesson">
-                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
-                    <span>8 Lessons</span>
-                </div>
-                <h4 class="course-name">WordPress for Beginners
-                    Master Word Press
-                </h4>
-                <div class="rating">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
-                    <span>4.50(2)</span>
-                </div>
-                <div class="course-by-wrp">
-                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
-
-                    <div class="avt-name">
-                        <span>by</span>
-                        Alex Brown
-                    </div>
-                </div>
-            </div>
-            <div class="course-card">
-                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
-                <div class="total-lesson">
-                    <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
-                    <span>8 Lessons</span>
-                </div>
-                <h4 class="course-name">WordPress for Beginners
-                    Master Word Press
-                </h4>
-                <div class="rating">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/full-star.svg')}}" class="img-flid">
-                    <img src="{{asset('css/images/outline-star.svg')}}" class="img-flid">
-                    <span>4.50(2)</span>
-                </div>
-                <div class="course-by-wrp">
-                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
-
-                    <div class="avt-name">
-                        <span>by</span>
-                        Alex Brown
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="view-all-course">
-            <a href="#" class="btn common-button">View All Courses</a>
+            <a href="{{route('login')}}" class="btn common-button">View All Courses</a>
         </div>
     </div>
 </section>

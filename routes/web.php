@@ -42,7 +42,7 @@ Route::middleware(['withoutLogin'])->group(function ()//this middleware used for
     Route::post('/verify-otp', 'WebFrontend\UserController@verifyOTP')->name('verify-otp');
 });
 
-
+Route::get('/home','HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function ()
 {
