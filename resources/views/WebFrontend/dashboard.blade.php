@@ -7,12 +7,11 @@
         <div class="header-bottom">
             @include('WebFrontend.layout.afterLoginNav')
         </div>
-
     </section>
     <!-- end header -->
 
     <section class="banner-wrp db-banner">
-        <img src="{{asset('css/images/dot-group-top.png')}}" class="img-fluid top_icon" alt="#">
+        <img src="{{ asset('css/images/dot-group-top.png') }}" class="img-fluid top_icon" alt="#">
         <div class="ban-content">
             <h1 class="cont-head">
                 Over <span>20,000+ </span>online
@@ -23,7 +22,7 @@
                 Iste Natus Error sit Voluptatem Accusantium....
             </p>
             <div class="but-wrap">
-                <img src="{{asset('css/images/dot-group.png')}}" class="img-fluid bottom_icon" alt="#">
+                <img src="{{ asset('css/images/dot-group.png') }}" class="img-fluid bottom_icon" alt="#">
             </div>
         </div>
     </section>
@@ -38,22 +37,22 @@
                         <a href="#" class="btn view-all">View all</a>
                     </div>
                 </div>
-                @foreach($courses as $course)
-                <div class="col-md-4">
-                    <div class="course-card db-cards">
-                        @if($course['course_photo'] != null)
-                        <img src="{{$course['course_photo']}}" class="course-image" alt="#">
-                        @else
-                        <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#">
-                        @endif
-                        <div class="title-w-icon">
-                            <h4 class="course-name">{{$course['course_name']}} </h4>
-                            <a href="#">
-                                <img src="{{asset('css/images/plus-icon.svg')}}" class="img-fluid" />
-                            </a>
+                @foreach ($courses as $course)
+                    <div class="col-md-4">
+                        <div class="course-card db-cards">
+                            @if ($course['course_photo'] != null)
+                                <img src="{{ $course['course_photo'] }}" class="course-image" alt="#">
+                            @else
+                                <img src="{{ asset('css/images/course-image.jpg') }}" class="course-image" alt="#">
+                            @endif
+                            <div class="title-w-icon">
+                                <h4 class="course-name">{{ $course['course_name'] }} </h4>
+                                <a href="#">
+                                    <img src="{{ asset('css/images/plus-icon.svg') }}" class="img-fluid" />
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
             </div>
 
@@ -69,28 +68,28 @@
                         <a href="#" class="btn view-all">View all</a>
                     </div>
                 </div>
-                @foreach($exams as $exam)
-                <div class="col-md-4">
-                    <div class="course-card db-cards">
-                        @if($exam->courseDetails->course_photo == null)
-                        <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#">
-                        @else
-                        <img src="{{$exam->courseDetails->course_photo}}" class="course-image" alt="#">
-                        @endif
-                        <div class="total-lesson">
-                            <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
-                            <span>{{$exam->courseDetails->course_name}}</span>
-                        </div>
-                        <div class="title-w-icon">
-                            <h4 class="course-name">{{$exam->exam_name}}
-                                {{$exam->courseDetails->course_name}}
-                            </h4>
-                            <a href="#">
-                                <img src="{{asset('css/images/plus-icon.svg')}}" class="img-fluid" />
-                            </a>
+                @foreach ($exams as $exam)
+                    <div class="col-md-4">
+                        <div class="course-card db-cards">
+                            @if ($exam->courseDetails->course_photo == null)
+                                <img src="{{ asset('css/images/course-image.jpg') }}" class="course-image" alt="#">
+                            @else
+                                <img src="{{ $exam->courseDetails->course_photo }}" class="course-image" alt="#">
+                            @endif
+                            <div class="total-lesson">
+                                <img src="{{ asset('css/images/lesson-icon.png') }}" class="img-flid" alt="#">
+                                <span>{{ $exam->courseDetails->course_name }}</span>
+                            </div>
+                            <div class="title-w-icon">
+                                <h4 class="course-name">{{ $exam->exam_name }}
+                                    {{ $exam->courseDetails->course_name }}
+                                </h4>
+                                <a href="#">
+                                    <img src="{{ asset('css/images/plus-icon.svg') }}" class="img-fluid" />
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
             </div>
 
@@ -162,26 +161,26 @@
                         <div class="search-input">
                             <input type="text" class="form-control" placeholder="Enrollment no" />
                             <button class="btn search">
-                                <img src="{{asset('css/images/search-icon.svg')}}" class="img-fluid">
+                                <img src="{{ asset('css/images/search-icon.svg') }}" class="img-fluid">
                             </button>
                         </div>
                         <div class="search-res">
-                            <span><img src="{{asset('css/images/winner-icon.svg')}}"></span>
+                            <span><img src="{{ asset('css/images/winner-icon.svg') }}"></span>
                             <p class="tests">Top 100 ICA History</p>
                             <button class="btn add-icon">
-                                <img src="{{asset('css/images/plus-icon-green.svg')}}" class="img-fluid" /></button>
+                                <img src="{{ asset('css/images/plus-icon-green.svg') }}" class="img-fluid" /></button>
                         </div>
                         <div class="search-res">
-                            <span><img src="{{asset('css/images/winner-icon.svg')}}"></span>
+                            <span><img src="{{ asset('css/images/winner-icon.svg') }}"></span>
                             <p class="tests">Top 100 ICA History</p>
                             <button class="btn add-icon">
-                                <img src="{{asset('css/images/plus-icon-green.svg')}}" class="img-fluid" /></button>
+                                <img src="{{ asset('css/images/plus-icon-green.svg') }}" class="img-fluid" /></button>
                         </div>
                         <div class="search-res">
-                            <span><img src="{{asset('css/images/winner-icon.svg')}}"></span>
+                            <span><img src="{{ asset('css/images/winner-icon.svg') }}"></span>
                             <p class="tests">Top 100 ICA History</p>
                             <button class="btn add-icon">
-                                <img src="{{asset('css/images/plus-icon-green.svg')}}" class="img-fluid" /></button>
+                                <img src="{{ asset('css/images/plus-icon-green.svg') }}" class="img-fluid" /></button>
                         </div>
                     </div>
                 </div>

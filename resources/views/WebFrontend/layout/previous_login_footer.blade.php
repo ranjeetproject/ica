@@ -7,7 +7,7 @@
                     quia
                     non numquam..</p>
 
-                <a href="#" class="btn btn-about">About us</a>
+                <a href="{{action('CmsController@aboutUs')}}" class="btn btn-about">About us</a>
             </div>
             <div class="footer-address">
                 <h6 class="fo-head">Get in touch</h6>
@@ -41,17 +41,17 @@
                 <h6 class="fo-head">Quick Links</h6>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="{{asset('css/images/footer-arrow.png')}}"> About Us</a>
+                        <a class="nav-link" href="{{action('CmsController@aboutUs')}}"><img src="{{asset('css/images/footer-arrow.png')}}"> About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="{{asset('css/images/footer-arrow.png')}}"> Contact Us</a>
+                        <a class="nav-link" href="{{action('CmsController@contactUs')}}"><img src="{{asset('css/images/footer-arrow.png')}}"> Contact Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img src="{{asset('css/images/footer-arrow.png')}}"> Terms &
+                        <a class="nav-link" href="{{action('CmsController@termsAndCondition')}}"><img src="{{asset('css/images/footer-arrow.png')}}"> Terms &
                             Conditions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"><img src="{{asset('css/images/footer-arrow.png')}}"> Privacy Policy</a>
+                        <a class="nav-link" href="{{action('CmsController@privacyPolicy')}}"><img src="{{asset('css/images/footer-arrow.png')}}"> Privacy Policy</a>
                     </li>
                 </ul>
             </div>
