@@ -15,7 +15,7 @@ class Course extends Model
      * @var array
      */
     protected $fillable = [
-        'course_code', 'course_name', 'entry_from', 'course_photo', 'created_by', 'course_type', 'courseduration', 'calias', 'coursegroupname', 'tagging_for', 'tagging_text'
+        'course_code', 'course_name', 'entry_from', 'course_photo', 'created_by', 'course_type', 'courseduration', 'calias', 'coursegroupname', 'tagging_for', 'tagging_text','rating'
     ];
 
     /**
@@ -28,5 +28,9 @@ class Course extends Model
     public function user()
     {
         return $this->belongsTo('App\User', 'created_by', 'id');
+    }
+    public function lessons()
+    {
+        return $this->hasMany('App\Subject', 'course_id', 'id');
     }
 }
