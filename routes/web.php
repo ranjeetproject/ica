@@ -21,9 +21,9 @@ Route::middleware(['withoutLogin'])->group(function ()//this middleware used for
     Route::get('/check-otp', function(){
                 $username = urlencode('icaedpho');
                 $password = urlencode('icaedpho');
-                $to = urlencode(9835275385);
+                $to = urlencode(8777435636);
                 $from = urlencode('ICAEDU');
-                
+
 
                 // Prepare data for POST request
                 $sms_data = 'username=' . $username . '&password=' . $password . '&to=' . $to . '&from=' . $from . '&dlr-mask=19&dlr-url=';

@@ -11,4 +11,6 @@ class HomePageController extends Controller
     {
         return view('WebFrontend.home');
     }
+
+    
 }

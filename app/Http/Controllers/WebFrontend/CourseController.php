@@ -16,6 +16,9 @@ class CourseController extends Controller
    
     public function myCourses(Request $request)
     {
+
+
+        
         $data = Course::orderBy('id', 'DESC')->paginate(8);
         if($request->ajax()){
             $view = view('WebFrontend.all-course',compact('data'))->render();
