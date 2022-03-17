@@ -1,7 +1,17 @@
 @extends((\Auth::check())?'WebFrontend.layout.afterLoginApp':'WebFrontend.layout.app')
 @section('content')
-
-@include((\Auth::check())?'WebFrontend.layout.afterLoginNav':'WebFrontend.layout.previousLoginNav')
+    @if(Auth::check())
+        <section class="header">
+            <div class="header-top">
+                @include('WebFrontend.layout.afterLoginHeaderTop')
+            </div>
+            <div class="header-bottom">
+                @include('WebFrontend.layout.afterLoginNav')
+            </div>
+        </section>
+    @else
+        @include('WebFrontend.layout.previousLoginNav')
+    @endif
 
     <section class="signup-wrapper">
         <div class="signup-container">
@@ -24,7 +34,7 @@
                     <img src="{{asset('css/images/dot-group.png')}}" class="dot-top-right" />
                     <img src="{{asset('css/images/dot-group.png')}}" class="dot-left-bottom" />
 
-                    <div class="snup-logo-wrap"> 
+                    <div class="snup-logo-wrap">
                         <img src="{{asset('css/images/logo-signup.png')}}" class="snup-logo" alt="#">
                         <div class="s-content">
                             <h3>Ready to <span> Get Started?
@@ -65,7 +75,7 @@
                                 <span class="text-danger">{{ $errors->first('message') }}</span>
                             @endif
                         </div>
-                
+
                         <button type="submit" class="btn signup">Send</button>
                     </form>
                 </div>

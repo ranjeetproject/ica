@@ -6,10 +6,10 @@
                     <a class="nav-link active" href="{{action('WebFrontend\DashboardController@dashboardPageDisplay')}}">Dashboard </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{action('CmsController@aboutUs')}}">About Us</a>
+                    <a class="nav-link" href="{{action('WebFrontend\CmsController@aboutUs')}}">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{action('CmsController@contactUs')}}">Contact Us </a>
+                    <a class="nav-link" href="{{action('WebFrontend\CmsController@contactUs')}}">Contact Us </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{action('WebFrontend\CourseController@myCourses')}}">My Course </a>
