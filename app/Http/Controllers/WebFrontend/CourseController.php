@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 use App\Course;
 use App\Chapter;
 use App\ChapterDetail;
-use App\StdCourse;
-
-use Illuminate\Support\Facades\Auth;
-
-
 use Illuminate\Support\Facades\Auth;
 
 
@@ -25,18 +20,11 @@ class CourseController extends Controller
     {
         $data = [];
         $data = Course::join('std_courses','std_courses.course','=','courses.id')
-<<<<<<< HEAD
-                   ->where('courses.entry_from','NEW')                   
-                   ->where('std_courses.student', Auth::user()->id)
-                   ->paginate(8); 
-                   
-=======
-                   ->where('courses.entry_from','NEW')
-                   ->where('std_courses.student', Auth::user()->id)
-                   ->paginate(8);
+            ->where('courses.entry_from','NEW')
+            ->where('std_courses.student', Auth::user()->id)
+            ->paginate(8);
 
->>>>>>> 6e9f86a94b7e4768789f6b1f24bec6ee94a1906e
-                  // return $data;
+        // return $data;
         if($request->ajax()){
             $view = view('WebFrontend.all-course',compact('data'))->render();
             return response()->json(['html' => $view]);
@@ -53,25 +41,15 @@ class CourseController extends Controller
             foreach($courseChapter as $chapter)
             {
                 $chapter->topicsCount = ChapterDetail::where('course','=',$course->id)
-<<<<<<< HEAD
-                ->where('chapter','=',$chapter->id)->count();                
-            }
-            $course->courseChapter=$courseChapter;            
-=======
-                ->where('chapter','=',$chapter->id)->count();
+                    ->where('chapter','=',$chapter->id)->count();
             }
             $course->courseChapter=$courseChapter;
->>>>>>> 6e9f86a94b7e4768789f6b1f24bec6ee94a1906e
             return view('WebFrontend.courseDetails',compact('course'));
         }
         else
         {
             abort('404');
         }
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 6e9f86a94b7e4768789f6b1f24bec6ee94a1906e
     }
 }
