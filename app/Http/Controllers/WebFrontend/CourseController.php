@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Course;
 use App\Chapter;
 use App\ChapterDetail;
-use App\StdCourse;
 
 use Illuminate\Support\Facades\Auth;
 
