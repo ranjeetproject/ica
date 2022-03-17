@@ -39,10 +39,10 @@
                             <a class="nav-link active" href="{{action('HomeController@index')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About Us</a>
+                            <a class="nav-link" href="{{action('CmsController@aboutUs')}}">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact Us</a>
+                            <a class="nav-link" href="{{action('CmsController@contactUs')}}">Contact Us</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">More</a>

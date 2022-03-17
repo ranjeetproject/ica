@@ -42,6 +42,11 @@ Route::middleware(['withoutLogin'])->group(function ()//this middleware used for
     Route::post('/verify-otp', 'WebFrontend\UserController@verifyOTP')->name('verify-otp');
 });
 
+Route::get('/about-us','CmsController@aboutUs')->name('aboutUs');
+Route::get('/contact-us','CmsController@contactUs')->name('contactUs');
+Route::post('/submit-query','CmsController@submitQuery')->name('submitQuery');
+Route::get('/privacy-policy','CmsController@privacyPolicy')->name('privacyPolicy');
+Route::get('/terms-and-conditions','CmsController@termsAndCondition')->name('termsAndCondition');
 Route::get('/home','HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function ()
