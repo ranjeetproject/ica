@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="home-courses">
-            @foreach($data['courses'] as $value)
+            @foreach($courses as $value)
             <div class="course-card">
                 @if($value->course_photo == null)
                 <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
