@@ -6,18 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Query;
+use App\Cms;
 
 class CmsController extends Controller
 {
     //
     public function aboutUs(){
-        return view('WebFrontend.cms.about_us');
+        $about = Cms::find(1);
+        return view('WebFrontend.cms.about_us',$about);
     }
     public function termsAndCondition(){
-        return view('WebFrontend.cms.terms_and_condition');
+        $termsAndCondition = Cms::find(2);
+        return view('WebFrontend.cms.terms_and_condition',$termsAndCondition);
     }
     public function privacyPolicy(){
-        return view('WebFrontend.cms.privacy_policy');
+        $privacyPolicy = Cms::find(3);
+        return view('WebFrontend.cms.privacy_policy',$privacyPolicy);
     }
     public function contactUs(){
         return view('WebFrontend.cms.contact_us');
