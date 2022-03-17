@@ -1,12 +1,7 @@
-@if(Auth::check())
-@extends('WebFrontend.layout.afterLoginApp')
-@else
-@extends('WebFrontend.layout.app')
-@endif
-
+@extends((\Auth::check())?'WebFrontend.layout.afterLoginApp':'WebFrontend.layout.app')
 @section('content')
 
-@include((Auth::check())?'WebFrontend.layout.afterLoginNav':'WebFrontend.layout.previousLoginNav')
+@include((\Auth::check())?'WebFrontend.layout.afterLoginNav':'WebFrontend.layout.previousLoginNav')
     <section class="course-header">
         <div class="container">
             <p class="courses-title">About Us</p>
