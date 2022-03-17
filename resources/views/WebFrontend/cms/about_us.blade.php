@@ -22,8 +22,8 @@
                     </div>
                     <div class="innerinfo_right">
                         <div class="addimg">
-                           <!--  <img class="img-fluid desktoppic" src="{{asset('css/images/signup-banner-left.jpg')}}" alt="" /> -->
-                            <img class="img-fluid mobilepic"  src="{{asset('css/images/aboutinfo.png')}}" alt="" />
+                             <img class="img-fluid desktoppic" src="{{asset('css/images/signup-banner-left.jpg')}}" alt="" />
+                           <!-- <img class="img-fluid mobilepic"  src="{{asset('css/images/aboutinfo.png')}}" alt="" />  -->
   
                         </div>
                     
