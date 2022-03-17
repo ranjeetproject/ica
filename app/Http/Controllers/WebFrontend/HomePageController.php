@@ -11,8 +11,7 @@ class HomePageController extends Controller
 {
     public function homePageDisplay(Request $request)
     {
-        $course = Course::with('user')->whereHas('user')
-            ->with('lessons')->where('entry_from', 'NEW')->orderBy('created_at', 'DESC')->get();
+        $course = Course::with('user')->whereHas('user')->with('lessons')->where('entry_from', 'NEW')->orderBy('created_at', 'DESC')->get(); 
         $data = [];
         foreach ($course as $value)
         {

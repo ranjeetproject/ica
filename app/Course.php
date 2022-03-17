@@ -27,7 +27,7 @@ class Course extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User', 'created_by', 'id');
+        return $this->belongsTo('App\Admin', 'created_by', 'id');
     }
     public function lessons()
     {
