@@ -29,7 +29,7 @@
     }
 
     .banner-wrp {
-        background-position: 110% center;
+        background-position: 100% top;
     }
 
     .ban-content::after {
@@ -40,7 +40,7 @@
 
 @media screen and (max-width: 1460px) {
     .banner-wrp {
-        background-position: 100% center;
+        background-position: 100% top;
     }
 
     .ban-content::after {
@@ -53,7 +53,7 @@
     }
 
     .ban-content {
-        padding: 90px 0 100px 85px;
+        padding: 80px 0 85px 85px;
     }
 
     .ban-content .cont-head {
@@ -77,7 +77,7 @@
     }
 
     .how-it-works .h-cards-wrp .card .card-body {
-        padding: 20px 30px;
+        padding: 20px 20px;
     }
 
     .how-it-works .h-cards-wrp .card .count-no {
@@ -284,6 +284,25 @@
     .top-cont .lt-prt .std-qt {
         font-size: 13px;
     }
+    .inner-content-modi .innerinfo_left p:first-child {
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 28px;
+        font-weight: 600;
+    }
+    .contents.textalign_justify p {
+        font-size: 16px;
+        margin-bottom: 40px;
+        line-height: 24px;
+    }
+    .contents.textalign_justify ul li {
+        font-size: 16px;
+        color: #071739;
+        font-weight: 400;
+        line-height: 24px;
+
+
+    }
 }
 
 @media screen and (max-width: 1100px) {
@@ -345,6 +364,11 @@
 }
 
 @media screen and (max-width: 991px) {
+    .crs-dtls-wrp .contents .sub-para {
+        font-size: 18px;
+        line-height: 32px;
+        margin-bottom: 25px;
+    }
     .banner-wrp {
         background-position: 80% top;
         padding-top: 74%;
@@ -418,20 +442,43 @@
     .course-card.db-cards {
         margin-bottom: 40px;
     }
+
+    section.banner-wrp.inner-banner {
+        background-position: 92% top;
+        padding-top: 75%;
+        background-size: 262%;
+    }
+    section.banner-wrp {
+        background-size: 138%!important;
+    
+    }
+    section.banner-wrp.inner-banner {
+        background-size: 259% !important;
+    }
+  
 }
 
 @media screen and (max-width:767px) {
+  
+    .top-cont .lt-prt .log-ar .text-part {
+        font-size: 13px;
+        margin-left: 20px;
+    }
+    .contactfrom_details {
+     
+        flex-direction: column-reverse;
+    }
     .header .rt-prt .login-btn {
-        font-size: 14px;
+        font-size: 12px;
         margin-left: 0px;
     }
 
     .header .rt-prt .free-sec .regis {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .header .rt-prt img {
-        margin-right: 12px;
+        margin-right: 5px;
         width: 30px;
     }
 

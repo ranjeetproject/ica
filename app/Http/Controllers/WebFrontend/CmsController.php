@@ -24,8 +24,10 @@ class CmsController extends Controller
         return view('WebFrontend.cms.privacy_policy',$privacyPolicy);
     }
     public function contactUs(){
-        return view('WebFrontend.cms.contact_us');
+	$contactUs= Cms::find(4);
+        return view('WebFrontend.cms.contact_us',$contactUs);
     }
+    
     public function submitQuery(Request $request){
         $request->validate([
             'name' => 'required',

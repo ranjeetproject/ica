@@ -47,7 +47,7 @@ Route::get('/contact-us','WebFrontend\CmsController@contactUs')->name('contactUs
 Route::post('/submit-query','WebFrontend\CmsController@submitQuery')->name('submitQuery');
 Route::get('/privacy-policy','WebFrontend\CmsController@privacyPolicy')->name('privacyPolicy');
 Route::get('/terms-and-conditions','WebFrontend\CmsController@termsAndCondition')->name('termsAndCondition');
-Route::get('/home','WebFrontend\HomePageController@homePageDisplay')->name('home');
+// Route::get('/home','WebFrontend\HomePageController@homePageDisplay')->name('home');
 
 Route::middleware(['auth'])->group(function ()
 {

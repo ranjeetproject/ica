@@ -10,7 +10,8 @@
     </section>
     <!-- end header -->
 
-    <section class="banner-wrp db-banner">
+    <section class="banner-wrp db-banner" style="background: url('https://demos.mydevfactory.com/android/public/cms_images/{{@$dashboardCms->featured_image}}') no-repeat top right;
+">
         <img src="{{ asset('css/images/dot-group-top.png') }}" class="img-fluid top_icon" alt="#">
         <div class="ban-content">
             <h1 class="cont-head">

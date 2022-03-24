@@ -168,7 +168,8 @@ body {
 }
 
 .header-bottom .navbar {
-    padding: 20px 0;
+    /* padding: 20px 0; */
+     padding: 10px 0; 
 }
 
 .header-bottom .navbar .nav-link {
@@ -198,7 +199,7 @@ body {
     background: url('../images/banner-image.jpg') no-repeat;
     background-size: contain;
     position: relative;
-    background-position: center right;
+    background-position: right top;
 }
 
 .banner-wrp .top_icon {
@@ -211,7 +212,7 @@ body {
 .ban-content {
     max-width: 885px;
     background: #116EEE url('../images/linear-circle.png') no-repeat 111% top;
-    padding: 100px 0 145px 180px;
+    padding: 80px 0 145px 160px;
     position: relative;
     background-size: auto;
 }
@@ -417,13 +418,27 @@ body {
 
 .courses-wrap .view-all-course {
     text-align: center;
-    margin-top: 45px;
+    /* margin-top: 45px; */
+    margin-top: 0px; 
 }
 
 .course-card {
-    box-shadow: 0px 20px 50px rgb(156 163 197 / 20%);
+    /* box-shadow: 0px 20px 50px rgb(156 163 197 / 20%); */
     padding: 25px;
     background: #fff;
+    
+    /* margin: 50px 0px ; */
+    box-shadow: 0px 21px 27px rgb(156 163 197 / 20%)
+}
+section.courses-wrap .course-card {
+    margin: 20px 0px 0px !important;
+}
+
+.courses-wrap .view-all-course {
+ 
+    margin-top: 0px;
+    POSITION: relative;
+    margin-top: 0px;
 }
 
 .course-card .course-image {
@@ -498,7 +513,8 @@ body {
 
 .testimonials .top-head {
     text-align: center;
-    max-width: 600px;
+    /* max-width: 600px; */
+    max-width: inherit; 
     margin: auto
 }
 
@@ -602,7 +618,7 @@ body {
 .footer-wrapper {
     background: #071739;
 
-    padding: 100px 0 70px;
+    padding: 80px 0 50px;
 }
 
 .footer-wrapper .text-prt {
@@ -977,7 +993,7 @@ body {
 .form-control {
     height: 60px;
     border-radius: 4px;
-    font-size: 18px;
+    font-size: 16px;
     color: #435077;
     font-weight: 700;
     background: #81c3ff;
@@ -1003,6 +1019,10 @@ select.form-control:focus {
     background: url('../images/db-banner.jpg') no-repeat;
     background-position: center right;
 }
+.inner-banner {
+    background: url('../images/innerbanner.jpg') no-repeat;
+    background-position: center right;
+}
 
 .db-block1 {
     padding: 60px 0 90px;
@@ -1026,7 +1046,7 @@ select.form-control:focus {
 
 .view-all {
     background: #3BBCA7;
-    padding: 8px 14px;
+    padding: 6px 14px;
     color: #fff;
     font-weight: 800;
     border-radius: 5px;
@@ -1245,10 +1265,10 @@ select.form-control:focus {
     box-shadow: 0px 20px 50px 0px #9CA3C533;
 }
 
-.couses-wrap .course-card {
+/* .couses-wrap .course-card {
     margin-bottom: 50px;
     box-shadow: 0px 20px 50px 0px #9CA3C533;
-}
+} */
 
 .couses-wrap .course-card .ourse-image {
     height: 238px;
@@ -1328,7 +1348,7 @@ select.form-control:focus {
 
 .crs-dtls-wrp .contents .sub-para {
     color: #071739;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 28px;
     line-height: 40px;
     margin-bottom: 45px;
@@ -1386,16 +1406,53 @@ select.form-control:focus {
 }
 
 .crs-dtls-wrp .contents .about-list .nav-item {
-    font-size: 28px;
+    /* font-size: 28px; */
     color: #071739;
     font-weight: 400;
-    line-height: 40px;
+    /* line-height: 40px; */
     background: url('../images/plus-whitebg.svg') no-repeat left 0px;
     background-size: 37px;
     padding-left: 65px;
     margin-bottom: 55px;
 }
+.contents.textalign_justify ul   {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+.contents.textalign_justify ul li  {
+    font-size: 20px;
+    color: #071739;
+    font-weight: 400;
+    line-height: 28px;
+    background: url(../images/plus-whitebg.svg) no-repeat left 0px;
+    background-size: 37px;
+    padding-left: 55px;
+    margin-bottom: 14px;
+    padding-bottom: 11px;
+}
+.contents.textalign_justify ul {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    padding-bottom: 16px;
+}
 
+.contents.textalign_justify p {
+    font-size: 20px;
+    margin-bottom: 40px;
+    line-height: 32px;
+}
+.contents.textalign_justify p {
+    color: #071739;
+    font-weight: 400;
+}
+.inner-content-modi .innerinfo_left p:first-child {
+    font-size: 22px;
+    line-height: 30px;
+    margin-bottom: 28px;
+    font-weight: 600;
+}
 .crs-dtls-wrp .module-content {
     display: flex;
     align-items: center;
@@ -1546,11 +1603,11 @@ select.form-control:focus {
     justify-content: space-between;
 }
 .innerinfo_left {
-    flex: 0 48%;
+    flex: 0 100%;
 }
-.innerinfo_right {
+/* .innerinfo_right {
     flex: 0 48%;
-}
+} */
 .innerinfo_right {
     position: relative;
 }
@@ -1601,6 +1658,83 @@ form.form.contactfrom {
 .textalign_justify {
     text-align: justify;
 }
+.add_banner{
+    padding: 80px 0px;
+    text-align: center;
+    background: #fff;
+}
+
+.contactfrom_right {
+    background: #fff;
+    padding: 38px;
+    box-shadow: 0px 20px 50px 0px #9ca3c533;
+    position: relative;
+    margin-bottom: 60px;
+    border-radius: 46px;
+    flex: 0 48%;
+}
+.contactfrom_left {
+    flex: 0 48%;
+}
+.contactfrom_details {
+    display: flex;
+    justify-content: space-between;
+}
+.contactfrom_details .title-part {
+    
+    flex-direction: column !important;
+    align-items: baseline !important ;
+}
+.contactfrom_details .title-part .bar {
+
+    margin-left: 0px !important;
+    margin-top: 5px !important;
+}
+form.contactfrom .form-control {
+    background: #f6f7fb;
+    border: 0px !important;
+    outline: 0px !important;
+    color: #072f60 !important;
+}
+form.contactfrom .form-control::placeholder {
+    color: #072f60 !important;
+}
+form.contactfrom button.btn.signup {
+    background: #2c368f;
+    color: #fff;
+    width: 100%;
+    font-size: 20px;
+}
+section.contact_info .crs-dtls-wrp {
+    padding: 70px 0 30px;
+}
+.contactfrom_right .title-part {
+    font-size: 24px !important;
+}
+.contactfrom_left.footer-wrapper {
+    background: none;
+    padding: 0px;
+    margin: 0px !important;
+    color: #7B87AC;
+}
+.contactfrom_left.footer-wrapper  .add-bar span{
+    color: #7B87AC;
+    margin-left: 0px;
+
+}
+.contactfrom_left.footer-wrapper  .add-bar{
+    color: #7B87AC;
+}
+.contactfrom_left.footer-wrapper  .add-bar a{
+    color: #7B87AC;
+    margin-left: 0px;
+}
+.contactfrom_left.footer-wrapper .add-bar {
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+
 @media screen and (max-width: 1190px) {
     .desktoppic{
         display: none;
