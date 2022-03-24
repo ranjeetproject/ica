@@ -13,7 +13,113 @@
         @include('WebFrontend.layout.previousLoginNav')
     @endif
 
-    <section class="signup-wrapper">
+    <section class="banner-wrp inner-banner" style="
+    background: url(https://demos.mydevfactory.com/android/public/cms_images/{{$featured_image}}) no-repeat top right;
+"> 
+        <img src="{{asset('css/images/dot-group-top.png')}}" class="img-fluid top_icon" alt="#">
+        <div class="ban-content">
+            <h1 class="cont-head">
+                Over <span>Contact Us</span> dolores
+                eos qui ratione volupta temdolored eod...
+            </h1>
+            <p class="cont-para">
+                Iste Natus Error sit Voluptatem Accusantium....
+            </p>
+            <div class="but-wrap">
+                <img src="{{asset('css/images/dot-group.png')}}" class="img-fluid bottom_icon" alt="#">
+            </div>
+        </div>
+    </section>
+
+<section class="contact_info">
+        <div class="crs-dtls-wrp">
+            <div class="container contents">
+                <div class="contactfrom_details">
+                    <div class="contactfrom_left footer-wrapper">
+                        <div class="title-part">
+                            <span>Contact  Address</span>
+                        </div>
+                        <div class="add-bar">
+                            <img src="{{asset('css/images/location-icon.svg')}}" class="add-icon">
+                            <div class="label">
+                                <span>Teum iure reprehenderit qui in<br>
+                                    eaderit qui in, Canada</span>
+                            </div>
+                        </div>
+                       
+                        <div class="add-bar">
+                            <img src="{{asset('css/images/envelop-icon.svg')}}" class="add-icon">
+                            <div class="label">
+                               
+                                <a href="mailto: jasonlokau@gmail.oom">
+                                    jasonlokau@gmail.oom
+                                </a>
+                            </div>
+                        </div>
+                        <div class="add-bar">
+                            <img src="{{asset('css/images/call-icon.svg')}}" class="add-icon">
+                            <div class="label">
+                                <a href="tel:+160 4825 6769">
+                                    +160 4825 6769</a>
+                            </div>
+                        </div>
+                       {!!@$content!!}
+                    </div>
+                    <div class="contactfrom_right">
+                        <div class="title-part">
+                            <span>{{@$page_name}}</span>
+                            <span class="bar"></span>
+                        </div>
+                        <form class="form contactfrom" method="post" action="{{ url('/submit-query') }}" id="contactUsForm">
+                            @csrf
+                        <div class="mb-3">
+                            <input type="Name" class="form-control" placeholder="Name" id="name" name="name">
+                            @if ($errors->has('name'))
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Email ID" id="email" name="email">
+                            @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" placeholder="Mobile Number" id="mobile" name="mobile">
+                            @if ($errors->has('mobile'))
+                                <span class="text-danger">{{ $errors->first('mobile') }}</span>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Subject" id="subject" name="subject">
+                            @if ($errors->has('subject'))
+                                <span class="text-danger">{{ $errors->first('subject') }}</span>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <textarea name="message" cols="30" rows="10" class="form-control" placeholder="Enter your Message" id="message"></textarea>
+                            @if ($errors->has('message'))
+                                <span class="text-danger">{{ $errors->first('message') }}</span>
+                            @endif
+                        </div>
+                            
+                    
+                            <button type="submit" class="btn signup">Send</button>
+                        </form>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </section>
+
+    <div class="add_banner">
+        <img src="{{asset('css/images/add.jpg')}}" class="img-fluid bottom_icon" alt="#">
+
+    </div>
+
+
+    <!-- <section class="signup-wrapper">
         <div class="signup-container">
             <div class="sig-card-wpr">
                 <div class="content-part">
@@ -81,7 +187,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
 @endsection
 @section('customJavascript')

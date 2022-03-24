@@ -2,7 +2,8 @@
     <div class="top-cont">
         <div class="lt-prt">
             <div class="log-ar">
-                <img class="img-fluid" src="{{ asset('css//images/logo.svg') }}" alt="logo" />
+                <a href="{{action('WebFrontend\HomePageController@homePageDisplay')}}" >
+                <img class="img-fluid" src="{{ asset('css//images/logo.svg') }}" alt="logo" /></a>
                 <div class="text-part">Student<span>Home page</span></div>
             </div>
             <div class="std-qt">study that gives you success</div>

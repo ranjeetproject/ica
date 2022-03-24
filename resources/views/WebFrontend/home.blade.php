@@ -1,10 +1,20 @@
-@extends('WebFrontend.layout.app')
+@extends((\Auth::check())?'WebFrontend.layout.afterLoginApp':'WebFrontend.layout.app')
 @section('content')
+    @if(Auth::check())
+        <section class="header">
+            <div class="header-top">
+                @include('WebFrontend.layout.afterLoginHeaderTop')
+            </div>
+            <div class="header-bottom">
+                @include('WebFrontend.layout.afterLoginNav')
+            </div>
+        </section>
+    @else
+        @include('WebFrontend.layout.previousLoginNav')
+    @endif
 
-
-@include('WebFrontend.layout.previousLoginNav')
-
-<section class="banner-wrp">
+<section class="banner-wrp" style="background: url('https://demos.mydevfactory.com/android/public/cms_images/{{@$homeCms->featured_image}}') no-repeat top right background-size: contain;;
+">
     <img src="{{asset('css/images/dot-group-top.png')}}" class="img-fluid top_icon" alt="#">
     <div class="ban-content">
         <h1 class="cont-head">
@@ -152,28 +162,24 @@
         </div>
 
         <div class="home-courses">
+            @foreach($testimonial as $value)
             <div class="course-card">
                 <div class="t-quotes-card">
                     <img src="{{asset('css/images/quote_icon.svg')}}" class="img-fluid quote-icon" />
-                    <h3>Best Support ever!</h3>
-                    <p>
-                        5 stars for design quality, but
-                        also for prompt new
-                        customer service and great
-                        attention to details work.
-
-                    </p>
+                    <h3>{{$value->title}}</h3>
+                    {!!$value->description!!}
                 </div>
                 <div class="course-by-wrp">
-                    <img src="{{asset('css/images/inst-avatar.png')}}" class="ins-avt" alt="#" />
+                    <img src="https://demos.mydevfactory.com/android/public/testimonial_images/{{$value->user_image}}" class="ins-avt" alt="#" />
                     <div class="avt-name">
-                        <label> Alex Brown</label>
-                        <p class="desg">Principal</p>
+                        <label> {{$value->username}}</label>
+                        <p class="desg">{{$value->designation}}</p>
                     </div>
 
                 </div>
             </div>
-            <div class="course-card">
+            @endforeach
+            <!-- <div class="course-card">
                 <div class="t-quotes-card">
                     <img src="{{asset('css/images/quote_icon.svg')}}" class="img-fluid quote-icon" />
                     <h3>Best Support ever!</h3>
@@ -319,7 +325,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="view-all-course">
             <a href="#" class="btn common-button">View All</a>
