@@ -3,7 +3,7 @@
         <div class="course-card">
             <img src="{{$courses->course_photo}}" class="course-image" alt="#">
             <h4 class="course-name">{{$courses->course_name}} </h4>
-            <a href="{{ url('course-details', $courses->id) }}" class="btn view">view</a>
+            <a href="{{ url('course-details', $courses->course) }}" class="btn view">view</a>
         </div>
     </div>
 @endforeach

@@ -60,7 +60,8 @@
                                 </button>
                             </div>
                         </div>
-                        <span id="verify_success_message" style="color:#ed0f12;padding:10px;"></span>
+                        <span id="verify_success_message" style="color:#008000;padding:10px;"></span>
+                        <span id="verify_error_message" style="color:#ed0f12;padding:10px;"></span>
                         <div class="mb-3 verify-otp">
                             <input type="text" class="form-control" name="verify_Otp" placeholder="OTP" id="verify_Otp">
                             <button type="button" class="btn reqOtp" id="verifyOtp">
@@ -173,9 +174,9 @@
                             $('#verify_success_message').html('');
                         }, 3000);
                     } else {
-                        $("#verify_success_message").html(data.message);
+                        $("#verify_error_message").html(data.message);
                         setTimeout(function () {
-                            $('#verify_success_message').html('');
+                            $('#verify_error_message').html('');
                         }, 3000);
                     }
                 }
