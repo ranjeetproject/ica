@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Your Otp</title>
+    <title>Registration Successful</title>
 
 </head>
 <body>
@@ -30,13 +30,13 @@
                 <tbody>
                 <tr>
                     <td align="center" style="padding:20px 20px 40px 20px;font-size:16px;line-height:22px">
-                        <h3>Hello!</h3>
+                        <h3>Hello {{$data['name']}}</h3>
                     </td>
                 </tr>
                 <tr>
                     <td align="center" style="padding:20px 20px 40px 20px;font-size:16px;line-height:22px">
                         <p>
-                            Your One Time Password (OTP) is {{$otp}}.Please enter this code on the ICA App to verify your mobile number. NEVER SHARE YOUR OTP WITH ANYONE.
+                            You have successfully registered with us. Your User Code is {{$data['mobile']}} and registered Email ID is {{$data['email']}}.
                         </p>
                     </td>
                 </tr>

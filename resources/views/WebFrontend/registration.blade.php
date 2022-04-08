@@ -35,26 +35,26 @@
 
                         @csrf
                         <div class="mb-3">
-                            <input type="Name" class="form-control" placeholder="Name" id="name" name="name">
+                            <input type="Name" class="form-control" placeholder="Name" id="name" name="name" value="{{ old('name') }}">
                             <p style="display: none;" id="nameError">Name is required</p>
                             @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
                             @endif
                         </div>
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email ID" id="email" name="email">
+                            <input type="email" class="form-control" placeholder="Email ID" id="email" name="email" value="{{ old('email') }}">
                             @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             @endif
                         </div>
                         <div class="mb-3">
-                            <input type="number" class="form-control" placeholder="Mobile Number" id="mobile" name="mobile">
+                            <input type="number" class="form-control" placeholder="Mobile Number" id="mobile" name="mobile" value="{{ old('mobile') }}">
                             @if ($errors->has('mobile'))
                                 <span class="text-danger">{{ $errors->first('mobile') }}</span>
                             @endif
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Address" id="address" name="address">
+                            <input type="text" class="form-control" placeholder="Address" id="address" name="address" value="{{ old('address') }}">
                             @if ($errors->has('address'))
                                 <span class="text-danger">{{ $errors->first('address') }}</span>
                             @endif
@@ -63,7 +63,7 @@
                             <select class="form-control" name="state">
                                 <option value="">Select State</option>
                                 @foreach ($states as $state)
-                                    <option value="{{$state->name_sort}}">{{$state->name_long}}</option>
+                                    <option value="{{$state->name_sort}}" {{old ('state') == $state->name_sort ? 'selected' : ''}}>{{$state->name_long}}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('state'))
@@ -71,10 +71,10 @@
                             @endif
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="City" id="city" name="city">
+                            <input type="text" class="form-control" placeholder="City" id="city" name="city" value="{{ old('city') }}">
                         </div>
                         <div class="mb-3">
-                            <input type="number" class="form-control" placeholder="Pincode" id="pincode" name="pincode">
+                            <input type="number" class="form-control" placeholder="Pincode" id="pincode" name="pincode" value="{{ old('pincode') }}">
                             @if ($errors->has('pincode'))
                                 <span class="text-danger">{{ $errors->first('pincode') }}</span>
                             @endif
@@ -100,10 +100,12 @@
                     required: true
                 },
                 email: {
-                    required: true
+                    required: true,
+                    remote: '{{route("checkEmailIsPresentOrNot")}}'
                 },
                 mobile: {
-                    required: true
+                    required: true,
+                    remote: '{{route("checkMobileIsPresentOrNot")}}'
                 },
                 address: {
                     required: true
@@ -125,10 +127,12 @@
                     required: "This name field is required."
                 },
                 email: {
-                    required: "Email field is required"
+                    required: "Email field is required",
+                    remote: "Email is already taken"
                 },
                 mobile: {
-                    required: "Mobile No field is required"
+                    required: "Mobile No field is required",
+                    remote: "Mobile No is already registered with us"
                 },
                 address: {
                     required: "Address field is required"

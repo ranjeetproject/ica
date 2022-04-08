@@ -38,6 +38,8 @@ Route::middleware(['withoutLogin'])->group(function ()//this middleware used for
 
     Route::post('/post-login', 'WebFrontend\UserController@postLogin')->name('post-login');
     Route::post('/registration', 'WebFrontend\UserController@registration')->name('registration');
+    Route::get('/check-email', 'WebFrontend\UserController@checkEmailIsPresentOrNot')->name('checkEmailIsPresentOrNot');
+    Route::get('/check-mobile-no', 'WebFrontend\UserController@checkMobileIsPresentOrNot')->name('checkMobileIsPresentOrNot');
     Route::post('/send-otp', 'WebFrontend\UserController@sendOTP')->name('send-otp');
     Route::post('/verify-otp', 'WebFrontend\UserController@verifyOTP')->name('verify-otp');
 });
