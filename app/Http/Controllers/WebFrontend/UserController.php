@@ -29,11 +29,11 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'code' => 'required',
-            'mobile_number' => 'required',
+           // 'mobile_number' => 'required',
             'verify_Otp' => 'required',
         ]);
         $input = $request->all();
-        $checkStudentOtp = Student::where('code', '=', $input['code'])->where('mobile', '=', $input['mobile_number'])->where('otp', $input['verify_Otp'])->first();
+        $checkStudentOtp = Student::where('code', '=', $input['code'])->where('otp', $input['verify_Otp'])->first();
         if ($checkStudentOtp)
         {
             Auth::login($checkStudentOtp);
@@ -47,6 +47,8 @@ class UserController extends Controller
                 }
                 return redirect()->action('WebFrontend\DashboardController@dashboardPageDisplay');
             }
+        }else{
+            return redirect()->back()->with(['error'=>'Oops! You have entered invalid code or otp']);
         }
     }
 
@@ -60,10 +62,10 @@ class UserController extends Controller
     {
         $request->validate([
             'code' => 'required',
-            'mobile_number' => 'required',
+           // 'mobile_number' => 'required',
         ]);
         $input = $request->all();
-        $check_student = Student::where('code', '=', $input['code'])->where('mobile', '=', $input['mobile_number'])->first();
+        $check_student = Student::where('code', '=', $input['code'])->first();
         if (!empty($check_student)) {
             $otp = rand(100000, 999999);
             $update_student = Student::find($check_student->id);
@@ -96,12 +98,12 @@ class UserController extends Controller
                 $response = curl_exec($ch);
                 curl_close($ch);
                 $data['status'] = true;
-                $data['message'] = "OTP is sent to your Mobile number";
+                $data['message'] = "OTP is sent to your email";
                 return $data;
             }
         } else {
             $data['status'] = false;
-            $data['error'] = "Please enter correct registered user id and mobile number";
+            $data['error'] = "Please enter correct your code";
             return $data;
         }
     }
@@ -110,11 +112,11 @@ class UserController extends Controller
     {
         $request->validate([
             'code' => 'required',
-            'mobile_number' => 'required',
+            //'mobile_number' => 'required',
             'verify_Otp' => 'required',
         ]);
         $input = $request->all();
-        $checkStudentOtp = Student::where('code', '=', $input['code'])->where('mobile', '=', $input['mobile_number'])->where('otp', $input['verify_Otp'])->count();
+        $checkStudentOtp = Student::where('code', '=', $input['code'])->where('otp', $input['verify_Otp'])->count();
         if ($checkStudentOtp > 0) {
             $data['status'] = true;
             $data['message'] = "Otp verify successfully";
