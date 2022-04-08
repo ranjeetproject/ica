@@ -161,7 +161,6 @@
 <script>
    @if(Session::has('success'))
         toastr.success("{{ Session::get('success') }}");
-        toastr.success("{{ Session::flush() }}");
   @endif
 
 

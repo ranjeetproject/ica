@@ -5,6 +5,7 @@ namespace App\Http\Controllers\WebFrontend;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Student;
 use App\State;
@@ -14,6 +15,11 @@ use Hash;
 
 class UserController extends Controller
 {
+    protected $userRepository;
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
     public function signUp()
     {
         $states = State::get();
@@ -192,7 +198,7 @@ class UserController extends Controller
             echo $valid;
         }
     }
-    
+
     public function checkMobileIsPresentOrNot(Request $request)
     {
         $request->validate([
