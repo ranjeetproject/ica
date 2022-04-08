@@ -37,22 +37,29 @@
                                 eum iure reprehenderit qui in ea vol.....</p>
                         </div>
                     </div>
+                    @if (session('error'))
+                        <div class="alert alert-danger" id="error-login">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <span id="success_message" style="color:#ed0f12;padding:10px;"></span>
                     <form class="form" action={{action('WebFrontend\UserController@postLogin')}} method="POST" id="loginForm">
                         {{csrf_field()}}
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="code" placeholder="User ID" id="code">
+                            <input type="text" class="form-control" name="code" placeholder="Your Code" id="code">
                             <span id="error_code" style="color:#ed0f12;padding:10px;"></span>
                         </div>
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <input type="number" class="form-control" name="mobile_number" placeholder="Mobile Number"
                                    id="mobile_number">
                             <span id="error_mobile_number" style="color:#ed0f12;padding:10px;"></span>
-                        </div>
+                        </div> --}}
 
                         <div class="otp-wrap">
-                            <p id="otp-msg"> </p>
+                            {{-- <p id="otp-msg"> </p> --}}
+                            <span id="otp_success_message" style="color:#008000;padding:10px;"></span>
+                            <span id="otp_error_message" style="color:#ed0f12;padding:10px;"></span>
                             <div class="time">
                                 {{-- <span>00:40</span> --}}
                                 <button type="button" class="btn reqOtp" id="sendOtp">
@@ -60,15 +67,15 @@
                                 </button>
                             </div>
                         </div>
-                        <span id="verify_success_message" style="color:#008000;padding:10px;"></span>
-                        <span id="verify_error_message" style="color:#ed0f12;padding:10px;"></span>
+                        
                         <div class="mb-3 verify-otp">
                             <input type="text" class="form-control" name="verify_Otp" placeholder="OTP" id="verify_Otp">
                             <button type="button" class="btn reqOtp" id="verifyOtp">
                                 Verify OTP
                             </button>
                             <span id="error_verify_ot" style="color:#ed0f12;padding:10px;"></span>
-
+                            <span id="verify_success_message" style="color:#008000;padding:10px;"></span>
+                            <span id="verify_error_message" style="color:#ed0f12;padding:10px;"></span>
                         </div>
 
                         <button type="submit" class="btn signup">Login</button>
@@ -85,26 +92,26 @@
 
         $("#sendOtp").click(function (e) {
             $("#code-error").html('');
-            $("#mobile_number-error").html('');
+            //$("#mobile_number-error").html('');
             $("#verify_Otp-error").html('');
             if ($("#code").val() == '' || $("#code").val() == undefined) {
-                $("#error_code").html('This user id field is required.');
+                $("#error_code").html('This code field is required.');
                 return false;
             } else {
                 $("#error_code").html('');
             }
 
-            if ($("#mobile_number").val() == '' || $("#mobile_number").val() == undefined) {
+           /* if ($("#mobile_number").val() == '' || $("#mobile_number").val() == undefined) {
                 $("#error_mobile_number").html('This mobile number field is required.');
                 return false;
             } else {
                 $("#error_mobile_number").html('');
-            }
+            }*/
             e.preventDefault()
             var dataVal = {
                 "_token": "{{ csrf_token() }}",
                 "code": $("#code").val(),
-                "mobile_number": $("#mobile_number").val()
+                //"mobile_number": $("#mobile_number").val()
             }
             var baseUrl = '{{route("send-otp")}}';
             $.ajax({
@@ -113,14 +120,14 @@
                 data: dataVal,
                 success: function (data) {
                     if (data.status == true) {
-                        $("#otp-msg").html(data.message);
+                        $("#otp_success_message").html(data.message);
                         setTimeout(function () {
-                            $('#otp-msg').html('');
+                            $('#otp_success_message').html('');
                         }, 3000);
                     } else {
-                        $("#success_message").html(data.error);
+                        $("#otp_error_message").html(data.error);
                         setTimeout(function () {
-                            $('#success_message').html('');
+                            $('#otp_error_message').html('');
                         }, 3000);
                     }
                 }
@@ -131,21 +138,21 @@
 
         $("#verifyOtp").click(function (e) {
             $("#code-error").html('');
-            $("#mobile_number-error").html('');
+            //$("#mobile_number-error").html('');
             $("#verify_Otp-error").html('');
             if ($("#code").val() == '' || $("#code").val() == undefined) {
-                $("#error_code").html('This user id field is required.');
+                $("#error_code").html('This code field is required.');
                 return false;
             } else {
                 $("#error_code").html('');
             }
 
-            if ($("#mobile_number").val() == '' || $("#mobile_number").val() == undefined) {
+            /*if ($("#mobile_number").val() == '' || $("#mobile_number").val() == undefined) {
                 $("#error_mobile_number").html('This mobile number field is required.');
                 return false;
             } else {
                 $("#error_mobile_number").html('');
-            }
+            }*/
 
             if ($("#verify_Otp").val() == '' || $("#verify_Otp").val() == undefined) {
                 $("#error_verify_ot").html('This verify otp field is required.');
@@ -158,7 +165,7 @@
             var dataVal = {
                 "_token": "{{ csrf_token() }}",
                 "code": $("#code").val(),
-                "mobile_number": $("#mobile_number").val(),
+                //"mobile_number": $("#mobile_number").val(),
                 "verify_Otp": $("#verify_Otp").val()
 
             }
@@ -219,7 +226,11 @@
             $('button[type=submit]').attr("disabled", true);
             setTimeout(function () {
                 $('button[type=submit]').attr("disabled", false);
+                $("#error-login").hide();
             }, 3000);
         });
+        setTimeout(function () {
+                $("#error-login").hide();
+            }, 3000);
     </script>
 @endsection
