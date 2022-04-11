@@ -169,7 +169,7 @@ class UserController extends Controller
         $inputData['email'] = $request->email;
         $inputData['name'] = $request->name;
         $inputData['mobile'] = $request->mobile;
-        Mail::send('WebFrontend.email.send_otp', ['data' => $inputData] , function ($m) use ($inputData) {
+        Mail::send('WebFrontend.email.registration_successful', ['data' => $inputData] , function ($m) use ($inputData) {
                 $m->from('ica@gmail.com','ica');
                 $m->to($inputData['email'],$inputData['name'])->subject('Registration Successful');
         });
