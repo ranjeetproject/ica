@@ -101,12 +101,12 @@
     }
 
     .courses-wrap .course-head {
-        font-size: 32px;
-        line-height: 40px;
+        font-size: 24px;
+        line-height: 35px;
     }
 
     .courses-wrap .corse-hints {
-        font-size: 15px;
+        font-size: 16px;
     }
 
     .home-courses .slick-slide {
@@ -284,17 +284,20 @@
     .top-cont .lt-prt .std-qt {
         font-size: 13px;
     }
+
     .inner-content-modi .innerinfo_left p:first-child {
         font-size: 16px;
         line-height: 24px;
         margin-bottom: 28px;
         font-weight: 600;
     }
+
     .contents.textalign_justify p {
         font-size: 16px;
         margin-bottom: 40px;
         line-height: 24px;
     }
+
     .contents.textalign_justify ul li {
         font-size: 16px;
         color: #071739;
@@ -369,6 +372,7 @@
         line-height: 32px;
         margin-bottom: 25px;
     }
+
     .banner-wrp {
         background-position: 80% top;
         padding-top: 74%;
@@ -448,26 +452,30 @@
         padding-top: 75%;
         background-size: 262%;
     }
+
     section.banner-wrp {
-        background-size: 138%!important;
-    
+        background-size: 138% !important;
+
     }
+
     section.banner-wrp.inner-banner {
         background-size: 259% !important;
     }
-  
+
 }
 
 @media screen and (max-width:767px) {
-  
+
     .top-cont .lt-prt .log-ar .text-part {
         font-size: 13px;
         margin-left: 20px;
     }
+
     .contactfrom_details {
-     
+
         flex-direction: column-reverse;
     }
+
     .header .rt-prt .login-btn {
         font-size: 12px;
         margin-left: 0px;
@@ -609,7 +617,8 @@
         margin: 10px auto;
     }
 
-    .footer-wrapper .add-bar .label span, .footer-wrapper .add-bar .label a {
+    .footer-wrapper .add-bar .label span,
+    .footer-wrapper .add-bar .label a {
         margin: 0;
     }
 
@@ -762,7 +771,8 @@
         padding: 10px;
     }
 
-    .page-item .page-link, .page-item.disabled .page-link {
+    .page-item .page-link,
+    .page-item.disabled .page-link {
         font-size: 18px;
     }
 }
