@@ -13,7 +13,7 @@ use App\Course;
 use App\StdCourse;
 use App\Exam;
 use App\StdExam;
-
+use App\Events\CourseAssign;
 use Illuminate\Support\Facades\Mail;
 use Hash;
 
@@ -50,7 +50,8 @@ class UserController extends Controller
             Auth::login($checkStudentOtp);
             if (Auth::check())
             {
-                $this->defaultCourse(Auth::user()->id);
+                // $this->defaultCourse(Auth::user()->id);
+                event(new CourseAssign());
                 $this->defaultExam(Auth::user()->id);
                 $student=Student::find($checkStudentOtp->id);
                 if($student)
