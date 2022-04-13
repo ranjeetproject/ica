@@ -57,7 +57,7 @@
     }
 
     .ban-content .cont-head {
-        font-size: 38px;
+        font-size: 34px;
     }
 
     .ban-content .cont-para {
@@ -101,7 +101,7 @@
     }
 
     .courses-wrap .course-head {
-        font-size: 24px;
+        font-size: 22px;
         line-height: 35px;
     }
 
@@ -158,7 +158,7 @@
     .crs-dtls-wrp .contents .title-part {
         color: #072F60;
         font-weight: 800;
-        font-size: 28px;
+        font-size: 23px;
     }
 
     .crs-dtls-wrp .contents .about-list .nav-item {
@@ -408,6 +408,10 @@
         justify-content: center;
     }
 
+    .contactfrom_details .add-bar {
+        justify-content: flex-start;
+    }
+
     .footer-wrapper .text-prt {
         font-size: 16px;
     }
@@ -465,6 +469,20 @@
 }
 
 @media screen and (max-width:767px) {
+    .contactfrom_right {
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .contactfrom_details .add-bar {
+        flex-direction: row !important;
+    }
+
+    .contactfrom_details .add-bar img,
+    .contactfrom_details .add-bar .label {
+        margin-left: 0 !important;
+        margin-right: 10px !important;
+    }
 
     .top-cont .lt-prt .log-ar .text-part {
         font-size: 13px;
