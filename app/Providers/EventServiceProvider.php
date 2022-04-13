@@ -21,8 +21,8 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\CourseAssign'=>[
             'App\Listeners\CourseAssigned'
         ],
-        'App\Events\CourseAssign'=>[
-            'App\Listeners\CourseAssigned'
+        'App\Events\ExamAssign'=>[
+            'App\Listeners\ExamAssigned'
         ]
     ];
 
