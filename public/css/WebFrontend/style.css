@@ -17,6 +17,11 @@ body {
     --bs-gutter-x: 50px;
 }
 
+h2 {
+    font-size: 26px;
+    line-height: 34px;
+}
+
 /* row mofification */
 
 .container {
@@ -551,7 +556,7 @@ section.courses-wrap .course-card {
 
 
 .testimonials .course-card h3 {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
     color: #435077;
 }
@@ -1368,7 +1373,7 @@ select.form-control:focus {
 
 .course-header .courses-title {
     color: #FFFFFF;
-    font-size: 38px;
+    font-size: 32px;
     font-weight: 800;
     margin: 0;
     text-align: center;
@@ -1517,6 +1522,7 @@ select.form-control:focus {
     height: 5px;
     display: inline-block;
     margin-left: 20px;
+    flex: 1;
 }
 
 .crs-dtls-wrp .contents .about-list {
@@ -1542,7 +1548,7 @@ select.form-control:focus {
 }
 
 .contents.textalign_justify ul li {
-    font-size: 20px;
+    font-size: 17px;
     color: #071739;
     font-weight: 400;
     line-height: 28px;
@@ -1551,6 +1557,7 @@ select.form-control:focus {
     padding-left: 55px;
     margin-bottom: 14px;
     padding-bottom: 11px;
+    padding-top: 7px;
 }
 
 .contents.textalign_justify ul {
@@ -1561,9 +1568,9 @@ select.form-control:focus {
 }
 
 .contents.textalign_justify p {
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: 40px;
-    line-height: 32px;
+    line-height: 28px;
 }
 
 .contents.textalign_justify p {
@@ -1852,7 +1859,7 @@ section.contact_info .crs-dtls-wrp {
 }
 
 .contactfrom_right .title-part {
-    font-size: 24px !important;
+    font-size: 23px !important;
 }
 
 .contactfrom_left.footer-wrapper {

@@ -30,13 +30,28 @@
                 <tbody>
                 <tr>
                     <td align="center" style="padding:20px 20px 40px 20px;font-size:16px;line-height:22px">
-                        <h3>Hello {{$data['name']}}</h3>
+                        <h3>Registration Successful</h3>
                     </td>
                 </tr>
                 <tr>
-                    <td align="center" style="padding:20px 20px 40px 20px;font-size:16px;line-height:22px">
+                    <td  style="padding:20px 20px 40px 20px;font-size:16px;line-height:22px">
                         <p>
-                            You have successfully registered with us. Your User Code is {{$data['mobile']}} and registered Email ID is {{$data['email']}}.
+                            Hi {{$data['name']}},
+                        </p>
+                        <p>
+                            You have successfully register with us.
+                        </p>
+                        <p>
+                            Your Given Information
+                        </p>
+                        <p>
+                            ------------------------------
+                        </p>
+                        <p>
+                            Your User Code : {{$data['mobile']}}
+                        </p>
+                        <p>
+                             Email ID : {{$data['email']}}.
                         </p>
                     </td>
                 </tr>
