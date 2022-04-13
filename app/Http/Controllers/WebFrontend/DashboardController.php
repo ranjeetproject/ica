@@ -15,7 +15,6 @@ class DashboardController extends Controller
 {
     public function dashboardPageDisplay()
     {
-
 	    $dashboardCms=Cms::find(5);
         $courses = Course::join('std_courses','std_courses.course','=','courses.id')
             ->where('courses.entry_from','NEW')

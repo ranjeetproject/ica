@@ -28,4 +28,20 @@ class ExamController extends Controller
         return view('WebFrontend.exam-list',compact('exams'));
         
     }
+
+    public function examInstruction()
+    {
+        return view('WebFrontend.exam-instruction');
+    }
+
+    public function examStart()
+    {
+        return view('WebFrontend.exam-start');
+    }
+    
+
+    public function examSubmit()
+    {
+        return view('WebFrontend.exam-result');
+    }
 }
