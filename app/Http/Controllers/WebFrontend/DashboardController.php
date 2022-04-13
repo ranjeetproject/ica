@@ -17,29 +17,24 @@ class DashboardController extends Controller
     {
 
 	    $dashboardCms=Cms::find(5);
-        $url = 'https://new.icaerp.com/api/Data/searchstudent';
-        $data_string = '{"StudentCode": "'.Auth::user()->code.'" }';
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch);
-        curl_close($ch);
-        $result = json_decode($result,true);
-        // print_r($result);
         $courses = Course::join('std_courses','std_courses.course','=','courses.id')
             ->where('courses.entry_from','NEW')
             ->where('std_courses.student', Auth::user()->id)
             ->get();
         // // $courses = Course::where('created_by',1)->orderBy('created_at','DESC')->limit(3)->get();
         // //$exams = Exam::with('courseDetails')->where('created_by',1)->orderBy('created_at','DESC')->limit(3)->get();
-        $exams = Exam::leftJoin('std_exam','std_exam.exam','=','exams.id')
+        $exams = Exam::join('std_exam','std_exam.exam','=','exams.id')
         ->where('std_exam.student','=', Auth::user()->id)
         ->where('exams.exam_for','=',1)->where('exams.status','=',1)->get();
-        
+        if(count($exams)>0){
+            foreach ($exams as $value_ex) 
+            {
+                $question = Question::where('exam_id', $value_ex->id)->where('state', '1')->get()->count();
+                if ($question > 0) {
+                    array_push($exams,$value_ex);
+                }
+            }
+        }
         return view('WebFrontend.dashboard',compact('courses','exams','dashboardCms'));
-           
-        
-        
     }
 }
