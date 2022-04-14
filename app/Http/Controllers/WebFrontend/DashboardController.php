@@ -26,21 +26,24 @@ class DashboardController extends Controller
             ->get();
         
         $exams=[];
-        $examsData = Exam::join('std_exam','std_exam.exam','=','exams.id')
+        $examsData = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_code','exams.exam_name',
+        'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type','exams.exam_zone','exams.exam_for','exams.duration')
+        ->join('std_exam','std_exam.exam','=','exams.id')
         ->where('std_exam.student','=', Auth::user()->id)
         ->where('exams.exam_for','=',1)->where('exams.status','=',1)->get();
         $i=0;
         foreach ($examsData as $value_ex) 
         {
-            $question = Question::where('exam_id', $value_ex->id)->where('state', '1')->count();
+            $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
             if ($question > 0) 
-            {                
+            {     
                 if($i<=3)
                 {
-                    array_push($exams,$value_ex);
+                    $exams[] = $value_ex;
                 }
                 $i++;
             }
+            
         }
         return view('WebFrontend.dashboard',compact('courses','exams','dashboardCms'));
     }

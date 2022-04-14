@@ -20,7 +20,7 @@
             @foreach ($exams as $key=>$exam)
                 <div class="list-item">
                     <span>{{$key+1}}</span>
-                    <a class="nav-link" href="{{route('exam-instruction')}}">
+                    <a class="nav-link" href="{{url('exam-instruction',$exam->ex_id)}}">
                         <p>{{$exam->exam_name}}</p>
                     </a>
                 </div>

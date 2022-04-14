@@ -10,6 +10,7 @@
         </div>
 
     </section>
+  
     <section class="exam-list-wr">
         <div class="container">
             <h3 class="e-title">
@@ -61,7 +62,7 @@
                     </div>
 
                     <div class="def_btn_opt">
-                        <a href="{{route('exam-start')}}" class="def_btn">Start Exam</a>
+                        <a href="{{url('exam-start',$id)}}" class="def_btn">Start Exam</a>
                     </div>
                      
                     
