@@ -1119,7 +1119,7 @@ section.courses-wrap .course-card {
     border-radius: 4px;
     font-size: 16px;
     color: #435077;
-    font-weight: 700;
+    font-weight: 600;
     background: #81c3ff;
     border: 1px solid #81c3ff;
 }
@@ -1819,6 +1819,12 @@ form.form.contactfrom {
 
 .contactfrom_left {
     flex: 0 48%;
+}
+
+.contactfrom_left p {
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 400;
 }
 
 .contactfrom_details {
