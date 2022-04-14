@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Auth::routes();
+Route::get('/', 'WebFrontend\HomePageController@homePageDisplay');
 Route::middleware(['withoutLogin'])->group(function ()//this middleware used for if login redirect to dashboard
 {
-    Route::get('/', 'WebFrontend\HomePageController@homePageDisplay');
+    
     Route::get('/login', 'WebFrontend\UserController@loginForm')->name('login');
     Route::get('/sign-up', 'WebFrontend\UserController@signUp');
     Route::get('/check-otp', function(){

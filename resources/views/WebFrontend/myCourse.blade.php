@@ -20,10 +20,10 @@
         <div class="container">
             <div class="row" id="course-data">
                 @include('WebFrontend.all-course')
-                
+
                 <div class="col-md-12">
                     <div class="load-more" style="display:none">
-                        <img src="{{asset('css/images/loadmore-icon.png')}}" class="img-fluid" />
+                        <img src="{{ asset('css/images/loadmore-icon.png') }}" class="img-fluid" />
                         <p>Load more...</p>
                     </div>
                 </div>
@@ -33,41 +33,35 @@
 @endsection
 @section('customJavascript')
     <script>
-    function loadMoreData(page){
-            $.ajax(
-	        {
-	            url:'?page=' + page,
-	            type: "get",
-	            beforeSend: function()
-	            {
-	                $('.load-more').show();
-	            }
-	        })
-	        .done(function(data)
-	        {
-	            if(data.html != ""){
-                    $("#course-data").append(data.html);
-                    $('.load-more').hide();
-	            }else{
-	                $('.load-more').html("No more records found");
-                    return;
-                }
-	          
-	        })
-	        .fail(function(jqXHR, ajaxOptions, thrownError)
-	        {
-	              alert('server not responding...');
-	        });
-    }
+        function loadMoreData(page) {
+            $.ajax({
+                    url: '?page=' + page,
+                    type: "get",
+                    beforeSend: function() {
+                        $('.load-more').show();
+                    }
+                })
+                .done(function(data) {
+                    if (data.html != "") {
+                        $("#course-data").append(data.html);
+                        $('.load-more').hide();
+                    } else {
+                        $('.load-more').html("No more records found");
+                        return;
+                    }
 
-    var page = 1;
-    $(window).scroll(function(){
-        if($(window).scrollTop() + $(window).height() + 50 >= $(document).height()){
-            page++;
-            loadMoreData(page);
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    alert('server not responding...');
+                });
         }
-    });
 
-
+        var page = 1;
+        $(window).scroll(function() {
+            if ($(window).scrollTop() + $(window).height() + 50 >= $(document).height()) {
+                page++;
+                loadMoreData(page);
+            }
+        });
     </script>
 @endsection
