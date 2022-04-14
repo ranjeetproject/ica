@@ -13,7 +13,8 @@ use App\Course;
 use App\StdCourse;
 use App\Exam;
 use App\StdExam;
-
+use App\Events\CourseAssign;
+use App\Events\ExamAssign;
 use Illuminate\Support\Facades\Mail;
 use Hash;
 
@@ -50,8 +51,10 @@ class UserController extends Controller
             Auth::login($checkStudentOtp);
             if (Auth::check())
             {
-                $this->defaultCourse(Auth::user()->id);
-                $this->defaultExam(Auth::user()->id);
+                // $this->defaultCourse(Auth::user()->id);
+                event(new CourseAssign());
+                // $this->defaultExam(Auth::user()->id);
+                event(new ExamAssign());
                 $student=Student::find($checkStudentOtp->id);
                 if($student)
                 {
@@ -182,7 +185,7 @@ class UserController extends Controller
         });
 
         if($studentRegistration){
-            \Session::put('success','You are registered successfully');
+            \Session::put('success','Congratulation. You have successfully registered with us. Your User Code is '.$request->mobile.'.');
             return redirect()->back();
         }else{
             \Session::put('error','Failed! User not registered');
@@ -222,36 +225,36 @@ class UserController extends Controller
         }
     }
 
-    public function defaultCourse($student_id)
-    {
-        $allcourses = Course::where('tagging_for', ':All:')->get();
-        foreach ($allcourses as $allcourse) {
-            $stdcourses1 = StdCourse::where('student', $student_id)->where('course', $allcourse->id)->count();
-            if ($stdcourses1 == 0) {
-                $db1 = new StdCourse();
-                $db1->student = $student_id;
-                $db1->course = $allcourse->id;
-                $db1->save();
-            }else{
-                return $stdcourses1;
-            }
-        }
-    }
+    // public function defaultCourse($student_id)
+    // {
+    //     $allcourses = Course::where('tagging_for', ':All:')->get();
+    //     foreach ($allcourses as $allcourse) {
+    //         $stdcourses1 = StdCourse::where('student', $student_id)->where('course', $allcourse->id)->count();
+    //         if ($stdcourses1 == 0) {
+    //             $db1 = new StdCourse();
+    //             $db1->student = $student_id;
+    //             $db1->course = $allcourse->id;
+    //             $db1->save();
+    //         }else{
+    //             return $stdcourses1;
+    //         }
+    //     }
+    // }
 
-    public function defaultExam($student_id)
-    {
-        $allexams = Exam::where('tagging_for', ':All:')->get();
-        foreach ($allexams as $allexam) {
-            $stdexam1 = StdExam::where('student', $student_id)->where('exam', $allexam->id)->count();
-            if ($stdexam1 == 0) {
-                $db1 = new StdExam();
-                $db1->student = $student_id;
-                $db1->exam = $allexam->id;
-                $db1->save();
-            }else{
-                return $stdexam1;
-            }
-        }
-    }
+    // public function defaultExam($student_id)
+    // {
+    //     $allexams = Exam::where('tagging_for', ':All:')->get();
+    //     foreach ($allexams as $allexam) {
+    //         $stdexam1 = StdExam::where('student', $student_id)->where('exam', $allexam->id)->count();
+    //         if ($stdexam1 == 0) {
+    //             $db1 = new StdExam();
+    //             $db1->student = $student_id;
+    //             $db1->exam = $allexam->id;
+    //             $db1->save();
+    //         }else{
+    //             return $stdexam1;
+    //         }
+    //     }
+    // }
 
 }
