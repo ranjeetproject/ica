@@ -16,7 +16,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Course</a></li>
-                    <li class="breadcrumb-item"><a href="#">{{$course->course_name}}</a></li>
+                    <li class="breadcrumb-item"><a href="#">{{ $course->course_name }}</a></li>
                     <li class="breadcrumb-item active" aria-current="page"><a href="javascript:void(0)">Introduction</a>
                     </li>
                 </ol>
@@ -27,19 +27,19 @@
     <section class="crs-dtls-wrp">
         <div class="container">
             <div class="video-wrp">
-                <img src="{{asset('css/images/video-banner.png')}}" alt="#" class="img-fluid" />
+                <img src="{{ asset('css/images/video-banner.png') }}" alt="#" class="img-fluid" />
                 <button class="btn btnplay">
-                    <img src="{{asset('css/images/play-icon.svg')}}" class="img-fluid" />
+                    <img src="{{ asset('css/images/play-icon.svg') }}" class="img-fluid" />
                 </button>
             </div>
 
-            <div class="contents">
+            <div class="contents textalign_justify">
                 <p class="sub-para">Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
                     porro quisquam est, qui dolorem ipsum
                     quia dolor sit amet, Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
                     laboriosam, nisi ut
                     aliquid ex ea commodi consequatur....</p>
-                <p class="para-text">Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
+                <p class="">Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
                     porro quisquam est, qui dolorem ipsum
                     quia dolor sit amet, Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
                     laboriosam, nisi ut
@@ -48,20 +48,20 @@
                     <span>About Courses</span>
                     <span class="bar"></span>
                 </div>
-                <p class="para-text">Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
+                <p class="">Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
                     porro quisquam est, qui dolorem ipsum
                     quia dolor sit amet, Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
                     laboriosam, nisi ut
                     aliquid ex ea commodi consequatur....</p>
 
-                <ul class="nav about-list">
-                    <li class="nav-item">Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                <ul>
+                    <li>Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
                         Neque porro quisquam est, qui dolorem ipsum
                         quia dolor sit amet, Ut enim ad minima veniam.</li>
-                    <li class="nav-item">Dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+                    <li>Dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
                         qui dolorem ipsum quia dolor sit amet, Ut
                         enim ad minima veniam.</li>
-                    <li class="nav-item">Ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
+                    <li>Ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
                         ipsum.
                     </li>
                 </ul>
@@ -70,23 +70,23 @@
                     <span class="bar"></span>
 
                     <div class="rating-star">
-                        <img src="{{asset('css/images/full-star.svg')}}" class="img-fluid" />
-                        <img src="{{asset('css/images/full-star.svg')}}" class="img-fluid" />
-                        <img src="{{asset('css/images/full-star.svg')}}" class="img-fluid" />
-                        <img src="{{asset('css/images/full-star.svg')}}" class="img-fluid" />
-                        <img src="{{asset('css/images/outline-star.svg')}}" class="img-fluid" />
+                        <img src="{{ asset('css/images/full-star.svg') }}" class="img-fluid" />
+                        <img src="{{ asset('css/images/full-star.svg') }}" class="img-fluid" />
+                        <img src="{{ asset('css/images/full-star.svg') }}" class="img-fluid" />
+                        <img src="{{ asset('css/images/full-star.svg') }}" class="img-fluid" />
+                        <img src="{{ asset('css/images/outline-star.svg') }}" class="img-fluid" />
                         <span>-4.33(3)</span>
                     </div>
                 </div>
-                @foreach ($course->courseChapter as $key=>$chapter)
+                @foreach ($course->courseChapter as $key => $chapter)
                     <div class="module-content">
-                        <span class="count-number">{{$key+1}}</span>
-                        
-                            <p>{{$chapter->chapter_name}}</p>
-                        
+                        <span class="count-number">{{ $key + 1 }}</span>
+
+                        <p>{{ $chapter->chapter_name }}</p>
+
                         <div class="lesson-prt">
-                            <img src="{{asset('css/images/lesson-icon.png')}}" class="img-fluid" />
-                            <span class="lesson-number">{{$chapter->topicsCount}} Lessons</span>
+                            <img src="{{ asset('css/images/lesson-icon.png') }}" class="img-fluid" />
+                            <span class="lesson-number">{{ $chapter->topicsCount }} Lessons</span>
                         </div>
                     </div>
                 @endforeach
@@ -106,7 +106,7 @@
                         <span class="lesson-number">10 Lessons</span>
                     </div>
                 </div> --}}
-                <p class="para-text mb-0">
+                <p class="">
                     Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
                     qui dolorem ipsum
                     quia dolor sit amet, Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
