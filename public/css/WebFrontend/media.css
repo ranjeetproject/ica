@@ -57,7 +57,7 @@
     }
 
     .ban-content .cont-head {
-        font-size: 34px;
+        font-size: 38px;
     }
 
     .ban-content .cont-para {
@@ -101,12 +101,12 @@
     }
 
     .courses-wrap .course-head {
-        font-size: 22px;
-        line-height: 35px;
+        font-size: 32px;
+        line-height: 40px;
     }
 
     .courses-wrap .corse-hints {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .home-courses .slick-slide {
@@ -158,14 +158,14 @@
     .crs-dtls-wrp .contents .title-part {
         color: #072F60;
         font-weight: 800;
-        font-size: 23px;
+        font-size: 28px;
     }
 
     .crs-dtls-wrp .contents .about-list .nav-item {
         font-size: 20px;
         line-height: 28px;
         background-size: 27px;
-        padding-left: 60px;
+        padding-left: 49px;
         margin-bottom: 12px
     }
 
@@ -284,28 +284,6 @@
     .top-cont .lt-prt .std-qt {
         font-size: 13px;
     }
-
-    .inner-content-modi .innerinfo_left p:first-child {
-        font-size: 16px;
-        line-height: 24px;
-        margin-bottom: 28px;
-        font-weight: 600;
-    }
-
-    .contents.textalign_justify p {
-        font-size: 16px;
-        margin-bottom: 40px;
-        line-height: 24px;
-    }
-
-    .contents.textalign_justify ul li {
-        font-size: 16px;
-        color: #071739;
-        font-weight: 400;
-        line-height: 24px;
-
-
-    }
 }
 
 @media screen and (max-width: 1100px) {
@@ -367,12 +345,18 @@
 }
 
 @media screen and (max-width: 991px) {
+    .exam-list-wr .e-title {
+        font-size: 22px;
+    }
+    .exam-list-wr .e-title .blue-bar {
+        width: 25px;
+   
+    }
     .crs-dtls-wrp .contents .sub-para {
         font-size: 18px;
         line-height: 32px;
         margin-bottom: 25px;
     }
-
     .banner-wrp {
         background-position: 80% top;
         padding-top: 74%;
@@ -406,10 +390,6 @@
 
     .footer-wrapper .add-bar {
         justify-content: center;
-    }
-
-    .contactfrom_details .add-bar {
-        justify-content: flex-start;
     }
 
     .footer-wrapper .text-prt {
@@ -456,55 +436,57 @@
         padding-top: 75%;
         background-size: 262%;
     }
-
-    section.banner-wrp {
-        background-size: 138% !important;
-
+    .inner_content_info {
+        padding: 40px 20px;
     }
-
-    section.banner-wrp.inner-banner {
-        background-size: 259% !important;
+    .innettitle {
+ 
+        font-size: 26px;
+      
     }
-
 }
 
 @media screen and (max-width:767px) {
-    .contactfrom_right {
-        padding: 20px;
-        border-radius: 10px;
-    }
 
-    .contactfrom_details .add-bar {
-        flex-direction: row !important;
+    .viewans {
+        width: auto;
     }
+    .result_des span {
+        padding: 10px 15px;
+        font-size: 15px;
 
-    .contactfrom_details .add-bar img,
-    .contactfrom_details .add-bar .label {
-        margin-left: 0 !important;
-        margin-right: 10px !important;
     }
-
-    .top-cont .lt-prt .log-ar .text-part {
-        font-size: 13px;
-        margin-left: 20px;
+    .result_info_heading span {
+        padding: 10px 10px;
+        font-size: 16px;
     }
-
+    .dateoption {
+ 
+        flex-direction: column;
+    }
+    .item_morecontent {
+     
+        flex-direction: column;
+    }
+    .inner_content_info {
+   
+        padding: 40px 20px;
+    }
     .contactfrom_details {
-
+     
         flex-direction: column-reverse;
     }
-
     .header .rt-prt .login-btn {
-        font-size: 12px;
+        font-size: 14px;
         margin-left: 0px;
     }
 
     .header .rt-prt .free-sec .regis {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .header .rt-prt img {
-        margin-right: 5px;
+        margin-right: 12px;
         width: 30px;
     }
 
@@ -635,8 +617,7 @@
         margin: 10px auto;
     }
 
-    .footer-wrapper .add-bar .label span,
-    .footer-wrapper .add-bar .label a {
+    .footer-wrapper .add-bar .label span, .footer-wrapper .add-bar .label a {
         margin: 0;
     }
 
@@ -789,8 +770,7 @@
         padding: 10px;
     }
 
-    .page-item .page-link,
-    .page-item.disabled .page-link {
+    .page-item .page-link, .page-item.disabled .page-link {
         font-size: 18px;
     }
 }
