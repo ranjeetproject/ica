@@ -18,7 +18,7 @@ class DashboardController extends Controller
     public function dashboardPageDisplay()
     {
 
-        //return $this->courseTagging(Auth::user()->id); 
+        // return $this->courseTagging(Auth::user()->id); 
 	    $dashboardCms=Cms::find(5);
         $courses = Course::join('std_courses','std_courses.course','=','courses.id')
             ->where('courses.entry_from','NEW')
@@ -50,9 +50,11 @@ class DashboardController extends Controller
         //Searching for ICA ERP
         //Learnersmall Course
         $url = 'https://new.icaerp.com/api/Data/searchstudent';
-        $data_string = '{"StudentCode": "'.$student->code.'" }';
+        $data_string = '{"StudentCode": '.$student->code.' }';
+        $data_strings = new \stdClass();
+        $data_strings->StudentCode = $student->code;
         $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_strings);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
