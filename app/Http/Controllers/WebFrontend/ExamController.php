@@ -108,29 +108,6 @@ class ExamController extends Controller
         return view('WebFrontend.exam-start',$data);
     }
 
-    function fetch(Request $request)
-    {
-       //dd($request->get('id'));
-        if($request->ajax())
-        {
-            $exams = Exam::where('id', $request->get('id'))->first();
-            if ($exams->question_limit > 0) {
-                $data = Question::where('exam_id', $request->get('id'))->where('state', 1)->paginate(1);
-                //$data = Question::where('exam_id', $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
-            }else {
-                $data = Question::where('exam_id', $request->get('id'))->where('state', 1)->orderBy('id', 'ASC')->paginate(1);
-            }
-            foreach ($data as $value) {
-                if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || $value->type == "accounting3" || $value->type == "accounting5") {
-                    $value->qus_option = explode("=><",$value->qus_option);
-                }
-            }
-            $data->exam_name = $exams->exam_name;
-            return view('WebFrontend.custom-exam-start-pagination', compact('data'))->render();
-        }
-    }
-
-
     public function examSubmit()
     {
         return view('WebFrontend.exam-result');

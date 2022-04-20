@@ -18,15 +18,18 @@
                     <span class="blue-bar"></span>
                 </h3>
                 <div class="dateoption">
-                    <div class="dateinfo"><span>Date : </span><strong>{{ date('d-m-Y') }}</strong></div>
-                    <div class="timeinfo"><span class="clockimg"><img src="images/clockimg.png" alt="">
-                        </span> <strong> 01:15:35 </strong><span> Remaining</span></div>
+                    <div class="dateinfo"><span>Date : </span><strong> {{ date('d-m-Y') }}</strong></div>
+                    <div class="timeinfo"><span class="clockimg"><img src="{{asset('css/images/clockimg.png')}}" alt="">
+                        </span> <strong id="countdown">  </strong> <span> Remaining</span></div>
                 </div>
             </div>
 
             <div class="inner_content_info">
                 <div class="inner_content_view">
                     <div class="inner_block" id="questionHolder">
+                        <div class="load-more" style="display:none">
+                            <img src="{{ asset('css/images/Spinner-1s-43px.gif') }}" class="img-fluid" />
+                        </div>
                     </div>
 
                     <div class="def_btn_opt morebtn_info">
@@ -43,6 +46,7 @@
     </section>
 @endsection
 @section('customJavascript')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         var examId = '{{ $id }}';
         let page = 1;
@@ -58,7 +62,7 @@
                     url: url + '?page=' + page,
                     method: "GET",
                     beforeSend: function() {
-                        $('#allPostLoader').show();
+                        $('.load-more').show();
                     }
                 })
                 .done(function(response) {
@@ -75,7 +79,7 @@
                         url: url + '?page=' + innetPage,
                         method: "GET",
                         beforeSend: function() {
-                            $('#allPostLoader').show();
+                            $('.load-more').show();
                         }
                     })
                     .done(function(response) {
@@ -83,7 +87,8 @@
                         page = response.page;
                     })
             } else {
-                alert('No More question for previous');
+                Swal.fire('No more question for previous')
+                //alert('No More question for previous');
             }
 
         }
@@ -94,7 +99,7 @@
                         url: url + '?page=' + page,
                         method: "GET",
                         beforeSend: function() {
-                            $('#allPostLoader').show();
+                            $('.load-more').show();
                         }
                     })
                     .done(function(response) {
@@ -102,8 +107,31 @@
                         page = response.page;
                     })
             } else {
-                alert('No More question for skip or next');
+                Swal.fire('No more question for skip or next')
+                //alert('No More question for skip or next');
             }
         }
+
+        const startingMinuites = 10;
+        let time = startingMinuites * 60;
+
+        const countdownEl = document.getElementById('countdown')
+        //console.log(countdownEl)
+        const interval =setInterval(updateCountdown,1000);
+
+        function updateCountdown(){
+            const minute = Math.floor(time/60);
+            let second = time % 60
+
+            countdownEl.innerText = `${(minute<10)?'0'+ minute:minute}: ${(second<10)?'0'+ second:second}`
+            if(time==0){
+                Swal.fire('Time is over')
+                clearInterval(interval)
+            }else{
+                time--
+            }
+
+        }
+        
     </script>
 @endsection
