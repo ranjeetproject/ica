@@ -78,7 +78,7 @@ class ExamController extends Controller
                 }
             }
         }
-        //dd($data);
+       // return $data;
         return view('WebFrontend.exam-start');
     }
     
