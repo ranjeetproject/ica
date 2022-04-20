@@ -48,7 +48,7 @@
                     <div class="mb-3 otpReqsec">
                         <input type="text" class="form-control" name="code" placeholder="Your Code" id="code">
                         <span id="error_code" style="color:#ed0f12;padding:10px;"></span>
-                        <span id="otp_success_message" style="color:#008000;padding:10px;"></span>
+                        <span id="otp_success_message" style="color:#82ff80;padding:10px;"></span>
                         <span id="otp_error_message" style="color:#ed0f12;padding:10px;"></span>
                         <button type="button" class="btn reqOtp" id="sendOtp">
                             Request OTP

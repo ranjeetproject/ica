@@ -10,10 +10,11 @@
         </div>
 
     </section>
+  
     <section class="exam-list-wr">
         <div class="container">
             <h3 class="e-title">
-                Name of Exams
+                {{$data->exam_name}}
                 <span class="blue-bar"></span>
             </h3>
             <div class="inner_content_info">
@@ -61,10 +62,11 @@
                     </div>
 
                     <div class="def_btn_opt">
-                        <a href="{{route('exam-start')}}" class="def_btn">Start Exam</a>
+                        <a href="{{url('exam-start',$id)}}" class="def_btn">Start Exam</a>
+
                     </div>
                      
-                    
+                    {!! $data->exam_details!!}
                 </div>
 
             </div>

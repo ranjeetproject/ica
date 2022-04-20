@@ -114,7 +114,7 @@ class UserController extends Controller
                 $response = curl_exec($ch);
                 curl_close($ch);
                 $data['status'] = true;
-                $data['message'] = "OTP is sent to your email";
+                $data['message'] = "OTP sent to E-mail ID";
                 return $data;
             }
         } else {

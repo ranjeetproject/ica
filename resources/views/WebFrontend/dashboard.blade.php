@@ -35,7 +35,7 @@
                 <div class="col-md-12">
                     <div class="db-top-part">
                         <h3 class="title">My Course</h3>
-                        <a href="#" class="btn view-all">View all</a>
+                        <a href="{{route('my-courses')}}" class="btn view-all">View all</a>
                     </div>
                 </div>
                 @foreach ($courses as $course)
@@ -48,7 +48,7 @@
                             @endif
                             <div class="title-w-icon">
                                 <h4 class="course-name">{{ $course['course_name'] }} </h4>
-                                <a href="#">
+                                <a href="{{url('course-details', $course['course'])}}">
                                     <img src="{{ asset('css/images/plus-icon.svg') }}" class="img-fluid" />
                                 </a>
                             </div>
