@@ -79,23 +79,33 @@ class ExamController extends Controller
         return view('WebFrontend.exam-instruction',compact('id','data'));
     }
 
-    public function examStart($id)
+    public function examStart(Request $request, $id)
     {
+        $data=[];
         $exams = Exam::where('id', $id)->first();
-            if ($exams->question_limit > 0) {
-                $data = Question::where('exam_id', $id)->where('state', 1)->paginate(1);
-                //$data = Question::where('exam_id', $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
-            }else {
-                $data = Question::where('exam_id', $id)->where('state', 1)->orderBy('id', 'ASC')->paginate(1);
-            }
-            foreach ($data as $value) {
-                if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || $value->type == "accounting3" || $value->type == "accounting5") {
-                    $value->qus_option = explode("=><",$value->qus_option);
-                }
-            }
-        $data->exam_name = $exams->exam_name;
-        //return $data;
-        return view('WebFrontend.exam-start',compact('data','id'));
+        if($request->ajax())
+        {
+            if($request->has('page'))
+            {
+                if ($exams->question_limit > 0) 
+                {
+                    $question = Question::where('exam_id', $id)->where('state', 1)->paginate(1);
+                    foreach ($question as $value) 
+                    {
+                        if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || 
+                        $value->type == "accounting3" || $value->type == "accounting5") 
+                        {
+                            $value->qus_option = explode("=><",$value->qus_option);
+                        }
+                    }            
+                } 
+                $html = view('WebFrontend.custom-exam-start-pagination', compact('question'))->render();
+                return response()->json(['page'=>$question->currentPage()+1,'last_page'=>$question->lastPage(),'html'=>$html]);
+            }            
+        }        
+        $data['examName'] = $exams->exam_name;        
+        $data['id'] = $id;
+        return view('WebFrontend.exam-start',$data);
     }
 
     function fetch(Request $request)
