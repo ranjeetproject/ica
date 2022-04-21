@@ -105,6 +105,7 @@ class ExamController extends Controller
         }        
         $data['examName'] = $exams->exam_name;        
         $data['id'] = $id;
+        $data['duration'] = $exams->duration;
         return view('WebFrontend.exam-start',$data);
     }
 

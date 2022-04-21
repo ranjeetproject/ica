@@ -9,7 +9,7 @@
                         @if (@$val->qus_option)
                             @foreach ($val->qus_option as $option)
                                 <div class="checkbtn_opt">
-                                    <input type="radio" id="test1" name="radio-group" checked>
+                                    <input type="radio" id="test1" name="radio-group">
                                     <label for="test1">{{ $option }}</label>
                                 </div>
                             @endforeach
