@@ -2358,6 +2358,7 @@ p.awsopt {
 }
 .swal2-title{
     font-size:1.5em !important;
+    font-weight: 500!important;
 }
 
 @media screen and (max-width: 1190px) {
