@@ -2106,13 +2106,65 @@ section.contact_info .crs-dtls-wrp {
 }
 
 .def_btn.prevbtn {
+    /*
     background: #7b87ac21;
     color: #7B87AC;
+*/
+    background: #283efe;
+    color: #ffffff;
+}
+
+.def_btn.prevbtn:hover {
+    background: #2c368f;
 }
 
 .def_btn.nextbtn {
+    /*
     background: #7b87ac21;
     color: #7B87AC;
+*/
+    background: #283efe;
+    color: #ffffff;
+}
+
+.def_btn.nextbtn:hover {
+    background: #2c368f;
+}
+
+.detlNewFont {
+    font-size: 18px;
+    font-weight: 600;
+    color: #00112b;
+}
+
+.actionview button:focus {
+    box-shadow: none !important;
+}
+
+.active-green {
+    background: #1b8e06d9 !important;
+    color: #fff !important;
+    box-shadow: none !important;
+}
+
+.active-yellow {
+    background: #dbaf10d9 !important;
+    color: #fff !important;
+    box-shadow: none !important;
+}
+
+.active-blue {
+    background: #002fbef5 !important;
+    color: #fff !important;
+    box-shadow: none !important;
+}
+
+.morebtn_info a {
+    margin-bottom: 8px !important;
+}
+
+.quizList .countopt {
+    height: 46px;
 }
 
 .dateoption {
