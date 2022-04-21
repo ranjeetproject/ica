@@ -1,28 +1,12 @@
 @extends('WebFrontend.layout.afterLoginApp')
 @section('content')
-<section class="header">
-    <div class="header-top">
-        @include('WebFrontend.layout.afterLoginHeaderTop')
-    </div>
-    <div class="header-bottom">
-        @include('WebFrontend.layout.afterLoginNav')
-    </div>
-
-<<<<<<< HEAD
-</section>
-<section class="exam-list-wr">
-    <div class="container">
-        <div class="innertitle modf_heading">
-            <h3 class="e-title">
-                <span class="blue-bar addbar"></span>
-                {{ $examName }}
-                <span class="blue-bar"></span>
-            </h3>
-            <div class="dateoption">
-                <div class="dateinfo"><span>Date : </span><strong>{{ date('d-m-Y') }}</strong></div>
-                <div class="timeinfo"><span class="clockimg"><img src="images/clockimg.png" alt="">
-                    </span> <strong> 01:15:35 </strong><span> Remaining</span></div>
-=======
+    <section class="header">
+        <div class="header-top">
+            @include('WebFrontend.layout.afterLoginHeaderTop')
+        </div>
+        <div class="header-bottom">
+            @include('WebFrontend.layout.afterLoginNav')
+        </div>
     </section>
     <section class="exam-list-wr">
         <div class="container">
@@ -35,26 +19,19 @@
                 <div class="dateoption">
                     <div class="dateinfo"><span>Date : </span><strong> {{ date('d-m-Y') }}</strong></div>
                     <div class="timeinfo"><span class="clockimg"><img src="{{asset('css/images/clockimg.png')}}" alt="">
-                        </span> <strong id="countdown">  </strong> <span> Remaining</span></div>
+                        </span> <strong id="countdown"> </strong> <span> Remaining</span></div>
                 </div>
->>>>>>> 1894052e0e1da6dfe4bc89966e032e917ae829eb
             </div>
         </div>
 
-<<<<<<< HEAD
+
         <div class="inner_content_info">
             <div class="inner_content_view">
                 <div class="inner_block" id="questionHolder">
-                </div>
-=======
-            <div class="inner_content_info">
-                <div class="inner_content_view">
-                    <div class="inner_block" id="questionHolder">
-                        <div class="load-more" style="display:none">
-                            <img src="{{ asset('css/images/Spinner-1s-43px.gif') }}" class="img-fluid" />
-                        </div>
+                    <div class="load-more" style="display:none">
+                        <img src="{{ asset('css/images/Spinner-1s-43px.gif') }}" class="img-fluid"/>
                     </div>
->>>>>>> 1894052e0e1da6dfe4bc89966e032e917ae829eb
+                </div>
 
                 <div class="def_btn_opt morebtn_info">
                     <a class="def_btn prevbtn" href="javascript:void(0);" onclick="previousQuestion();">Previous</a>
@@ -62,83 +39,68 @@
                     <a class="def_btn nextbtn" href="javascript:void(0);" onclick="nextQuestion();">Next</a>
                 </div>
             </div>
-
-
-
         </div>
-    </div>
-</section>
+    </section>
 @endsection
-@section('customJavascript')
-<<<<<<< HEAD
-<script>
-    var examId = '{{ $id }}';
-    let page = 1;
-    let lastPage = 1;
-    let url = "{{ action('WebFrontend\ExamController@examStart', ['id' => $id]) }}";
-    $(function() {
-        fetch_data();
-    });
 
-=======
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@section('customJavascript')
+
     <script>
         var examId = '{{ $id }}';
         let page = 1;
         let lastPage = 1;
         let url = "{{ action('WebFrontend\ExamController@examStart', ['id' => $id]) }}";
-        $(function() {
+        $(function () {
             fetch_data();
         });
->>>>>>> 1894052e0e1da6dfe4bc89966e032e917ae829eb
 
-    function fetch_data() {
-        $.ajax({
+
+        function fetch_data() {
+            $.ajax({
                 url: url + '?page=' + page,
                 method: "GET",
-                beforeSend: function() {
+                beforeSend: function () {
                     $('#allPostLoader').show();
                 }
             })
-            .done(function(response) {
-                $('#questionHolder').html(response.html);
-                page = response.page;
-                lastPage = response.last_page;
-            })
-    }
-
-    function previousQuestion() {
-        let innetPage = (page - 2);
-        if (innetPage > 0) {
-            $.ajax({
-                    url: url + '?page=' + innetPage,
-                    method: "GET",
-                    beforeSend: function() {
-                        $('.load-more').show();
-                    }
-                })
-                .done(function(response) {
+                .done(function (response) {
                     $('#questionHolder').html(response.html);
                     page = response.page;
+                    lastPage = response.last_page;
                 })
-        } else {
-            alert('No More question for previous');
         }
 
-<<<<<<< HEAD
-    }
-=======
         function previousQuestion() {
             let innetPage = (page - 2);
             if (innetPage > 0) {
                 $.ajax({
-                        url: url + '?page=' + innetPage,
-                        method: "GET",
-                        beforeSend: function() {
-                            $('.load-more').show();
-                        }
+                    url: url + '?page=' + innetPage,
+                    method: "GET",
+                    beforeSend: function () {
+                        $('.load-more').show();
+                    }
+                })
+                    .done(function (response) {
+                        $('#questionHolder').html(response.html);
+                        page = response.page;
                     })
-                    .done(function(response) {
+            } else {
+                alert('No More question for previous');
+            }
+        }
+
+
+        function previousQuestion() {
+            let innetPage = (page - 2);
+            if (innetPage > 0) {
+                $.ajax({
+                    url: url + '?page=' + innetPage,
+                    method: "GET",
+                    beforeSend: function () {
+                        $('.load-more').show();
+                    }
+                })
+                    .done(function (response) {
                         $('#questionHolder').html(response.html);
                         page = response.page;
                     })
@@ -146,40 +108,21 @@
                 Swal.fire('No more question for previous')
                 //alert('No More question for previous');
             }
->>>>>>> 1894052e0e1da6dfe4bc89966e032e917ae829eb
-
-    function nextQuestion() {
-        if (lastPage >= page) {
-            $.ajax({
-                    url: url + '?page=' + page,
-                    method: "GET",
-                    beforeSend: function() {
-                        $('#allPostLoader').show();
-                    }
-                })
-                .done(function(response) {
-                    $('#questionHolder').html(response.html);
-                    page = response.page;
-                })
-        } else {
-            alert('No More question for skip or next');
         }
-    }
 
-</script>
 
-<<<<<<< HEAD
-=======
+
+
         function nextQuestion() {
             if (lastPage >= page) {
                 $.ajax({
-                        url: url + '?page=' + page,
-                        method: "GET",
-                        beforeSend: function() {
-                            $('.load-more').show();
-                        }
-                    })
-                    .done(function(response) {
+                    url: url + '?page=' + page,
+                    method: "GET",
+                    beforeSend: function () {
+                        $('.load-more').show();
+                    }
+                })
+                    .done(function (response) {
                         $('#questionHolder').html(response.html);
                         page = response.page;
                     })
@@ -194,22 +137,22 @@
 
         const countdownEl = document.getElementById('countdown')
         //console.log(countdownEl)
-        const interval =setInterval(updateCountdown,1000);
+        const interval = setInterval(updateCountdown, 1000);
 
-        function updateCountdown(){
-            const minute = Math.floor(time/60);
+        function updateCountdown() {
+            const minute = Math.floor(time / 60);
             let second = time % 60
 
-            countdownEl.innerText = `${(minute<10)?'0'+ minute:minute}: ${(second<10)?'0'+ second:second}`
-            if(time==0){
+            countdownEl.innerText = `${(minute < 10) ? '0' + minute : minute}: ${(second < 10) ? '0' + second : second}`
+            if (time == 0) {
                 Swal.fire('Time is over')
                 clearInterval(interval)
-            }else{
+            } else {
                 time--
             }
 
         }
-        
+
     </script>
->>>>>>> 1894052e0e1da6dfe4bc89966e032e917ae829eb
+
 @endsection
