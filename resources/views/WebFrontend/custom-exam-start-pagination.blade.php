@@ -1,4 +1,5 @@
 @foreach ($question as $key => $val)
+<<<<<<< HEAD
 <div class="innerlist-item quizList">
     <span class="countopt">{{ $question->currentPage() }}</span>
     <div class="item_details">
@@ -14,6 +15,23 @@
                     </div>
                     @endforeach
                     @endif
+=======
+    <div class="innerlist-item">
+        <span class="countopt">{{ $question->currentPage() }}</span>
+        <div class="item_details">
+            <p>{{ $val->qus }}</p>
+            <div class="item_desc">
+                <div class="item_morecontent">
+                    <div class="item_checkoutopt">
+                        @if (@$val->qus_option)
+                            @foreach ($val->qus_option as $option)
+                                <div class="checkbtn_opt">
+                                    <input type="radio" id="test1" name="radio-group">
+                                    <label for="test1">{{ $option }}</label>
+                                </div>
+                            @endforeach
+                        @endif
+>>>>>>> 1894052e0e1da6dfe4bc89966e032e917ae829eb
 
 
 
