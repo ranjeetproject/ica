@@ -2356,7 +2356,9 @@ p.awsopt {
     padding: 45px 0 0;
     text-align: left;
 }
-
+.swal2-title{
+    font-size:1.5em !important;
+}
 
 @media screen and (max-width: 1190px) {
     .desktoppic {
