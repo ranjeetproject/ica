@@ -13,6 +13,8 @@ use App\Course;
 use App\StdCourse;
 use App\Exam;
 use App\StdExam;
+use App\centre;
+
 use App\Events\CourseAssign;
 use App\Events\ExamAssign;
 use Illuminate\Support\Facades\Mail;
@@ -21,11 +23,11 @@ use Hash;
 
 class UserController extends Controller
 {
-    protected $userRepository;
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
+    // protected $userRepository;
+    // public function __construct(UserRepository $userRepository)
+    // {
+    //     $this->userRepository = $userRepository;
+    // }
     public function signUp()
     {
         $states = State::get();
@@ -51,9 +53,7 @@ class UserController extends Controller
             Auth::login($checkStudentOtp);
             if (Auth::check())
             {
-                // $this->defaultCourse(Auth::user()->id);
                 event(new CourseAssign());
-                // $this->defaultExam(Auth::user()->id);
                 event(new ExamAssign());
                 $student=Student::find($checkStudentOtp->id);
                 if($student)
@@ -145,6 +145,270 @@ class UserController extends Controller
 
     }
 
+    public function courseTagging()
+    {
+        //For Courses
+        //All Courses
+        $allCourses = Course::where('tagging_for', ':All:')->get();
+        foreach ($allCourses as $allCourse) {
+            $stdCourses = StdCourse::where('student', Auth::user()->id)
+                            ->where('course', $allCourse->id)->count();
+                if ($stdCourses == 0) {
+                    $stdCourse = new StdCourse();
+                    $stdCourse->student = Auth::user()->id;
+                    $stdCourse->course = $allCourse->id;
+                    $stdCourse->save();
+                }
+        }
+        
+        //Centre Courses
+        $centerLike = "";
+        $centres = centre::where('Center_code', Auth::user()->centre_code)->first();
+        if ($centres != '') {
+            $centerLike = ":CE". $centres->id .":";
+            $centerCourses = Course::where('tagging_for', 'like', '%:Centre:%')
+                            ->where('tagging_text', 'like', '%'. $centerLike .'%')->get();
+            foreach ($centerCourses as $centerCourse) {
+                $stdCourses2 = StdCourse::where('student', Auth::user()->id)->where('course', $centerCourse->id)->count();
+                if ($stdCourses2 == 0) {
+                    $stdCourse = new StdCourse();
+                    $stdCourse->student = Auth::user()->id;
+                    $stdCourse->course = $centerCourse->id;
+                    $stdCourse->save();
+                }
+            }
+        }
+        
+        //Tutor Course
+        $tutorLike = ":TU". Auth::user()->created_by .":";
+        $tutorCourses = Course::where('tagging_for', 'like', '%:Tutor:%')->where('tagging_text', 'like', '%'. $tutorLike .'%')->get();
+        foreach ($tutorCourses as $tutorCourse) {
+            $stdCourses3 = StdCourse::where('student', Auth::user()->id)->where('course', $tutorCourse->id)->count();
+            if ($stdCourses3 == 0) {
+                $stdCourse = new StdCourse();
+                $stdCourse->student = Auth::user()->id;
+                $stdCourse->course = $tutorCourse->id;
+                $stdCourse->save();
+            }
+        }
+        
+        //Batch Course
+        $batchLike = ":BA". Auth::user()->batch_id .":";
+        $batchCourses = Course::where('tagging_for', 'like', '%:Batch:%')->where('tagging_text', 'like', '%'. $batchLike .'%')->get();
+        foreach ($batchCourses as $batchCourse) {
+            $stdCourses3 = StdCourse::where('student', Auth::user()->id)->where('course', $batchCourse->id)->count();
+            if ($stdCourses3 == 0) {
+                $stdCourse = new StdCourse();
+                $stdCourse->student = Auth::user()->id;
+                $stdCourse->course = $batchCourse->id;
+                $stdCourse->save();
+            }
+        }
+    }
+
+    public function examTagging(){
+        
+        //For Exam 
+        //All Exam
+        $allExams = Exam::where('tagging_for', ':All:')->get();
+        foreach ($allExams as $allExam) {
+            $stdExam1 = StdExam::where('student', Auth::user()->id)->where('exam', $allExam->id)->count();
+            if ($stdExam1 == 0) {
+                $stdExam = new StdExam();
+                $stdExam->student = Auth::user()->id;
+                $stdExam->exam = $allExam->id;
+                $stdExam->save();
+            }
+        }
+        
+        //Centre Exam
+        $centerLike = "";
+        if(Auth::user()->centre_code != null){
+            $centres = centre::where('Center_code', Auth::user()->centre_code)->first();
+            if ($centres != '') {
+                $centerLike = ":CE". $centres->id .":";
+                if ($centerLike != '') {
+                    $centerExams = Exam::where('tagging_for', 'like', '%:Centre:%')->where('tagging_text', 'like', '%'. $centerLike .'%')->get();
+                    foreach ($centerExams as $centerExam) {
+                        $stdExam2 = StdExam::where('student', Auth::user()->id)->where('exam', $centerExam->id)->count();
+                        if ($stdExam2 == 0) {
+                            $stdExam = new StdExam();
+                            $stdExam->student = Auth::user()->id;
+                            $stdExam->exam = $centerExam->id;
+                            $stdExam->save();
+                        }
+                    }
+                }
+            }
+        }
+        
+        //Tutor Exam
+        $tutorLike = ":TU". Auth::user()->created_by .":";
+        if ($tutorLike != '') {
+            $tutorExams = Exam::where('tagging_for', 'like', '%:Tutor:%')->where('tagging_text', 'like', '%'. $tutorLike .'%')->get();
+            foreach ($tutorExams as $tutorExam) {
+                $stdExam3 = StdExam::where('student', Auth::user()->id)->where('exam', $tutorExam->id)->count();
+                if ($stdExam3 == 0) {
+                    $stdExam = new StdExam();
+                    $stdExam->student = Auth::user()->id;
+                    $stdExam->exam = $tutorExam->id;
+                    $stdExam->save();
+                }
+            }
+        }
+        
+        //Batch Exam
+        $batchLike = ":BA". Auth::user()->batch_id .":";
+        if ($batchLike != '') {
+            $batchExams = Exam::where('tagging_for', 'like', '%:Batch:%')->where('tagging_text', 'like', '%'. $batchLike .'%')->get();
+            foreach ($batchExams as $batchExam) {
+                $stdExam3 = StdExam::where('student', Auth::user()->id)->where('exam', $batchExam->id)->count();
+                if ($stdExam3 == 0) {
+                    $stdExam = new StdExam();
+                    $stdExam->student = Auth::user()->id;
+                    $stdExam->exam = $batchExam->id;
+                    $stdExam->save();
+                }
+            }
+        }
+        
+    }
+
+    public function courseVerification() {
+        //$db = Student::where('id', $request->student)->get();
+        // echo $db[0]->code;
+        
+        //Learnersmall Course
+        $url = 'https://new.icaerp.com/api/Data/searchstudent';
+        $data_string = '{"StudentCode": "'.Auth::user()->code.'" }';
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $result = json_decode($result,true);
+        // print_r($result);
+        if (array_key_exists("StudentCode",$result)) {
+            if ($result['courses']!='') {
+                $courses = $result['courses'];
+                foreach($courses as $val) {
+                    // echo $val['courseid']."<br>";
+                    $course1 = Course::where('course_code',$val['courseid'])->first();
+                    if (count($course1)>0) {
+                        $courseLike = ":CO". $course1->id .":";
+                        $c_courses = Course::where('tagging_for', 'like', '%:Course:%')->where('tagging_text', 'like', '%'. $courseLike .'%')->first();
+                        foreach ($c_courses as $c_course) {
+                            $stdCourses4 = StdCourse::where('student', Auth::user()->id)->where('course', $c_course->id)->count();
+                            if ($stdCourses4 == 0) {
+                                $stdCourse = new StdCourse();
+                                $stdCourse->student = Auth::user()->id;
+                                $stdCourse->course = $c_course->id;
+                                $stdCourse->save();
+                            }
+                        }
+                    }
+                }
+            }
+            
+            //Learnersmall Exam
+            if ($result['courses']!='') {
+                $courses = $result['courses'];
+                foreach($courses as $val) {
+                    $course1 = Course::where('course_code',$val['courseid'])->first();
+                    if (count($course1)>0) {
+                        $courseLike = ":CO". $course1->id .":";
+                        $c_courses = Exam::where('tagging_for', 'like', '%:Course:%')->where('tagging_text', 'like', '%'. $courseLike .'%')->get();
+                        foreach ($c_courses as $c_course) {
+                            $stdCourses4 = StdExam::where('student', Auth::user()->id)->where('exam', $c_course->id)->count();
+                            if ($stdCourses4 == 0) {
+                                $stdExam = new StdExam();
+                                $stdExam->student = Auth::user()->id;
+                                $stdExam->exam = $c_course->id;
+                                $stdExam->save();
+                            }
+                        }
+                    }
+                }
+            }    
+        }
+        
+        $data = [];
+        $data['status'] = true;
+        $data['error'] = "Done successfully";
+        return $data;
+    }
+
+    public function erpCourseTagging(){
+
+        $url = 'https://new.icaerp.com/api/Data/searchstudent';
+        $data_string = '{"StudentCode": "'.Auth::user()->code.'" }';
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $result = json_decode($result,true);
+        if (array_key_exists("StudentCode",$result)) {
+            if ($result['courses']!='') {
+                $courses = $result['courses'];
+                foreach($courses as $val) {
+                    $course1 = Course::where('course_code',$val['courseid'])->first();
+                    if (count($course1)>0) {
+                        $courseLike = ":CO". $course1->id .":";
+                        $c_courses = Course::where('tagging_for', 'like', '%:Course:%')->where('tagging_text', 'like', '%'. $courseLike .'%')->first();
+                        foreach ($c_courses as $c_course) {
+                            $stdCourses4 = StdCourse::where('student', Auth::user()->id)->where('course', $c_course->id)->count();
+                            if ($stdCourses4 == 0) {
+                                $stdCourse = new StdCourse();
+                                $stdCourse->student = Auth::user()->id;
+                                $stdCourse->course = $c_course->id;
+                                $stdCourse->save();
+                            }
+                        }
+                    }
+                }
+            }
+
+            if ($result['courses']!='') {
+                $courses = $result['courses'];
+                foreach($courses as $val) {
+                    $course1 = Course::where('course_code',$val['courseid'])->first();
+                    if (count($course1)>0) {
+                        $courseLike = ":CO". $course1->id .":";
+                        $c_courses = Exam::where('tagging_for', 'like', '%:Course:%')->where('tagging_text', 'like', '%'. $courseLike .'%')->get();
+                        foreach ($c_courses as $c_course) {
+                            $stdCourses4 = StdExam::where('student', Auth::user()->id)->where('exam', $c_course->id)->count();
+                            if ($stdCourses4 == 0) {
+                                $stdExam = new StdExam();
+                                $stdExam->student = Auth::user()->id;
+                                $stdExam->exam = $c_course->id;
+                                $stdExam->save();
+                            }
+                        }
+                    }
+                }
+            }    
+
+        }
+    }
+
+    public function courseSave($request, $student_id) {
+        $courses = $request['courses'];
+        // print_r($courses);
+        foreach($courses as $val) {
+            $db_course = new StudentCourse();
+            $db_course->student_id = $student_id;
+            $db_course->course_code = $val['courseid'];
+            $db_course->course_name = $val['coursename'];
+            $db_course->admission_date = stripslashes($val['admission']);
+            $db_course->save();
+        }
+        
+        return true;
+    }
+
     public function registration(Request $request){
         $request->validate([
             'name' => 'required',
@@ -199,7 +463,7 @@ class UserController extends Controller
             'email' => 'required|email',
         ]);
         $input = $request->all();
-        $present = $this->userRepository->checkEmailIsPresentOrNotRepo($input);
+        $present = $this->checkEmailIsPresentOrNotRepo($input);
         if ($present) {
             $valid = 'false';
             echo $valid;
@@ -215,7 +479,7 @@ class UserController extends Controller
             'mobile' => 'required|integer',
         ]);
         $input = $request->all();
-        $present = $this->userRepository->checkMobileNosPresentOrNotRepo($input);
+        $present = $this->checkMobileNosPresentOrNotRepo($input);
         if ($present) {
             $valid = 'false';
             echo $valid;
@@ -224,6 +488,7 @@ class UserController extends Controller
             echo $valid;
         }
     }
+    
 
     // public function defaultCourse($student_id)
     // {
@@ -256,5 +521,38 @@ class UserController extends Controller
     //         }
     //     }
     // }
-
+    public function checkEmailIsPresentOrNotRepo($inputData)
+    {
+        if(isset($inputData['email']))
+        {
+            $user=Student::where('email',$inputData['email'])->first();
+            if($user)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+    public function checkMobileNosPresentOrNotRepo($inputData)
+    {
+        if(isset($inputData['mobile']))
+        {
+            $user=Student::where('mobile',$inputData['mobile'])->first();
+            if($user)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
 }
