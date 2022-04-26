@@ -113,4 +113,9 @@ class ExamController extends Controller
     {
         return view('WebFrontend.exam-result');
     }
+
+    public function examQuestion()
+    {
+        return view('WebFrontend.exam-question');
+    }
 }

@@ -50,8 +50,9 @@
                         <span id="error_code" style="color:#ed0f12;padding:10px;"></span>
                         <span id="otp_success_message" style="color:#82ff80;padding:10px;"></span>
                         <span id="otp_error_message" style="color:#ed0f12;padding:10px;"></span>
+      
                         <button type="button" class="btn reqOtp" id="sendOtp">
-                            Request OTP
+                            Request OTP <img src="{{ asset('css/images/Spinner-1s-23px.gif') }}" class="img-fluid" id="sendOtp-loader"  style="display:none"/>
                         </button>
                         <div class="otp-wrap">
                             {{-- <p id="otp-msg"> </p> --}}
@@ -98,15 +99,17 @@
                     <div class="mb-3 verify-otp">
                         <input type="text" class="form-control" name="verify_Otp" placeholder="OTP" id="verify_Otp">
                         <button type="button" class="btn reqOtp" id="verifyOtp">
-                            Verify OTP
+                            Verify OTP<img src="{{ asset('css/images/Spinner-1s-23px.gif') }}" class="img-fluid" id="verifyOtp-loader"  style="display:none"/>
                         </button>
                         <div class="verifyOtptxt">
                             <span id="error_verify_ot" style="color:#ed0f12;padding:10px;"></span>
-                            <span id="verify_success_message" style="color:#008000;padding:10px;"></span>
+                            <span id="verify_success_message" style="color:#82ff80;padding:10px;"></span>
                             <span id="verify_error_message" style="color:#ed0f12;padding:10px;"></span>
                         </div>
                     </div>
-
+                    <div class="load-more" style="margin-left:72%;position:absolute;margin-top:14px;display:none">
+                        <img src="{{ asset('css/images/Spinner-1s-50px.gif') }}" class="img-fluid" />
+                    </div>
                     <button type="submit" class="btn signup">Login</button>
                 </form>
                 <p class="already-account"></p>
@@ -119,11 +122,13 @@
 @section('customJavascript')
 <script>
     $("#sendOtp").click(function(e) {
+        $('#sendOtp-loader').show();
         $("#code-error").html('');
         //$("#mobile_number-error").html('');
         $("#verify_Otp-error").html('');
         if ($("#code").val() == '' || $("#code").val() == undefined) {
-            $("#error_code").html('This code field is required.');
+            $("#error_code").html('This your code field is required.');
+            $('#sendOtp-loader').hide();
             return false;
         } else {
             $("#error_code").html('');
@@ -152,11 +157,16 @@
                     setTimeout(function() {
                         $('#otp_success_message').html('');
                     }, 3000);
+                     $('#sendOtp-loader').hide();
                 } else {
                     $("#otp_error_message").html(data.error);
+                    
                     setTimeout(function() {
                         $('#otp_error_message').html('');
                     }, 3000);
+                    $('#sendOtp-loader').hide();
+
+                    
                 }
             }
         });
@@ -165,27 +175,22 @@
 
 
     $("#verifyOtp").click(function(e) {
+        $('#verifyOtp-loader').show();
         $("#code-error").html('');
-        //$("#mobile_number-error").html('');
+        
         $("#verify_Otp-error").html('');
         if ($("#code").val() == '' || $("#code").val() == undefined) {
-            $("#error_code").html('This code field is required.');
+            $("#error_code").html('This your code field is required.');
+             $('#verifyOtp-loader').hide();
             return false;
-        } else {
+        }else{
             $("#error_code").html('');
         }
-
-        /*if ($("#mobile_number").val() == '' || $("#mobile_number").val() == undefined) {
-            $("#error_mobile_number").html('This mobile number field is required.');
-            return false;
-        } else {
-            $("#error_mobile_number").html('');
-        }*/
-
         if ($("#verify_Otp").val() == '' || $("#verify_Otp").val() == undefined) {
-            $("#error_verify_ot").html('This verify otp field is required.');
+            $("#error_verify_ot").html('This otp field is required.');
+            $('#verifyOtp-loader').hide();
             return false;
-        } else {
+        }else{
             $("#error_verify_ot").html('');
         }
 
@@ -208,11 +213,13 @@
                     setTimeout(function() {
                         $('#verify_success_message').html('');
                     }, 3000);
+                    $('#verifyOtp-loader').hide();
                 } else {
                     $("#verify_error_message").html(data.message);
                     setTimeout(function() {
                         $('#verify_error_message').html('');
                     }, 3000);
+                    $('#verifyOtp-loader').hide();
                 }
             }
         });
@@ -225,9 +232,6 @@
             code: {
                 required: true
             },
-            mobile_number: {
-                required: true
-            },
             verify_Otp: {
                 required: true
             }
@@ -236,13 +240,10 @@
         messages: {
 
             code: {
-                required: "This user id field is required."
-            },
-            mobile_number: {
-                required: "This mobile number field is required."
+                required: "This your code field is required."
             },
             verify_Otp: {
-                required: "This verify otp field is required."
+                required: "This otp field is required."
 
             }
         },
@@ -250,16 +251,20 @@
         errorClass: "form-text text-danger is-invalid"
     });
     $('#loginForm').submit(function() {
+        $('.load-more').show();
         $("#error_code").html('');
-        $('button[type=submit]').attr("disabled", true);
+        //$('button[type=submit]').attr("disabled", true);
         setTimeout(function() {
-            $('button[type=submit]').attr("disabled", false);
+           $('button[type=submit]').attr("disabled", false);
             $("#error-login").hide();
         }, 3000);
     });
+    
     setTimeout(function() {
         $("#error-login").hide();
+        $('.load-more').hide();
     }, 3000);
+   
 
 </script>
 @endsection
