@@ -107,9 +107,7 @@
                             <span id="verify_error_message" style="color:#ed0f12;padding:10px;"></span>
                         </div>
                     </div>
-                    <div class="load-more" style="margin-left:72%;position:absolute;margin-top:14px;display:none">
-                        <img src="{{ asset('css/images/Spinner-1s-50px.gif') }}" class="img-fluid" />
-                    </div>
+                
                     <button type="submit" class="btn signup">Login</button>
                 </form>
                 <p class="already-account"></p>
@@ -123,12 +121,14 @@
 <script>
     $("#sendOtp").click(function(e) {
         $('#sendOtp-loader').show();
+        $('#sendOtp').attr("disabled", true);
         $("#code-error").html('');
         //$("#mobile_number-error").html('');
         $("#verify_Otp-error").html('');
         if ($("#code").val() == '' || $("#code").val() == undefined) {
             $("#error_code").html('This your code field is required.');
             $('#sendOtp-loader').hide();
+             $('#sendOtp').attr("disabled", false);
             return false;
         } else {
             $("#error_code").html('');
@@ -158,6 +158,7 @@
                         $('#otp_success_message').html('');
                     }, 3000);
                      $('#sendOtp-loader').hide();
+                     $('#sendOtp').attr("disabled", false);
                 } else {
                     $("#otp_error_message").html(data.error);
                     
@@ -165,6 +166,7 @@
                         $('#otp_error_message').html('');
                     }, 3000);
                     $('#sendOtp-loader').hide();
+                    $('#sendOtp').attr("disabled", false);
 
                     
                 }
@@ -176,12 +178,14 @@
 
     $("#verifyOtp").click(function(e) {
         $('#verifyOtp-loader').show();
+        $('#verifyOtp').attr("disabled", true);
         $("#code-error").html('');
         
         $("#verify_Otp-error").html('');
         if ($("#code").val() == '' || $("#code").val() == undefined) {
             $("#error_code").html('This your code field is required.');
              $('#verifyOtp-loader').hide();
+             $('#verifyOtp').attr("disabled", false);
             return false;
         }else{
             $("#error_code").html('');
@@ -189,6 +193,7 @@
         if ($("#verify_Otp").val() == '' || $("#verify_Otp").val() == undefined) {
             $("#error_verify_ot").html('This otp field is required.');
             $('#verifyOtp-loader').hide();
+            $('#verifyOtp').attr("disabled", false);
             return false;
         }else{
             $("#error_verify_ot").html('');
@@ -214,12 +219,14 @@
                         $('#verify_success_message').html('');
                     }, 3000);
                     $('#verifyOtp-loader').hide();
+                    $('#verifyOtp').attr("disabled", false);
                 } else {
                     $("#verify_error_message").html(data.message);
                     setTimeout(function() {
                         $('#verify_error_message').html('');
                     }, 3000);
                     $('#verifyOtp-loader').hide();
+                    $('#verifyOtp').attr("disabled", false);
                 }
             }
         });
@@ -251,18 +258,22 @@
         errorClass: "form-text text-danger is-invalid"
     });
     $('#loginForm').submit(function() {
-        $('.load-more').show();
+       
         $("#error_code").html('');
-        //$('button[type=submit]').attr("disabled", true);
-        setTimeout(function() {
-           $('button[type=submit]').attr("disabled", false);
-            $("#error-login").hide();
-        }, 3000);
+        $('button[type=submit]').attr("disabled", true);
+        $('#sendOtp').attr("disabled", true);
+        $('#verifyOtp').attr("disabled", true);
+        $('#code,#verify_Otp').keyup(function() {
+            if($(this).val() != '') {
+                $('button[type="submit"]').attr('disabled', false);
+            }
+     });
     });
     
     setTimeout(function() {
         $("#error-login").hide();
-        $('.load-more').hide();
+       // $('button[type=submit]').attr("disabled", false);
+        
     }, 3000);
    
 
