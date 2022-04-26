@@ -135,7 +135,21 @@
 
             countdownEl.innerText = `${(minute<10)?'0'+ minute:minute}: ${(second<10)?'0'+ second:second}`
             if(time==0){
-                Swal.fire('Time is over')
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        //redirect
+                    }
+                })
+                //Swal.fire('Time is over')
                 clearInterval(interval)
             }else{
                 time--
