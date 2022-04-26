@@ -12,9 +12,11 @@ use Illuminate\Http\Request;
 
 class HomePageController extends Controller
 {
+    /**
+     * query for display course without login
+     */
     public function homePageDisplay(Request $request)
-    {
-	    
+    {	    
         $course = Course::with('user')->whereHas('user')->with('lessons')->where('entry_from', 'NEW')->orderBy('created_at', 'DESC')->get(); 
         $data = [];
         foreach ($course as $value)
@@ -34,6 +36,4 @@ class HomePageController extends Controller
 
         return view('WebFrontend.home', $data);
     }
-
-
 }

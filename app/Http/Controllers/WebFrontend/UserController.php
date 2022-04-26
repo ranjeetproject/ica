@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\WebFrontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\User;
 use Illuminate\Http\Request;
-use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Student;
 use App\State;
@@ -14,7 +13,6 @@ use App\StdCourse;
 use App\Exam;
 use App\StdExam;
 use App\centre;
-
 use App\Events\CourseAssign;
 use App\Events\ExamAssign;
 use Illuminate\Support\Facades\Mail;
@@ -23,393 +21,15 @@ use Hash;
 
 class UserController extends Controller
 {
-    // protected $userRepository;
-    // public function __construct(UserRepository $userRepository)
-    // {
-    //     $this->userRepository = $userRepository;
-    // }
+
     public function signUp()
     {
         $states = State::get();
-        return view('WebFrontend.registration',compact('states'));
+        return view('WebFrontend.registration', compact('states'));
     }
 
-    public function loginForm()
+    public function registration(Request $request)
     {
-        return view('WebFrontend.login');
-    }
-
-    public function postLogin(Request $request)
-    {
-        $this->validate($request, [
-            'code' => 'required',
-           // 'mobile_number' => 'required',
-            'verify_Otp' => 'required',
-        ]);
-        $input = $request->all();
-        $checkStudentOtp = Student::where('code', '=', $input['code'])->where('otp', $input['verify_Otp'])->first();
-        if ($checkStudentOtp)
-        {
-            Auth::login($checkStudentOtp);
-            if (Auth::check())
-            {
-                event(new CourseAssign());
-                event(new ExamAssign());
-                $student=Student::find($checkStudentOtp->id);
-                if($student)
-                {
-                    $student->otp=rand(100000, 999999);
-                    $student->save();
-                }
-                return redirect()->action('WebFrontend\DashboardController@dashboardPageDisplay');
-            }
-        }else{
-            return redirect()->back()->with(['error'=>'Oops! You have entered invalid code or otp']);
-        }
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->action('WebFrontend\UserController@loginForm');
-    }
-
-    public function sendOTP(Request $request)
-    {
-        $request->validate([
-            'code' => 'required',
-           // 'mobile_number' => 'required',
-        ]);
-        $input = $request->all();
-        $check_student = Student::where('code', '=', $input['code'])->first();
-        if (!empty($check_student)) {
-            $otp = rand(100000, 999999);
-            $update_student = Student::find($check_student->id);
-            $update_student->otp = $otp;
-            if ($update_student->save()) {
-                $email_send = Mail::send('WebFrontend.email.send_otp',
-                    array(
-                        'name' => $check_student->name,
-                        'email' => $check_student->email,
-                        'mobile' => $check_student->mobile,
-                        'otp' => $otp
-                    ), function ($message) use ($check_student) {
-                        $message->to($check_student->email, $check_student->name)->subject('OTP verification for Learnersmall App.');
-                        $message->from('verification@icajobguarantee.com', 'ICA');
-                    });
-
-                $text = "Your One Time Password (OTP) is " . $otp . " for the mobile number " . $check_student->mobile . ". Please enter this code on the ICA App to verify your mobile number. NEVER SHARE YOUR OTP WITH ANYONE.";
-                // Textlocal account details
-                $username = urlencode('icaedpho');
-                $password = urlencode('icaedpho');
-                $to = urlencode($check_student->mobile);
-                $from = urlencode('ICAEDU');
-                $text = urlencode($text);
-
-                // Prepare data for POST request
-                $sms_data = 'username=' . $username . '&password=' . $password . '&to=' . $to . '&from=' . $from . '&udh=0&text=' . $text . '&dlr-mask=19&dlr-url=';
-                // Send the GET request with cURL
-                $ch = curl_init('https://103.229.250.200/smpp/sendsms?' . $sms_data);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                $response = curl_exec($ch);
-                curl_close($ch);
-                $data['status'] = true;
-                $data['message'] = "OTP sent to E-mail ID";
-                return $data;
-            }
-        } else {
-            $data['status'] = false;
-            $data['error'] = "Please enter correct your code";
-            return $data;
-        }
-    }
-
-    public function verifyOTP(Request $request)
-    {
-        $request->validate([
-            'code' => 'required',
-            //'mobile_number' => 'required',
-            'verify_Otp' => 'required',
-        ]);
-        $input = $request->all();
-        $checkStudentOtp = Student::where('code', '=', $input['code'])->where('otp', $input['verify_Otp'])->count();
-        if ($checkStudentOtp > 0) {
-            $data['status'] = true;
-            $data['message'] = "Otp verify successfully";
-            return $data;
-        } else {
-            $data['status'] = false;
-            $data['message'] = "Please fill correct otp";
-            return $data;
-        }
-
-    }
-
-    public function courseTagging()
-    {
-        //For Courses
-        //All Courses
-        $allCourses = Course::where('tagging_for', ':All:')->get();
-        foreach ($allCourses as $allCourse) {
-            $stdCourses = StdCourse::where('student', Auth::user()->id)
-                            ->where('course', $allCourse->id)->count();
-                if ($stdCourses == 0) {
-                    $stdCourse = new StdCourse();
-                    $stdCourse->student = Auth::user()->id;
-                    $stdCourse->course = $allCourse->id;
-                    $stdCourse->save();
-                }
-        }
-        
-        //Centre Courses
-        $centerLike = "";
-        $centres = centre::where('Center_code', Auth::user()->centre_code)->first();
-        if ($centres != '') {
-            $centerLike = ":CE". $centres->id .":";
-            $centerCourses = Course::where('tagging_for', 'like', '%:Centre:%')
-                            ->where('tagging_text', 'like', '%'. $centerLike .'%')->get();
-            foreach ($centerCourses as $centerCourse) {
-                $stdCourses2 = StdCourse::where('student', Auth::user()->id)->where('course', $centerCourse->id)->count();
-                if ($stdCourses2 == 0) {
-                    $stdCourse = new StdCourse();
-                    $stdCourse->student = Auth::user()->id;
-                    $stdCourse->course = $centerCourse->id;
-                    $stdCourse->save();
-                }
-            }
-        }
-        
-        //Tutor Course
-        $tutorLike = ":TU". Auth::user()->created_by .":";
-        $tutorCourses = Course::where('tagging_for', 'like', '%:Tutor:%')->where('tagging_text', 'like', '%'. $tutorLike .'%')->get();
-        foreach ($tutorCourses as $tutorCourse) {
-            $stdCourses3 = StdCourse::where('student', Auth::user()->id)->where('course', $tutorCourse->id)->count();
-            if ($stdCourses3 == 0) {
-                $stdCourse = new StdCourse();
-                $stdCourse->student = Auth::user()->id;
-                $stdCourse->course = $tutorCourse->id;
-                $stdCourse->save();
-            }
-        }
-        
-        //Batch Course
-        $batchLike = ":BA". Auth::user()->batch_id .":";
-        $batchCourses = Course::where('tagging_for', 'like', '%:Batch:%')->where('tagging_text', 'like', '%'. $batchLike .'%')->get();
-        foreach ($batchCourses as $batchCourse) {
-            $stdCourses3 = StdCourse::where('student', Auth::user()->id)->where('course', $batchCourse->id)->count();
-            if ($stdCourses3 == 0) {
-                $stdCourse = new StdCourse();
-                $stdCourse->student = Auth::user()->id;
-                $stdCourse->course = $batchCourse->id;
-                $stdCourse->save();
-            }
-        }
-    }
-
-    public function examTagging(){
-        
-        //For Exam 
-        //All Exam
-        $allExams = Exam::where('tagging_for', ':All:')->get();
-        foreach ($allExams as $allExam) {
-            $stdExam1 = StdExam::where('student', Auth::user()->id)->where('exam', $allExam->id)->count();
-            if ($stdExam1 == 0) {
-                $stdExam = new StdExam();
-                $stdExam->student = Auth::user()->id;
-                $stdExam->exam = $allExam->id;
-                $stdExam->save();
-            }
-        }
-        
-        //Centre Exam
-        $centerLike = "";
-        if(Auth::user()->centre_code != null){
-            $centres = centre::where('Center_code', Auth::user()->centre_code)->first();
-            if ($centres != '') {
-                $centerLike = ":CE". $centres->id .":";
-                if ($centerLike != '') {
-                    $centerExams = Exam::where('tagging_for', 'like', '%:Centre:%')->where('tagging_text', 'like', '%'. $centerLike .'%')->get();
-                    foreach ($centerExams as $centerExam) {
-                        $stdExam2 = StdExam::where('student', Auth::user()->id)->where('exam', $centerExam->id)->count();
-                        if ($stdExam2 == 0) {
-                            $stdExam = new StdExam();
-                            $stdExam->student = Auth::user()->id;
-                            $stdExam->exam = $centerExam->id;
-                            $stdExam->save();
-                        }
-                    }
-                }
-            }
-        }
-        
-        //Tutor Exam
-        $tutorLike = ":TU". Auth::user()->created_by .":";
-        if ($tutorLike != '') {
-            $tutorExams = Exam::where('tagging_for', 'like', '%:Tutor:%')->where('tagging_text', 'like', '%'. $tutorLike .'%')->get();
-            foreach ($tutorExams as $tutorExam) {
-                $stdExam3 = StdExam::where('student', Auth::user()->id)->where('exam', $tutorExam->id)->count();
-                if ($stdExam3 == 0) {
-                    $stdExam = new StdExam();
-                    $stdExam->student = Auth::user()->id;
-                    $stdExam->exam = $tutorExam->id;
-                    $stdExam->save();
-                }
-            }
-        }
-        
-        //Batch Exam
-        $batchLike = ":BA". Auth::user()->batch_id .":";
-        if ($batchLike != '') {
-            $batchExams = Exam::where('tagging_for', 'like', '%:Batch:%')->where('tagging_text', 'like', '%'. $batchLike .'%')->get();
-            foreach ($batchExams as $batchExam) {
-                $stdExam3 = StdExam::where('student', Auth::user()->id)->where('exam', $batchExam->id)->count();
-                if ($stdExam3 == 0) {
-                    $stdExam = new StdExam();
-                    $stdExam->student = Auth::user()->id;
-                    $stdExam->exam = $batchExam->id;
-                    $stdExam->save();
-                }
-            }
-        }
-        
-    }
-
-    public function courseVerification() {
-        //$db = Student::where('id', $request->student)->get();
-        // echo $db[0]->code;
-        
-        //Learnersmall Course
-        $url = 'https://new.icaerp.com/api/Data/searchstudent';
-        $data_string = '{"StudentCode": "'.Auth::user()->code.'" }';
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch);
-        curl_close($ch);
-        $result = json_decode($result,true);
-        // print_r($result);
-        if (array_key_exists("StudentCode",$result)) {
-            if ($result['courses']!='') {
-                $courses = $result['courses'];
-                foreach($courses as $val) {
-                    // echo $val['courseid']."<br>";
-                    $course1 = Course::where('course_code',$val['courseid'])->first();
-                    if (count($course1)>0) {
-                        $courseLike = ":CO". $course1->id .":";
-                        $c_courses = Course::where('tagging_for', 'like', '%:Course:%')->where('tagging_text', 'like', '%'. $courseLike .'%')->first();
-                        foreach ($c_courses as $c_course) {
-                            $stdCourses4 = StdCourse::where('student', Auth::user()->id)->where('course', $c_course->id)->count();
-                            if ($stdCourses4 == 0) {
-                                $stdCourse = new StdCourse();
-                                $stdCourse->student = Auth::user()->id;
-                                $stdCourse->course = $c_course->id;
-                                $stdCourse->save();
-                            }
-                        }
-                    }
-                }
-            }
-            
-            //Learnersmall Exam
-            if ($result['courses']!='') {
-                $courses = $result['courses'];
-                foreach($courses as $val) {
-                    $course1 = Course::where('course_code',$val['courseid'])->first();
-                    if (count($course1)>0) {
-                        $courseLike = ":CO". $course1->id .":";
-                        $c_courses = Exam::where('tagging_for', 'like', '%:Course:%')->where('tagging_text', 'like', '%'. $courseLike .'%')->get();
-                        foreach ($c_courses as $c_course) {
-                            $stdCourses4 = StdExam::where('student', Auth::user()->id)->where('exam', $c_course->id)->count();
-                            if ($stdCourses4 == 0) {
-                                $stdExam = new StdExam();
-                                $stdExam->student = Auth::user()->id;
-                                $stdExam->exam = $c_course->id;
-                                $stdExam->save();
-                            }
-                        }
-                    }
-                }
-            }    
-        }
-        
-        $data = [];
-        $data['status'] = true;
-        $data['error'] = "Done successfully";
-        return $data;
-    }
-
-    public function erpCourseTagging(){
-
-        $url = 'https://new.icaerp.com/api/Data/searchstudent';
-        $data_string = '{"StudentCode": "'.Auth::user()->code.'" }';
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = curl_exec($ch);
-        curl_close($ch);
-        $result = json_decode($result,true);
-        if (array_key_exists("StudentCode",$result)) {
-            if ($result['courses']!='') {
-                $courses = $result['courses'];
-                foreach($courses as $val) {
-                    $course1 = Course::where('course_code',$val['courseid'])->first();
-                    if (count($course1)>0) {
-                        $courseLike = ":CO". $course1->id .":";
-                        $c_courses = Course::where('tagging_for', 'like', '%:Course:%')->where('tagging_text', 'like', '%'. $courseLike .'%')->first();
-                        foreach ($c_courses as $c_course) {
-                            $stdCourses4 = StdCourse::where('student', Auth::user()->id)->where('course', $c_course->id)->count();
-                            if ($stdCourses4 == 0) {
-                                $stdCourse = new StdCourse();
-                                $stdCourse->student = Auth::user()->id;
-                                $stdCourse->course = $c_course->id;
-                                $stdCourse->save();
-                            }
-                        }
-                    }
-                }
-            }
-
-            if ($result['courses']!='') {
-                $courses = $result['courses'];
-                foreach($courses as $val) {
-                    $course1 = Course::where('course_code',$val['courseid'])->first();
-                    if (count($course1)>0) {
-                        $courseLike = ":CO". $course1->id .":";
-                        $c_courses = Exam::where('tagging_for', 'like', '%:Course:%')->where('tagging_text', 'like', '%'. $courseLike .'%')->get();
-                        foreach ($c_courses as $c_course) {
-                            $stdCourses4 = StdExam::where('student', Auth::user()->id)->where('exam', $c_course->id)->count();
-                            if ($stdCourses4 == 0) {
-                                $stdExam = new StdExam();
-                                $stdExam->student = Auth::user()->id;
-                                $stdExam->exam = $c_course->id;
-                                $stdExam->save();
-                            }
-                        }
-                    }
-                }
-            }    
-
-        }
-    }
-
-    public function courseSave($request, $student_id) {
-        $courses = $request['courses'];
-        // print_r($courses);
-        foreach($courses as $val) {
-            $db_course = new StudentCourse();
-            $db_course->student_id = $student_id;
-            $db_course->course_code = $val['courseid'];
-            $db_course->course_name = $val['coursename'];
-            $db_course->admission_date = stripslashes($val['admission']);
-            $db_course->save();
-        }
-        
-        return true;
-    }
-
-    public function registration(Request $request){
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:students',
@@ -424,7 +44,7 @@ class UserController extends Controller
             'pincode.integer' => 'Pin Code should be a number',
             'mobile' => 'Mobile No is required'
         ]);
-        $otp = rand(100000,999999);
+        $otp = rand(100000, 999999);
         $studentRegistration = Student::create([
             'code' => $request->mobile,
             'name' => $request->name,
@@ -443,16 +63,16 @@ class UserController extends Controller
         $inputData['email'] = $request->email;
         $inputData['name'] = $request->name;
         $inputData['mobile'] = $request->mobile;
-        Mail::send('WebFrontend.email.registration_successful', ['data' => $inputData] , function ($m) use ($inputData) {
-                $m->from('ica@gmail.com','ica');
-                $m->to($inputData['email'],$inputData['name'])->subject('Registration Successful');
+        Mail::send('WebFrontend.email.registration_successful', ['data' => $inputData], function ($m) use ($inputData) {
+            $m->from('ica@gmail.com', 'ica');
+            $m->to($inputData['email'], $inputData['name'])->subject('Registration Successful');
         });
 
-        if($studentRegistration){
-            \Session::put('success','Congratulation. You have successfully registered with us. Your User Code is '.$request->mobile.'.');
+        if ($studentRegistration) {
+            \Session::put('success', 'Congratulation. You have successfully registered with us. Your User Code is ' . $request->mobile . '.');
             return redirect()->back();
-        }else{
-            \Session::put('error','Failed! User not registered');
+        } else {
+            \Session::put('error', 'Failed! User not registered');
             return redirect()->back();
         }
     }
@@ -488,71 +108,337 @@ class UserController extends Controller
             echo $valid;
         }
     }
-    
 
-    // public function defaultCourse($student_id)
-    // {
-    //     $allcourses = Course::where('tagging_for', ':All:')->get();
-    //     foreach ($allcourses as $allcourse) {
-    //         $stdcourses1 = StdCourse::where('student', $student_id)->where('course', $allcourse->id)->count();
-    //         if ($stdcourses1 == 0) {
-    //             $db1 = new StdCourse();
-    //             $db1->student = $student_id;
-    //             $db1->course = $allcourse->id;
-    //             $db1->save();
-    //         }else{
-    //             return $stdcourses1;
-    //         }
-    //     }
-    // }
-
-    // public function defaultExam($student_id)
-    // {
-    //     $allexams = Exam::where('tagging_for', ':All:')->get();
-    //     foreach ($allexams as $allexam) {
-    //         $stdexam1 = StdExam::where('student', $student_id)->where('exam', $allexam->id)->count();
-    //         if ($stdexam1 == 0) {
-    //             $db1 = new StdExam();
-    //             $db1->student = $student_id;
-    //             $db1->exam = $allexam->id;
-    //             $db1->save();
-    //         }else{
-    //             return $stdexam1;
-    //         }
-    //     }
-    // }
     public function checkEmailIsPresentOrNotRepo($inputData)
     {
-        if(isset($inputData['email']))
-        {
-            $user=Student::where('email',$inputData['email'])->first();
-            if($user)
-            {
+        if (isset($inputData['email'])) {
+            $user = Student::where('email', $inputData['email'])->first();
+            if ($user) {
                 return true;
-            }
-            else{
+            } else {
                 return false;
             }
-        }
-        else{
+        } else {
             return false;
         }
     }
+
     public function checkMobileNosPresentOrNotRepo($inputData)
     {
-        if(isset($inputData['mobile']))
-        {
-            $user=Student::where('mobile',$inputData['mobile'])->first();
-            if($user)
-            {
+        if (isset($inputData['mobile'])) {
+            $user = Student::where('mobile', $inputData['mobile'])->first();
+            if ($user) {
                 return true;
-            }
-            else{
+            } else {
                 return false;
             }
-        }
-        else{
+        } else {
             return false;
         }
     }
+
+
+
+
+    public function loginForm()
+    {
+        return view('WebFrontend.login');
+    }
+
+    public function sendOTP(Request $request)
+    {
+        $request->validate([
+            'code' => 'required',
+        ]);
+        $input = $request->all();
+        $check_student = Student::where('code', '=', $input['code'])->first();
+        if (!empty($check_student)) {
+            $otp = rand(100000, 999999);
+            $update_student = Student::find($check_student->id);
+            $update_student->otp = $otp;
+            if ($update_student->save()) {
+                Mail::send('WebFrontend.email.send_otp',
+                    array(
+                        'name' => $check_student->name,
+                        'email' => $check_student->email,
+                        'mobile' => $check_student->mobile,
+                        'otp' => $otp
+                    ), function ($message) use ($check_student) {
+                        $message->to($check_student->email, $check_student->name)->subject('OTP verification for Learnersmall App.');
+                        $message->from('verification@icajobguarantee.com', 'ICA');
+                    });
+
+                $text = "Your One Time Password (OTP) is " . $otp . " for the mobile number " . $check_student->mobile . ". Please enter this code on the ICA App to verify your mobile number. NEVER SHARE YOUR OTP WITH ANYONE.";
+                $username = urlencode('icaedpho');
+                $password = urlencode('icaedpho');
+                $to = urlencode($check_student->mobile);
+                $from = urlencode('ICAEDU');
+                $text = urlencode($text);
+
+                // Prepare data for POST request
+                $sms_data = 'username=' . $username . '&password=' . $password . '&to=' . $to . '&from=' . $from . '&udh=0&text=' . $text . '&dlr-mask=19&dlr-url=';
+                $ch = curl_init('https://103.229.250.200/smpp/sendsms?' . $sms_data);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $response = curl_exec($ch);
+                curl_close($ch);
+                $data['status'] = true;
+                $data['message'] = "OTP sent to E-mail ID";
+                return $data;
+            }
+        } else {
+            $data['status'] = false;
+            $data['error'] = "Please enter correct your code";
+            return $data;
+        }
+    }
+
+    public function verifyOTP(Request $request)
+    {
+        $request->validate([
+            'code' => 'required',
+            'verify_Otp' => 'required',
+        ]);
+        $input = $request->all();
+        $checkStudentOtp = Student::where('code', '=', $input['code'])->where('otp', $input['verify_Otp'])->count();
+        if ($checkStudentOtp > 0) {
+            $data['status'] = true;
+            $data['message'] = "Otp verify successfully";
+            return $data;
+        } else {
+            $data['status'] = false;
+            $data['message'] = "Please fill correct otp";
+            return $data;
+        }
+    }
+
+    public function postLogin(Request $request)
+    {
+        $this->validate($request, [
+            'code' => 'required',
+            'verify_Otp' => 'required',
+        ]);
+        $input = $request->all();
+        $checkStudentOtp = Student::where('code', '=', $input['code'])->where('otp', $input['verify_Otp'])->first();
+        if ($checkStudentOtp) {
+            Auth::login($checkStudentOtp);
+            if (Auth::check()) {
+                $student = Student::find($checkStudentOtp->id);
+                if ($student) {
+                    $student->otp = rand(100000, 999999);
+                    $student->save();
+                    event(new CourseAssign());
+                    event(new ExamAssign());
+                }
+                return redirect()->action('WebFrontend\DashboardController@dashboardPageDisplay');
+            }
+        } else {
+            return redirect()->back()->with(['error' => 'Oops! You have entered invalid code or otp']);
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->action('WebFrontend\UserController@loginForm');
+    }
+
+
+
+
+    public function courseTagging()
+    {
+        //All Courses
+        $allCourses = Course::where('tagging_for', ':All:')->get();
+        foreach ($allCourses as $allCourse) {
+            $stdCourses = StdCourse::where('student', Auth::user()->id)
+                ->where('course', $allCourse->id)->count();
+            if ($stdCourses == 0) {
+                $stdCourse = new StdCourse();
+                $stdCourse->student = Auth::user()->id;
+                $stdCourse->course = $allCourse->id;
+                $stdCourse->save();
+            }
+        }
+
+        //Centre Courses
+        $centerLike = "";
+        $centres = centre::where('Center_code', Auth::user()->centre_code)->first();
+        if ($centres != '') {
+            $centerLike = ":CE" . $centres->id . ":";
+            $centerCourses = Course::where('tagging_for', 'like', '%:Centre:%')
+                ->where('tagging_text', 'like', '%' . $centerLike . '%')->get();
+            foreach ($centerCourses as $centerCourse) {
+                $stdCourses2 = StdCourse::where('student', Auth::user()->id)->where('course', $centerCourse->id)->count();
+                if ($stdCourses2 == 0) {
+                    $stdCourse = new StdCourse();
+                    $stdCourse->student = Auth::user()->id;
+                    $stdCourse->course = $centerCourse->id;
+                    $stdCourse->save();
+                }
+            }
+        }
+
+        //Tutor Course
+        $tutorLike = ":TU" . Auth::user()->created_by . ":";
+        $tutorCourses = Course::where('tagging_for', 'like', '%:Tutor:%')->where('tagging_text', 'like', '%' . $tutorLike . '%')->get();
+        foreach ($tutorCourses as $tutorCourse) {
+            $stdCourses3 = StdCourse::where('student', Auth::user()->id)->where('course', $tutorCourse->id)->count();
+            if ($stdCourses3 == 0) {
+                $stdCourse = new StdCourse();
+                $stdCourse->student = Auth::user()->id;
+                $stdCourse->course = $tutorCourse->id;
+                $stdCourse->save();
+            }
+        }
+
+        //Batch Course
+        $batchLike = ":BA" . Auth::user()->batch_id . ":";
+        $batchCourses = Course::where('tagging_for', 'like', '%:Batch:%')->where('tagging_text', 'like', '%' . $batchLike . '%')->get();
+        foreach ($batchCourses as $batchCourse) {
+            $stdCourses3 = StdCourse::where('student', Auth::user()->id)->where('course', $batchCourse->id)->count();
+            if ($stdCourses3 == 0) {
+                $stdCourse = new StdCourse();
+                $stdCourse->student = Auth::user()->id;
+                $stdCourse->course = $batchCourse->id;
+                $stdCourse->save();
+            }
+        }
+    }
+
+    public function examTagging()
+    {
+        //All Exam
+        $allExams = Exam::where('tagging_for', ':All:')->get();
+        foreach ($allExams as $allExam) {
+            $stdExam1 = StdExam::where('student', Auth::user()->id)->where('exam', $allExam->id)->count();
+            if ($stdExam1 == 0) {
+                $stdExam = new StdExam();
+                $stdExam->student = Auth::user()->id;
+                $stdExam->exam = $allExam->id;
+                $stdExam->save();
+            }
+        }
+
+        //Centre Exam
+        $centerLike = "";
+        if (Auth::user()->centre_code != null) {
+            $centres = centre::where('Center_code', Auth::user()->centre_code)->first();
+            if ($centres != '') {
+                $centerLike = ":CE" . $centres->id . ":";
+                if ($centerLike != '') {
+                    $centerExams = Exam::where('tagging_for', 'like', '%:Centre:%')->where('tagging_text', 'like', '%' . $centerLike . '%')->get();
+                    foreach ($centerExams as $centerExam) {
+                        $stdExam2 = StdExam::where('student', Auth::user()->id)->where('exam', $centerExam->id)->count();
+                        if ($stdExam2 == 0) {
+                            $stdExam = new StdExam();
+                            $stdExam->student = Auth::user()->id;
+                            $stdExam->exam = $centerExam->id;
+                            $stdExam->save();
+                        }
+                    }
+                }
+            }
+        }
+
+        //Tutor Exam
+        $tutorLike = ":TU" . Auth::user()->created_by . ":";
+        if ($tutorLike != '') {
+            $tutorExams = Exam::where('tagging_for', 'like', '%:Tutor:%')->where('tagging_text', 'like', '%' . $tutorLike . '%')->get();
+            foreach ($tutorExams as $tutorExam) {
+                $stdExam3 = StdExam::where('student', Auth::user()->id)->where('exam', $tutorExam->id)->count();
+                if ($stdExam3 == 0) {
+                    $stdExam = new StdExam();
+                    $stdExam->student = Auth::user()->id;
+                    $stdExam->exam = $tutorExam->id;
+                    $stdExam->save();
+                }
+            }
+        }
+
+        //Batch Exam
+        $batchLike = ":BA" . Auth::user()->batch_id . ":";
+        if ($batchLike != '') {
+            $batchExams = Exam::where('tagging_for', 'like', '%:Batch:%')->where('tagging_text', 'like', '%' . $batchLike . '%')->get();
+            foreach ($batchExams as $batchExam) {
+                $stdExam3 = StdExam::where('student', Auth::user()->id)->where('exam', $batchExam->id)->count();
+                if ($stdExam3 == 0) {
+                    $stdExam = new StdExam();
+                    $stdExam->student = Auth::user()->id;
+                    $stdExam->exam = $batchExam->id;
+                    $stdExam->save();
+                }
+            }
+        }
+
+    }
+
+    public function erpCourseTagging()
+    {
+        $url = 'https://new.icaerp.com/api/Data/searchstudent';
+        $data_string = '{"StudentCode": "' . Auth::user()->code . '" }';
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $result = json_decode($result, true);
+        if (array_key_exists("StudentCode", $result)) {
+            if ($result['courses'] != '') {
+                $courses = $result['courses'];
+                foreach ($courses as $val) {
+                    $course1 = Course::where('course_code', $val['courseid'])->first();
+                    if ($course1) {
+                        $courseLike = ":CO" . $course1->id . ":";
+                        $c_courses = Course::where('tagging_for', 'like', '%:Course:%')->where('tagging_text', 'like', '%' . $courseLike . '%')->get();
+                        foreach ($c_courses as $c_course) {
+                            $stdCourses4 = StdCourse::where('student', Auth::user()->id)->where('course', $c_course->id)->count();
+                            if ($stdCourses4 == 0) {
+                                $stdCourse = new StdCourse();
+                                $stdCourse->student = Auth::user()->id;
+                                $stdCourse->course = $c_course->id;
+                                $stdCourse->save();
+                            }
+                        }
+                    }
+                }
+            }
+
+            if ($result['courses'] != '') {
+                $courses = $result['courses'];
+                foreach ($courses as $val) {
+                    $course1 = Course::where('course_code', $val['courseid'])->first();
+                    if ($course1) {
+                        $courseLike = ":CO" . $course1->id . ":";
+                        $c_courses = Exam::where('tagging_for', 'like', '%:Course:%')->where('tagging_text', 'like', '%' . $courseLike . '%')->get();
+                        foreach ($c_courses as $c_course) {
+                            $stdCourses4 = StdExam::where('student', Auth::user()->id)->where('exam', $c_course->id)->count();
+                            if ($stdCourses4 == 0) {
+                                $stdExam = new StdExam();
+                                $stdExam->student = Auth::user()->id;
+                                $stdExam->exam = $c_course->id;
+                                $stdExam->save();
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    /*public function courseSave($request, $student_id) {
+        $courses = $request['courses'];
+        foreach($courses as $val) {
+            $db_course = new StudentCourse();
+            $db_course->student_id = $student_id;
+            $db_course->course_code = $val['courseid'];
+            $db_course->course_name = $val['coursename'];
+            $db_course->admission_date = stripslashes($val['admission']);
+            $db_course->save();
+        }
+        return true;
+    }*/
+
+
 }
