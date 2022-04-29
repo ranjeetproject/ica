@@ -41,26 +41,26 @@
                             <div class="questionBlock">
                                 <p>Select appropriate option from dropdown list</p>
                                 <div class="qbSelect">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Select</option>
+                                    <select class="form-select a" aria-label="Default select example">
+                                        <option selected value=''>Select</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
                                     </select>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Select</option>
+                                    <select class="form-select b" aria-label="Default select example">
+                                        <option selected value=''>Select</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
                                     </select>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Select</option>
+                                    <select class="form-select c" aria-label="Default select example">
+                                        <option selected value=''>Select</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
                                     </select>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Select</option>
+                                    <select class="form-select d" aria-label="Default select example">
+                                        <option selected value=''>Select</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
@@ -185,9 +185,36 @@
 @endsection
 @section('customJavascript')
     <script>
-    $(".numberIcn"). click(function() {
-        var button = $(this). text();
-        $('#exam-count').text(button)
+    $(function(){ 
+	    $(".numberIcn"). click(function() {
+            var button = $(this). text();
+            $('#exam-count').text(button)
+        });
+
+        $(".carousel-control-next").click(function() {
+           
+            var a = $('.a'). val();
+            var b = $('.b'). val();
+            var c = $('.c'). val();
+            var d = $('.d'). val();
+
+            if(a == '' && b == '' && c == '' &&  d == ''){
+                return true
+            }
+
+            if(a != '' && b != '' && c != '' &&  d != ''){
+              
+            }else{
+                alert()
+            }
+
+            
+
+        })
+
     });
+
+
+    
     </script>
 @endsection
