@@ -17,7 +17,7 @@
                 <span class="blue-bar"></span>
             </h3>
             
-             @foreach ($data as $key=>$exam)
+             @foreach ($comExam as $key=>$exam)
                 <div class="list-item">
                     <span>{{$key+1}}</span>
                     <a class="nav-link" href="#">
@@ -27,7 +27,7 @@
              @endforeach
             
             <nav aria-label="...">
-                {{-- {{$data->links('WebFrontend.custom-competitive-exam-pagination')}} --}} 
+                {{$comExam->links('WebFrontend.custom-competitive-exam-pagination')}} 
             </nav>
         </div>
     </section>

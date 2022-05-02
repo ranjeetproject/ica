@@ -10,6 +10,9 @@ use App\Question;
 use App\StdCourse;
 use App\StudentExam;
 use App\StdExam;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class ExamController extends Controller
@@ -24,11 +27,13 @@ class ExamController extends Controller
         foreach($exams as $exam){
             $question = Question::where('exam_id', $exam->ex_id)->where('state', '1')->count();
             if($question>0){
+                dd($exams);
                 return view('WebFrontend.exam-list',compact('exams'));
             }
         }
-
+        dd($exams);
     }
+
 
     public function examInstruction($id)
     {
@@ -119,7 +124,7 @@ class ExamController extends Controller
         return view('WebFrontend.exam-question');
     }
 
-    public function competitiveExam()
+    public function competitiveExam(Request $request)
     {
         $data = [];
         $compExam = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_code','exams.exam_name',
@@ -162,8 +167,26 @@ class ExamController extends Controller
                 }
             }
         }
-        return view('WebFrontend.competitive-exam-list',compact('data'));
-      //return $data; 
+
+         // Get current page form url e.x. &page=1
+         $currentPage = LengthAwarePaginator::resolveCurrentPage();
+ 
+         // Create a new Laravel collection from the array data
+         $productCollection = collect($data);
+  
+         // Define how many products we want to be visible in each page
+         $perPage = 10;
+  
+         // Slice the collection to get the products to display in current page
+         $currentPageproducts = $productCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+  
+         // Create our paginator and pass it to the view
+         $comExam= new LengthAwarePaginator($currentPageproducts , count($productCollection), $perPage);
+  
+         // set url path for generted links
+         $comExam->setPath($request->url());
+         
+         return view('WebFrontend.competitive-exam-list',compact('comExam'));
 
 
             
@@ -189,5 +212,21 @@ class ExamController extends Controller
         //     }
         // }
        
+    }
+
+    public function paginate($perPage, $total = null, $page = null, $pageName = 'page')
+    {
+        $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
+
+        return new LengthAwarePaginator(
+            $this->forPage($page, $perPage),
+            $total ?: $this->count(),
+            $perPage,
+            $page,
+            [
+                'path' => LengthAwarePaginator::resolveCurrentPath(),
+                'pageName' => $pageName,
+            ]
+        );
     }
 }
