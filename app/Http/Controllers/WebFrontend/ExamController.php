@@ -118,4 +118,76 @@ class ExamController extends Controller
     {
         return view('WebFrontend.exam-question');
     }
+
+    public function competitiveExam()
+    {
+        $data = [];
+        $compExam = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_code','exams.exam_name',
+         'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type',
+        'exams.exam_zone','exams.exam_for','exams.duration','exams.datet','exams.start_time','exams.end_time','exams.created_by','exams.tagging_for','exams.tagging_text','exams.quesstion_tag','exams.question_limit','exams.attempt_time')
+        ->join('std_exam','std_exam.exam','=','exams.id')
+        ->where('std_exam.student', Auth::user()->id)
+        ->where('exams.exam_for', 2)
+        ->where('exams.status', '1')
+        ->get();
+        if (count($compExam) > 0) {
+            foreach ($compExam as $value_ex) {
+                $datet = $value_ex->datet;
+                $datet_arr = explode("-",$datet);
+                
+                $stime = $value_ex->start_time;
+                $stime_arr = explode(":",$stime);
+                
+                $etime = $value_ex->end_time;
+                $etime_arr = explode(":",$etime);
+
+                $time = time() + 19800;
+                $st_time = mktime($stime_arr['0'],$stime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
+                $et_time = mktime($etime_arr['0'],$etime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
+                if ($value_ex->attempt_time!=0) {
+                    $student_exam = StudentExam::where('student_id', Auth::user()->id)->where('exam_id', $value_ex->ex_id)->count();
+                    if ($student_exam < $value_ex->attempt_time) {
+                        if ($st_time < $time && $et_time > $time) {
+                            $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
+                            if ($question > 0) {
+                                $data[] = $value_ex;
+                            }
+                        }
+                    }
+                } else {
+                    $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
+                    if ($question > 0) {
+                        $data[] = $value_ex;
+                    }
+                }
+            }
+        }
+        return view('WebFrontend.competitive-exam-list',compact('data'));
+      //return $data; 
+
+
+            
+
+
+
+
+
+
+
+        
+        // $compExam = Exam::select('exams.id as ex_id','std_courses.id as std_courses_id','exams.exam_code','exams.exam_name',
+        // 'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type','exams.exam_zone','exams.exam_for','exams.duration')
+        // ->join('std_courses','std_courses.course','=','exams.course')
+        // ->where('std_courses.student', Auth::user()->id)
+        // ->where('exams.exam_for', 3)
+        // ->where('exams.status', '1')
+        // ->paginate(8);
+        // foreach ($compExam as $value) {
+        //     $question = Question::where('exam_id', $value->ex_id)->where('state', '1')->count();
+        //     if ($question > 0) {
+        //         return view('WebFrontend.competitive-exam-list',compact('compExam'));
+        //     }
+        // }
+       
+    }
 }

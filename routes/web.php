@@ -55,6 +55,10 @@ Route::get('/terms-and-conditions','WebFrontend\CmsController@termsAndCondition'
 Route::middleware(['auth'])->group(function ()
 {
     Route::get('dashboard', 'WebFrontend\DashboardController@dashboardPageDisplay')->name('dashboard');
+    Route::get('profile', 'WebFrontend\DashboardController@profilePage')->name('profile');
+    Route::get('edit-profile/{id}', 'WebFrontend\DashboardController@editProfilePage');
+    Route::post('update-profile/{id}', 'WebFrontend\DashboardController@updateProfilePage');
+    Route::post('upload-profile-image', 'WebFrontend\DashboardController@profileImage');
     Route::get('my-courses', 'WebFrontend\CourseController@myCourses')->name('my-courses');
     Route::get('course-details/{id}', 'WebFrontend\CourseController@courseDetail');
     Route::get('my-exam','WebFrontend\ExamController@myExam')->name('my-exam');
@@ -63,6 +67,7 @@ Route::middleware(['auth'])->group(function ()
     Route::get('pagination/fetch', 'WebFrontend\ExamController@fetch')->name('pagination-fetch');
     Route::get('exam-result','WebFrontend\ExamController@examSubmit')->name('exam-submit');
     Route::get('exam-question','WebFrontend\ExamController@examQuestion')->name('exam-question');
+    Route::get('competitive-exam','WebFrontend\ExamController@competitiveExam')->name('competitive-exam');
 
 
 
