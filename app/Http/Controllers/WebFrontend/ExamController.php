@@ -27,7 +27,6 @@ class ExamController extends Controller
         foreach($exams as $exam){
             $question = Question::where('exam_id', $exam->ex_id)->where('state', '1')->count();
             if($question>0){
-                dd($exams);
                 return view('WebFrontend.exam-list',compact('exams'));
             }
         }
@@ -187,46 +186,8 @@ class ExamController extends Controller
          $comExam->setPath($request->url());
          
          return view('WebFrontend.competitive-exam-list',compact('comExam'));
-
-
-            
-
-
-
-
-
-
-
-        
-        // $compExam = Exam::select('exams.id as ex_id','std_courses.id as std_courses_id','exams.exam_code','exams.exam_name',
-        // 'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type','exams.exam_zone','exams.exam_for','exams.duration')
-        // ->join('std_courses','std_courses.course','=','exams.course')
-        // ->where('std_courses.student', Auth::user()->id)
-        // ->where('exams.exam_for', 3)
-        // ->where('exams.status', '1')
-        // ->paginate(8);
-        // foreach ($compExam as $value) {
-        //     $question = Question::where('exam_id', $value->ex_id)->where('state', '1')->count();
-        //     if ($question > 0) {
-        //         return view('WebFrontend.competitive-exam-list',compact('compExam'));
-        //     }
-        // }
        
     }
 
-    public function paginate($perPage, $total = null, $page = null, $pageName = 'page')
-    {
-        $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
-
-        return new LengthAwarePaginator(
-            $this->forPage($page, $perPage),
-            $total ?: $this->count(),
-            $perPage,
-            $page,
-            [
-                'path' => LengthAwarePaginator::resolveCurrentPath(),
-                'pageName' => $pageName,
-            ]
-        );
-    }
+   
 }
