@@ -20,7 +20,7 @@
              @foreach ($comExam as $key=>$exam)
                 <div class="list-item">
                     <span>{{$key+1}}</span>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{url('competitive-exam-instruction',$exam->ex_id)}}">
                         <p>{{$exam->exam_name}}</p>
                     </a>
                 </div>

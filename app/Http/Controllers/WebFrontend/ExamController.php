@@ -189,5 +189,57 @@ class ExamController extends Controller
        
     }
 
+    public function competitiveExamInstruction($id)
+    {
+        $studentId = Auth::user()->id;
+        //$stdcors = StdCourse::where('student', $request->student)->get();
+        $value = StdExam::where('student', $studentId)->where('exam',$id)->first();
+        $data = array();
+        if($value) {
+        $value_ex =  Exam::where('id', $value->exam)->where('exam_for', 2)
+                        ->where('status', '1')->first();
+
+                if ($value_ex) {
+                    $datet = $value_ex->datet;
+                    $datet_arr = explode("-",$datet);
+
+                    $stime = $value_ex->start_time;
+                    $stime_arr = explode(":",$stime);
+
+                    $etime = $value_ex->end_time;
+                    $etime_arr = explode(":",$etime);
+
+                    $time = time() + 19800;
+                    $st_time = mktime($stime_arr['0'],$stime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
+                    $et_time = mktime($etime_arr['0'],$etime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
+
+                    if ($value_ex->attempt_time!=0) {
+                        $student_exam = StudentExam::where('student_id', $studentId)->where('exam_id', $value_ex->id)->count();
+                        //echo $student_exam;
+                        if ($student_exam < $value_ex->attempt_time) {
+                            if ($st_time < $time && $et_time > $time) {
+                                $question = Question::where('exam_id', $value->exam)->where('state', '1')->count();
+                                if ($question > 0) {
+                                    $data = $value_ex;
+                                }
+                            }
+                        }
+                    } else {
+                        $question = Question::where('exam_id', $value->exam)->where('state', '1')->count();
+                        if ($question > 0) {
+                            $data = $value_ex;
+                        }
+                    }
+                }
+
+        }
+        return view('WebFrontend.competitive-instruction',compact('id','data'));
+    }
+
+    public function competitiveExamStart(Request $request, $id)
+    {
+        dd($id);
+    }
+
    
 }
