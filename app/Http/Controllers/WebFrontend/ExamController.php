@@ -27,13 +27,13 @@ class ExamController extends Controller
         ->join('std_exam','std_exam.exam','=','exams.id')
         ->where('std_exam.student','=', Auth::user()->id)
         ->where('exams.exam_for','=',1)->where('exams.status','=',1)->paginate(8);
-        foreach($exams as $exam){
+        foreach($exams as $exam)
+        {
             $question = Question::where('exam_id', $exam->ex_id)->where('state', '1')->count();
             if($question>0){
                 return view('WebFrontend.exam-list',compact('exams'));
             }
         }
-        dd($exams);
     }
 
 
@@ -128,8 +128,8 @@ class ExamController extends Controller
         {
             $exams = Exam::where('id', $id)->first();
             if ($exams->question_limit > 0) {
-               // $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting5')->inRandomOrder()->limit($exams->question_limit)->get();
-                $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
+                $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting4')->inRandomOrder()->limit($exams->question_limit)->get();
+                //$data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
             } else {
 
                 $data = Question::where('exam_id',  $id)->where('state', 1)->orderBy('id', 'ASC')->get();

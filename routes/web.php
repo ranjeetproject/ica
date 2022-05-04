@@ -69,7 +69,7 @@ Route::middleware(['auth'])->group(function ()
     Route::get('exam-question/{id}','WebFrontend\ExamController@examQuestion')->name('exam-question');
 
 
-    Route::get('exam-question','WebFrontend\ExamController@examQuestion')->name('exam-question');
+   // Route::get('exam-question','WebFrontend\ExamController@examQuestion')->name('exam-question');
     Route::get('competitive-exam','WebFrontend\ExamController@competitiveExam')->name('competitive-exam');
     Route::get('competitive-exam-instruction/{id}','WebFrontend\ExamController@competitiveExamInstruction')->name('competitive-exam-instruction');
     Route::get('competitive-start-exam/{id}','WebFrontend\ExamController@competitiveExamStart')->name('competitive-start');
