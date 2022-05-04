@@ -2372,14 +2372,14 @@ p.awsopt {
 .examSlider .carousel-indicators {
     position: static;
     display: block;
-    text-align: center;
+    /*    text-align: center;*/
     margin: 0;
 }
 
 .examSlider .carousel-indicators button {
-    width: 30px;
-    height: 30px;
-    margin: 0 2px;
+    width: 36px;
+    height: 36px;
+    margin: 0 6px 6px;
     padding: 0;
     text-align: center;
     text-indent: 0;
@@ -2392,9 +2392,23 @@ p.awsopt {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: #000;
-    color: #fff;
+    color: #000;
     border: 0;
+    opacity: 1;
+}
+
+#exampleModal .modal-dialog {
+    max-width: 300px;
+}
+
+.ic1 {
+    background: #959595 !important;
+    color: #fff !important;
+}
+
+.ic2 {
+    background: #297e49 !important;
+    color: #fff !important;
 }
 
 .examSlider .carousel-indicators button span {
@@ -2403,6 +2417,9 @@ p.awsopt {
     height: 100%;
     border-radius: 50px;
     line-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carouselFlow {
@@ -2410,7 +2427,7 @@ p.awsopt {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 20px;
+    margin-top: 20px;
 }
 
 .carouselFlow button {
@@ -2418,15 +2435,18 @@ p.awsopt {
     padding: 5px 10px;
     position: static;
     color: #000;
-    font-size: 18px;
+    font-size: 15px;
     width: 100px;
     background: #ccc;
 }
 
 .carouselFlow button:hover {
-    color: #000;
+    color: #fff;
     opacity: 1;
+    background: #072f60;
 }
+
+
 
 .questionBlock {
     width: 100%;
@@ -2445,11 +2465,13 @@ p.awsopt {
 .qbSelect {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .qbSelect select {
     width: 24%;
     height: 40px;
+    margin-bottom: 8px;
 }
 
 .qbSelect select:focus {
@@ -2463,8 +2485,10 @@ p.awsopt {
 }
 
 .eql {
-    font-size: 16px;
+    font-size: 20px;
     padding: 0 3px;
+    display: flex;
+    align-items: center;
 }
 
 .wcHead {
@@ -2490,6 +2514,7 @@ p.awsopt {
 .workingCap input[type="radio"] {
     width: 22px;
     height: 22px;
+    border: none;
 }
 
 .workingCap .form-check {
@@ -2504,7 +2529,7 @@ p.awsopt {
 }
 
 .qbSelectB select {
-    width: 100%;
+    width: 100% !important;
 }
 
 .questionBlock .form-control {
@@ -2513,8 +2538,374 @@ p.awsopt {
     background: #fff;
 }
 
+/*
+.increase input[type="radio"] {
+    background-color: #267a3e;
+}
+*/
+
+.radioInn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 15px;
+}
+
+.radioLft label {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+    color: #658B8B;
+}
+
+.radioRgt {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 500;
+    color: #004E4E;
+}
+
+
+.radioLft [type="radio"]:checked,
+.radioLft [type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+.radioLft [type="radio"]:checked + label,
+.radioLft [type="radio"]:not(:checked) + label {
+    position: relative;
+    padding-left: 33px;
+    cursor: pointer;
+    line-height: 26px;
+    display: inline-block;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.radioLft [type="radio"]:checked + label:before,
+.radioLft [type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+
+.radioLft [type="radio"]:checked + label:after,
+.radioLft [type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 25px;
+    height: 25px;
+    background: #000;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.radioLft [type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+.radioLft [type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+
+.radioLft.increase [type="radio"]:checked + label:before,
+.radioLft.increase [type="radio"]:not(:checked) + label:before {
+    content: "\f106";
+    width: 25px;
+    height: 25px;
+    background: #267a3e;
+    font-family: "Font Awesome 5 pro";
+    text-align: center;
+    font-size: 20px;
+    line-height: 24px;
+    color: #fff;
+}
+
+.radioLft.increase [type="radio"]:checked + label:after,
+.radioLft.increase [type="radio"]:not(:checked) + label:after {
+    content: '\f106';
+    width: 25px;
+    height: 25px;
+    background: #14176c;
+    font-family: "Font Awesome 5 pro";
+    text-align: center;
+    font-size: 20px;
+    line-height: 24px;
+    color: #fff;
+}
+
+
+
+
+.radioLft.decrease [type="radio"]:checked + label:before,
+.radioLft.decrease [type="radio"]:not(:checked) + label:before {
+    content: "\f107";
+    width: 25px;
+    height: 25px;
+    background: #c14135;
+    font-family: "Font Awesome 5 pro";
+    text-align: center;
+    font-size: 20px;
+    line-height: 26px;
+    color: #fff;
+}
+
+.radioLft.decrease [type="radio"]:checked + label:after,
+.radioLft.decrease [type="radio"]:not(:checked) + label:after {
+    content: '\f107';
+    width: 25px;
+    height: 25px;
+    background: #14176c;
+    font-family: "Font Awesome 5 pro";
+    text-align: center;
+    font-size: 20px;
+    line-height: 26px;
+    color: #fff;
+}
+
+
+
+
+.radioLft.noInpact [type="radio"]:checked + label:before,
+.radioLft.noInpact [type="radio"]:not(:checked) + label:before {
+    content: "\f068";
+    width: 25px;
+    height: 25px;
+    background: #c6a102;
+    font-family: "Font Awesome 5 pro";
+    text-align: center;
+    font-size: 20px;
+    line-height: 26px;
+    color: #fff;
+}
+
+.radioLft.noInpact [type="radio"]:checked + label:after,
+.radioLft.noInpact [type="radio"]:not(:checked) + label:after {
+    content: '\f107';
+    width: 25px;
+    height: 25px;
+    background: #14176c;
+    font-family: "Font Awesome 5 pro";
+    text-align: center;
+    font-size: 20px;
+    line-height: 26px;
+    color: #fff;
+}
+
+.qslImg {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.qslImg img {
+    width: 200px;
+    padding: 3px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.qBtnB input[type="radio"] {
+    background-color: #fff;
+    width: 16px;
+    height: 16px;
+}
+
+.qBtnB input[type="radio"]:checked {
+    border: 1px solid #4196a6;
+    box-shadow: none;
+    background: url("../images/radiodot.png") 2px 2px no-repeat;
+}
+
+.qBtnB {
+    display: flex;
+    padding: 0;
+    justify-content: space-between;
+}
+
+.qbLft {
+    display: flex;
+}
+
+.qBtnB button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 25px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    background: #004574;
+    box-shadow: none;
+}
+
+.qBtnB button:hover {
+    box-shadow: none;
+    background: #000;
+}
+
+.qBtnB label {
+    padding-right: 10px;
+}
+
+.questionTable {
+    width: 100%;
+    margin-top: 10px;
+    background: #f1f3f9;
+    padding: 20px;
+}
+
+.questionTable table {
+    width: 100%;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.questionTable table tr th {
+    background: #072F60;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.questionTable table tr td {
+    text-align: center;
+    font-size: 15px;
+    color: #000;
+}
+
+.questionTable table tr:last-child td {
+    background: #ccc;
+    text-align: center;
+    font-weight: 500;
+}
+
+/*
+.questionTable table tr th:nth-child(1),
+.questionTable table tr td:nth-child(1) {
+    text-align: center;
+}
+*/
+.rowDel {
+    color: #a70606;
+    font-size: 22px;
+}
+
+.baccountTable tr th:nth-child(1),
+.baccountTable tr td:nth-child(1) {
+    text-align: left;
+    width: 50px;
+}
+
+.baccountTable tr th:nth-child(2),
+.baccountTable tr td:nth-child(2) {
+    text-align: left !important;
+    width: 300px;
+}
+
+.nullSelect {
+    justify-content: center;
+    text-align: center;
+}
+
+.qaccord {
+    padding: 15px;
+    margin: 0;
+}
+
+.qaccord li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.qaFormbg {
+    width: 100%;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+li.selected .qaFormbg {
+    height: auto;
+    opacity: 1;
+    padding-bottom: 20px;
+}
+
+.qaFormbg select {
+    width: 100% !important;
+}
+
+.wCapital .workingCap {
+    width: 24%;
+}
+
+
+
 /* ---------------newslide-end------------------ */
 
+@media screen and (max-width: 991px) {
+    .qbSelectB {
+        width: 49%;
+    }
+
+    .qbSelect select {
+        width: 49%;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .questionWorking {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .workingCap {
+        width: 100%;
+    }
+
+    .wCapital {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .wCapital .workingCap {
+        width: 49%;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .qbSelectB {
+        width: 100%;
+    }
+
+    .qbSelect select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/*
 @media screen and (max-width: 1190px) {
     .desktoppic {
         display: none;
@@ -2530,3 +2921,4 @@ p.awsopt {
         flex-direction: column-reverse;
     }
 }
+*/

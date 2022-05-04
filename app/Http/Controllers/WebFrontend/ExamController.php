@@ -10,6 +10,9 @@ use App\Question;
 use App\StdCourse;
 use App\StudentExam;
 use App\StdExam;
+use App\SecondaryAccount;
+use App\PrimaryAccount;
+use App\Account;
 
 
 class ExamController extends Controller
@@ -114,8 +117,40 @@ class ExamController extends Controller
         return view('WebFrontend.exam-result');
     }
 
-    public function examQuestion()
+    public function examQuestion(Request $request,$id)
     {
-        return view('WebFrontend.exam-question');
+        $data=[];
+        if($request->ajax())
+        {
+            $exams = Exam::where('id', $id)->first();
+            if ($exams->question_limit > 0) {
+               // $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting5')->inRandomOrder()->limit($exams->question_limit)->get();
+                $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
+            } else {
+                
+                $data = Question::where('exam_id',  $id)->where('state', 1)->orderBy('id', 'ASC')->get();
+            }
+            foreach ($data as $key=>$value) 
+            {        
+                $value->indexKey=  $key+1;  
+                if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || $value->type == "accounting3" || $value->type == "accounting5") {
+                    $value->qus_option = explode("=><",$value->qus_option);
+                    if($value->type == "accounting5")
+                    {
+                        $value->qus = explode("=><",$value->qus); 
+                    }
+                }
+                if($value->type == "accounting2")   
+                {
+                    $value->primaryAccount=PrimaryAccount::get();
+                    $value->secondaryAccount=SecondaryAccount::get();
+                    $value->account=Account::get();
+                } 
+            }    
+            $html = view('WebFrontend.exam.examInnerQuestion', compact('data'))->render();
+            return response()->json(['html'=>$html]);        
+        } 
+        $data['id'] = $id;
+        return view('WebFrontend.exam.exam-question',$data);
     }
 }

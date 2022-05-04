@@ -11,6 +11,7 @@
     <link href="{{ asset('css/WebFrontend/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/WebFrontend/media.css') }}" rel="stylesheet">
     <link href="{{ asset('css/WebFrontend/progress.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
 
     <title>Ica Educations</title>
 </head>
