@@ -17,6 +17,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('my-exam')}}">Exams </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{action('WebFrontend\ExamController@competitiveExam')}}">Competitive</a>
+                </li>
             </ul>
             <div class="follow-us">
                 <span>Follow us</span>

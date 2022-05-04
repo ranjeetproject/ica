@@ -16,8 +16,8 @@
                 <img src="{{ asset('css/images/bell_icon.svg') }}" class="img-fluid" />
             </div>
             <div class="profile">
-            @if(Auth::user()->profile_image)
-                <img src="{{Auth::user()->profile_image}}" alt="profile_image"/>
+            @if(Auth::user()->profile_image!='')
+                <img src="{{asset('user_images/' .Auth::user()->profile_image)}}" alt="profile_image"/>
             @else
                 <img src="{{asset('css/images/profile-avatar.jpg')}}" alt="profile_image"/>
             @endif
@@ -28,6 +28,7 @@
                     </a>
 
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{action('WebFrontend\DashboardController@profilePage')}}">Profile</a></li>
                         <li><a class="dropdown-item" href="{{action('WebFrontend\UserController@logout')}}">Logout</a></li>
                     </ul>
                 </div>

@@ -9,6 +9,8 @@ use App\Question;
 use App\StdCourse;
 use App\Cms;
 use App\Student;
+use App\Batch;
+use Session;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +46,87 @@ class DashboardController extends Controller
             
         }
         return view('WebFrontend.dashboard',compact('courses','exams','dashboardCms'));
+    }
+    
+    public function profileImage(Request $request)
+    {
+        $input = [];
+        if ($request->has('profile_picture')) {
+            $file = $request->get('profile_picture');
+            $image_array_1 = explode(";", $file);
+            $image_array_2 = explode(",", $image_array_1[1]);
+            $data = base64_decode($image_array_2[1]);
+
+            $rand_val = date('YMDHIS') . rand(11111, 99999);
+            $image_name = md5($rand_val);
+            $fileName = $image_name . '.jpg';
+
+            $destinationPath = public_path() . '/user_images/' . $fileName;
+            //$destinationPath = 'https://learnersmall.in/android/public/profile_photo/' . $fileName;
+
+            file_put_contents($destinationPath, $data);
+            $input['profile_image'] = $fileName;
+            $this->imageUpload($input);
+            return asset('user_images/' . $fileName);
+
+        }
+
+    }
+
+    public function imageUpload($inputData)
+    {
+        if(Auth::check())
+        {
+            $id=Auth::user()->id;
+            $user=Student::find($id);
+            if($user)
+            {
+                $user->update($inputData);
+                return ['success'=>true];
+            }
+            else{
+                return ['success'=>false];
+            }
+        }
+        else{
+            return ['success'=>false];
+        }
+
+    }
+
+    public function profilePage()
+    {
+        $batch = Batch::where('id',Auth::user()->batch_id)->get();
+        $courses = Course::join('std_courses','std_courses.course','=','courses.id')
+            ->where('courses.entry_from','NEW')
+            ->where('std_courses.student', Auth::user()->id)
+            ->get();
+        return view('WebFrontend.profile',compact('courses','batch'));
+    }
+
+    public function editProfilePage($id)
+    {
+        $profileData = Student::find($id);
+        if($profileData){
+            return view('WebFrontend.edit-profile',compact('profileData'));
+        }else{
+            abort('404');
+        }
+    }
+
+    public function updateProfilePage(Request $request,$id)
+    {
+        $row = Student::find($id);
+        $inputData = $request->all();
+        if ($row) {
+            $row->update($inputData);
+            Session::put('success', 'Your Profile Update Successfully');
+            return redirect()->action('WebFrontend\DashboardController@profilePage');
+            
+        } else {
+            Session::put('error', 'Failed!');
+            return redirect()->back();
+        }
     }
 
 }

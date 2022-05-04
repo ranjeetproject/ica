@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'WebFrontend\HomePageController@homePageDisplay');
 Route::middleware(['withoutLogin'])->group(function ()//this middleware used for if login redirect to dashboard
 {
-    
+
     Route::get('/login', 'WebFrontend\UserController@loginForm')->name('login');
     Route::get('/sign-up', 'WebFrontend\UserController@signUp');
     Route::get('/check-otp', function(){
@@ -55,6 +55,10 @@ Route::get('/terms-and-conditions','WebFrontend\CmsController@termsAndCondition'
 Route::middleware(['auth'])->group(function ()
 {
     Route::get('dashboard', 'WebFrontend\DashboardController@dashboardPageDisplay')->name('dashboard');
+    Route::get('profile', 'WebFrontend\DashboardController@profilePage')->name('profile');
+    Route::get('edit-profile/{id}', 'WebFrontend\DashboardController@editProfilePage');
+    Route::post('update-profile/{id}', 'WebFrontend\DashboardController@updateProfilePage');
+    Route::post('upload-profile-image', 'WebFrontend\DashboardController@profileImage');
     Route::get('my-courses', 'WebFrontend\CourseController@myCourses')->name('my-courses');
     Route::get('course-details/{id}', 'WebFrontend\CourseController@courseDetail');
     Route::get('my-exam','WebFrontend\ExamController@myExam')->name('my-exam');
@@ -62,9 +66,13 @@ Route::middleware(['auth'])->group(function ()
     Route::get('exam-start/{id}','WebFrontend\ExamController@examStart')->name('exam-start');
     Route::get('pagination/fetch', 'WebFrontend\ExamController@fetch')->name('pagination-fetch');
     Route::get('exam-result','WebFrontend\ExamController@examSubmit')->name('exam-submit');
-    Route::get('exam-question','WebFrontend\ExamController@examQuestion')->name('exam-question');
+    Route::get('exam-question/{id}','WebFrontend\ExamController@examQuestion')->name('exam-question');
 
 
+   // Route::get('exam-question','WebFrontend\ExamController@examQuestion')->name('exam-question');
+    Route::get('competitive-exam','WebFrontend\ExamController@competitiveExam')->name('competitive-exam');
+    Route::get('competitive-exam-instruction/{id}','WebFrontend\ExamController@competitiveExamInstruction')->name('competitive-exam-instruction');
+    Route::get('competitive-start-exam/{id}','WebFrontend\ExamController@competitiveExamStart')->name('competitive-start');
 
 
 
