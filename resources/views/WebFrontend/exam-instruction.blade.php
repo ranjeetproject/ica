@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="def_btn_opt">
-                        <a href="{{url('exam-start',$id)}}" class="def_btn">Start Exam</a>
+                        <a href="{{url('exam-question',$id)}}" class="def_btn">Start Exam</a>
 
                     </div>
                      

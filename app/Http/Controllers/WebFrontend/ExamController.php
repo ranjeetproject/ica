@@ -124,12 +124,12 @@ class ExamController extends Controller
     public function examQuestion(Request $request,$id)
     {
         $data=[];
+        $exams = Exam::where('id', $id)->first();
         if($request->ajax())
-        {
-            $exams = Exam::where('id', $id)->first();
+        {            
             if ($exams->question_limit > 0) {
-                $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting4')->inRandomOrder()->limit($exams->question_limit)->get();
-                //$data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
+               // $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting4')->inRandomOrder()->limit($exams->question_limit)->get();
+                $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
             } else {
 
                 $data = Question::where('exam_id',  $id)->where('state', 1)->orderBy('id', 'ASC')->get();
@@ -154,7 +154,9 @@ class ExamController extends Controller
             $html = view('WebFrontend.exam.examInnerQuestion', compact('data'))->render();
             return response()->json(['html'=>$html]);
         }
+        $data['examName'] = $exams->exam_name;
         $data['id'] = $id;
+        $data['duration'] = $exams->duration;
         return view('WebFrontend.exam.exam-question',$data);
     }
 

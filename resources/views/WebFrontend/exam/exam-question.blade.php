@@ -10,8 +10,20 @@
 
     </section>
 
-    <section class="crs-dtls-wrp">
+    <section class="exam-list-wr">
         <div class="container">
+            <div class="innertitle modf_heading">
+                <h3 class="e-title">
+                    <span class="blue-bar addbar"></span>
+                    {{ $examName }}
+                    <span class="blue-bar"></span>
+                </h3>
+                <div class="dateoption">
+                    <div class="dateinfo"><span>Date : </span><strong> {{ date('d-m-Y') }}</strong></div>
+                    <div class="timeinfo"><span class="clockimg"><img src="{{asset('css/images/clockimg.png')}}" alt="">
+                        </span> <strong id="countdown">  </strong> <span> Remaining</span></div>
+                </div>
+            </div>
 
             <div class="examSlider">
                 <!-- Button trigger modal -->
@@ -72,11 +84,11 @@
                         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
                             data-bs-slide="next"><span class="">Skip</span>
                         </button>
-                        {{-- <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
                             data-bs-slide="next"><span class="">Next</span>
-                        </button> --}}
-                        <button class="carousel-control-next" type="button"><span class="">Next Again</span>
                         </button>
+                        {{-- <button class="carousel-control-next" type="button"><span class="">Next Again</span>
+                        </button> --}}
                     </div>
                 </div>
             </div>
@@ -100,6 +112,7 @@
                 })
                 .done(function(response) {
                     $('#questionHolder').html(response.html);
+                    updateCountdown();
                     var myCarousel = document.getElementById('carouselExampleIndicators');
                     var carousel = bootstrap.Carousel.getInstance(myCarousel);
                     myCarousel.addEventListener('slide.bs.carousel', function(event) {
@@ -217,41 +230,50 @@
                                     
                                 }
                                 if (questionType === 'accounting5') {
-                                    var curInputs = $(this).find("select");  
-                                    var check = true;                                 
-                                    for (var i = 0; i < curInputs.length; i++) 
-                                    {
-                                        var name = curInputs[i].name;
-                                        var id = curInputs[i].id;
-                                        if($('#'+id).val()=='')
-                                        {
-                                            check = false; 
-                                        } 
-                                    }
+                                    // var curInputs = $(this).find("select");  
+                                    // var check = true;                                 
+                                    // for (var i = 0; i < curInputs.length; i++) 
+                                    // {
+                                    //     var name = curInputs[i].name;
+                                    //     var id = curInputs[i].id;
+                                    //     if($('#'+id).val()=='')
+                                    //     {
+                                    //         check = false; 
+                                    //     } 
+                                    // }
 
-                                    if(!check){
-                                        return event.preventDefault();
-                                    }
+                                    // if(!check){
+                                    //     return event.preventDefault();
+                                    // }
                                 }
                                 if (questionType === 'accounting6') {
-                                    var curInputs = $(this).find("input[type='radio']");
-                                    var check = true;
-                                    for (var i = 0; i < curInputs.length; i++) 
-                                    {
-                                        var name = curInputs[i].name;
-                                        if($("input:radio[name="+name+"]:checked").length == 0){
-                                            check = false;
-                                        }
-                                    }                                       
+                                    // var curInputs = $(this).find("input[type='radio']");
+                                    // var check = true;
+                                    // for (var i = 0; i < curInputs.length; i++) 
+                                    // {
+                                    //     var name = curInputs[i].name;
+                                    //     if($("input:radio[name="+name+"]:checked").length == 0){
+                                    //         check = false;
+                                    //     }
+                                    // }                                       
                                     
-                                    if(!check){
-                                        return event.preventDefault();
-                                    }
+                                    // if(!check){
+                                    //     return event.preventDefault();
+                                    // }
                                 }
                             }
                         });
 
                        
+                    });
+
+                    $(".carousel-control-next").click(function() {
+                        $(".carousel-item").each(function() {
+                            if ($(this).hasClass("active")) {
+                                $('#exam-count').text($(this).attr("slide"));
+                                var questionType = $(this).children(".questionType").val();
+                            }
+                        })
                     });
 
                     // $(".carousel-control-next").click(function() {
@@ -320,6 +342,40 @@
 
 
         });
+
+
+        
+        const startingMinuites = 10;
+        let time = startingMinuites * 60;
+
+        const countdownEl = document.getElementById('countdown')
+        const interval =setInterval(updateCountdown,1000);
+        function updateCountdown()
+        {
+            const minute = Math.floor(time/60);
+            let second = time % 60
+            countdownEl.innerText = `${(minute<10)?'0'+ minute:minute}: ${(second<10)?'0'+ second:second}`
+            if(time==0){
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        //redirect
+                    }
+                })
+                clearInterval(interval)
+            }else{
+                time--
+            }
+
+        }
+        
     </script>
 
     

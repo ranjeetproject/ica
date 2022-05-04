@@ -10,11 +10,11 @@
                     </div>
                 @endforeach
             </div>
-            <div class="actionview">
+            {{-- <div class="actionview">
                 <button type="button" class="btn ansbtn">Answered</button>
                 <button type="button" class="btn skippedbtn">Skipped</button>
                 <button type="button" class="btn revdbtn">Marked for Review</button>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
