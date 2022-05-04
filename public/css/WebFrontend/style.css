@@ -2862,6 +2862,273 @@ li.selected .qaFormbg {
 
 /* ---------------newslide-end------------------ */
 
+
+
+/* ---------------Profile-start------------------ */
+.profileBg {
+    width: 100%;
+    padding: 30px;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 0 10px #efefef;
+}
+
+.profileHdn {
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.profileHdn h2 {
+    position: relative;
+    margin: 0;
+    color: #072F60;
+    font-weight: 600;
+    font-size: 26px;
+}
+
+.profileHdn h2::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 15px;
+    width: 100px;
+    height: 5px;
+    background: #116EEE;
+    margin-right: 10px;
+    border-radius: 20px;
+}
+
+.profileHdn h2::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    top: 15px;
+    height: 5px;
+    background: #116EEE;
+    margin-left: 10px;
+    border-radius: 20px;
+}
+
+.profileBanner {
+    background: url("../images/profilebg.jpg") 0 0 no-repeat;
+    background-size: cover;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+
+.profileIcom {
+    border-radius: 100px;
+    width: 150px;
+    height: 150px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #000;
+    margin-right: 25px;
+}
+
+.profileIcom img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+.profileTxt h2 {
+    color: #fff;
+    font-weight: 600;
+    margin: 0;
+}
+
+.profileTxt h5 {
+    color: #fff;
+    font-weight: 400;
+    margin: 0;
+}
+
+.profileTxt p {
+    color: #5195F3;
+    font-weight: 400;
+}
+
+.profileTxt button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow: none;
+    border-radius: 2px;
+    text-align: center;
+    background: #3BBCA7;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.profileTxt button:hover {
+    background: #071739;
+}
+
+.profsubhdn {
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 20px;
+}
+
+.profsubhdn h2::before {
+    display: none;
+}
+
+.profsubhdn h2::after {
+    width: 50px;
+    height: 3px;
+    top: 17px;
+}
+
+.profileForm {
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px 30px 20px 30px;
+    background: #eff3ff;
+}
+
+.profileForm .form-control {
+    height: 40px;
+    background: #fff;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 5px #ccc;
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 500;
+
+}
+
+.profileForm label {
+    font-size: 15px;
+    color: #072F60;
+    font-weight: 700;
+    padding-right: 5px;
+    padding-left: 20px;
+}
+
+.formButton {
+    text-align: center;
+    padding: 30px;
+    background: #E8ECF6;
+    margin-top: 20px;
+}
+
+.formButton button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow: none;
+    border-radius: 5px;
+    text-align: center;
+    background: #072F60;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.courseDetlMain {
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px 30px 20px 30px;
+    background: #eff3ff;
+    margin-top: 25px;
+}
+
+.detlTable {
+    width: 100%;
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 10px;
+}
+
+.detlTable h3 {
+    background: #072F60;
+    color: #fff;
+    padding: 8px 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.detlTable p {
+    margin: 0;
+}
+
+.detlTable ul {
+    padding-left: 18px;
+}
+
+.detlTable ul li {
+    list-style-type: disc;
+}
+
+.logoContainer {
+    border-radius: 100px;
+    width: 150px;
+    height: 150px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #000;
+    margin-right: 25px;
+}
+
+.logoContainer img {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+.fileContainer {
+    overflow: hidden;
+    position: relative;
+    color: #434343;
+    cursor: pointer !important;
+    text-align: center;
+    background: #3BBCA7;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.fileContainer span {
+    overflow: hidden;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.fileContainer input[type="file"] {
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    cursor: pointer;
+}
+
+/* ---------------Profile-end------------------ */
+
 @media screen and (max-width: 991px) {
     .qbSelectB {
         width: 49%;
@@ -2891,6 +3158,21 @@ li.selected .qaFormbg {
     .wCapital .workingCap {
         width: 49%;
         margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .profileBanner {
+        flex-direction: column;
+    }
+
+    .logoContainer {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .profileTxt {
+        text-align: center;
     }
 }
 
