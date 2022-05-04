@@ -128,7 +128,7 @@ class ExamController extends Controller
         if($request->ajax())
         {            
             if ($exams->question_limit > 0) {
-               // $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting4')->inRandomOrder()->limit($exams->question_limit)->get();
+                //$data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting5')->inRandomOrder()->limit($exams->question_limit)->get();
                 $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
             } else {
 
@@ -157,6 +157,7 @@ class ExamController extends Controller
         $data['examName'] = $exams->exam_name;
         $data['id'] = $id;
         $data['duration'] = $exams->duration;
+        $data['questionLimit'] = $exams->question_limit;
         return view('WebFrontend.exam.exam-question',$data);
     }
 
