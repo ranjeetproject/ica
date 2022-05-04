@@ -11,8 +11,10 @@
                     <div class="std-qt">study that gives you success</div>
                 </div>
                 <div class="rt-prt">
-                    <img src="{{asset('css/images/q-mark.svg')}}" class="img-fluid" />
-                    <img src="{{asset('css/images/video-icon.svg')}}" class="img-fluid" />
+		  <a href="{{route('contactUs')}}" class="social-link">
+                    <img src="{{asset('css/images/q-mark.svg')}}" class="img-fluid" /></a>
+		  <a href="{{$setting_data->video_link}}" class="social-link" target="_blank">
+                    <img src="{{asset('css/images/video-icon.svg')}}" class="img-fluid" /></a>
                     <a href="{{action('WebFrontend\UserController@loginForm')}}" class="login-btn">Login</a>
                     <div class="free-sec">
                         <img src="{{asset('css/images/free-icon.svg')}}" class="img-fluid" />
@@ -51,11 +53,11 @@
                     </ul>
                     <div class="follow-us">
                         <span>Follow us</span>
-                        <a href="#" class="social-link">
+                        <a href="{{$setting_data->footer_facebook}}" class="social-link" target="_blank">
                             <img src="{{asset('css/images/fb-icon.svg')}}" class="img-fluid" /></a>
-                        <a href="#" class="social-link"><img src="{{asset('css/images/twitter-icon.svg')}}"
+                        <a href="{{$setting_data->footer_twitter}}" class="social-link" target="_blank"><img src="{{asset('css/images/twitter-icon.svg')}}"
                                                              class="img-fluid" /></a>
-                        <a href="#" class="social-link"><img src="{{asset('css/images/pinterest-icon.svg')}}"
+                        <a href="{{$setting_data->footer_pinterest}}" class="social-link" target="_blank"><img src="{{asset('css/images/pinterest-icon.svg')}}"
                                                              class="img-fluid" /></a>
                         <a href="#" class="social-link"><img src="{{asset('css/images/Linkedin-icon.svg')}}"
                                                              class="img-fluid" /></a>

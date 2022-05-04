@@ -3,9 +3,7 @@
         <div class="social-wrap">
             <div class="footer-logo-wrap">
                 <img src="{{asset('css/images/logo-footer.svg')}}" class="footer-logo" alt="#"/>
-                <p class="text-prt">Sectetur, adipisci velit, sed quia non numquam esectetur, adipisci velit, sed
-                    quia
-                    non numquam..</p>
+                <p class="text-prt">{!!$setting_data->footer_text!!}</p>
 
                 <a href="{{action('WebFrontend\CmsController@aboutUs')}}" class="btn btn-about">About us</a>
             </div>
@@ -15,8 +13,7 @@
                     <img src="{{asset('css/images/location-icon.svg')}}" class="add-icon">
                     <div class="label">
                         <label>Address:</label>
-                        <span>Teum iure reprehenderit qui in<br>
-                                eaderit qui in, Canada</span>
+                        <span>{{$setting_data->footer_address}}</span>
                     </div>
                 </div>
                 <div class="add-bar">
@@ -24,7 +21,7 @@
                     <div class="label">
                         <label>Phone:</label>
                         <a href="tel:+160 4825 6769">
-                            +160 4825 6769</a>
+                            {{$setting_data->footer_phone}}</a>
                     </div>
                 </div>
                 <div class="add-bar">
@@ -32,7 +29,7 @@
                     <div class="label">
                         <label>Email:</label>
                         <a href="mailto: jasonlokau@gmail.oom">
-                            jasonlokau@gmail.oom
+                            {{$setting_data->footer_email}}
                         </a>
                     </div>
                 </div>
@@ -59,25 +56,25 @@
                 <h6 class="fo-head">Social Links</h6>
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="#" class="quick-links-social">
+                        <a href="{{$setting_data->footer_facebook}}" class="quick-links-social" target="_blank">
                             <img src="{{asset('css/images/footer-fb-icon.svg')}}" class="f-social-icon" alt="#"/>
                             Facebook &nbsp;&nbsp;&nbsp;
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a href="#" class="quick-links-social">
+                        <a href="{{$setting_data->footer_twitter}}" class="quick-links-social" target="_blank">
                             <img src="{{asset('css/images/footer-twitter-icon.svg')}}" class="f-social-icon" alt="#"/>
                             Twitter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a href="#" class="quick-links-social">
+                        <a href="{{$setting_data->footer_pinterest}}" class="quick-links-social" target="_blank">
                             <img src="{{asset('css/images/footer-pint-icon.svg')}}" class="f-social-icon" alt="#"/>
                             Pinterest&nbsp;&nbsp;
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a href="#" class="quick-links-social">
+                        <a href="{{$setting_data->footer_instagram}}" class="quick-links-social" target="_blank">
                             <img src="{{asset('css/images/footer-insta-icon.svg')}}" class="f-social-icon" alt="#"/>
                             Instagram
                         </a>

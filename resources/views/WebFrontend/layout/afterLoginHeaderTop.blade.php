@@ -9,8 +9,10 @@
             <div class="std-qt">study that gives you success</div>
         </div>
         <div class="rt-prt">
-            <img src="{{ asset('css/images/q-mark.svg') }}" class="img-fluid" />
-            <img src="{{ asset('css/images/video-icon.svg') }}" class="img-fluid" />
+	<a href="{{route('contactUs')}}" class="social-link">
+            <img src="{{ asset('css/images/q-mark.svg') }}" class="img-fluid" /></a>
+	<a href="{{$setting_data->video_link}}" class="social-link" target="_blank">
+            <img src="{{ asset('css/images/video-icon.svg') }}" class="img-fluid" /></a>
             <div class="notification-wrp">
                 <span class="num">1</span>
                 <img src="{{ asset('css/images/bell_icon.svg') }}" class="img-fluid" />
