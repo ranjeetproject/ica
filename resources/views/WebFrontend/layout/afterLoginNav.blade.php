@@ -23,11 +23,11 @@
             </ul>
             <div class="follow-us">
                 <span>Follow us</span>
-                <a href="#" class="social-link">
+                <a href="{{$setting_data->footer_facebook}}" class="social-link" target="_blank">
                     <img src="{{asset('css/images/fb-icon.svg')}}" class="img-fluid" /></a>
-                <a href="#" class="social-link"><img src="{{asset('css/images/twitter-icon.svg')}}"
+                <a href="{{$setting_data->footer_twitter}}" class="social-link" target="_blank"><img src="{{asset('css/images/twitter-icon.svg')}}"
                                                      class="img-fluid" /></a>
-                <a href="#" class="social-link"><img src="{{asset('css/images/pinterest-icon.svg')}}"
+                <a href="{{$setting_data->footer_pinterest}}" class="social-link" target="_blank"><img src="{{asset('css/images/pinterest-icon.svg')}}"
                                                      class="img-fluid" /></a>
                 <a href="#" class="social-link"><img src="{{asset('css/images/Linkedin-icon.svg')}}"
                                                      class="img-fluid" /></a>
