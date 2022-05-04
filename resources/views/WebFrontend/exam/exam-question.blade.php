@@ -39,34 +39,34 @@
                             <div class="modal-body">
                                 <div class="carousel-indicators">
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                        class="numberIcn" aria-current="true" aria-label="Slide 1"><span
+                                        class="numberIcn" aria-current="true" id="numberIcnButton_1" aria-label="Slide 1"><span
                                             data-bs-dismiss="modal">1</span></button>
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                                        data-bs-dismiss="modal" class="numberIcn" aria-label="Slide 2"><span
+                                        data-bs-dismiss="modal" class="numberIcn" id="numberIcnButton_2" aria-label="Slide 2"><span
                                             data-bs-dismiss="modal">2</span></button>
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                                        data-bs-dismiss="modal" class="numberIcn" aria-label="Slide 3"><span
+                                        data-bs-dismiss="modal" class="numberIcn"  id="numberIcnButton_3" aria-label="Slide 3"><span
                                             data-bs-dismiss="modal">3</span></button>
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                                        data-bs-dismiss="modal" class="numberIcn" aria-label="Slide 4"><span
+                                        data-bs-dismiss="modal" class="numberIcn"  id="numberIcnButton_4" aria-label="Slide 4"><span
                                             data-bs-dismiss="modal">4</span></button>
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
-                                        data-bs-dismiss="modal" class="numberIcn" aria-label="Slide 5"><span
+                                        data-bs-dismiss="modal" class="numberIcn" id="numberIcnButton_5" aria-label="Slide 5"><span
                                             data-bs-dismiss="modal">5</span></button>
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5"
-                                        data-bs-dismiss="modal" class="numberIcn" aria-label="Slide 6"><span
+                                        data-bs-dismiss="modal" class="numberIcn" id="numberIcnButton_6" aria-label="Slide 6"><span
                                             data-bs-dismiss="modal">6</span></button>
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="6"
-                                        data-bs-dismiss="modal" class="numberIcn" aria-label="Slide 7"><span
+                                        data-bs-dismiss="modal" class="numberIcn" id="numberIcnButton_7" aria-label="Slide 7"><span
                                             data-bs-dismiss="modal">7</span></button>
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="7"
-                                        data-bs-dismiss="modal" class="numberIcn" aria-label="Slide 8"><span
+                                        data-bs-dismiss="modal" class="numberIcn" id="numberIcnButton_8" aria-label="Slide 8"><span
                                             data-bs-dismiss="modal">8</span></button>
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="8"
-                                        data-bs-dismiss="modal" class="numberIcn" aria-label="Slide 9">
+                                        data-bs-dismiss="modal" class="numberIcn" id="numberIcnButton_9" aria-label="Slide 9">
                                         <span data-bs-dismiss="modal">9</span></button>
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="9"
-                                        data-bs-dismiss="modal" class="numberIcn" aria-label="Slide 10"><span
+                                        data-bs-dismiss="modal" class="numberIcn" id="numberIcnButton_10" aria-label="Slide 10"><span
                                             data-bs-dismiss="modal">10</span></button>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                         </button> --}}
                         <button class="carousel-control-next-skip" id="skip" type="button"><span class="">Skip</span>
                         </button>
-                        <button class="carousel-control-next" type="button"><span class="">Next Again</span>
+                        <button class="carousel-control-next" type="button"><span class="">Save & Next</span>
                         </button>
                     </div>
                 </div>
@@ -130,6 +130,8 @@
                             {
                                 console.log($(this).attr("slide"));
                                 $('#exam-count').text($(this).attr("slide"));
+                                var sliderNumber = $(this).attr("slide");
+                                $("#numberIcnButton_"+(sliderNumber-1)).addClass('ic1');
                             }
                         });
                         
@@ -172,6 +174,8 @@
                                     else{
                                         $('#exam-count').text($(this).attr("slide"));
                                         $('#carouselExampleIndicators').carousel('next');
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
                                     }                                    
                                 }
                                 if (questionType === 'check') 
@@ -194,6 +198,8 @@
                                     {
                                         $('#exam-count').text($(this).attr("slide"));                                        
                                         $('#carouselExampleIndicators').carousel('next');
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
                                     }
                                 }
                                 if (questionType === 'accounting1') 
@@ -214,6 +220,8 @@
                                     else{
                                         $('#exam-count').text($(this).attr("slide"));
                                         $('#carouselExampleIndicators').carousel('next');
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
                                     }
 
                                 }
@@ -253,6 +261,8 @@
                                     else{
                                         $('#exam-count').text($(this).attr("slide"));
                                         $('#carouselExampleIndicators').carousel('next');
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
                                     }
                                 }
                                 if (questionType === 'accounting3')
@@ -275,6 +285,8 @@
                                     else{
                                         $('#exam-count').text($(this).attr("slide"));
                                         $('#carouselExampleIndicators').carousel('next');
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
                                     }
                                 }
                                 if (questionType === 'accounting4') {
@@ -300,6 +312,8 @@
                                     else{
                                         $('#exam-count').text($(this).attr("slide"));
                                         $('#carouselExampleIndicators').carousel('next');
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
                                     }
                                 }
                                 if (questionType === 'accounting6') 
@@ -320,11 +334,12 @@
                                     else{
                                         $('#exam-count').text($(this).attr("slide"));
                                         $('#carouselExampleIndicators').carousel('next');
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
                                     }
                                 }
                             }
-                        });
-                        
+                        });                        
                     });
 
                     
