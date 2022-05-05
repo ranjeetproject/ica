@@ -313,9 +313,7 @@
                                         {
                                             if($("input:radio[name="+name+"]:checked").length == 0)
                                             {
-
                                                 check = false;
-                                                console.log(i +"  "+ check);
                                             }
                                         }
 
@@ -386,9 +384,9 @@
                                         }
                                     }
                                 }
-                                if (questionType === 'accounting4') {
+                                if (questionType === 'accounting4') 
+                                {
                                     var curInputs = $(this).find("input[type='radio'],select,input[type='text']");
-                                    console.log(curInputs);
                                     var check = true; 
                                     for (var i = 0; i < curInputs.length; i++) 
                                     {
@@ -399,69 +397,53 @@
                                         {
                                             if($("input:radio[name="+name+"]:checked").length != 0)
                                             {
-                                                
-                                                var  radio_check = $("input[name="+name+"]:checked").val();
+                                                var radio_check = $("input[name="+name+"]:checked").val();
                                                 var account_typr = $("input[name="+name+"]:checked").attr('divType');
-                                                if(account_typr == 'assets' ) {
-                                                    if(radio_check == 1) {
-                                                    
+                                                if(account_typr == 'assets' )
+                                                {
+                                                    if(radio_check == 1) 
+                                                    {                                                    
                                                         if($("#"+id+"_Option").find('option:selected').val() == ''){
+                                                            
                                                             check = false;
                                                         }
                                                         if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            
                                                             check = false;
                                                         }
                                                     }
-                                                    if(radio_check == 2) {
+                                                    if(radio_check == 2) 
+                                                    {
                                                         if($("#"+id+"_Option").find('option:selected').val() == ''){
+                                                            
+                                                            
                                                             check = false;
                                                         }
                                                         if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                           
                                                             check = false;
                                                         }
                                                     }
                                                 }
-                                                if(account_typr == 'liabilities' ) {
-                                                    if(radio_check == 1) {
-                                                        console.log('liabilities increase')
+                                                if(account_typr == 'liabilities' ) 
+                                                {
+                                                    if(radio_check == 1)
+                                                    {
                                                         if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                           
                                                             check = false;
                                                         }
                                                         if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                            
                                                             check = false;
                                                         }
                                                         if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            
                                                             check = false;
                                                         }
                                                     }
-                                                    if(radio_check == 2) {
-                                                        console.log('liabilities decrease')
-                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
-                                                            check = false;
-                                                        }
-                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
-                                                            check = false;
-                                                        }
-                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
-                                                            check = false;
-                                                        }
-                                                    }
-                                                }
-                                                if(account_typr == 'equity' ) {
-                                                    if(radio_check == 1) {
-                                                        console.log('equity increase')
-                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
-                                                            check = false;
-                                                        }
-                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
-                                                            check = false;
-                                                        }
-                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
-                                                            check = false;
-                                                        }
-                                                    }
-                                                    if(radio_check == 2) {
-                                                        console.log('equity decrease')
+                                                    if(radio_check == 2) 
+                                                    {
                                                         if($("#"+id+"_Option1").find('option:selected').val() == ''){
                                                             check = false;
                                                         }
@@ -473,15 +455,47 @@
                                                         }
                                                     }
                                                 }
-                                                
+                                                if(account_typr == 'equity' ) 
+                                                {
+                                                    if(radio_check == 1) 
+                                                    {                                                        
+                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                    if(radio_check == 2)
+                                                    {
+                                                        
+                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                }                                                
                                             }
-
-
+                                            else
+                                            {
+                                                check = false; 
+                                            }
                                         }
                                     }
-                                    if(!check){                                       
+                                    if(!check)
+                                    {                                       
                                         return event.preventDefault();
-                                    }else{
+                                    }
+                                    else
+                                    {
                                         $('#carouselExampleIndicators').carousel('next');
                                         $('#exam-count').text(parseInt($(this).attr("slide"))+1);
 

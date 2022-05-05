@@ -26,7 +26,7 @@
                 <li>
                     <div class="radioInn">
                         <span class="radioLft decrease">
-                            <input type="radio" id="accounting4AssetsDecrease_{{ $question->id }}" name="accounting4Assets_{{ $question->id }}" value="2">
+                            <input type="radio" id="accounting4AssetsDecrease_{{ $question->id }}" name="accounting4Assets_{{ $question->id }}" value="2" divType='assets'>
                             <label for="accounting4AssetsDecrease_{{ $question->id }}">Decrease</label>
                         </span>
                     </div>
@@ -45,7 +45,7 @@
                 <li>
                     <div class="radioInn">
                         <span class="radioLft noInpact">
-                            <input type="radio" id="accounting4AssetsNoImpact_{{ $question->id }}" name="accounting4Assets_{{ $question->id }}" value="3"><label
+                            <input type="radio" id="accounting4AssetsNoImpact_{{ $question->id }}" name="accounting4Assets_{{ $question->id }}" value="3" divType='assets'><label
                                 for="accounting4AssetsNoImpact_{{ $question->id }}">No-Impact</label>
                         </span>
                     </div>
@@ -85,8 +85,8 @@
                 <li>
                     <div class="radioInn">
                         <span class="radioLft decrease">
-                            <input type="radio" id="accounting4LiabilitiesDecrease_{{ $question->id }}" name="accounting4Liabilities_{{ $question->id }}" value="2"><label
-                                for="accounting4LiabilitiesDecrease_{{ $question->id }}">Decrease</label>
+                            <input type="radio" id="accounting4LiabilitiesDecrease_{{ $question->id }}" name="accounting4Liabilities_{{ $question->id }}" value="2" divType='liabilities'>
+                            <label for="accounting4LiabilitiesDecrease_{{ $question->id }}">Decrease</label>
                         </span>
                     </div>
                     <div class="qaFormbg">
@@ -110,12 +110,11 @@
                 <li>
                     <div class="radioInn">
                         <span class="radioLft noInpact">
-                            <input type="radio" id="accounting4LiabilitiesNoImpact_{{ $question->id }}" name="accounting4Liabilities_{{ $question->id }}" value="3"><label
-                                for="accounting4LiabilitiesNoImpact_{{ $question->id }}">No-Impact</label>
+                            <input type="radio" id="accounting4LiabilitiesNoImpact_{{ $question->id }}" name="accounting4Liabilities_{{ $question->id }}" value="3" divType='liabilities'>
+                            <label for="accounting4LiabilitiesNoImpact_{{ $question->id }}">No-Impact</label>
                         </span>
                     </div>
                 </li>
-
             </ul>
         </div>
         <div class="eql">&#43;</div>
@@ -125,8 +124,8 @@
                 <li>
                     <div class="radioInn">
                         <span class="radioLft increase">
-                            <input type="radio" id="accounting4EquityIncrease_{{ $question->id }}" name="accounting4Equity_{{ $question->id }}" value="1" divType='equity'><label
-                                for="accounting4EquityIncrease_{{ $question->id }}">Increase</label>
+                            <input type="radio" id="accounting4EquityIncrease_{{ $question->id }}" name="accounting4Equity_{{ $question->id }}" value="1" divType='equity'>
+                            <label for="accounting4EquityIncrease_{{ $question->id }}">Increase</label>
                         </span>
                     </div>
                     <div class="qaFormbg">
@@ -150,8 +149,8 @@
                 <li>
                     <div class="radioInn">
                         <span class="radioLft decrease">
-                            <input type="radio" id="accounting4EquityDecrease_{{ $question->id }}" name="accounting4Equity_{{ $question->id }}" value="2"><label
-                                for="accounting4EquityDecrease_{{ $question->id }}">Decrease</label>
+                            <input type="radio" id="accounting4EquityDecrease_{{ $question->id }}" name="accounting4Equity_{{ $question->id }}" value="2" divType='equity'>
+                            <label for="accounting4EquityDecrease_{{ $question->id }}">Decrease</label>
                         </span>
                     </div>
                     <div class="qaFormbg">
@@ -175,8 +174,8 @@
                 <li>
                     <div class="radioInn">
                         <span class="radioLft noInpact">
-                            <input type="radio" id="accounting4EquityNoImpact_{{ $question->id }}" name="accounting4Equity_{{ $question->id }}" value="3"><label
-                                for="accounting4EquityNoImpact_{{ $question->id }}">No-Impact</label>
+                            <input type="radio" id="accounting4EquityNoImpact_{{ $question->id }}" name="accounting4Equity_{{ $question->id }}" value="3" divType='equity'>
+                            <label for="accounting4EquityNoImpact_{{ $question->id }}">No-Impact</label>
                         </span>
                     </div>
                 </li>
