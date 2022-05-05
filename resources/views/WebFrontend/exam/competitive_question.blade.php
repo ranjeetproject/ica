@@ -104,7 +104,7 @@
 @section('customJavascript')
     <script>
         var examId = '{{ $id }}';
-        let url = "{{ action('WebFrontend\ExamController@examQuestion', ['id' => $id]) }}";
+        let url = "{{ action('WebFrontend\ExamController@competitiveExamStart', ['id' => $id]) }}";
         var buttonType='';
 
         function fetch_data() {
@@ -290,7 +290,104 @@
                                     }
                                 }
                                 if (questionType === 'accounting4') {
-                                    
+                                    var curInputs = $(this).find("input[type='radio'],select,input[type='text']");
+                                    console.log(curInputs);
+                                    var check = true; 
+                                    for (var i = 0; i < curInputs.length; i++) 
+                                    {
+                                        var type = curInputs[i].type;
+                                        var name = curInputs[i].name;
+                                        var id = curInputs[i].id;
+                                        if(type == 'radio')
+                                        {
+                                            if($("input:radio[name="+name+"]:checked").length != 0)
+                                            {
+                                                
+                                                var  radio_check = $("input[name="+name+"]:checked").val();
+                                                var account_typr = $("input[name="+name+"]:checked").attr('divType');
+                                                if(account_typr == 'assets' ) {
+                                                    if(radio_check == 1) {
+                                                    
+                                                        if($("#"+id+"_Option").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                    if(radio_check == 2) {
+                                                        if($("#"+id+"_Option").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                }
+                                                if(account_typr == 'liabilities' ) {
+                                                    if(radio_check == 1) {
+                                                        console.log('liabilities increase')
+                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                    if(radio_check == 2) {
+                                                        console.log('liabilities decrease')
+                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                }
+                                                if(account_typr == 'equity' ) {
+                                                    if(radio_check == 1) {
+                                                        console.log('equity increase')
+                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                    if(radio_check == 2) {
+                                                        console.log('equity decrease')
+                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                }
+                                                
+                                            }
+
+
+                                        }
+                                    }
+                                    if(!check){
+                                        console.log('ttttt');
+                                        return event.preventDefault();
+                                    }else{
+                                        console.log('pass');
+                                    }
                                 }
                                 if (questionType === 'accounting5') 
                                 {
