@@ -23,7 +23,7 @@
                     </div>-->
                     <div class="logoContainer">
                         @if(Auth::user()->profile_image!='')
-                            <img src="{{asset('user_images/' .Auth::user()->profile_image)}}" alt="profile_image" id="profile_picture_image"/>
+                            <img src="{{Auth::user()->profile_image}}" alt="profile_image" id="profile_picture_image"/>
                         @else
                             <img src="{{asset('css/images/profile-avatar.jpg')}}" alt="profile_image" id="profile_picture_image"/>
                         @endif
