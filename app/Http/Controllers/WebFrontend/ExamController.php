@@ -276,7 +276,42 @@ class ExamController extends Controller
 
     public function competitiveExamStart(Request $request, $id)
     {
-        dd($id);
+        $data=[];
+        $exams = Exam::where('id', $id)->first();
+        if($request->ajax())
+        {            
+            if ($exams->question_limit > 0) {
+                //$data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting5')->inRandomOrder()->limit($exams->question_limit)->get();
+                $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
+            } else {
+
+                $data = Question::where('exam_id',  $id)->where('state', 1)->orderBy('id', 'ASC')->get();
+            }
+            foreach ($data as $key=>$value)
+            {
+                $value->indexKey=  $key+1;
+                if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || $value->type == "accounting3" || $value->type == "accounting5") {
+                    $value->qus_option = explode("=><",$value->qus_option);
+                    if($value->type == "accounting5")
+                    {
+                        $value->qus = explode("=><",$value->qus);
+                    }
+                }
+                if($value->type == "accounting2")
+                {
+                    $value->primaryAccount=PrimaryAccount::get();
+                    $value->secondaryAccount=SecondaryAccount::get();
+                    $value->account=Account::get();
+                }
+            }
+            $html = view('WebFrontend.exam.examInnerQuestion', compact('data'))->render();
+            return response()->json(['html'=>$html]);
+        }
+        $data['examName'] = $exams->exam_name;
+        $data['id'] = $id;
+        $data['duration'] = $exams->duration;
+        $data['questionLimit'] = $exams->question_limit;
+        return view('WebFrontend.exam.competitive_question',$data);
     }
 
 
