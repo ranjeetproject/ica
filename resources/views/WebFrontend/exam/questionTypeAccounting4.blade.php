@@ -1,5 +1,5 @@
 <div class="questionBlock">
-    <p>{{ $question->indexKey }}. {{ $question->qus }}</p>
+    <p>{{ $question->indexKey }}/Accounting4. {{ $question->qus }}</p>
     <div class="questionWorking">
         <div class="workingCap">
             <div class="wcHead">Assets</div>
@@ -7,42 +7,47 @@
                 <li>
                     <div class="radioInn">
                         <span class="radioLft increase">
-                            <input type="radio" id="test10" name="radio-group4"><label
-                                for="test10">Increase</label></span>
+                            <input type="radio" id="accounting4AssetsIncrease_{{ $question->id }}" name="accounting4Assets_{{ $question->id }}" value="1" divType='assets'>
+                            <label for="accounting4AssetsIncrease_{{ $question->id }}">Increase</label>
+                        </span>
                     </div>
                     <div class="qaFormbg">
                         <div class="qbSelect">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select</option>
+                            <select class="form-select" aria-label="Default select example" name="accounting4AssetsIncrease_{{$question->id}}_Option" id="accounting4AssetsIncrease_{{$question->id}}_Option">
+                                <option selected value="">Select</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
                         </div>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" name="accounting4AssetsIncrease_{{ $question->id }}_Text" id="accounting4AssetsIncrease_{{ $question->id }}_Text" />
                     </div>
                 </li>
                 <li>
                     <div class="radioInn">
-                        <span class="radioLft decrease"><input type="radio" id="test11" name="radio-group4"><label
-                                for="test11">Decrease</label></span>
+                        <span class="radioLft decrease">
+                            <input type="radio" id="accounting4AssetsDecrease_{{ $question->id }}" name="accounting4Assets_{{ $question->id }}" value="2">
+                            <label for="accounting4AssetsDecrease_{{ $question->id }}">Decrease</label>
+                        </span>
                     </div>
                     <div class="qaFormbg">
                         <div class="qbSelect">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select</option>
+                            <select class="form-select" aria-label="Default select example" name="accounting4AssetsDecrease_{{$question->id}}_Option" id="accounting4AssetsDecrease_{{$question->id}}_Option">
+                                <option selected value="">Select</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
                         </div>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" name="accounting4AssetsDecrease_{{ $question->id }}_Text" id="accounting4AssetsDecrease_{{ $question->id }}_Text" />
                     </div>
                 </li>
                 <li>
                     <div class="radioInn">
-                        <span class="radioLft noInpact"><input type="radio" id="test12" name="radio-group4"><label
-                                for="test12">No-Impact</label></span>
+                        <span class="radioLft noInpact">
+                            <input type="radio" id="accounting4AssetsNoImpact_{{ $question->id }}" name="accounting4Assets_{{ $question->id }}" value="3"><label
+                                for="accounting4AssetsNoImpact_{{ $question->id }}">No-Impact</label>
+                        </span>
                     </div>
                 </li>
 
@@ -54,54 +59,60 @@
             <ul class="qInner qaccord">
                 <li>
                     <div class="radioInn">
-                        <span class="radioLft increase"><input type="radio" id="test13" name="radio-group5"><label
-                                for="test13">Increase</label></span>
+                        <span class="radioLft increase">
+                            <input type="radio" id="accounting4LiabilitiesIncrease_{{ $question->id }}" name="accounting4Liabilities_{{ $question->id }}" value="1" divType='liabilities'>
+                            <label for="accounting4LiabilitiesIncrease_{{ $question->id }}">Increase</label>
+                        </span>
                     </div>
                     <div class="qaFormbg">
                         <div class="qbSelect">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select</option>
+                            <select class="form-select" aria-label="Default select example" name="accounting4LiabilitiesIncrease_{{ $question->id }}_Option1" id="accounting4LiabilitiesIncrease_{{ $question->id }}_Option1">
+                                <option selected value="">Select</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select</option>
+                            <select class="form-select" aria-label="Default select example" name="accounting4LiabilitiesIncrease_{{ $question->id }}_Option2" id="accounting4LiabilitiesIncrease_{{ $question->id }}_Option2">
+                                <option selected value="">Select</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
                         </div>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" name="accounting4LiabilitiesIncrease_{{ $question->id }}_Text" id="accounting4LiabilitiesIncrease_{{ $question->id }}_Text" />
                     </div>
                 </li>
                 <li>
                     <div class="radioInn">
-                        <span class="radioLft decrease"><input type="radio" id="test14" name="radio-group5"><label
-                                for="test14">Decrease</label></span>
+                        <span class="radioLft decrease">
+                            <input type="radio" id="accounting4LiabilitiesDecrease_{{ $question->id }}" name="accounting4Liabilities_{{ $question->id }}" value="2"><label
+                                for="accounting4LiabilitiesDecrease_{{ $question->id }}">Decrease</label>
+                        </span>
                     </div>
                     <div class="qaFormbg">
                         <div class="qbSelect">
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select" aria-label="Default select example" name="accounting4LiabilitiesDecrease_{{ $question->id }}_Option1" id="accounting4LiabilitiesDecrease_{{ $question->id }}_Option1">
                                 <option selected>Select</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select</option>
+                            <select class="form-select" aria-label="Default select example" name="accounting4LiabilitiesDecrease_{{ $question->id }}_Option2" id="accounting4LiabilitiesDecrease_{{ $question->id }}_Option2">
+                                <option selected value="">Select</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
                         </div>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" name="accounting4LiabilitiesDecrease_{{ $question->id }}_Text" id="accounting4LiabilitiesDecrease_{{ $question->id }}_Text" />
                     </div>
                 </li>
                 <li>
                     <div class="radioInn">
-                        <span class="radioLft noInpact"><input type="radio" id="test15" name="radio-group5"><label
-                                for="test15">No-Impact</label></span>
+                        <span class="radioLft noInpact">
+                            <input type="radio" id="accounting4LiabilitiesNoImpact_{{ $question->id }}" name="accounting4Liabilities_{{ $question->id }}" value="3"><label
+                                for="accounting4LiabilitiesNoImpact_{{ $question->id }}">No-Impact</label>
+                        </span>
                     </div>
                 </li>
 
@@ -113,54 +124,60 @@
             <ul class="qInner qaccord">
                 <li>
                     <div class="radioInn">
-                        <span class="radioLft increase"><input type="radio" id="test16" name="radio-group6"><label
-                                for="test16">Increase</label></span>
+                        <span class="radioLft increase">
+                            <input type="radio" id="accounting4EquityIncrease_{{ $question->id }}" name="accounting4Equity_{{ $question->id }}" value="1" divType='equity'><label
+                                for="accounting4EquityIncrease_{{ $question->id }}">Increase</label>
+                        </span>
                     </div>
                     <div class="qaFormbg">
                         <div class="qbSelect">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select</option>
+                            <select class="form-select" aria-label="Default select example" name="accounting4EquityIncrease_{{ $question->id }}_Option1" id="accounting4EquityIncrease_{{ $question->id }}_Option1">
+                                <option selected value="">Select</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select</option>
+                            <select class="form-select" aria-label="Default select example" name="accounting4EquityIncrease_{{ $question->id }}_Option2" id="accounting4EquityIncrease_{{ $question->id }}_Option2">
+                                <option selected value="">Select</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
                         </div>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" name="accounting4EquityIncrease_{{ $question->id }}_Text" id="accounting4EquityIncrease_{{ $question->id }}_Text" />
                     </div>
                 </li>
                 <li>
                     <div class="radioInn">
-                        <span class="radioLft decrease"><input type="radio" id="test17" name="radio-group6"><label
-                                for="test17">Decrease</label></span>
+                        <span class="radioLft decrease">
+                            <input type="radio" id="accounting4EquityDecrease_{{ $question->id }}" name="accounting4Equity_{{ $question->id }}" value="2"><label
+                                for="accounting4EquityDecrease_{{ $question->id }}">Decrease</label>
+                        </span>
                     </div>
                     <div class="qaFormbg">
                         <div class="qbSelect">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select</option>
+                            <select class="form-select" aria-label="Default select example" name="accounting4EquityDecrease_{{ $question->id }}_Option1" id="accounting4EquityDecrease_{{ $question->id }}_Option1">
+                                <option selected value="">Select</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select</option>
+                            <select class="form-select" aria-label="Default select example" name="accounting4EquityDecrease_{{ $question->id }}_Option2" id="accounting4EquityDecrease_{{ $question->id }}_Option2">
+                                <option selected value="">Select</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
                         </div>
-                        <input type="text" class="form-control" />
+                        <input type="text" class="form-control" name="accounting4EquityDecrease_{{ $question->id }}_Text" id="accounting4EquityDecrease_{{ $question->id }}_Text" />
                     </div>
                 </li>
                 <li>
                     <div class="radioInn">
-                        <span class="radioLft noInpact"><input type="radio" id="test18" name="radio-group6"><label
-                                for="test18">No-Impact</label></span>
+                        <span class="radioLft noInpact">
+                            <input type="radio" id="accounting4EquityNoImpact_{{ $question->id }}" name="accounting4Equity_{{ $question->id }}" value="3"><label
+                                for="accounting4EquityNoImpact_{{ $question->id }}">No-Impact</label>
+                        </span>
                     </div>
                 </li>
             </ul>

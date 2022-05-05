@@ -59,9 +59,9 @@
                                                              class="img-fluid" /></a>
                         <a href="{{$setting_data->footer_pinterest}}" class="social-link" target="_blank"><img src="{{asset('css/images/pinterest-icon.svg')}}"
                                                              class="img-fluid" /></a>
-                        <a href="#" class="social-link"><img src="{{asset('css/images/Linkedin-icon.svg')}}"
+                        <a href="{{$setting_data->linkedin}}" class="social-link" target="_blank"><img src="{{asset('css/images/Linkedin-icon.svg')}}"
                                                              class="img-fluid" /></a>
-                        <a href="#" class="social-link"><img src="{{asset('css/images/youtube-icon.svg')}}"
+                        <a href="{{$setting_data->youtube}}" class="social-link" target="_blank"><img src="{{asset('css/images/youtube-icon.svg')}}"
                                                              class="img-fluid" /></a>
                     </div>
                 </div>

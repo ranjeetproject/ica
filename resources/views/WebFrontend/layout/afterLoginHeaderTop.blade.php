@@ -19,7 +19,7 @@
             </div>
             <div class="profile">
             @if(Auth::user()->profile_image!='')
-                <img src="{{asset('user_images/' .Auth::user()->profile_image)}}" alt="profile_image"/>
+                <img src="{{Auth::user()->profile_image}}" alt="profile_image"/>
             @else
                 <img src="{{asset('css/images/profile-avatar.jpg')}}" alt="profile_image"/>
             @endif

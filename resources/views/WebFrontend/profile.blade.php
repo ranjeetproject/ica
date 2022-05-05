@@ -23,7 +23,7 @@
                     </div>-->
                     <div class="logoContainer">
                         @if(Auth::user()->profile_image!='')
-                            <img src="{{asset('user_images/' .Auth::user()->profile_image)}}" alt="profile_image" id="profile_picture_image"/>
+                            <img src="{{Auth::user()->profile_image}}" alt="profile_image" id="profile_picture_image"/>
                         @else
                             <img src="{{asset('css/images/profile-avatar.jpg')}}" alt="profile_image" id="profile_picture_image"/>
                         @endif
@@ -135,7 +135,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Crop Image Before Upload</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">x</span>
                             </button>
                         </div>
@@ -153,7 +153,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="crop" class="btn btn-primary">Crop</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
