@@ -5,7 +5,7 @@
             @foreach($question->qus as $key=>$questionOption)
                 <div class="qbSelectB">
                     <label>{{$questionOption}}</label>
-                    <select class="form-select" aria-label="Default select example" name="accounting5_{{$key}}_{{$question->id}}"
+                    <select class="form-select" aria-label="Default select example" name="accounting5_{{$question->id}}[]"
                         id="accounting5_{{$key}}_{{$question->id}}">
                         <option selected value=''>Select</option>
                         @foreach($question->qus_option as $keyPair => $option)

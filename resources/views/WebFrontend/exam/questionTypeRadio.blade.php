@@ -5,7 +5,8 @@
             <div class="item_checkoutopt">
                 @foreach ($question->qus_option as $key => $option)
                     <div class="checkbtn_opt">
-                        <input type="radio" id="questionOption_{{$question->id}}_{{$key}}_{{ $option }}" name="radioType_{{$question->id}}">
+                        <input type="radio" id="questionOption_{{$question->id}}_{{$key}}_{{ $option }}" 
+                        name="radioType_{{$question->id}}" value={{$key+1}} >
                         <label for="questionOption_{{$question->id}}_{{$key}}_{{ $option }}">{{ $option }}</label>
                     </div>
                 @endforeach

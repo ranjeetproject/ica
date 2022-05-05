@@ -116,7 +116,7 @@ class ExamController extends Controller
         return view('WebFrontend.exam-start',$data);
     }
 
-    public function examSubmit()
+    public function examResult()
     {
         return view('WebFrontend.exam-result');
     }
@@ -158,6 +158,7 @@ class ExamController extends Controller
         $data['id'] = $id;
         $data['duration'] = $exams->duration;
         $data['questionLimit'] = $exams->question_limit;
+        //$data['questionLimit'] = 2;
         return view('WebFrontend.exam.exam-question',$data);
     }
 
@@ -277,6 +278,160 @@ class ExamController extends Controller
     public function competitiveExamStart(Request $request, $id)
     {
         dd($id);
+    }
+
+
+    public function examSubmit(Request $request)
+    {
+        $input = $request->all();
+        return $input;
+        $radioAnswer=[];
+        $checkboxAnswer=[];
+        $accounting1Answer=[];
+        $accounting2Answer=[];        
+        $accounting3Answer=[];
+        $accounting4Answer=[];
+        $accounting5Answer=[];
+        $accounting6Answer=[];
+        
+        
+        $data=[];
+         
+        foreach($input as $key=>$value)
+        {  
+            if(strstr($key,"radioType"))
+            {
+                $keyArray=explode("_",$key);
+                if(count($keyArray)>0)
+                {
+                    $questionId=$keyArray[1];  
+                    if (array_key_exists($questionId,$radioAnswer))
+                    {
+                        array_push($radioAnswer[$questionId],$value);
+                    }
+                    else
+                    {
+                        $radioAnswer[$questionId]=[];
+                        array_push($radioAnswer[$questionId],$value);
+                    }                    
+                }                
+            }
+            if(strstr($key,"checkboxType"))
+            {
+                $keyArray=explode("_",$key);
+                if(count($keyArray)>0)
+                {
+                    $questionId=$keyArray[1];  
+                    if (array_key_exists($questionId,$checkboxAnswer))
+                    {
+                        $checkboxAnswer[$questionId]=$value;
+                    }
+                    else
+                    {
+                        $checkboxAnswer[$questionId]=[];
+                        $checkboxAnswer[$questionId]=$value;
+                    }                    
+                }                
+            }
+            if(strstr($key,"accounting1"))
+            {
+                $keyArray=explode("_",$key);
+                if(count($keyArray)>0)
+                {
+                    $questionId=$keyArray[2];                    
+                    
+                    if (array_key_exists($questionId,$accounting1Answer))
+                    {
+                        array_push($accounting1Answer[$questionId],$value);
+                    }
+                    else
+                    {
+                        $accounting1Answer[$questionId]=[];
+                        array_push($accounting1Answer[$questionId],$value);
+                    }                    
+                }                
+            }
+            if(strstr($key,"accounting2_"))
+            {
+                $keyArray=explode("_",$key);
+                if(count($keyArray)>0)
+                {
+                    $questionId=$keyArray[2];  
+                    if (array_key_exists($questionId,$accounting2Answer))
+                    {
+                        $accounting2Answer[$questionId]=$value;
+                    }
+                    else
+                    {
+                        $accounting2Answer[$questionId]=[];
+                        $accounting2Answer[$questionId]=$value;
+                    }                    
+                }                
+            }
+            if(strstr($key,"accounting3"))
+            {
+                $keyArray=explode("_",$key);
+                if(count($keyArray)>0)
+                {
+                    $questionId=$keyArray[2];  
+                    if (array_key_exists($questionId,$accounting3Answer))
+                    {
+                        $accounting3Answer[$questionId]=$value;
+                    }
+                    else
+                    {
+                        $accounting3Answer[$questionId]=[];
+                        $accounting3Answer[$questionId]=$value;
+                    }                    
+                }                
+            }
+            if(strstr($key,"accounting5"))
+            {
+                $keyArray=explode("_",$key);
+                if(count($keyArray)>0)
+                {
+                    $questionId=$keyArray[1];  
+                    if (array_key_exists($questionId,$accounting5Answer))
+                    {
+                        $accounting5Answer[$questionId]=$value;
+                    }
+                    else
+                    {
+                        $accounting5Answer[$questionId]=[];
+                        $accounting5Answer[$questionId]=$value;
+                    }                    
+                }                
+            }
+            if(strstr($key,"accounting6"))
+            {
+                $keyArray=explode("_",$key);
+                if(count($keyArray)>0)
+                {
+                    $questionId=$keyArray[2];  
+                    if (array_key_exists($questionId,$accounting6Answer))
+                    {
+                        array_push($accounting6Answer[$questionId],$value);
+                    }
+                    else
+                    {
+                        $accounting6Answer[$questionId]=[];
+                        array_push($accounting6Answer[$questionId],$value);
+                    }                    
+                }                
+            }            
+        }
+        $data['radio']=$radioAnswer;
+        $data['check']=$checkboxAnswer;
+        $data['accounting1']=$accounting1Answer;
+        $data['accounting2']=$accounting2Answer;
+        $data['accounting3']=$accounting3Answer;
+        $data['accounting5']=$accounting5Answer;
+        $data['accounting6']=$accounting6Answer;        
+       
+        return $data;
+        die();
+
+       // if(strstr($input,"world");)
     }
 
 

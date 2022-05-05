@@ -6,7 +6,8 @@
             <ul class="qInner qaccord">
                 <li>
                     <div class="radioInn">
-                        <span class="radioLft increase"><input type="radio" id="test10" name="radio-group4"><label
+                        <span class="radioLft increase">
+                            <input type="radio" id="test10" name="radio-group4"><label
                                 for="test10">Increase</label></span>
                     </div>
                     <div class="qaFormbg">

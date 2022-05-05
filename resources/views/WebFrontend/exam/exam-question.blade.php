@@ -74,27 +74,34 @@
                     </div>
                 </div>
 
-                <div id="carouselExampleIndicators" class="carousel" data-bs-interval="false">
-                    <div class="carousel-inner" id="questionHolder">
+                <form action="{{action('WebFrontend\ExamController@examSubmit')}}" method="post" >
+                    @csrf
+                    <input type="hidden" name="examId" value="{{$id}}">
+                    
+                    <div id="carouselExampleIndicators" class="carousel" data-bs-interval="false">
+                        <div class="carousel-inner" id="questionHolder">
+                        </div>
+                        <div class="carouselFlow">
+                            <button class="carousel-control-prev" type="button"><span class="">Previous</span>
+                            </button>
+                        {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="prev"><span class="">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" id="skip" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="next"><span class="">Skip</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"  id="next" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="next"><span class="">Next</span>
+                            </button> --}}
+                            <button class="carousel-control-next-skip" id="skip" type="button"><span class="">Skip</span>
+                            </button>
+                            <button class="carousel-control-next" id="next" type="button"><span class="">Save & Next</span>
+                            </button>
+                            <button class="carousel-control-next"  id="formSubmit" type="submit" style="display:none;"><span class="">Submit</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="carouselFlow">
-                        <button class="carousel-control-prev" type="button"><span class="">Previous</span>
-                        </button>
-                       {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="prev"><span class="">Previous</span>
-                        </button>
-                         <button class="carousel-control-next" type="button" id="skip" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="next"><span class="">Skip</span>
-                        </button>
-                        <button class="carousel-control-next" type="button"  id="next" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="next"><span class="">Next</span>
-                        </button> --}}
-                        <button class="carousel-control-next-skip" id="skip" type="button"><span class="">Skip</span>
-                        </button>
-                        <button class="carousel-control-next" type="button"><span class="">Save & Next</span>
-                        </button>
-                    </div>
-                </div>
+                </form>
             </div>
 
 
@@ -106,6 +113,13 @@
         var examId = '{{ $id }}';
         let url = "{{ action('WebFrontend\ExamController@examQuestion', ['id' => $id]) }}";
         var buttonType='';
+
+        var questionLimit={{$questionLimit}};
+        if(questionLimit==1)
+        {
+            $("#next").hide();
+            $("#formSubmit").show();
+        }
 
         function fetch_data() {
             $.ajax({
@@ -128,10 +142,18 @@
                         {
                             if ($(this).hasClass("active"))
                             {
-                                console.log($(this).attr("slide"));
                                 $('#exam-count').text($(this).attr("slide"));
                                 var sliderNumber = $(this).attr("slide");
                                 $("#numberIcnButton_"+(sliderNumber-1)).addClass('ic1');
+                                if(sliderNumber==questionLimit)
+                                {
+                                    $("#next").hide();
+                                    $("#formSubmit").show();                                    
+                                }
+                                else{
+                                    $("#next").show();
+                                    $("#formSubmit").hide(); 
+                                }
                             }
                         });
                         
@@ -169,13 +191,26 @@
                                     }                                       
                                     
                                     if(!check){
+                                    
                                         return event.preventDefault();
                                     }
                                     else{
-                                        $('#exam-count').text($(this).attr("slide"));
+                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
                                         $('#carouselExampleIndicators').carousel('next');
                                         var sliderNumber = $(this).attr("slide");
                                         $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+
+                                        
+                                        if(questionLimit==(parseInt(sliderNumber)+1))
+                                        {
+                                            $("#next").hide();
+                                            $("#formSubmit").show();                                    
+                                        }
+                                        else{
+                                            $("#next").show();
+                                            $("#formSubmit").hide(); 
+                                        }
+
                                     }                                    
                                 }
                                 if (questionType === 'check') 
@@ -192,14 +227,26 @@
                                     }
 
                                     if(!check){
+                                       
                                         return event.preventDefault();
                                     }
                                     else
                                     {
-                                        $('#exam-count').text($(this).attr("slide"));                                        
                                         $('#carouselExampleIndicators').carousel('next');
+                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);                                        
+                                       
                                         var sliderNumber = $(this).attr("slide");
                                         $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+
+                                        if(questionLimit==(parseInt(sliderNumber)+1))
+                                        {
+                                            $("#next").hide();
+                                            $("#formSubmit").show();                                    
+                                        }
+                                        else{
+                                            $("#next").show();
+                                            $("#formSubmit").hide(); 
+                                        }
                                     }
                                 }
                                 if (questionType === 'accounting1') 
@@ -215,13 +262,24 @@
                                     }                                       
                                     
                                     if(!check){
+                                        
                                         return event.preventDefault();
                                     }
                                     else{
-                                        $('#exam-count').text($(this).attr("slide"));
                                         $('#carouselExampleIndicators').carousel('next');
+                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
+                                        
                                         var sliderNumber = $(this).attr("slide");
                                         $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+                                        if(questionLimit==(parseInt(sliderNumber)+1))
+                                        {
+                                            $("#next").hide();
+                                            $("#formSubmit").show();                                    
+                                        }
+                                        else{
+                                            $("#next").show();
+                                            $("#formSubmit").hide(); 
+                                        }
                                     }
 
                                 }
@@ -234,6 +292,12 @@
                                         var type = curInputs[i].type;
                                         var name = curInputs[i].name;
                                         var id = curInputs[i].id;
+                                        
+                                        var curInputNammeArray = id.split("_");
+                                        var questionId=curInputNammeArray[1];
+
+
+                                        
                                         if(type != 'radio')
                                         {
                                             if($('#'+id).val()=='')
@@ -243,26 +307,43 @@
                                         }
                                         if(type == 'radio')
                                         {
-                                            console.log('d');
                                             if($("input:radio[name="+name+"]:checked").length == 0)
                                             {
                                                 
                                                 check = false;
                                                 console.log(i +"  "+ check);
                                             }
-
-
                                         }
+                                        
                                     }
 
-                                    if(!check){
+                                    if($("#accounting2credit_"+questionId).val()==0 || $("#accounting2Debit_"+questionId).val()==0)
+                                    {
+                                        
                                         return event.preventDefault();
                                     }
-                                    else{
-                                        $('#exam-count').text($(this).attr("slide"));
-                                        $('#carouselExampleIndicators').carousel('next');
-                                        var sliderNumber = $(this).attr("slide");
-                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+                                    else
+                                    {
+                                        // if(!check){
+                                        //     return event.preventDefault();
+                                        // }
+                                        // else
+                                        // {
+                                            $('#carouselExampleIndicators').carousel('next');
+                                            $('#exam-count').text(parseInt($(this).attr("slide"))+1);
+                                        
+                                            var sliderNumber = $(this).attr("slide");
+                                            $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+                                            if(questionLimit==(parseInt(sliderNumber)+1))
+                                            {
+                                                $("#next").hide();
+                                                $("#formSubmit").show();                                    
+                                            }
+                                            else{
+                                                $("#next").show();
+                                                $("#formSubmit").hide(); 
+                                            }
+                                        // }
                                     }
                                 }
                                 if (questionType === 'accounting3')
@@ -280,13 +361,25 @@
                                     }
 
                                     if(!check){
+                                        
                                         return event.preventDefault();
                                     }
                                     else{
-                                        $('#exam-count').text($(this).attr("slide"));
                                         $('#carouselExampleIndicators').carousel('next');
+                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);                                        
+                                       
                                         var sliderNumber = $(this).attr("slide");
                                         $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+
+                                        if(questionLimit==(parseInt(sliderNumber)+1))
+                                        {
+                                            $("#next").hide();
+                                            $("#formSubmit").show();                                    
+                                        }
+                                        else{
+                                            $("#next").show();
+                                            $("#formSubmit").hide(); 
+                                        }
                                     }
                                 }
                                 if (questionType === 'accounting4') {
@@ -298,7 +391,7 @@
                                     var check = true;                                 
                                     for (var i = 0; i < curInputs.length; i++) 
                                     {
-                                        var name = curInputs[i].name;
+                                        //var name = curInputs[i].name;
                                         var id = curInputs[i].id;
                                         if($('#'+id).val()=='')
                                         {
@@ -307,13 +400,25 @@
                                     }
 
                                     if(!check){
+                                        
                                         return event.preventDefault();
                                     }
                                     else{
-                                        $('#exam-count').text($(this).attr("slide"));
                                         $('#carouselExampleIndicators').carousel('next');
+                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);                                        
+                                       
                                         var sliderNumber = $(this).attr("slide");
                                         $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+
+                                        if(questionLimit==(parseInt(sliderNumber)+1))
+                                        {
+                                            $("#next").hide();
+                                            $("#formSubmit").show();                                    
+                                        }
+                                        else{
+                                            $("#next").show();
+                                            $("#formSubmit").hide(); 
+                                        }
                                     }
                                 }
                                 if (questionType === 'accounting6') 
@@ -329,13 +434,25 @@
                                     }                                       
                                     
                                     if(!check){
+                                       
                                         return event.preventDefault();
                                     }
                                     else{
-                                        $('#exam-count').text($(this).attr("slide"));
                                         $('#carouselExampleIndicators').carousel('next');
+                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);                                        
+                                       
                                         var sliderNumber = $(this).attr("slide");
                                         $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+
+                                        if(questionLimit==(parseInt(sliderNumber)+1))
+                                        {
+                                            $("#next").hide();
+                                            $("#formSubmit").show();                                    
+                                        }
+                                        else{
+                                            $("#next").show();
+                                            $("#formSubmit").hide(); 
+                                        }
                                     }
                                 }
                             }

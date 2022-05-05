@@ -5,7 +5,8 @@
             <div class="item_checkoutopt">
                 @foreach ($question->qus_option as $key => $option)
                     <div class="checkbtn_opt">
-                        <input type="checkbox" id="questionOption_{{$question->id}}_{{$key}}_{{ $option }}" name="checkboxType_{{$question->id}}" class="checkboxType">
+                        <input type="checkbox" id="questionOption_{{$question->id}}_{{$key}}_{{ $option }}" 
+                        name="checkboxType_{{$question->id}}[]" class="checkboxType" value={{$key+1}}>
                         <label for="questionOption_{{$question->id}}_{{$key}}_{{ $option }}">{{ $option }}</label>
                     </div>
                 @endforeach

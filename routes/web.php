@@ -65,8 +65,10 @@ Route::middleware(['auth'])->group(function ()
     Route::get('exam-instruction/{id}','WebFrontend\ExamController@examInstruction')->name('exam-instruction');
     Route::get('exam-start/{id}','WebFrontend\ExamController@examStart')->name('exam-start');
     Route::get('pagination/fetch', 'WebFrontend\ExamController@fetch')->name('pagination-fetch');
-    Route::get('exam-result','WebFrontend\ExamController@examSubmit')->name('exam-submit');
+    Route::get('exam-result','WebFrontend\ExamController@examResult')->name('exam-result');
     Route::get('exam-question/{id}','WebFrontend\ExamController@examQuestion')->name('exam-question');
+    
+    Route::post('exam-submit','WebFrontend\ExamController@examSubmit');
 
 
    // Route::get('exam-question','WebFrontend\ExamController@examQuestion')->name('exam-question');

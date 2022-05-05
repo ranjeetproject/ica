@@ -4,7 +4,7 @@
     <div class="qbSelect">
         <div class="qbSelectB">
             <label>Primary Account</label>
-            <select class="form-select" aria-label="Default select example" name="accounting2PrimaryAccount_{{$question->id}}"
+            <select class="form-select" aria-label="Default select example"
                 id="accounting2PrimaryAccount_{{$question->id}}">
                 <option selected value=''>Select</option>
                 @foreach ($question->primaryAccount as $primaryAccountValue)
@@ -14,7 +14,7 @@
         </div>
         <div class="qbSelectB">
             <label>Secondary Account</label>
-            <select class="form-select" aria-label="Default select example" name="accounting2SecondaryAccount_{{$question->id}}"
+            <select class="form-select" aria-label="Default select example" 
                 id="accounting2SecondaryAccount_{{$question->id}}">
                 <option selected value=''>Select</option>
                 @foreach ($question->secondaryAccount as $secondaryAccountValue)
@@ -25,9 +25,9 @@
         </div>
         <div class="qbSelectB">
             <label>Account Name</label>
-            <select class="form-select" aria-label="Default select example" name="accounting2AccountName_{{$question->id}}"
+            <select class="form-select" aria-label="Default select example"
                 id="accounting2AccountName_{{$question->id}}">
-                <option selected>Select</option>
+                <option selected value=''>Select</option>
                 @foreach ($question->account as $accountValue)
                     <option value="{{ $accountValue->id }}">{{ $accountValue->accName }}
                     </option>
@@ -37,7 +37,7 @@
         <div class="qbSelectB">
             <label>Amount</label>
             <input class="form-control" type="number" placeholder="Default input" aria-label="default input example" 
-            name="accounting2Amount_{{$question->id}}" id="accounting2Amount_{{$question->id}}"/>
+             id="accounting2Amount_{{$question->id}}"/>
         </div>
 
     </div>
@@ -46,20 +46,20 @@
         <div class="qbLft">
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="accounting2DebitCredit_{{$question->id}}" 
-                id="accounting2DebitCreditDebit_{{$question->id}}" value="0" checked >
+                id="accounting2DebitCreditDebit_{{$question->id}}" value="1" checked >
                 <label class="form-check-label" for="accounting2DebitCreditDebit_{{$question->id}}">Debit</label>
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="accounting2DebitCredit_{{$question->id}}" 
-                id="accounting2DebitCreditCredit_{{$question->id}}" value="1">
+                id="accounting2DebitCreditCredit_{{$question->id}}" value="2">
                 <label class="form-check-label" for="flexRadioDefault2">Credit</label>
             </div>
         </div>
-        <button onClick="addLineItemAccounting2('{{$question->id}}')">Add a line</button>
+        <button onClick="addLineItemAccounting2('{{$question->id}}')" type="button">Add a line</button>
     </div>
     <div class="questionTable baccountTable">
-        <input type="hidden" name="accounting2credit_{{$question->id}}" id="accounting2credit_{{$question->id}}" value="0">
-        <input type="hidden" name="accounting2Debit_{{$question->id}}" id="accounting2Debit_{{$question->id}}" value="0">
+        <input type="hidden"  id="accounting2credit_{{$question->id}}" value="0">
+        <input type="hidden"  id="accounting2Debit_{{$question->id}}" value="0">
         <table cellpadding="10" cellspacing="1">
             <tr>
                 <th>&nbsp;</th>
@@ -82,6 +82,10 @@
 <script>
     function addLineItemAccounting2(questionId)
     {
+        var primaryAccountValue=$("#accounting2PrimaryAccount_"+questionId).val();
+        var secondaryAccountValue=$("#accounting2SecondaryAccount_"+questionId).val();
+        var accountNameValue=$("#accounting2AccountName_"+questionId).val();
+
         var accountName=$("#accounting2AccountName_"+questionId+" option:selected").text();
         var amount=$("#accounting2Amount_"+questionId).val();
 
@@ -90,11 +94,10 @@
 
         if(amount > 0){
             var html='';
-            if(type==0)
+            if(type==1)
             {
                 //debit
-                var html='<tr><td><a href="#" class="rowDel"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td>'+amount+'</td><td>0</td></tr>';
-                
+                var html='<tr><td><a href="#" class="rowDel"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td>'+amount+'</td><td>0</td></tr><input type="hidden" name="accounting2_LineItem_'+questionId+'[]" value="{'+primaryAccountValue+','+secondaryAccountValue+','+accountNameValue+','+amount+','+type+'}">';
                 var totalDebit=$("#accounting2Debit_"+questionId).val();
                 var totalDebit = parseInt(totalDebit)+parseInt(amount);
                 $("#accounting2Debit_"+questionId).val(totalDebit);
@@ -102,7 +105,7 @@
             }
             else{
                 //credit
-                var html='<tr><td><a href="#" class="rowDel"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td>0</td><td>'+amount+'</td></tr>';
+                var html='<tr><td><a href="#" class="rowDel"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td>0</td><td>'+amount+'</td></tr><input type="hidden" name="accounting2_LineItem_'+questionId+'[]" value="{'+primaryAccountValue+','+secondaryAccountValue+','+accountNameValue+','+amount+','+type+'}">';
                 
                 var totalCredit=$("#accounting2credit_"+questionId).val();
                 var totalCredit = parseInt(totalCredit)+parseInt(amount);
@@ -135,6 +138,11 @@
                     }
                 })                
             });
+
+            $("#accounting2PrimaryAccount_"+questionId).val('');
+            $("#accounting2SecondaryAccount_"+questionId).val('');
+            $("#accounting2AccountName_"+questionId).val('');
+            $("#accounting2Amount_"+questionId).val('');
         }
     }
 </script>
