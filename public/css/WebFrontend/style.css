@@ -474,7 +474,14 @@ section.courses-wrap .course-card {
     line-height: 20px;
     font-weight: 600;
     margin: 20px 0 10px 0;
-    min-height: 60px;
+    /*    min-height: 60px;*/
+    height: 40px;
+    display: -webkit-box;
+    max-height: 5.07rem;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .course-card .rating img {
@@ -2066,6 +2073,14 @@ section.contact_info .crs-dtls-wrp {
     padding-bottom: 7px;
 }
 
+.checkbtn_opt input[type="checkbox"] {
+    position: relative;
+    top: 3px;
+    width: 17px;
+    height: 17px;
+}
+}
+
 .item_morecontent {
     display: flex;
     justify-content: space-between;
@@ -2373,7 +2388,7 @@ p.awsopt {
     position: static;
     display: block;
     /*    text-align: center;*/
-    margin: 0;
+    margin: 10px 0 0 0;
 }
 
 .examSlider .carousel-indicators button {
@@ -2411,6 +2426,53 @@ p.awsopt {
     color: #fff !important;
 }
 
+.askp {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.answerd {
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 600;
+    color: #1D8A56;
+    display: flex;
+    align-items: center;
+}
+
+.skpped {
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.ans {
+    background: #1D8A56;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    margin-left: 5px;
+}
+
+.skp {
+    background: #959595;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    margin-left: 5px;
+}
+
+.examSlider {
+    padding: 10px 15px 15px;
+    box-shadow: 0 0 5px #ccc;
+}
+
 .examSlider .carousel-indicators button span {
     display: block;
     width: 100%;
@@ -2434,16 +2496,30 @@ p.awsopt {
     margin: 0;
     padding: 5px 10px;
     position: static;
-    color: #000;
+    color: #fff;
     font-size: 15px;
-    width: 100px;
-    background: #ccc;
+    width: 120px;
+    background: #072f60;
+    opacity: 1;
+    border-radius: 3px;
 }
 
 .carouselFlow button:hover {
     color: #fff;
     opacity: 1;
-    background: #072f60;
+    background: #3BBCA7;
+}
+
+.carousel-control-next-skip {
+    color: #ffffff !important;
+    background: #bfa650fa !important;
+    border: 1px solid #e3dbb0;
+    outline: none;
+}
+
+.carousel-control-next-skip:hover {
+    background: #c99f0a61 !important;
+    color: #000 !important;
 }
 
 
@@ -2457,9 +2533,10 @@ p.awsopt {
 .examCount {
     border: none;
     outline: none;
-    background: transparent;
-    color: #116eee;
+    background: #38bca7;
+    color: #fff;
     font-weight: 600;
+    border-radius: 5px 5px 0 0;
 }
 
 .qbSelect {
@@ -2778,6 +2855,11 @@ p.awsopt {
     background: #fff;
 }
 
+.questionTable table tbody tr td {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
 .questionTable table tr th {
     background: #072F60;
     color: #fff;
@@ -2792,7 +2874,7 @@ p.awsopt {
     color: #000;
 }
 
-.questionTable table tr:last-child td {
+.questionTable table tfoot td {
     background: #ccc;
     text-align: center;
     font-weight: 500;

@@ -1,14 +1,14 @@
 @extends('WebFrontend.layout.afterLoginApp')
 @section('content')
-    <section class="header">
-        <div class="header-top">
-            @include('WebFrontend.layout.afterLoginHeaderTop')
-        </div>
-        <div class="header-bottom">
-            @include('WebFrontend.layout.afterLoginNav')
-        </div>
+<section class="header">
+    <div class="header-top">
+        @include('WebFrontend.layout.afterLoginHeaderTop')
+    </div>
+    <div class="header-bottom">
+        @include('WebFrontend.layout.afterLoginNav')
+    </div>
 
-    </section>
+</section>
 
     <section class="exam-list-wr">
         <div class="container">
@@ -37,6 +37,10 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-body">
+                                <div class="askp">
+                                    <div class="answerd">Answered: <span class="ans"></span></div>
+                                    <div class="skpped">Skipped: <span class="skp"></span></div>
+                                </div>
                                 <div class="carousel-indicators">
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                                         class="numberIcn" aria-current="true" id="numberIcnButton_1" aria-label="Slide 1"><span
@@ -77,7 +81,7 @@
                 <form action="{{action('WebFrontend\ExamController@examSubmit')}}" method="post" >
                     @csrf
                     <input type="hidden" name="examId" value="{{$id}}">
-                    
+
                     <div id="carouselExampleIndicators" class="carousel" data-bs-interval="false">
                         <div class="carousel-inner" id="questionHolder">
                         </div>
@@ -131,14 +135,14 @@
                 })
                 .done(function(response) {
                     $('#questionHolder').html(response.html);
-                    updateCountdown();                   
+                    updateCountdown();
 
                     var myCarousel = document.getElementById('carouselExampleIndicators');
                     var carousel = bootstrap.Carousel.getInstance(myCarousel);
-                    
+
                     $('.carousel-control-next-skip').click(function() {
                         $('#carouselExampleIndicators').carousel('next');
-                        $(".carousel-item").each(function() 
+                        $(".carousel-item").each(function()
                         {
                             if ($(this).hasClass("active"))
                             {
@@ -148,15 +152,15 @@
                                 if(sliderNumber==questionLimit)
                                 {
                                     $("#next").hide();
-                                    $("#formSubmit").show();                                    
+                                    $("#formSubmit").show();
                                 }
                                 else{
                                     $("#next").show();
-                                    $("#formSubmit").hide(); 
+                                    $("#formSubmit").hide();
                                 }
                             }
                         });
-                        
+
                     });
 
                     $(".carousel-control-prev").click(function() {
@@ -167,31 +171,31 @@
                                 var questionType = $(this).children(".questionType").val();
                             }
                         });
-                        
+
                     });
 
-                    $('.carousel-control-next').click(function() 
+                    $('.carousel-control-next').click(function()
                     {
-                        $(".carousel-item").each(function() 
+                        $(".carousel-item").each(function()
                         {
-                            if ($(this).hasClass("active")) 
+                            if ($(this).hasClass("active"))
                             {
-                                var questionType = $(this).children(".questionType").val();                               
-                            
-                                if (questionType === 'radio') 
+                                var questionType = $(this).children(".questionType").val();
+
+                                if (questionType === 'radio')
                                 {
                                     var curInputs = $(this).find("input[type='radio']");
                                     var check = true;
-                                    for (var i = 0; i < curInputs.length; i++) 
+                                    for (var i = 0; i < curInputs.length; i++)
                                     {
                                         var name = curInputs[i].name;
                                         if($("input:radio[name="+name+"]:checked").length == 0){
                                             check = false;
                                         }
-                                    }                                       
-                                    
+                                    }
+
                                     if(!check){
-                                    
+
                                         return event.preventDefault();
                                     }
                                     else{
@@ -200,126 +204,126 @@
                                         var sliderNumber = $(this).attr("slide");
                                         $("#numberIcnButton_"+sliderNumber).addClass('ic2');
 
-                                        
+
                                         if(questionLimit==(parseInt(sliderNumber)+1))
                                         {
                                             $("#next").hide();
-                                            $("#formSubmit").show();                                    
+                                            $("#formSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
-                                            $("#formSubmit").hide(); 
+                                            $("#formSubmit").hide();
                                         }
 
-                                    }                                    
+                                    }
                                 }
-                                if (questionType === 'check') 
-                                {                                    
+                                if (questionType === 'check')
+                                {
                                     var curInputs = $(this).find("input[type='checkbox']");
                                     var check = false;
-                                    for (var i = 0; i < curInputs.length; i++) 
+                                    for (var i = 0; i < curInputs.length; i++)
                                     {
                                         var name = curInputs[i].name;
-                                        if (curInputs[i].checked) 
+                                        if (curInputs[i].checked)
                                         {
-                                            check = true;                                            
+                                            check = true;
                                         }
                                     }
 
                                     if(!check){
-                                       
+
                                         return event.preventDefault();
                                     }
                                     else
                                     {
                                         $('#carouselExampleIndicators').carousel('next');
-                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);                                        
-                                       
+                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
+
                                         var sliderNumber = $(this).attr("slide");
                                         $("#numberIcnButton_"+sliderNumber).addClass('ic2');
 
                                         if(questionLimit==(parseInt(sliderNumber)+1))
                                         {
                                             $("#next").hide();
-                                            $("#formSubmit").show();                                    
+                                            $("#formSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
-                                            $("#formSubmit").hide(); 
+                                            $("#formSubmit").hide();
                                         }
                                     }
                                 }
-                                if (questionType === 'accounting1') 
+                                if (questionType === 'accounting1')
                                 {
                                     var curInputs = $(this).find("input[type='radio']");
                                     var check = true;
-                                    for (var i = 0; i < curInputs.length; i++) 
+                                    for (var i = 0; i < curInputs.length; i++)
                                     {
                                         var name = curInputs[i].name;
                                         if($("input:radio[name="+name+"]:checked").length == 0){
                                             check = false;
                                         }
-                                    }                                       
-                                    
+                                    }
+
                                     if(!check){
-                                        
+
                                         return event.preventDefault();
                                     }
                                     else{
                                         $('#carouselExampleIndicators').carousel('next');
                                         $('#exam-count').text(parseInt($(this).attr("slide"))+1);
-                                        
+
                                         var sliderNumber = $(this).attr("slide");
                                         $("#numberIcnButton_"+sliderNumber).addClass('ic2');
                                         if(questionLimit==(parseInt(sliderNumber)+1))
                                         {
                                             $("#next").hide();
-                                            $("#formSubmit").show();                                    
+                                            $("#formSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
-                                            $("#formSubmit").hide(); 
+                                            $("#formSubmit").hide();
                                         }
                                     }
 
                                 }
-                                if (questionType === 'accounting2') 
+                                if (questionType === 'accounting2')
                                 {
-                                    var curInputs = $(this).find("input[type='number'],input[type='radio'],select");  
-                                    var check = true;                                 
-                                    for (var i = 0; i < curInputs.length; i++) 
+                                    var curInputs = $(this).find("input[type='number'],input[type='radio'],select");
+                                    var check = true;
+                                    for (var i = 0; i < curInputs.length; i++)
                                     {
                                         var type = curInputs[i].type;
                                         var name = curInputs[i].name;
                                         var id = curInputs[i].id;
-                                        
+
                                         var curInputNammeArray = id.split("_");
                                         var questionId=curInputNammeArray[1];
 
 
-                                        
+
                                         if(type != 'radio')
                                         {
                                             if($('#'+id).val()=='')
                                             {
-                                                check = false; 
-                                            }  
+                                                check = false;
+                                            }
                                         }
                                         if(type == 'radio')
                                         {
                                             if($("input:radio[name="+name+"]:checked").length == 0)
                                             {
-                                                
+
                                                 check = false;
                                                 console.log(i +"  "+ check);
                                             }
                                         }
-                                        
+
                                     }
 
                                     if($("#accounting2credit_"+questionId).val()==0 || $("#accounting2Debit_"+questionId).val()==0)
                                     {
-                                        
+
                                         return event.preventDefault();
                                     }
                                     else
@@ -331,173 +335,173 @@
                                         // {
                                             $('#carouselExampleIndicators').carousel('next');
                                             $('#exam-count').text(parseInt($(this).attr("slide"))+1);
-                                        
+
                                             var sliderNumber = $(this).attr("slide");
                                             $("#numberIcnButton_"+sliderNumber).addClass('ic2');
                                             if(questionLimit==(parseInt(sliderNumber)+1))
                                             {
                                                 $("#next").hide();
-                                                $("#formSubmit").show();                                    
+                                                $("#formSubmit").show();
                                             }
                                             else{
                                                 $("#next").show();
-                                                $("#formSubmit").hide(); 
+                                                $("#formSubmit").hide();
                                             }
                                         // }
                                     }
                                 }
                                 if (questionType === 'accounting3')
                                 {
-                                    var curInputs = $(this).find("select");  
-                                    var check = true;                                 
-                                    for (var i = 0; i < curInputs.length; i++) 
+                                    var curInputs = $(this).find("select");
+                                    var check = true;
+                                    for (var i = 0; i < curInputs.length; i++)
                                     {
                                         var name = curInputs[i].name;
                                         var id = curInputs[i].id;
                                         if($('#'+id).val()=='')
                                         {
-                                            check = false; 
-                                        } 
+                                            check = false;
+                                        }
                                     }
 
                                     if(!check){
-                                        
+
                                         return event.preventDefault();
                                     }
                                     else{
                                         $('#carouselExampleIndicators').carousel('next');
-                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);                                        
-                                       
+                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
+
                                         var sliderNumber = $(this).attr("slide");
                                         $("#numberIcnButton_"+sliderNumber).addClass('ic2');
 
                                         if(questionLimit==(parseInt(sliderNumber)+1))
                                         {
                                             $("#next").hide();
-                                            $("#formSubmit").show();                                    
+                                            $("#formSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
-                                            $("#formSubmit").hide(); 
+                                            $("#formSubmit").hide();
                                         }
                                     }
                                 }
                                 if (questionType === 'accounting4') {
-                                    
+
                                 }
-                                if (questionType === 'accounting5') 
+                                if (questionType === 'accounting5')
                                 {
-                                    var curInputs = $(this).find("select");  
-                                    var check = true;                                 
-                                    for (var i = 0; i < curInputs.length; i++) 
+                                    var curInputs = $(this).find("select");
+                                    var check = true;
+                                    for (var i = 0; i < curInputs.length; i++)
                                     {
                                         //var name = curInputs[i].name;
                                         var id = curInputs[i].id;
                                         if($('#'+id).val()=='')
                                         {
-                                            check = false; 
-                                        } 
+                                            check = false;
+                                        }
                                     }
 
                                     if(!check){
-                                        
+
                                         return event.preventDefault();
                                     }
                                     else{
                                         $('#carouselExampleIndicators').carousel('next');
-                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);                                        
-                                       
+                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
+
                                         var sliderNumber = $(this).attr("slide");
                                         $("#numberIcnButton_"+sliderNumber).addClass('ic2');
 
                                         if(questionLimit==(parseInt(sliderNumber)+1))
                                         {
                                             $("#next").hide();
-                                            $("#formSubmit").show();                                    
+                                            $("#formSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
-                                            $("#formSubmit").hide(); 
+                                            $("#formSubmit").hide();
                                         }
                                     }
                                 }
-                                if (questionType === 'accounting6') 
+                                if (questionType === 'accounting6')
                                 {
                                     var curInputs = $(this).find("input[type='radio']");
                                     var check = true;
-                                    for (var i = 0; i < curInputs.length; i++) 
+                                    for (var i = 0; i < curInputs.length; i++)
                                     {
                                         var name = curInputs[i].name;
                                         if($("input:radio[name="+name+"]:checked").length == 0){
                                             check = false;
                                         }
-                                    }                                       
-                                    
+                                    }
+
                                     if(!check){
-                                       
+
                                         return event.preventDefault();
                                     }
                                     else{
                                         $('#carouselExampleIndicators').carousel('next');
-                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);                                        
-                                       
+                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
+
                                         var sliderNumber = $(this).attr("slide");
                                         $("#numberIcnButton_"+sliderNumber).addClass('ic2');
 
                                         if(questionLimit==(parseInt(sliderNumber)+1))
                                         {
                                             $("#next").hide();
-                                            $("#formSubmit").show();                                    
+                                            $("#formSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
-                                            $("#formSubmit").hide(); 
+                                            $("#formSubmit").hide();
                                         }
                                     }
                                 }
                             }
-                        });                        
+                        });
                     });
 
-                    
-                   
-                    // myCarousel.addEventListener('slide.bs.carousel', function(event) 
-                    // {   
-                    //     $(".carousel-item").each(function() 
+
+
+                    // myCarousel.addEventListener('slide.bs.carousel', function(event)
+                    // {
+                    //     $(".carousel-item").each(function()
                     //     {
-                    //         if ($(this).hasClass("active")) 
+                    //         if ($(this).hasClass("active"))
                     //         {
                     //             $('#exam-count').text($(this).attr("slide"));
-                    //             var questionType = $(this).children(".questionType").val();                               
-                            
-                    //             if (questionType === 'radio') 
+                    //             var questionType = $(this).children(".questionType").val();
+
+                    //             if (questionType === 'radio')
                     //             {
                     //                 console.log("Inner :"+buttonType);
 
                     //                 var curInputs = $(this).find("input[type='radio']");
                     //                 var check = true;
-                    //                 for (var i = 0; i < curInputs.length; i++) 
+                    //                 for (var i = 0; i < curInputs.length; i++)
                     //                 {
                     //                     var name = curInputs[i].name;
                     //                     if($("input:radio[name="+name+"]:checked").length == 0){
                     //                         check = false;
                     //                     }
-                    //                 }                                       
-                                    
+                    //                 }
+
                     //                 if(!check){
                     //                     return event.preventDefault();
                     //                 }
-                                    
+
                     //             }
-                    //             if (questionType === 'check') {                                    
+                    //             if (questionType === 'check') {
                     //                 // var curInputs = $(this).find("input[type='checkbox']");
                     //                 // var check = false;
-                    //                 // for (var i = 0; i < curInputs.length; i++) 
+                    //                 // for (var i = 0; i < curInputs.length; i++)
                     //                 // {
                     //                 //     var name = curInputs[i].name;
-                    //                 //     if (curInputs[i].checked) 
+                    //                 //     if (curInputs[i].checked)
                     //                 //     {
-                    //                 //         check = true;                                            
+                    //                 //         check = true;
                     //                 //     }
                     //                 // }
 
@@ -508,23 +512,23 @@
                     //             if (questionType === 'accounting1') {
                     //                 // var curInputs = $(this).find("input[type='radio']");
                     //                 // var check = true;
-                    //                 // for (var i = 0; i < curInputs.length; i++) 
+                    //                 // for (var i = 0; i < curInputs.length; i++)
                     //                 // {
                     //                 //     var name = curInputs[i].name;
                     //                 //     if($("input:radio[name="+name+"]:checked").length == 0){
                     //                 //         check = false;
                     //                 //     }
-                    //                 // }                                       
-                                    
+                    //                 // }
+
                     //                 // if(!check){
                     //                 //     return event.preventDefault();
                     //                 // }
 
                     //             }
                     //             if (questionType === 'accounting2') {
-                    //                 //    var curInputs = $(this).find("input[type='number'],input[type='radio'],select");  
-                    //                 //    var check = true;                                 
-                    //                 //     for (var i = 0; i < curInputs.length; i++) 
+                    //                 //    var curInputs = $(this).find("input[type='number'],input[type='radio'],select");
+                    //                 //    var check = true;
+                    //                 //     for (var i = 0; i < curInputs.length; i++)
                     //                 //     {
                     //                 //         var type = curInputs[i].type;
                     //                 //         var name = curInputs[i].name;
@@ -533,15 +537,15 @@
                     //                 //         {
                     //                 //             if($('#'+id).val()=='')
                     //                 //             {
-                    //                 //                 check = false; 
-                    //                 //             }  
+                    //                 //                 check = false;
+                    //                 //             }
                     //                 //         }
                     //                 //         if(type == 'radio')
                     //                 //         {
                     //                 //             console.log('d');
                     //                 //             if($("input:radio[name="+name+"]:checked").length == 0)
                     //                 //             {
-                                                    
+
                     //                 //                 check = false;
                     //                 //                 console.log(i +"  "+ check);
                     //                 //             }
@@ -556,16 +560,16 @@
                     //             }
                     //             if (questionType === 'accounting3')
                     //             {
-                    //                 // var curInputs = $(this).find("select");  
-                    //                 // var check = true;                                 
-                    //                 // for (var i = 0; i < curInputs.length; i++) 
+                    //                 // var curInputs = $(this).find("select");
+                    //                 // var check = true;
+                    //                 // for (var i = 0; i < curInputs.length; i++)
                     //                 // {
                     //                 //     var name = curInputs[i].name;
                     //                 //     var id = curInputs[i].id;
                     //                 //     if($('#'+id).val()=='')
                     //                 //     {
-                    //                 //         check = false; 
-                    //                 //     } 
+                    //                 //         check = false;
+                    //                 //     }
                     //                 // }
 
                     //                 // if(!check){
@@ -574,19 +578,19 @@
 
                     //             }
                     //             if (questionType === 'accounting4') {
-                                    
+
                     //             }
                     //             if (questionType === 'accounting5') {
-                    //                 // var curInputs = $(this).find("select");  
-                    //                 // var check = true;                                 
-                    //                 // for (var i = 0; i < curInputs.length; i++) 
+                    //                 // var curInputs = $(this).find("select");
+                    //                 // var check = true;
+                    //                 // for (var i = 0; i < curInputs.length; i++)
                     //                 // {
                     //                 //     var name = curInputs[i].name;
                     //                 //     var id = curInputs[i].id;
                     //                 //     if($('#'+id).val()=='')
                     //                 //     {
-                    //                 //         check = false; 
-                    //                 //     } 
+                    //                 //         check = false;
+                    //                 //     }
                     //                 // }
 
                     //                 // if(!check){
@@ -596,26 +600,26 @@
                     //             if (questionType === 'accounting6') {
                     //                 // var curInputs = $(this).find("input[type='radio']");
                     //                 // var check = true;
-                    //                 // for (var i = 0; i < curInputs.length; i++) 
+                    //                 // for (var i = 0; i < curInputs.length; i++)
                     //                 // {
                     //                 //     var name = curInputs[i].name;
                     //                 //     if($("input:radio[name="+name+"]:checked").length == 0){
                     //                 //         check = false;
                     //                 //     }
-                    //                 // }                                       
-                                    
+                    //                 // }
+
                     //                 // if(!check){
                     //                 //     return event.preventDefault();
                     //                 // }
                     //             }
                     //         }
                     //     });
-                                              
+
                     // });
 
-                    
 
-                    
+
+
                 })
         }
 
@@ -627,10 +631,10 @@
             });
         });
 
-        
 
 
-        
+
+
         const startingMinuites = 10;
         let time = startingMinuites * 60;
         const countdownEl = document.getElementById('countdown')
@@ -640,15 +644,15 @@
             const minute = Math.floor(time/60);
             let second = time % 60
             countdownEl.innerText = `${(minute<10)?'0'+ minute:minute}: ${(second<10)?'0'+ second:second}`
-            if(time==0){                
+            if(time==0){
                 clearInterval(interval)
             }else{
                 time--;
             }
 
         }
-        
+
     </script>
 
-    
+
 @endsection
