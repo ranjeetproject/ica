@@ -118,7 +118,7 @@
     }
 
     .course-card .course-name {
-        font-size: 14px;
+        font-size: 15px;
         margin: 10px 0 5px 0;
     }
 
@@ -137,6 +137,7 @@
 
     .course-card.db-cards {
         padding: 25px;
+        margin-bottom: 20px;
     }
 
     .exam .db-cards .course-image {
@@ -788,5 +789,12 @@
     .page-item .page-link,
     .page-item.disabled .page-link {
         font-size: 18px;
+    }
+}
+
+@media screen and (max-width:480px) {
+    .carouselFlow button {
+        font-size: 12px;
+        width: 86px;
     }
 }
