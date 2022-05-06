@@ -16,6 +16,7 @@ use App\Account;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\StudentAnswer;
 
 
 class ExamController extends Controller
@@ -125,11 +126,12 @@ class ExamController extends Controller
     {
         $data=[];
         $exams = Exam::where('id', $id)->first();
+        $fullMarks=0;
         if($request->ajax())
         {            
             if ($exams->question_limit > 0) {
-                //$data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting4')->inRandomOrder()->limit($exams->question_limit)->get();
-                $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
+               // $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting3')->inRandomOrder()->limit($exams->question_limit)->get();
+               $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
             } else {
 
                 $data = Question::where('exam_id',  $id)->where('state', 1)->orderBy('id', 'ASC')->get();
@@ -150,8 +152,10 @@ class ExamController extends Controller
                     $value->secondaryAccount=SecondaryAccount::get();
                     $value->account=Account::get();
                 }
+                $fullMarks=$fullMarks+$value->marks;
             }
-            $html = view('WebFrontend.exam.examInnerQuestion', compact('data'))->render();
+
+            $html = view('WebFrontend.exam.examInnerQuestion', compact('data','fullMarks'))->render();
             return response()->json(['html'=>$html]);
         }
         $data['examName'] = $exams->exam_name;
@@ -227,7 +231,6 @@ class ExamController extends Controller
          return view('WebFrontend.competitive-exam-list',compact('comExam'));
 
     }
-
     public function competitiveExamInstruction($id)
     {
         $studentId = Auth::user()->id;
@@ -274,7 +277,6 @@ class ExamController extends Controller
         }
         return view('WebFrontend.competitive-instruction',compact('id','data'));
     }
-
     public function competitiveExamStart(Request $request, $id)
     {
         $data=[];
@@ -316,10 +318,15 @@ class ExamController extends Controller
     }
 
 
-    public function examSubmit(Request $request)
+
+
+    //////********* exam save starting  ***************/
+    /**
+     *  create result data array create by thete type
+     */
+    public function createResultSetData($inputData)
     {
-        $input = $request->all();
-        return $input;
+        $input=$inputData;
         $radioAnswer=[];
         $checkboxAnswer=[];
         $accounting1Answer=[];
@@ -327,11 +334,10 @@ class ExamController extends Controller
         $accounting3Answer=[];
         $accounting4Answer=[];
         $accounting5Answer=[];
-        $accounting6Answer=[];
-        
+        $accounting6Answer=[];        
         
         $data=[];
-         
+        $data['examId']=$input['examId'];         
         foreach($input as $key=>$value)
         {  
             if(strstr($key,"radioType"))
@@ -461,13 +467,313 @@ class ExamController extends Controller
         $data['accounting2']=$accounting2Answer;
         $data['accounting3']=$accounting3Answer;
         $data['accounting5']=$accounting5Answer;
-        $data['accounting6']=$accounting6Answer;        
-       
+        $data['accounting6']=$accounting6Answer; 
         return $data;
-        die();
-
-       // if(strstr($input,"world");)
+    }
+    public function marksCalculet($resultSetData,$studentExamData)
+    {
+        $marks = [];
+        $marks['full_marks'] = 0;
+        $marks['obtain_marks'] = 0; 
+        foreach ($resultSetData as $key=>$value) 
+        {            
+            if($key=='radio')
+            {
+                foreach($value as $radioKey=>$radioValue)
+                {
+                   $radioBoxReturnData=$this->checkAnswerReturnMarks($radioKey, $radioValue[0]);   
+                   if(isset($radioBoxReturnData['marks']))
+                   {
+                        $this->saveStudentAnswer($studentExamData,$radioKey,$radioValue[0],$radioBoxReturnData['status'],$radioBoxReturnData['marks']);
+                        $marks['full_marks'] += $radioBoxReturnData['marks'];
+                        if ($radioBoxReturnData['status']=='true') 
+                        {
+                            $marks['obtain_marks'] += $radioBoxReturnData['marks'];
+                        } 
+                   }                                  
+                }
+            }
+            if($key=='check')
+            {
+                foreach($value as $checkboxKey=>$checkboxValue)
+                {
+                   $checkboxStringValue=implode(',',$checkboxValue);
+                   $checkBoxReturnData=$this->checkAnswerReturnMarks($checkboxKey, $checkboxStringValue);   
+                   if(isset($checkBoxReturnData['marks']))
+                   {
+                        $this->saveStudentAnswer($studentExamData,$checkboxKey,$checkboxStringValue,$checkBoxReturnData['status'],$checkBoxReturnData['marks']);
+                        $marks['full_marks'] += $checkBoxReturnData['marks'];
+                        if ($checkBoxReturnData['status']=='true') 
+                        {
+                            $marks['obtain_marks'] += $checkBoxReturnData['marks'];
+                        } 
+                   }                                  
+                }
+            }
+            if($key=='accounting1')
+            {
+                foreach($value as $accounting1Key=>$accounting1Value)
+                {
+                   $accounting1StringValue=implode(',',$accounting1Value);
+                   $accounting1ReturnData=$this->checkAnswerReturnMarks($accounting1Key, $accounting1StringValue);   
+                   if(isset($accounting1ReturnData['marks']))
+                   {
+                        $this->saveStudentAnswer($studentExamData,$accounting1Key,$accounting1StringValue,$accounting1ReturnData['status'],$accounting1ReturnData['marks']);
+                        $marks['full_marks'] += $accounting1ReturnData['marks'];
+                        if ($accounting1ReturnData['status']=='true') 
+                        {
+                            $marks['obtain_marks'] += $accounting1ReturnData['marks'];
+                        } 
+                   }                                  
+                }
+            }
+            if($key=='accounting2')
+            {
+                foreach($value as $accounting2Key=>$accounting2Value)
+                {
+                    $accounting2StringValue='';
+                    foreach($accounting2Value as $lineItemData)
+                    {
+                        if($accounting2StringValue=='')
+                        {
+                            $accounting2StringValue=$lineItemData;
+                        }
+                        else{
+                            $accounting2StringValue=$accounting2StringValue.','.$lineItemData;
+                        }                        
+                    }
+                    $accounting2StringValue='['.$accounting2StringValue.']';
+                    $accounting2ReturnData=$this->checkAnswerReturnMarks($accounting2Key, $accounting2StringValue);   
+                    if(isset($accounting2ReturnData['marks']))
+                    {
+                        $this->saveStudentAnswer($studentExamData,$accounting2Key,$accounting2StringValue,$accounting2ReturnData['status'],$accounting2ReturnData['marks']);
+                        $marks['full_marks'] += $accounting2ReturnData['marks'];
+                        if ($accounting2ReturnData['status']=='true') 
+                        {
+                            $marks['obtain_marks'] += $accounting2ReturnData['marks'];
+                        } 
+                    }                                  
+                }
+            }
+            if($key=='accounting3')
+            {
+                foreach($value as $accounting3Key=>$accounting3Value)
+                {
+                    $accounting3ReturnData=$this->checkAnswerReturnMarks($accounting3Key, $accounting3Value);   
+                    if(isset($accounting3ReturnData['marks']))
+                    {
+                        $this->saveStudentAnswer($studentExamData,$accounting3Key,$accounting3Value,$accounting3ReturnData['status'],$accounting3ReturnData['marks']);
+                        $marks['full_marks'] += $accounting3ReturnData['marks'];
+                        if ($accounting3ReturnData['status']=='true') 
+                        {
+                            $marks['obtain_marks'] += $accounting3ReturnData['marks'];
+                        } 
+                    }                                  
+                }
+            }
+            // if($key=='accounting4')
+            // {
+            //     echo('<br>6</br>');
+            //     print_r($value);
+            // }
+            if($key=='accounting5')
+            {
+                foreach($value as $accounting5Key=>$accounting5Value)
+                {
+                   $accounting5StringValue=implode(',',$accounting5Value);
+                   $accounting5ReturnData=$this->checkAnswerReturnMarks($accounting5Key, $accounting5StringValue);   
+                   if(isset($accounting5ReturnData['marks']))
+                   {
+                        $this->saveStudentAnswer($studentExamData,$accounting5Key,$accounting5StringValue,$accounting5ReturnData['status'],$accounting5ReturnData['marks']);
+                        $marks['full_marks'] += $accounting5ReturnData['marks'];
+                        if ($accounting5ReturnData['status']=='true') 
+                        {
+                            $marks['obtain_marks'] += $accounting5ReturnData['marks'];
+                        } 
+                    }                                  
+                }
+            }
+            if($key=='accounting6')
+            {
+                foreach($value as $accounting6Key=>$accounting6Value)
+                {
+                   $accounting6StringValue=implode(',',$accounting6Value);                  
+                   $accounting6ReturnData=$this->checkAnswerReturnMarks($accounting6Key, $accounting6StringValue);   
+                   if(isset($accounting6ReturnData['marks']))
+                   {
+                        $this->saveStudentAnswer($studentExamData,$accounting6Key,$accounting6StringValue,$accounting6ReturnData['status'],$accounting6ReturnData['marks']);
+                        $marks['full_marks'] += $accounting6ReturnData['marks'];
+                        if ($accounting6ReturnData['status']=='true') 
+                        {
+                            $marks['obtain_marks'] += $accounting6ReturnData['marks'];
+                        } 
+                   }                                  
+                }
+            }
+        }
+        return $marks;
     }
 
+    /**
+     * this function are used for check particular answer is correct or not
+     */
 
+    public function checkAnswerReturnMarks($questionId, $answerSet,$type=null)
+    {
+        $data=[];
+        if($type==5)
+        {
+            $answerIsCorrect = Question::where('id', $questionId)->where('ans', $answerSet)->first();
+            $questionData =  Question::find($questionId);
+            if ($answerIsCorrect) 
+            {
+                $ansMarks =$questionData->marks;
+                $ansString = $questionData->ans;
+                $corAnswerArray = explode(",", $ansString);
+                $givenAnswerArray = explode(",", $answerSet);
+                $i = 0;
+                $j = 0;
+                foreach ($givenAnswerArray as $val) 
+                {
+                    if ($val!=0) 
+                    {
+                        if ($val == $corAnswerArray[$i]) $j++;
+                    }
+                    $i++;
+                }
+                $obtainMarks = $ansMarks * $j / $i;
+                
+                $data['status'] = 'true';
+                $data['marks'] = $obtainMarks;
+                $data['ans'] = $questionData->ans;
+            } else {
+                $data['status'] = 'false';
+                $data['marks'] = $questionData->marks;
+                $data['ans'] = $questionData->ans;
+            }
+        }
+        else{
+            $answerIsCorrect = Question::where('id', $questionId)->where('ans', $answerSet)->first();
+            $questionData =  Question::find($questionId);
+            if ($answerIsCorrect) 
+            {            
+                $data['status'] = 'true';
+                $data['marks'] = $questionData->marks;
+                $data['ans'] = $questionData->ans;
+            } else {
+                $data['status'] = 'false';
+                $data['marks'] = $questionData->marks;
+                $data['ans'] = $questionData->ans;
+            }
+        }
+        
+        return $data;
+    }
+
+    /**
+     * student answer save student answer table
+     */
+    public function saveStudentAnswer($studentExamData,$questionId,$answerData,$answerStatus,$markObtain)
+    {
+        $db = new StudentAnswer();
+        $db->student_exam_id = $studentExamData->id;
+        $db->student_id = $studentExamData->student_id;
+        $db->exam_id = $studentExamData->exam_id;
+        $db->question_id = $questionId;
+        $db->ques_text='';
+        $db->qus_image = "";
+        $question=Question::find($questionId);
+        if ($question->qus_image!="")
+        {
+            $db->qus_image = $question->qus_image;
+        }
+        
+        $db->ques_type = $question->type;
+        $db->ques_old_answer = $question->ans;
+        $db->ques_answer = $answerData;
+        $db->ques_correct=0;
+        $db->obtain_marks =0;
+        if($answerStatus=='true')
+        {
+            $db->ques_correct = 1;
+            $db->obtain_marks = $markObtain;
+        }
+        
+        $db->ques_marks = $question->marks;        
+        $db->save();
+        return true;
+    }
+
+    /**
+     * main function for exam store
+     */
+    public function examSubmit(Request $request)
+    {
+        $input = $request->all();
+        $resultSetData=$this->createResultSetData($input);
+        if(isset($resultSetData['examId']) && $resultSetData['examId']>0)
+        {
+            $exam = Exam::find($resultSetData['examId']);
+            if($exam)
+            {
+                $examComplete = 0;
+                if ($exam->exam_for == 2 && $exam->attempt_time!=0) {
+                    $studentdExams = StudentExam::where('exam_id',$exam->id)->where('student_id',Auth::user()->id)
+                                    ->orderBy('created_at', 'ASC')->get();
+                    if (count($studentdExams) == $exam->attempt_time) 
+                    {
+                        $examComplete = 1;
+                    } 
+                }
+
+                if ($examComplete == 1) 
+                {
+                    $maxAttempt = 0;
+                    foreach ($studentdExams as $studentdExam) 
+                    {
+                        $maxAttempt++;
+                        if ($maxAttempt == $exam->attempt_time) 
+                        {
+                            $data['id'] = $studentdExam->id;
+                            $data['status'] = true;
+                            $data['mes']= 0;
+                        }
+                    }
+                }
+                else
+                {
+                    $studentExamData=[];
+                    $studentExamData['exam_id']=$exam->id;
+                    $studentExamData['student_id']=$exam->id;
+                    $studentExamData['total_duration']='';
+                    if ($exam->centre != '') 
+                    {
+                        $studentExamData['centre_id']=$exam->centre;
+                    }
+                    else{
+                        $studentExamData['centre_id']= 0;
+                    }
+                    
+                    $studentExamData['exam_for']=$exam->exam_for;
+                    $studentExamData['exam_zone']=$exam->exam_zone;
+                    $studentExamData['full_marks']=$input['total_marks'];
+                    $studentExamData['obtain_marks']='';
+                    $studentExam=StudentExam::create($studentExamData);
+                    if($studentExam)
+                    {                        
+                        $marks = self::marksCalculet($resultSetData,$studentExam);
+                        $studentExam->obtain_marks=$marks['obtain_marks'];
+                        $studentExam->save();
+                    }
+                    $data['id'] = $studentExam->id;
+                    $data['status'] = true;
+                    $data['mes']= 0;
+                }
+            }
+            else{
+                return abort('404');                
+            }
+        }       
+    }   
+    ///////////////////************* exam save end *****************//////////////////////////
 }

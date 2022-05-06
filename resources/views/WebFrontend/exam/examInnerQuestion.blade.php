@@ -1,3 +1,4 @@
+<input type="hidden" name="total_marks" value="{{$fullMarks}}">
 @foreach ($data as $question)
     <div class="carousel-item @if ($loop->iteration == 1) active @endif" slide="{{ $loop->iteration }}">
         @if ($question->type === 'radio')
