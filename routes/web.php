@@ -75,6 +75,7 @@ Route::middleware(['auth'])->group(function ()
     Route::get('competitive-exam','WebFrontend\ExamController@competitiveExam')->name('competitive-exam');
     Route::get('competitive-exam-instruction/{id}','WebFrontend\ExamController@competitiveExamInstruction')->name('competitive-exam-instruction');
     Route::get('competitive-start-exam/{id}','WebFrontend\ExamController@competitiveExamStart')->name('competitive-start');
+    Route::post('competitive-exam-submit','WebFrontend\ExamController@competitiveExamSubmit');
 
 
 

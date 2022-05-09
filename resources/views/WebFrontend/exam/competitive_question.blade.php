@@ -78,7 +78,7 @@
                     </div>
                 </div>
 
-                <form action="{{action('WebFrontend\ExamController@examSubmit')}}" method="post" >
+                <form action="{{action('WebFrontend\ExamController@competitiveExamSubmit')}}" method="post" >
                     @csrf
                     <input type="hidden" name="examId" value="{{$id}}">
 
