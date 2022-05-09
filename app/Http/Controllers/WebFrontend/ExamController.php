@@ -117,10 +117,7 @@ class ExamController extends Controller
         return view('WebFrontend.exam-start',$data);
     }
 
-    public function examResult()
-    {
-        return view('WebFrontend.exam-result');
-    }
+    
 
     public function examQuestion(Request $request,$id)
     {
@@ -737,6 +734,7 @@ class ExamController extends Controller
                             $data['id'] = $studentdExam->id;
                             $data['status'] = true;
                             $data['mes']= 0;
+                            return ('404');
                         }
                     }
                 }
@@ -744,8 +742,8 @@ class ExamController extends Controller
                 {
                     $studentExamData=[];
                     $studentExamData['exam_id']=$exam->id;
-                    $studentExamData['student_id']=$exam->id;
-                    $studentExamData['total_duration']='';
+                    $studentExamData['student_id']=Auth::user()->id;
+                    $studentExamData['total_duration']=10;
                     if ($exam->centre != '') 
                     {
                         $studentExamData['centre_id']=$exam->centre;
@@ -757,7 +755,8 @@ class ExamController extends Controller
                     $studentExamData['exam_for']=$exam->exam_for;
                     $studentExamData['exam_zone']=$exam->exam_zone;
                     $studentExamData['full_marks']=$input['total_marks'];
-                    $studentExamData['obtain_marks']='';
+                    $studentExamData['obtain_marks']=0;
+                    $studentExamData['exam_status']='Current';
                     $studentExam=StudentExam::create($studentExamData);
                     if($studentExam)
                     {                        
@@ -769,11 +768,36 @@ class ExamController extends Controller
                     $data['status'] = true;
                     $data['mes']= 0;
                 }
+                return redirect()->action('WebFrontend\ExamController@examResult',['id'=>$data['id']]);
             }
             else{
                 return abort('404');                
             }
         }       
     }   
+
+    /**
+     * this function are used for exam result
+     */
+    public function examResult($studentExamId)
+    {
+        if($studentExamId>0)
+        {
+            $studentExam=StudentExam::find($studentExamId);
+            if($studentExam)
+            {
+                $studentExam->markPercentage=(($studentExam->obtain_marks/$studentExam->full_marks)*100);
+                $studentExam->exam=Exam::find($studentExam->exam_id);
+                $data['studentExam']=$studentExam;
+                return view('WebFrontend.exam.exam-result',$data);
+            }
+            else{
+                abort('404');
+            }            
+        }        
+        else{
+            abort('404');
+        }       
+    }
     ///////////////////************* exam save end *****************//////////////////////////
 }
