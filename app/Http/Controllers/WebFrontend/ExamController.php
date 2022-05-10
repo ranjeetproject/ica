@@ -127,7 +127,8 @@ class ExamController extends Controller
         if($request->ajax())
         {            
             if ($exams->question_limit > 0) {
-                $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting4')->inRandomOrder()->limit($exams->question_limit)->get();
+                $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting1')
+                ->inRandomOrder()->limit($exams->question_limit)->get();
                 //$data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
             } else {
 
@@ -158,8 +159,8 @@ class ExamController extends Controller
         $data['examName'] = $exams->exam_name;
         $data['id'] = $id;
         $data['duration'] = $exams->duration;
-        $data['questionLimit'] = $exams->question_limit;
-        //$data['questionLimit'] = 1;
+       // $data['questionLimit'] = $exams->question_limit;
+        $data['questionLimit'] = 5;
         return view('WebFrontend.exam.exam-question',$data);
     }
 
@@ -710,6 +711,7 @@ class ExamController extends Controller
     {
         $input = $request->all();
         $resultSetData=$this->createResultSetData($input);
+        return $resultSetData;
         if(isset($resultSetData['examId']) && $resultSetData['examId']>0)
         {
             $exam = Exam::find($resultSetData['examId']);
@@ -778,103 +780,7 @@ class ExamController extends Controller
         }       
     }  
     
-    public function competitiveExamSubmit(Request $request)
-    {
-        $input = $request->all();
-        return $resultSetData=$this->createCompetitiveResultSetData($input);
-
-    }
-
-    public function createCompetitiveResultSetData($inputData)
-    {
-        $input=$inputData;
-        //dd($input);
-        $accounting4Answer=[];
-        foreach($input as $key=>$value)
-        {  
-            //echo $key.'=>'.$value;
-            //echo '<br>';
-            if(strstr($key,"accounting4"))
-            {
-                $keyArray=explode("_",$key);
-                if(count($keyArray)>0)     {
-                    $questionId=$keyArray[1];
-                
-                    $createKeyValueAssets= 'accounting4_'.$keyArray[1].'_Assets';                    
-                    if($key==$createKeyValueAssets)
-                    {
-                        if($value==1)
-                        {
-                            echo 'Assets increase';
-                        }
-                        if($value==2)
-                        {
-                            echo 'Assets decrease';
-                        }
-                        if($value==3)
-                        {
-                            echo 'Assets noimpace';
-                        }    
-                    }
-                    $createKeyValueLiabilities= 'accounting4_'.$keyArray[1].'_Liabilities';                    
-                    if($key==$createKeyValueLiabilities)
-                    {
-                        if($value==1)
-                        {
-                            echo 'Liabilities increase';
-                        }
-                        if($value==2)
-                        {
-                            echo 'Liabilities decrease';
-                        }
-                        if($value==3)
-                        {
-                            echo 'Liabilities no impact';
-                        }    
-                    }
-                    $createKeyValueEquity= 'accounting4_'.$keyArray[1].'_Equity';                    
-                    if($key==$createKeyValueEquity)
-                    {
-                        if($value==1)
-                        {
-                            echo 'Equity increase';
-                        }
-                        if($value==2)
-                        {
-                            echo 'Equity decrease';
-                        }
-                        if($value==3)
-                        {
-                            echo 'Equity no impact';
-                        }    
-                    }
-                    if (array_key_exists($questionId,$accounting4Answer))
-                    {
-                        //dd($value);
-                        if($value !=null){
-                            array_push($accounting4Answer[$questionId],$value);
-                        }
-                    }
-                    else
-                    {
-                        echo 'tt';
-                        //dd($value);
-                        $accounting4Answer[$questionId]=[];
-                        array_push($accounting4Answer[$questionId],$value);
-                    } 
-                }         
-                
-                
-
-                
-            }
-        }
-        die();
-        $data['accounting4']=$accounting4Answer;
-
-        return $data;
-    }
-
+    
 
     /**
      * this function are used for exam result
@@ -900,4 +806,138 @@ class ExamController extends Controller
         }       
     }
     ///////////////////************* exam save end *****************//////////////////////////
+
+
+    public function competitiveExamSubmit(Request $request)
+    {
+        $input = $request->all();
+        return $resultSetData=$this->createCompetitiveResultSetData($input);
+
+    }
+
+    public function createCompetitiveResultSetData($inputData)
+    {
+        $input=$inputData;
+        //return $input;
+        $accounting4Answer=[];
+        foreach($input as $key=>$value)
+        {  
+            if(strstr($key,"accounting4"))
+            {
+                $keyArray=explode("_",$key);
+                if(count($keyArray)>0)     {
+                    $questionId=$keyArray[1];   
+                    $createKeyValueAssets= 'accounting4_'.$keyArray[1].'_Assets';                    
+                    if($key==$createKeyValueAssets)
+                    {
+                        if($value==1)
+                        {
+                            $accounting4Answer[$questionId]['assets'][1][]=$input[$createKeyValueAssets.'_Increase_Option'];
+                            $accounting4Answer[$questionId]['assets'][1][]=$input[$createKeyValueAssets.'_Increase_Text'];
+                            
+                        }
+                        elseif($value==2)
+                        {
+                            $accounting4Answer[$questionId]['assets'][2][]=$input[$createKeyValueAssets.'_Decrease_Option'];
+                            $accounting4Answer[$questionId]['assets'][2][]=$input[$createKeyValueAssets.'_Decrease_Text'];
+                        }
+                        elseif($value==3)
+                        {
+                            $accounting4Answer[$questionId]['assets'][3]=true;
+                        }    
+                    }
+                    $createKeyValueLiabilities= 'accounting4_'.$keyArray[1].'_Liabilities';                    
+                    if($key==$createKeyValueLiabilities)
+                    {
+                        if($value==1)
+                        {
+                            $accounting4Answer[$questionId]['liabilities'][1][]=$input[$createKeyValueLiabilities.'_Increase_Option1'];
+                            $accounting4Answer[$questionId]['liabilities'][1][]=$input[$createKeyValueLiabilities.'_Increase_Option2'];
+                            $accounting4Answer[$questionId]['liabilities'][1][]=$input[$createKeyValueLiabilities.'_Increase_Text'];
+                            
+                        }
+                        elseif($value==2)
+                        {
+                            $accounting4Answer[$questionId]['liabilities'][2][]=$input[$createKeyValueLiabilities.'_Decrease_Option1'];
+                            $accounting4Answer[$questionId]['liabilities'][2][]=$input[$createKeyValueLiabilities.'_Decrease_Option2'];
+                            $accounting4Answer[$questionId]['liabilities'][2][]=$input[$createKeyValueLiabilities.'_Decrease_Text'];
+                        }
+                        elseif($value==3)
+                        {
+                            $accounting4Answer[$questionId]['liabilities'][3]=true;
+                        }   
+                    }
+                    $createKeyValueEquity= 'accounting4_'.$keyArray[1].'_Equity';                    
+                    if($key==$createKeyValueEquity)
+                    {
+                        if($value==1)
+                        {
+                            $accounting4Answer[$questionId]['equity'][1][]=$input[$createKeyValueEquity.'_Increase_Option1'];
+                            $accounting4Answer[$questionId]['equity'][1][]=$input[$createKeyValueEquity.'_Increase_Option2'];
+                            $accounting4Answer[$questionId]['equity'][1][]=$input[$createKeyValueEquity.'_Increase_Text'];
+                            
+                        }
+                        elseif($value==2)
+                        {
+                            $accounting4Answer[$questionId]['equity'][2][]=$input[$createKeyValueEquity.'_Decrease_Option1'];
+                            $accounting4Answer[$questionId]['equity'][2][]=$input[$createKeyValueEquity.'_Decrease_Option2'];
+                            $accounting4Answer[$questionId]['equity'][2][]=$input[$createKeyValueEquity.'_Decrease_Text'];
+                        }
+                        elseif($value==3)
+                        {
+                            $accounting4Answer[$questionId]['equity'][3]=true;
+                        }   
+                    }
+                   
+                }   
+            }
+        }
+
+        foreach($accounting4Answer as $accounting4Key=>$accounting4Value)
+        {
+            echo "<pre>=================Start====================</pre>";
+            echo $accounting4Key;
+            echo "<pre>=====================================</pre>";
+            print_r($accounting4Value);
+            echo "<pre>===================Loop start==================</pre>";
+
+            foreach($accounting4Value as $innerKey=>$optionValuePair)
+            {
+                if($innerKey=='assets')
+                {
+
+                }
+                if($innerKey=='liabilities')
+                {
+                    
+                }
+                if($innerKey=='equity')
+                {
+                    
+                }
+                echo "<pre>=================Inner loop Start====================</pre>";
+                echo $innerKey;
+                echo "<pre>=====================================</pre>";
+                print_r($optionValuePair);
+                echo "<pre>===================Inner Loop end==================</pre>";
+            }
+            echo "<pre>===================Loop start==================</pre>";
+            echo "<pre>====================End=================</pre>";
+
+
+            
+            
+           //$accounting4StringValue=implode(',',$accounting4Value);
+           
+                                             
+        }
+        die();
+
+
+        $data['accounting4']=$accounting4Answer;
+
+
+        return $data;
+    }
+
 }
