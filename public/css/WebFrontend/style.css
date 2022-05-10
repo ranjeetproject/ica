@@ -1187,6 +1187,7 @@ select.form-control:focus {
 
 .course-card.db-cards {
     padding: 38px;
+    margin-bottom: 20px;
 }
 
 .db-cards .course-image {
@@ -2774,7 +2775,7 @@ p.awsopt {
 
 .radioLft.noInpact [type="radio"]:checked + label:after,
 .radioLft.noInpact [type="radio"]:not(:checked) + label:after {
-    content: '\f107';
+    content: '\f068';
     width: 25px;
     height: 25px;
     background: #14176c;
@@ -2784,6 +2785,8 @@ p.awsopt {
     line-height: 26px;
     color: #fff;
 }
+
+
 
 .qslImg {
     width: 100%;
@@ -3093,6 +3096,11 @@ li.selected .qaFormbg {
 
 }
 
+.newProfileform .form-control {
+    background: #e2e7f7;
+    box-shadow: 0 0 2px #bcc3db;
+}
+
 .profileForm label {
     font-size: 15px;
     color: #072F60;
@@ -3150,11 +3158,36 @@ li.selected .qaFormbg {
 }
 
 .detlTable ul {
-    padding-left: 18px;
+    padding-left: 0px;
 }
 
 .detlTable ul li {
-    list-style-type: disc;
+    list-style-type: none;
+    box-shadow: 0 0 5px #d0d9f5;
+    background: #fff;
+    padding: 10px 15px 10px 45px;
+    margin-top: 15px;
+    position: relative;
+    display: flex;
+    border-radius: 5px;
+
+}
+
+.detlTable ul li span {
+    background: #3BBCA7;
+    /* display: inline-block; */
+    width: 30px;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    top: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 5px;
 }
 
 .logoContainer {
