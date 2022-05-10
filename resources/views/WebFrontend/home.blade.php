@@ -48,7 +48,7 @@
                 <div class="card-body">
                     <img src="{{asset('css/images/how-it-icon-1.svg')}}" class="img-icon img-fluid" alt="#">
                     <div class="content">
-                        <h4 class="c-text">Numquam veli</h4>
+                        <h4 class="c-text">Registration</h4>
                         <p>Don numq modi</p>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                 <div class="card-body">
                     <img src="{{asset('css/images/how-it-icon-2.svg')}}" class="img-icon img-fluid" alt="#">
                     <div class="content">
-                        <h4 class="c-text">Numquam veli</h4>
+                        <h4 class="c-text">Study</h4>
                         <p>Don numq modi</p>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                 <div class="card-body">
                     <img src="{{asset('css/images/how-it-icon-3.svg')}}" class="img-icon img-fluid" alt="#">
                     <div class="content">
-                        <h4 class="c-text">Numquam veli</h4>
+                        <h4 class="c-text">Evaluate</h4>
                         <p>Don numq modi</p>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                 <div class="card-body">
                     <img src="{{asset('css/images/how-it-icon-4.svg')}}" class="img-icon img-fluid" alt="#">
                     <div class="content">
-                        <h4 class="c-text">Numquam veli</h4>
+                        <h4 class="c-text">Cirtificate</h4>
                         <p>Don numq modi</p>
                     </div>
                 </div>

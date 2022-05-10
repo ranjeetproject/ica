@@ -185,11 +185,11 @@
 </div>
 
 <script>
-    const menuLis = document.querySelectorAll(".qaccord > li");
-    for (let li of menuLis) {
+    var menuLis = document.querySelectorAll(".qaccord > li");
+    for (var li of menuLis) {
         li.addEventListener("click", function() {
             // 1. Remove Class from All Lis
-            for (let li of menuLis) {
+            for (var li of menuLis) {
                 li.classList.remove('selected');
             }
             // 2. Add Class to Relevant Li
