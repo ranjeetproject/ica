@@ -36,4 +36,15 @@ class HomePageController extends Controller
 
         return view('WebFrontend.home', $data);
     }
+
+    public function allCourses(Request $request)
+    {	
+        $data = []; 
+        $data = Course::with('user')->whereHas('user')->with('lessons')->where('entry_from', 'NEW')->orderBy('created_at', 'DESC')->paginate(8);
+        if($request->ajax()){
+            $view = view('WebFrontend.all_courses_pagination',compact('data'))->render();
+            return response()->json(['html' => $view]);
+        }
+        return view('WebFrontend.all_courses',compact('data'));
+    }
 }

@@ -147,7 +147,7 @@
             @endforeach
         </div>
         <div class="view-all-course">
-            <a href="{{route('login')}}" class="btn common-button">View All Courses</a>
+            <a href="{{route('all-courses')}}" class="btn common-button">View All Courses</a>
         </div>
     </div>
 </section>

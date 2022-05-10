@@ -53,19 +53,25 @@
                                 <div class="mb-3 row">
                                     <label class="col-sm-2 col-form-label">Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="name" value="{{$profileData->name}}" />
+                                        <input type="text" class="form-control" name="name" value="{{$profileData->name}}" readonly/>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label class="col-sm-2 col-form-label">Phone No.</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="mobile" value="{{$profileData->mobile}}" />
+                                        <input type="text" class="form-control" name="mobile" value="{{$profileData->mobile}}" readonly/>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" name="email" value="{{$profileData->email}}" />
+                                        <input type="email" class="form-control" name="email" value="{{$profileData->email}}" readonly />
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Center Details</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" readonly class="form-control" name="center"  value="{{@$center->Center_code}} , {{@$center->Center_name}} , {{@$center->Center_address}}" />
                                     </div>
                                 </div>
                             </div>
