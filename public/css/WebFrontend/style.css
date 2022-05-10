@@ -470,11 +470,18 @@ section.courses-wrap .course-card {
 
 .course-card .course-name {
     color: #071739;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 20px;
     font-weight: 600;
     margin: 20px 0 10px 0;
-    min-height: 60px;
+    /*    min-height: 60px;*/
+    height: 40px;
+    display: -webkit-box;
+    max-height: 5.07rem;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .course-card .rating img {
@@ -2066,6 +2073,14 @@ section.contact_info .crs-dtls-wrp {
     padding-bottom: 7px;
 }
 
+.checkbtn_opt input[type="checkbox"] {
+    position: relative;
+    top: 3px;
+    width: 17px;
+    height: 17px;
+}
+}
+
 .item_morecontent {
     display: flex;
     justify-content: space-between;
@@ -2372,14 +2387,14 @@ p.awsopt {
 .examSlider .carousel-indicators {
     position: static;
     display: block;
-    text-align: center;
-    margin: 0;
+    /*    text-align: center;*/
+    margin: 10px 0 0 0;
 }
 
 .examSlider .carousel-indicators button {
-    width: 30px;
-    height: 30px;
-    margin: 0 2px;
+    width: 36px;
+    height: 36px;
+    margin: 0 6px 6px;
     padding: 0;
     text-align: center;
     text-indent: 0;
@@ -2392,9 +2407,70 @@ p.awsopt {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: #000;
-    color: #fff;
+    color: #000;
     border: 0;
+    opacity: 1;
+}
+
+#exampleModal .modal-dialog {
+    max-width: 300px;
+}
+
+.ic1 {
+    background: #959595 !important;
+    color: #fff !important;
+}
+
+.ic2 {
+    background: #297e49 !important;
+    color: #fff !important;
+}
+
+.askp {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.answerd {
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 600;
+    color: #1D8A56;
+    display: flex;
+    align-items: center;
+}
+
+.skpped {
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.ans {
+    background: #1D8A56;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    margin-left: 5px;
+}
+
+.skp {
+    background: #959595;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    margin-left: 5px;
+}
+
+.examSlider {
+    padding: 10px 15px 15px;
+    box-shadow: 0 0 5px #ccc;
 }
 
 .examSlider .carousel-indicators button span {
@@ -2403,6 +2479,9 @@ p.awsopt {
     height: 100%;
     border-radius: 50px;
     line-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carouselFlow {
@@ -2410,23 +2489,40 @@ p.awsopt {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 20px;
+    margin-top: 20px;
 }
 
 .carouselFlow button {
     margin: 0;
     padding: 5px 10px;
     position: static;
-    color: #000;
-    font-size: 18px;
-    width: 100px;
-    background: #ccc;
+    color: #fff;
+    font-size: 15px;
+    width: 120px;
+    background: #072f60;
+    opacity: 1;
+    border-radius: 3px;
 }
 
 .carouselFlow button:hover {
-    color: #000;
+    color: #fff;
     opacity: 1;
+    background: #3BBCA7;
 }
+
+.carousel-control-next-skip {
+    color: #ffffff !important;
+    background: #bfa650fa !important;
+    border: 1px solid #e3dbb0;
+    outline: none;
+}
+
+.carousel-control-next-skip:hover {
+    background: #c99f0a61 !important;
+    color: #000 !important;
+}
+
+
 
 .questionBlock {
     width: 100%;
@@ -2437,19 +2533,22 @@ p.awsopt {
 .examCount {
     border: none;
     outline: none;
-    background: transparent;
-    color: #116eee;
+    background: #38bca7;
+    color: #fff;
     font-weight: 600;
+    border-radius: 5px 5px 0 0;
 }
 
 .qbSelect {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .qbSelect select {
     width: 24%;
     height: 40px;
+    margin-bottom: 8px;
 }
 
 .qbSelect select:focus {
@@ -2463,8 +2562,10 @@ p.awsopt {
 }
 
 .eql {
-    font-size: 16px;
+    font-size: 20px;
     padding: 0 3px;
+    display: flex;
+    align-items: center;
 }
 
 .wcHead {
@@ -2490,6 +2591,7 @@ p.awsopt {
 .workingCap input[type="radio"] {
     width: 22px;
     height: 22px;
+    border: none;
 }
 
 .workingCap .form-check {
@@ -2504,7 +2606,7 @@ p.awsopt {
 }
 
 .qbSelectB select {
-    width: 100%;
+    width: 100% !important;
 }
 
 .questionBlock .form-control {
@@ -2513,36 +2615,662 @@ p.awsopt {
     background: #fff;
 }
 
+/*
+.increase input[type="radio"] {
+    background-color: #267a3e;
+}
+*/
+
+.radioInn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 15px;
+}
+
+.radioLft label {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+    color: #658B8B;
+}
+
+.radioRgt {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 500;
+    color: #004E4E;
+}
+
+
+.radioLft [type="radio"]:checked,
+.radioLft [type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+.radioLft [type="radio"]:checked + label,
+.radioLft [type="radio"]:not(:checked) + label {
+    position: relative;
+    padding-left: 33px;
+    cursor: pointer;
+    line-height: 26px;
+    display: inline-block;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.radioLft [type="radio"]:checked + label:before,
+.radioLft [type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+
+.radioLft [type="radio"]:checked + label:after,
+.radioLft [type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 25px;
+    height: 25px;
+    background: #000;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.radioLft [type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+.radioLft [type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+
+.radioLft.increase [type="radio"]:checked + label:before,
+.radioLft.increase [type="radio"]:not(:checked) + label:before {
+    content: "\f106";
+    width: 25px;
+    height: 25px;
+    background: #267a3e;
+    font-family: "Font Awesome 5 pro";
+    text-align: center;
+    font-size: 20px;
+    line-height: 24px;
+    color: #fff;
+}
+
+.radioLft.increase [type="radio"]:checked + label:after,
+.radioLft.increase [type="radio"]:not(:checked) + label:after {
+    content: '\f106';
+    width: 25px;
+    height: 25px;
+    background: #14176c;
+    font-family: "Font Awesome 5 pro";
+    text-align: center;
+    font-size: 20px;
+    line-height: 24px;
+    color: #fff;
+}
+
+
+
+
+.radioLft.decrease [type="radio"]:checked + label:before,
+.radioLft.decrease [type="radio"]:not(:checked) + label:before {
+    content: "\f107";
+    width: 25px;
+    height: 25px;
+    background: #c14135;
+    font-family: "Font Awesome 5 pro";
+    text-align: center;
+    font-size: 20px;
+    line-height: 26px;
+    color: #fff;
+}
+
+.radioLft.decrease [type="radio"]:checked + label:after,
+.radioLft.decrease [type="radio"]:not(:checked) + label:after {
+    content: '\f107';
+    width: 25px;
+    height: 25px;
+    background: #14176c;
+    font-family: "Font Awesome 5 pro";
+    text-align: center;
+    font-size: 20px;
+    line-height: 26px;
+    color: #fff;
+}
+
+
+
+
+.radioLft.noInpact [type="radio"]:checked + label:before,
+.radioLft.noInpact [type="radio"]:not(:checked) + label:before {
+    content: "\f068";
+    width: 25px;
+    height: 25px;
+    background: #c6a102;
+    font-family: "Font Awesome 5 pro";
+    text-align: center;
+    font-size: 20px;
+    line-height: 26px;
+    color: #fff;
+}
+
+.radioLft.noInpact [type="radio"]:checked + label:after,
+.radioLft.noInpact [type="radio"]:not(:checked) + label:after {
+    content: '\f107';
+    width: 25px;
+    height: 25px;
+    background: #14176c;
+    font-family: "Font Awesome 5 pro";
+    text-align: center;
+    font-size: 20px;
+    line-height: 26px;
+    color: #fff;
+}
+
+.qslImg {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.qslImg img {
+    width: 200px;
+    padding: 3px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.qBtnB input[type="radio"] {
+    background-color: #fff;
+    width: 16px;
+    height: 16px;
+}
+
+.qBtnB input[type="radio"]:checked {
+    border: 1px solid #4196a6;
+    box-shadow: none;
+    background: url("../images/radiodot.png") 2px 2px no-repeat;
+}
+
+.qBtnB {
+    display: flex;
+    padding: 0;
+    justify-content: space-between;
+}
+
+.qbLft {
+    display: flex;
+}
+
+.qBtnB button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 25px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    background: #004574;
+    box-shadow: none;
+}
+
+.qBtnB button:hover {
+    box-shadow: none;
+    background: #000;
+}
+
+.qBtnB label {
+    padding-right: 10px;
+}
+
+.questionTable {
+    width: 100%;
+    margin-top: 10px;
+    background: #f1f3f9;
+    padding: 20px;
+}
+
+.questionTable table {
+    width: 100%;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.questionTable table tbody tr td {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.questionTable table tr th {
+    background: #072F60;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.questionTable table tr td {
+    text-align: center;
+    font-size: 15px;
+    color: #000;
+}
+
+.questionTable table tfoot td {
+    background: #ccc;
+    text-align: center;
+    font-weight: 500;
+}
+
+/*
+.questionTable table tr th:nth-child(1),
+.questionTable table tr td:nth-child(1) {
+    text-align: center;
+}
+*/
+.rowDel {
+    color: #a70606;
+    font-size: 22px;
+}
+
+.baccountTable tr th:nth-child(1),
+.baccountTable tr td:nth-child(1) {
+    text-align: left;
+    width: 50px;
+}
+
+.baccountTable tr th:nth-child(2),
+.baccountTable tr td:nth-child(2) {
+    text-align: left !important;
+    width: 300px;
+}
+
+.nullSelect {
+    justify-content: center;
+    text-align: center;
+}
+
+.qaccord {
+    padding: 15px;
+    margin: 0;
+}
+
+.qaccord li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.qaFormbg {
+    width: 100%;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+li.selected .qaFormbg {
+    height: auto;
+    opacity: 1;
+    padding-bottom: 20px;
+}
+
+.qaFormbg select {
+    width: 100% !important;
+}
+
+.wCapital .workingCap {
+    width: 24%;
+}
+
+
+
 /* ---------------newslide-end------------------ */
 
 
 
-/* ---------------all-course-start------------------ */
-.allCourse {
+/* ---------------Profile-start------------------ */
+.profileBg {
     width: 100%;
-    padding: 50px 0;
+    padding: 30px;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 0 10px #efefef;
 }
 
-.allCourseBlock {
+.profileHdn {
+    position: relative;
+    text-align: center;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 20px;
 }
 
-.allCourse .course-card {
-    box-shadow: 0 10px 11px #e2e4e7;
-    margin-bottom: 25px;
-    width: 23%;
+.profileHdn h2 {
+    position: relative;
+    margin: 0;
+    color: #072F60;
+    font-weight: 600;
+    font-size: 26px;
 }
 
+.profileHdn h2::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 15px;
+    width: 100px;
+    height: 5px;
+    background: #116EEE;
+    margin-right: 10px;
+    border-radius: 20px;
+}
 
-/* ---------------all-course-end------------------ */
+.profileHdn h2::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    top: 15px;
+    height: 5px;
+    background: #116EEE;
+    margin-left: 10px;
+    border-radius: 20px;
+}
 
-@media screen and (max-width: 1190px) {
-    .allCourse .course-card {
-        width: 31%;
+.profileBanner {
+    background: url("../images/profilebg.jpg") 0 0 no-repeat;
+    background-size: cover;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+
+.profileIcom {
+    border-radius: 100px;
+    width: 150px;
+    height: 150px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #000;
+    margin-right: 25px;
+}
+
+.profileIcom img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+.profileTxt h2 {
+    color: #fff;
+    font-weight: 600;
+    margin: 0;
+}
+
+.profileTxt h5 {
+    color: #fff;
+    font-weight: 400;
+    margin: 0;
+}
+
+.profileTxt p {
+    color: #5195F3;
+    font-weight: 400;
+}
+
+.profileTxt button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow: none;
+    border-radius: 2px;
+    text-align: center;
+    background: #3BBCA7;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.profileTxt button:hover {
+    background: #071739;
+}
+
+.profsubhdn {
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 20px;
+}
+
+.profsubhdn h2::before {
+    display: none;
+}
+
+.profsubhdn h2::after {
+    width: 50px;
+    height: 3px;
+    top: 17px;
+}
+
+.profileForm {
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px 30px 20px 30px;
+    background: #eff3ff;
+}
+
+.profileForm .form-control {
+    height: 40px;
+    background: #fff;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 5px #ccc;
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 500;
+
+}
+
+.profileForm label {
+    font-size: 15px;
+    color: #072F60;
+    font-weight: 700;
+    padding-right: 5px;
+    padding-left: 20px;
+}
+
+.formButton {
+    text-align: center;
+    padding: 30px;
+    background: #E8ECF6;
+    margin-top: 20px;
+}
+
+.formButton button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow: none;
+    border-radius: 5px;
+    text-align: center;
+    background: #072F60;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.courseDetlMain {
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px 30px 20px 30px;
+    background: #eff3ff;
+    margin-top: 25px;
+}
+
+.detlTable {
+    width: 100%;
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 10px;
+}
+
+.detlTable h3 {
+    background: #072F60;
+    color: #fff;
+    padding: 8px 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.detlTable p {
+    margin: 0;
+}
+
+.detlTable ul {
+    padding-left: 18px;
+}
+
+.detlTable ul li {
+    list-style-type: disc;
+}
+
+.logoContainer {
+    border-radius: 100px;
+    width: 150px;
+    height: 150px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #000;
+    margin-right: 25px;
+}
+
+.logoContainer img {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+.fileContainer {
+    overflow: hidden;
+    position: relative;
+    color: #434343;
+    cursor: pointer !important;
+    text-align: center;
+    background: #3BBCA7;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.fileContainer span {
+    overflow: hidden;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.fileContainer input[type="file"] {
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    cursor: pointer;
+}
+
+/* ---------------Profile-end------------------ */
+
+@media screen and (max-width: 991px) {
+    .qbSelectB {
+        width: 49%;
     }
 
+    .qbSelect select {
+        width: 49%;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .questionWorking {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .workingCap {
+        width: 100%;
+    }
+
+    .wCapital {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .wCapital .workingCap {
+        width: 49%;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .profileBanner {
+        flex-direction: column;
+    }
+
+    .logoContainer {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .profileTxt {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .qbSelectB {
+        width: 100%;
+    }
+
+    .qbSelect select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/*
+@media screen and (max-width: 1190px) {
     .desktoppic {
         display: none;
     }
@@ -2557,15 +3285,4 @@ p.awsopt {
         flex-direction: column-reverse;
     }
 }
-
-@media screen and (max-width: 767px) {
-    .allCourse .course-card {
-        width: 48%;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .allCourse .course-card {
-        width: 100%;
-    }
-}
+*/
