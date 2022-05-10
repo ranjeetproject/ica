@@ -72,6 +72,12 @@
                                         <input type="email" readonly class="form-control" value="{{Auth::user()->email}}" />
                                     </div>
                                 </div>
+                                <div class="mb-3 row">
+                                    <label class="col-sm-2 col-form-label">Center Details</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" readonly class="form-control" value="{{@$center->Center_code}} , {{@$center->Center_name}} , {{@$center->Center_address}}" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3 row">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\WebFrontend;
 
 use App\Http\Controllers\Controller;
 use App\Course;
+use App\centre;
 use App\Exam;
 use App\Question;
 use App\StdCourse;
@@ -97,18 +98,20 @@ class DashboardController extends Controller
     public function profilePage()
     {
         $batch = Batch::where('id',Auth::user()->batch_id)->get();
+        $center = centre::where('Center_code',Auth::user()->centre_code)->first();
         $courses = Course::join('std_courses','std_courses.course','=','courses.id')
             ->where('courses.entry_from','NEW')
             ->where('std_courses.student', Auth::user()->id)
             ->get();
-        return view('WebFrontend.profile',compact('courses','batch'));
+        return view('WebFrontend.profile',compact('courses','batch','center'));
     }
 
     public function editProfilePage($id)
     {
         $profileData = Student::find($id);
+        $center = centre::where('Center_code',$profileData->centre_code)->first();
         if($profileData){
-            return view('WebFrontend.edit-profile',compact('profileData'));
+            return view('WebFrontend.edit-profile',compact('profileData','center'));
         }else{
             abort('404');
         }
@@ -118,6 +121,7 @@ class DashboardController extends Controller
     {
         $row = Student::find($id);
         $inputData = $request->all();
+        //dd($inputData);
         if ($row) {
             $row->update($inputData);
             Session::put('success', 'Your Profile Update Successfully');
