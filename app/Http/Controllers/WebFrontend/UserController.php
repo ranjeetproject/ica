@@ -440,5 +440,11 @@ class UserController extends Controller
         return true;
     }*/
 
+    public function courseExamEvent()
+    {
+        event(new CourseAssign());
+        event(new ExamAssign());
+    }
+
 
 }
