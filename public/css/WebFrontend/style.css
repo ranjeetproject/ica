@@ -3243,6 +3243,23 @@ li.selected .qaFormbg {
 }
 
 /* ---------------Profile-end------------------ */
+.allCourse {
+    width: 100%;
+    padding: 50px 0;
+}
+
+.allCourseBlock {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.allCourse .course-card {
+    box-shadow: 0 10px 11px #e2e4e7;
+    margin-bottom: 25px;
+    width: 23%;
+}
+
 
 @media screen and (max-width: 991px) {
     .qbSelectB {
@@ -3274,6 +3291,9 @@ li.selected .qaFormbg {
         width: 49%;
         margin-bottom: 10px;
     }
+    .allCourse .course-card {
+        width: 48%;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -3300,11 +3320,15 @@ li.selected .qaFormbg {
         width: 100%;
         margin-bottom: 10px;
     }
+
+    .allCourse .course-card {
+        width: 100%;
+    }
 }
 
-/*
+
 @media screen and (max-width: 1190px) {
-    .desktoppic {
+    /* .desktoppic {
         display: none;
     }
 
@@ -3316,6 +3340,10 @@ li.selected .qaFormbg {
         display: flex;
         justify-content: space-between;
         flex-direction: column-reverse;
+    } */
+
+    .allCourse .course-card {
+        width: 31%;
     }
 }
-*/
+
