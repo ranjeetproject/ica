@@ -15,7 +15,9 @@
             <img src="{{ asset('css/images/video-icon.svg') }}" class="img-fluid" /></a>
             <div class="notification-wrp">
                 <span class="num">1</span>
-                <img src="{{ asset('css/images/bell_icon.svg') }}" class="img-fluid" />
+                <a href="{{route('notification-list')}}" class="social-link">
+                    <img src="{{ asset('css/images/bell_icon.svg') }}" class="img-fluid" />
+                </a>
             </div>
             <div class="profile">
             @if(Auth::user()->profile_image!='')

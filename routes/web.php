@@ -49,8 +49,9 @@ Route::get('/contact-us','WebFrontend\CmsController@contactUs')->name('contactUs
 Route::post('/submit-query','WebFrontend\CmsController@submitQuery')->name('submitQuery');
 Route::get('/privacy-policy','WebFrontend\CmsController@privacyPolicy')->name('privacyPolicy');
 Route::get('/terms-and-conditions','WebFrontend\CmsController@termsAndCondition')->name('termsAndCondition');
-Route::get('/all-courses','WebFrontend\HomePageController@allCourses')->name('all-courses');
+Route::get('/all-courses','WebFrontend\CourseController@allCourses')->name('all-courses');
 // Route::get('/home','WebFrontend\HomePageController@homePageDisplay')->name('home');
+Route::get('/course-exam-event','WebFrontend\UserController@courseExamEvent')->name('course-exam-event');
 
 Route::middleware(['auth'])->group(function ()
 {
@@ -68,7 +69,6 @@ Route::middleware(['auth'])->group(function ()
     Route::get('pagination/fetch', 'WebFrontend\ExamController@fetch')->name('pagination-fetch');
     Route::get('exam-result/{id}','WebFrontend\ExamController@examResult')->name('exam-result');
     Route::get('exam-question/{id}','WebFrontend\ExamController@examQuestion')->name('exam-question');
-    
     Route::post('exam-submit','WebFrontend\ExamController@examSubmit');
 
 
@@ -76,7 +76,8 @@ Route::middleware(['auth'])->group(function ()
     Route::get('competitive-exam','WebFrontend\ExamController@competitiveExam')->name('competitive-exam');
     Route::get('competitive-exam-instruction/{id}','WebFrontend\ExamController@competitiveExamInstruction')->name('competitive-exam-instruction');
     Route::get('competitive-start-exam/{id}','WebFrontend\ExamController@competitiveExamStart')->name('competitive-start');
-    Route::post('competitive-exam-submit','WebFrontend\ExamController@competitiveExamSubmit');
+    
+    Route::get('notification-list','WebFrontend\NotificationController@list')->name('notification-list');
 
 
 

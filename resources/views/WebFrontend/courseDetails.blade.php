@@ -48,23 +48,7 @@
                     <span>About Courses</span>
                     <span class="bar"></span>
                 </div>
-                <p class="">Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
-                    porro quisquam est, qui dolorem ipsum
-                    quia dolor sit amet, Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
-                    laboriosam, nisi ut
-                    aliquid ex ea commodi consequatur....</p>
-
-                <ul>
-                    <li>Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-                        Neque porro quisquam est, qui dolorem ipsum
-                        quia dolor sit amet, Ut enim ad minima veniam.</li>
-                    <li>Dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-                        qui dolorem ipsum quia dolor sit amet, Ut
-                        enim ad minima veniam.</li>
-                    <li>Ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
-                        ipsum.
-                    </li>
-                </ul>
+                    {!! $course->course_details !!}
                 <div class="title-part">
                     <span>Modules</span>
                     <span class="bar"></span>

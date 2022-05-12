@@ -38,18 +38,17 @@
     <div class="container">
         <div class="h-header-wrp">
             <p>How it Works</p>
-            <h3>Adipisci velit, Sed quia non Numquam Eius Modi quia non
-                Eum iure Reprehende</h3>
+            {!!$howItWork->heading_title!!}
         </div>
         <div class="h-cards-wrp">
             <div class="card">
                 <span class="count-no">1</span>
                 <img src="{{asset('css/images/how-connector.png')}}" alt="#" class="img-fluid conntector" />
                 <div class="card-body">
-                    <img src="{{asset('css/images/how-it-icon-1.svg')}}" class="img-icon img-fluid" alt="#">
+                    <img src="https://demos.mydevfactory.com/android/public/howItWork_image/{{$howItWork->image_one}}" class="img-icon img-fluid" alt="#">
                     <div class="content">
-                        <h4 class="c-text">Registration</h4>
-                        <p>Don numq modi</p>
+                        <h4 class="c-text">{{$howItWork->title_one}}</h4>
+                        {{-- <p>Don numq modi</p> --}}
                     </div>
                 </div>
             </div>
@@ -57,10 +56,10 @@
                 <span class="count-no">2</span>
                 <img src="{{asset('css/images/how-connector.png')}}" alt="#" class="img-fluid conntector" />
                 <div class="card-body">
-                    <img src="{{asset('css/images/how-it-icon-2.svg')}}" class="img-icon img-fluid" alt="#">
+                    <img src="https://demos.mydevfactory.com/android/public/howItWork_image/{{$howItWork->image_two}}" class="img-icon img-fluid" alt="#">
                     <div class="content">
-                        <h4 class="c-text">Study</h4>
-                        <p>Don numq modi</p>
+                        <h4 class="c-text">{{$howItWork->title_two}}</h4>
+                        {{-- <p>Don numq modi</p> --}}
                     </div>
                 </div>
             </div>
@@ -68,20 +67,20 @@
                 <span class="count-no">3</span>
                 <img src="{{asset('css/images/how-connector.png')}}" alt="#" class="img-fluid conntector" />
                 <div class="card-body">
-                    <img src="{{asset('css/images/how-it-icon-3.svg')}}" class="img-icon img-fluid" alt="#">
+                    <img src="https://demos.mydevfactory.com/android/public/howItWork_image/{{$howItWork->image_three}}" class="img-icon img-fluid" alt="#">
                     <div class="content">
-                        <h4 class="c-text">Evaluate</h4>
-                        <p>Don numq modi</p>
+                        <h4 class="c-text">{{$howItWork->title_three}}</h4>
+                        {{-- <p>Don numq modi</p> --}}
                     </div>
                 </div>
             </div>
             <div class="card">
                 <span class="count-no">4</span>
                 <div class="card-body">
-                    <img src="{{asset('css/images/how-it-icon-4.svg')}}" class="img-icon img-fluid" alt="#">
+                    <img src="https://demos.mydevfactory.com/android/public/howItWork_image/{{$howItWork->image_four}}" class="img-icon img-fluid" alt="#">
                     <div class="content">
-                        <h4 class="c-text">Cirtificate</h4>
-                        <p>Don numq modi</p>
+                        <h4 class="c-text">{{$howItWork->title_four}}</h4>
+                        {{-- <p>Don numq modi</p> --}}
                     </div>
                 </div>
             </div>

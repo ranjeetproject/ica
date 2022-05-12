@@ -117,7 +117,7 @@ class ExamController extends Controller
         return view('WebFrontend.exam-start',$data);
     }
 
-    
+
 
     public function examQuestion(Request $request,$id)
     {
@@ -125,7 +125,7 @@ class ExamController extends Controller
         $exams = Exam::where('id', $id)->first();
         $fullMarks=0;
         if($request->ajax())
-        {            
+        {
             if ($exams->question_limit > 0) {
                 //$data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting2')->inRandomOrder()->limit($exams->question_limit)->get();
                 $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
@@ -280,7 +280,7 @@ class ExamController extends Controller
         $fullMarks=0;
         $exams = Exam::where('id', $id)->first();
         if($request->ajax())
-        {            
+        {
             if ($exams->question_limit > 0) {
                 //$data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting4')->inRandomOrder()->limit($exams->question_limit)->get();
                  $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
@@ -329,22 +329,22 @@ class ExamController extends Controller
         $radioAnswer=[];
         $checkboxAnswer=[];
         $accounting1Answer=[];
-        $accounting2Answer=[];        
+        $accounting2Answer=[];
         $accounting3Answer=[];
         $accounting4Answer=[];
         $accounting5Answer=[];
-        $accounting6Answer=[];        
-        
+        $accounting6Answer=[];
+
         $data=[];
-        $data['examId']=$input['examId'];         
+        $data['examId']=$input['examId'];
         foreach($input as $key=>$value)
-        {  
+        {
             if(strstr($key,"radioType"))
             {
                 $keyArray=explode("_",$key);
                 if(count($keyArray)>0)
                 {
-                    $questionId=$keyArray[1];  
+                    $questionId=$keyArray[1];
                     if (array_key_exists($questionId,$radioAnswer))
                     {
                         array_push($radioAnswer[$questionId],$value);
@@ -353,15 +353,15 @@ class ExamController extends Controller
                     {
                         $radioAnswer[$questionId]=[];
                         array_push($radioAnswer[$questionId],$value);
-                    }                    
-                }                
+                    }
+                }
             }
             if(strstr($key,"checkboxType"))
             {
                 $keyArray=explode("_",$key);
                 if(count($keyArray)>0)
                 {
-                    $questionId=$keyArray[1];  
+                    $questionId=$keyArray[1];
                     if (array_key_exists($questionId,$checkboxAnswer))
                     {
                         $checkboxAnswer[$questionId]=$value;
@@ -370,16 +370,16 @@ class ExamController extends Controller
                     {
                         $checkboxAnswer[$questionId]=[];
                         $checkboxAnswer[$questionId]=$value;
-                    }                    
-                }                
+                    }
+                }
             }
             if(strstr($key,"accounting1"))
             {
                 $keyArray=explode("_",$key);
                 if(count($keyArray)>0)
                 {
-                    $questionId=$keyArray[2];                    
-                    
+                    $questionId=$keyArray[2];
+
                     if (array_key_exists($questionId,$accounting1Answer))
                     {
                         array_push($accounting1Answer[$questionId],$value);
@@ -388,15 +388,15 @@ class ExamController extends Controller
                     {
                         $accounting1Answer[$questionId]=[];
                         array_push($accounting1Answer[$questionId],$value);
-                    }                    
-                }                
+                    }
+                }
             }
             if(strstr($key,"accounting2_"))
             {
                 $keyArray=explode("_",$key);
                 if(count($keyArray)>0)
                 {
-                    $questionId=$keyArray[2];  
+                    $questionId=$keyArray[2];
                     if (array_key_exists($questionId,$accounting2Answer))
                     {
                         $accounting2Answer[$questionId]=$value;
@@ -405,15 +405,15 @@ class ExamController extends Controller
                     {
                         $accounting2Answer[$questionId]=[];
                         $accounting2Answer[$questionId]=$value;
-                    }                    
-                }                
+                    }
+                }
             }
             if(strstr($key,"accounting3"))
             {
                 $keyArray=explode("_",$key);
                 if(count($keyArray)>0)
                 {
-                    $questionId=$keyArray[2];  
+                    $questionId=$keyArray[2];
                     if (array_key_exists($questionId,$accounting3Answer))
                     {
                         $accounting3Answer[$questionId]=$value;
@@ -422,22 +422,22 @@ class ExamController extends Controller
                     {
                         $accounting3Answer[$questionId]=[];
                         $accounting3Answer[$questionId]=$value;
-                    }                    
-                }                
+                    }
+                }
             }
             if(strstr($key,"accounting4"))
             {
                 $keyArray=explode("_",$key);
                 if(count($keyArray)>0)     {
-                    $questionId=$keyArray[1];   
-                    $createKeyValueAssets= 'accounting4_'.$keyArray[1].'_Assets';                    
+                    $questionId=$keyArray[1];
+                    $createKeyValueAssets= 'accounting4_'.$keyArray[1].'_Assets';
                     if($key==$createKeyValueAssets)
                     {
                         if($value==1)
                         {
                             $accounting4Answer[$questionId]['assets'][1][]=$input[$createKeyValueAssets.'_Increase_Option'];
                             $accounting4Answer[$questionId]['assets'][1][]=$input[$createKeyValueAssets.'_Increase_Text'];
-                            
+
                         }
                         elseif($value==2)
                         {
@@ -447,9 +447,9 @@ class ExamController extends Controller
                         elseif($value==3)
                         {
                             $accounting4Answer[$questionId]['assets'][3]=true;
-                        }    
+                        }
                     }
-                    $createKeyValueLiabilities= 'accounting4_'.$keyArray[1].'_Liabilities';                    
+                    $createKeyValueLiabilities= 'accounting4_'.$keyArray[1].'_Liabilities';
                     if($key==$createKeyValueLiabilities)
                     {
                         if($value==1)
@@ -457,7 +457,7 @@ class ExamController extends Controller
                             $accounting4Answer[$questionId]['liabilities'][1][]=$input[$createKeyValueLiabilities.'_Increase_Option1'];
                             $accounting4Answer[$questionId]['liabilities'][1][]=$input[$createKeyValueLiabilities.'_Increase_Option2'];
                             $accounting4Answer[$questionId]['liabilities'][1][]=$input[$createKeyValueLiabilities.'_Increase_Text'];
-                            
+
                         }
                         elseif($value==2)
                         {
@@ -468,9 +468,9 @@ class ExamController extends Controller
                         elseif($value==3)
                         {
                             $accounting4Answer[$questionId]['liabilities'][3]=true;
-                        }   
+                        }
                     }
-                    $createKeyValueEquity= 'accounting4_'.$keyArray[1].'_Equity';                    
+                    $createKeyValueEquity= 'accounting4_'.$keyArray[1].'_Equity';
                     if($key==$createKeyValueEquity)
                     {
                         if($value==1)
@@ -478,7 +478,7 @@ class ExamController extends Controller
                             $accounting4Answer[$questionId]['equity'][1][]=$input[$createKeyValueEquity.'_Increase_Option1'];
                             $accounting4Answer[$questionId]['equity'][1][]=$input[$createKeyValueEquity.'_Increase_Option2'];
                             $accounting4Answer[$questionId]['equity'][1][]=$input[$createKeyValueEquity.'_Increase_Text'];
-                            
+
                         }
                         elseif($value==2)
                         {
@@ -489,17 +489,17 @@ class ExamController extends Controller
                         elseif($value==3)
                         {
                             $accounting4Answer[$questionId]['equity'][3]=true;
-                        }   
+                        }
                     }
-                   
-                }   
+
+                }
             }
             if(strstr($key,"accounting5"))
             {
                 $keyArray=explode("_",$key);
                 if(count($keyArray)>0)
                 {
-                    $questionId=$keyArray[1];  
+                    $questionId=$keyArray[1];
                     if (array_key_exists($questionId,$accounting5Answer))
                     {
                         $accounting5Answer[$questionId]=$value;
@@ -508,15 +508,15 @@ class ExamController extends Controller
                     {
                         $accounting5Answer[$questionId]=[];
                         $accounting5Answer[$questionId]=$value;
-                    }                    
-                }                
+                    }
+                }
             }
             if(strstr($key,"accounting6"))
             {
                 $keyArray=explode("_",$key);
                 if(count($keyArray)>0)
                 {
-                    $questionId=$keyArray[2];  
+                    $questionId=$keyArray[2];
                     if (array_key_exists($questionId,$accounting6Answer))
                     {
                         array_push($accounting6Answer[$questionId],$value);
@@ -525,9 +525,9 @@ class ExamController extends Controller
                     {
                         $accounting6Answer[$questionId]=[];
                         array_push($accounting6Answer[$questionId],$value);
-                    }                    
-                }                
-            }            
+                    }
+                }
+            }
         }
         $data['radio']=$radioAnswer;
         $data['check']=$checkboxAnswer;
@@ -536,30 +536,30 @@ class ExamController extends Controller
         $data['accounting3']=$accounting3Answer;
         $data['accounting4']=$accounting4Answer;
         $data['accounting5']=$accounting5Answer;
-        $data['accounting6']=$accounting6Answer; 
+        $data['accounting6']=$accounting6Answer;
         return $data;
     }
     public function marksCalculet($resultSetData,$studentExamData)
     {
         $marks = [];
         $marks['full_marks'] = 0;
-        $marks['obtain_marks'] = 0; 
-        foreach ($resultSetData as $key=>$value) 
-        {            
+        $marks['obtain_marks'] = 0;
+        foreach ($resultSetData as $key=>$value)
+        {
             if($key=='radio')
             {
                 foreach($value as $radioKey=>$radioValue)
                 {
-                   $radioBoxReturnData=$this->checkAnswerReturnMarks($radioKey, $radioValue[0]);   
+                   $radioBoxReturnData=$this->checkAnswerReturnMarks($radioKey, $radioValue[0]);
                    if(isset($radioBoxReturnData['marks']))
                    {
                         $this->saveStudentAnswer($studentExamData,$radioKey,$radioValue[0],$radioBoxReturnData['status'],$radioBoxReturnData['marks']);
                         $marks['full_marks'] += $radioBoxReturnData['marks'];
-                        if ($radioBoxReturnData['status']=='true') 
+                        if ($radioBoxReturnData['status']=='true')
                         {
                             $marks['obtain_marks'] += $radioBoxReturnData['marks'];
-                        } 
-                   }                                  
+                        }
+                   }
                 }
             }
             if($key=='check')
@@ -567,16 +567,16 @@ class ExamController extends Controller
                 foreach($value as $checkboxKey=>$checkboxValue)
                 {
                    $checkboxStringValue=implode(',',$checkboxValue);
-                   $checkBoxReturnData=$this->checkAnswerReturnMarks($checkboxKey, $checkboxStringValue);   
+                   $checkBoxReturnData=$this->checkAnswerReturnMarks($checkboxKey, $checkboxStringValue);
                    if(isset($checkBoxReturnData['marks']))
                    {
                         $this->saveStudentAnswer($studentExamData,$checkboxKey,$checkboxStringValue,$checkBoxReturnData['status'],$checkBoxReturnData['marks']);
                         $marks['full_marks'] += $checkBoxReturnData['marks'];
-                        if ($checkBoxReturnData['status']=='true') 
+                        if ($checkBoxReturnData['status']=='true')
                         {
                             $marks['obtain_marks'] += $checkBoxReturnData['marks'];
-                        } 
-                   }                                  
+                        }
+                   }
                 }
             }
             if($key=='accounting1')
@@ -584,16 +584,16 @@ class ExamController extends Controller
                 foreach($value as $accounting1Key=>$accounting1Value)
                 {
                    $accounting1StringValue=implode(',',$accounting1Value);
-                   $accounting1ReturnData=$this->checkAnswerReturnMarks($accounting1Key, $accounting1StringValue);   
+                   $accounting1ReturnData=$this->checkAnswerReturnMarks($accounting1Key, $accounting1StringValue);
                    if(isset($accounting1ReturnData['marks']))
                    {
                         $this->saveStudentAnswer($studentExamData,$accounting1Key,$accounting1StringValue,$accounting1ReturnData['status'],$accounting1ReturnData['marks']);
                         $marks['full_marks'] += $accounting1ReturnData['marks'];
-                        if ($accounting1ReturnData['status']=='true') 
+                        if ($accounting1ReturnData['status']=='true')
                         {
                             $marks['obtain_marks'] += $accounting1ReturnData['marks'];
-                        } 
-                   }                                  
+                        }
+                   }
                 }
             }
             if($key=='accounting2')
@@ -609,47 +609,47 @@ class ExamController extends Controller
                         }
                         else{
                             $accounting2StringValue=$accounting2StringValue.','.$lineItemData;
-                        }                        
+                        }
                     }
                     $accounting2StringValue='['.$accounting2StringValue.']';
-                    $accounting2ReturnData=$this->checkAnswerReturnMarks($accounting2Key, $accounting2StringValue);   
+                    $accounting2ReturnData=$this->checkAnswerReturnMarks($accounting2Key, $accounting2StringValue);
                     if(isset($accounting2ReturnData['marks']))
                     {
                         $this->saveStudentAnswer($studentExamData,$accounting2Key,$accounting2StringValue,$accounting2ReturnData['status'],$accounting2ReturnData['marks']);
                         $marks['full_marks'] += $accounting2ReturnData['marks'];
-                        if ($accounting2ReturnData['status']=='true') 
+                        if ($accounting2ReturnData['status']=='true')
                         {
                             $marks['obtain_marks'] += $accounting2ReturnData['marks'];
-                        } 
-                    }                                  
+                        }
+                    }
                 }
             }
             if($key=='accounting3')
             {
                 foreach($value as $accounting3Key=>$accounting3Value)
                 {
-                    $accounting3ReturnData=$this->checkAnswerReturnMarks($accounting3Key, $accounting3Value);   
+                    $accounting3ReturnData=$this->checkAnswerReturnMarks($accounting3Key, $accounting3Value);
                     if(isset($accounting3ReturnData['marks']))
                     {
                         $this->saveStudentAnswer($studentExamData,$accounting3Key,$accounting3Value,$accounting3ReturnData['status'],$accounting3ReturnData['marks']);
                         $marks['full_marks'] += $accounting3ReturnData['marks'];
-                        if ($accounting3ReturnData['status']=='true') 
+                        if ($accounting3ReturnData['status']=='true')
                         {
                             $marks['obtain_marks'] += $accounting3ReturnData['marks'];
-                        } 
-                    }                                  
+                        }
+                    }
                 }
-            }            
+            }
             if($key=='accounting4')
             {
                 foreach($value as $accounting4Key=>$accounting4Value)
-                {     
+                {
                     $accounting4StringValue='';
                     $assetVal='';
                     $liabilitieVal='';
-                    $equitytVal='';       
+                    $equitytVal='';
                     foreach($accounting4Value as $innerKey=>$optionValuePair)
-                    {               
+                    {
                         if($innerKey=='assets')
                         {
                             foreach($optionValuePair as $key=>$valueOptionData)
@@ -666,7 +666,7 @@ class ExamController extends Controller
                                 {
                                     $assetVal='{'.$key.":{}}";
                                 }
-                               
+
                             }
                         }
                         if($innerKey=='liabilities')
@@ -705,21 +705,21 @@ class ExamController extends Controller
                                 {
                                     $equitytVal='{'.$key.":{}}";
                                 }
-                            } 
+                            }
                         }
                     }
-                    $accounting4StringValue='['.$assetVal.','.$liabilitieVal.','.$equitytVal.']';  
-                    $accounting4ReturnData=$this->checkAnswerReturnMarks($accounting4Key, $accounting4StringValue);   
+                    $accounting4StringValue='['.$assetVal.','.$liabilitieVal.','.$equitytVal.']';
+                    $accounting4ReturnData=$this->checkAnswerReturnMarks($accounting4Key, $accounting4StringValue);
                     if(isset($accounting4ReturnData['marks']))
                     {
                         $this->saveStudentAnswer($studentExamData,$accounting4Key,$accounting4StringValue,$accounting4ReturnData['status'],$accounting4ReturnData['marks']);
                         $marks['full_marks'] += $accounting4ReturnData['marks'];
-                        if ($accounting4ReturnData['status']=='true') 
+                        if ($accounting4ReturnData['status']=='true')
                         {
                             $marks['obtain_marks'] += $accounting4ReturnData['marks'];
-                        } 
-                    } 
-                                                
+                        }
+                    }
+
                 }
             }
             if($key=='accounting5')
@@ -727,33 +727,33 @@ class ExamController extends Controller
                 foreach($value as $accounting5Key=>$accounting5Value)
                 {
                    $accounting5StringValue=implode(',',$accounting5Value);
-                   $accounting5ReturnData=$this->checkAnswerReturnMarks($accounting5Key, $accounting5StringValue);   
+                   $accounting5ReturnData=$this->checkAnswerReturnMarks($accounting5Key, $accounting5StringValue);
                    if(isset($accounting5ReturnData['marks']))
                    {
                         $this->saveStudentAnswer($studentExamData,$accounting5Key,$accounting5StringValue,$accounting5ReturnData['status'],$accounting5ReturnData['marks']);
                         $marks['full_marks'] += $accounting5ReturnData['marks'];
-                        if ($accounting5ReturnData['status']=='true') 
+                        if ($accounting5ReturnData['status']=='true')
                         {
                             $marks['obtain_marks'] += $accounting5ReturnData['marks'];
-                        } 
-                    }                                  
+                        }
+                    }
                 }
             }
             if($key=='accounting6')
             {
                 foreach($value as $accounting6Key=>$accounting6Value)
                 {
-                   $accounting6StringValue=implode(',',$accounting6Value);                  
-                   $accounting6ReturnData=$this->checkAnswerReturnMarks($accounting6Key, $accounting6StringValue);   
+                   $accounting6StringValue=implode(',',$accounting6Value);
+                   $accounting6ReturnData=$this->checkAnswerReturnMarks($accounting6Key, $accounting6StringValue);
                    if(isset($accounting6ReturnData['marks']))
                    {
                         $this->saveStudentAnswer($studentExamData,$accounting6Key,$accounting6StringValue,$accounting6ReturnData['status'],$accounting6ReturnData['marks']);
                         $marks['full_marks'] += $accounting6ReturnData['marks'];
-                        if ($accounting6ReturnData['status']=='true') 
+                        if ($accounting6ReturnData['status']=='true')
                         {
                             $marks['obtain_marks'] += $accounting6ReturnData['marks'];
-                        } 
-                   }                                  
+                        }
+                   }
                 }
             }
         }
@@ -771,7 +771,7 @@ class ExamController extends Controller
         {
             $answerIsCorrect = Question::where('id', $questionId)->where('ans', $answerSet)->first();
             $questionData =  Question::find($questionId);
-            if ($answerIsCorrect) 
+            if ($answerIsCorrect)
             {
                 $ansMarks =$questionData->marks;
                 $ansString = $questionData->ans;
@@ -779,16 +779,16 @@ class ExamController extends Controller
                 $givenAnswerArray = explode(",", $answerSet);
                 $i = 0;
                 $j = 0;
-                foreach ($givenAnswerArray as $val) 
+                foreach ($givenAnswerArray as $val)
                 {
-                    if ($val!=0) 
+                    if ($val!=0)
                     {
                         if ($val == $corAnswerArray[$i]) $j++;
                     }
                     $i++;
                 }
                 $obtainMarks = $ansMarks * $j / $i;
-                
+
                 $data['status'] = 'true';
                 $data['marks'] = $obtainMarks;
                 $data['ans'] = $questionData->ans;
@@ -801,8 +801,8 @@ class ExamController extends Controller
         else{
             $answerIsCorrect = Question::where('id', $questionId)->where('ans', $answerSet)->first();
             $questionData =  Question::find($questionId);
-            if ($answerIsCorrect) 
-            {            
+            if ($answerIsCorrect)
+            {
                 $data['status'] = 'true';
                 $data['marks'] = $questionData->marks;
                 $data['ans'] = $questionData->ans;
@@ -812,7 +812,7 @@ class ExamController extends Controller
                 $data['ans'] = $questionData->ans;
             }
         }
-        
+
         return $data;
     }
 
@@ -833,7 +833,7 @@ class ExamController extends Controller
         {
             $db->qus_image = $question->qus_image;
         }
-        
+
         $db->ques_type = $question->type;
         $db->ques_old_answer = $question->ans;
         $db->ques_answer = $answerData;
@@ -844,8 +844,8 @@ class ExamController extends Controller
             $db->ques_correct = 1;
             $db->obtain_marks = $markObtain;
         }
-        
-        $db->ques_marks = $question->marks;        
+
+        $db->ques_marks = $question->marks;
         $db->save();
         return true;
     }
@@ -867,19 +867,19 @@ class ExamController extends Controller
                 if ($exam->exam_for == 2 && $exam->attempt_time!=0) {
                     $studentdExams = StudentExam::where('exam_id',$exam->id)->where('student_id',Auth::user()->id)
                                     ->orderBy('created_at', 'ASC')->get();
-                    if (count($studentdExams) == $exam->attempt_time) 
+                    if (count($studentdExams) == $exam->attempt_time)
                     {
                         $examComplete = 1;
-                    } 
+                    }
                 }
 
-                if ($examComplete == 1) 
+                if ($examComplete == 1)
                 {
                     $maxAttempt = 0;
-                    foreach ($studentdExams as $studentdExam) 
+                    foreach ($studentdExams as $studentdExam)
                     {
                         $maxAttempt++;
-                        if ($maxAttempt == $exam->attempt_time) 
+                        if ($maxAttempt == $exam->attempt_time)
                         {
                             $data['id'] = $studentdExam->id;
                             $data['status'] = true;
@@ -894,14 +894,14 @@ class ExamController extends Controller
                     $studentExamData['exam_id']=$exam->id;
                     $studentExamData['student_id']=Auth::user()->id;
                     $studentExamData['total_duration']=10;
-                    if ($exam->centre != '') 
+                    if ($exam->centre != '')
                     {
                         $studentExamData['centre_id']=$exam->centre;
                     }
                     else{
                         $studentExamData['centre_id']= 0;
                     }
-                    
+
                     $studentExamData['exam_for']=$exam->exam_for;
                     $studentExamData['exam_zone']=$exam->exam_zone;
                     $studentExamData['full_marks']=$input['total_marks'];
@@ -909,7 +909,7 @@ class ExamController extends Controller
                     $studentExamData['exam_status']='Current';
                     $studentExam=StudentExam::create($studentExamData);
                     if($studentExam)
-                    {                        
+                    {
                         $marks = self::marksCalculet($resultSetData,$studentExam);
                         $studentExam->obtain_marks=$marks['obtain_marks'];
                         $studentExam->save();
@@ -921,12 +921,12 @@ class ExamController extends Controller
                 return redirect()->action('WebFrontend\ExamController@examResult',['id'=>$data['id']]);
             }
             else{
-                return abort('404');                
+                return abort('404');
             }
-        }       
-    }  
-    
-    
+        }
+    }
+
+
 
     /**
      * this function are used for exam result
@@ -945,11 +945,11 @@ class ExamController extends Controller
             }
             else{
                 abort('404');
-            }            
-        }        
+            }
+        }
         else{
             abort('404');
-        }       
+        }
     }
     ///////////////////************* exam save end *****************//////////////////////////
 }
