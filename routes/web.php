@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 //Auth::routes();
 Route::get('/', 'WebFrontend\HomePageController@homePageDisplay');
 Route::middleware(['withoutLogin'])->group(function ()//this middleware used for if login redirect to dashboard
-{
-
+{    
     Route::get('/login', 'WebFrontend\UserController@loginForm')->name('login');
     Route::get('/sign-up', 'WebFrontend\UserController@signUp');
     Route::get('/check-otp', function(){
@@ -55,6 +54,7 @@ Route::get('/all-courses','WebFrontend\HomePageController@allCourses')->name('al
 
 Route::middleware(['auth'])->group(function ()
 {
+   // Route::get('/', 'WebFrontend\DashboardController@dashboardPageDisplay')->name('dashboard');
     Route::get('dashboard', 'WebFrontend\DashboardController@dashboardPageDisplay')->name('dashboard');
     Route::get('profile', 'WebFrontend\DashboardController@profilePage')->name('profile');
     Route::get('edit-profile/{id}', 'WebFrontend\DashboardController@editProfilePage');

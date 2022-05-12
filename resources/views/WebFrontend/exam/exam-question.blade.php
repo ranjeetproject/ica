@@ -42,7 +42,13 @@
                                     <div class="skpped">Skipped: <span class="skp"></span></div>
                                 </div>
                                 <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                    @for ($i = 0; $i < $questionLimit; $i++)
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$i}}"
+                                            class="numberIcn" aria-current="true" id="numberIcnButton_{{$i+1}}" aria-label="Slide {{$i+1}}"><span
+                                            data-bs-dismiss="modal">{{$i+1}}</span>
+                                        </button>
+                                    @endfor
+                                    {{-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                                         class="numberIcn" aria-current="true" id="numberIcnButton_1" aria-label="Slide 1"><span
                                             data-bs-dismiss="modal">1</span></button>
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
@@ -71,7 +77,7 @@
                                         <span data-bs-dismiss="modal">9</span></button>
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="9"
                                         data-bs-dismiss="modal" class="numberIcn" id="numberIcnButton_10" aria-label="Slide 10"><span
-                                            data-bs-dismiss="modal">10</span></button>
+                                            data-bs-dismiss="modal">10</span></button> --}}
                                 </div>
                             </div>
                         </div>
@@ -87,21 +93,14 @@
                         </div>
                         <div class="carouselFlow">
                             <button class="carousel-control-prev" type="button"><span class="">Previous</span>
-                            </button>
-                        {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide="prev"><span class="">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" id="skip" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide="next"><span class="">Skip</span>
-                            </button>
-                            <button class="carousel-control-next" type="button"  id="next" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide="next"><span class="">Next</span>
-                            </button> --}}
+                            </button>                        
                             <button class="carousel-control-next-skip" id="skip" type="button"><span class="">Skip</span>
+                            </button>
+                            <button class="carousel-control-next-skip" id="skipSubmit" type="submit" style="display:none;"><span class="">Skip & Submit</span>
                             </button>
                             <button class="carousel-control-next" id="next" type="button"><span class="">Save & Next</span>
                             </button>
-                            <button class="carousel-control-next"  id="formSubmit" type="submit" style="display:none;"><span class="">Submit</span>
+                            <button class="carousel-control-next"  id="formSubmit" type="submit" style="display:none;"><span class="">Save & Submit</span>
                             </button>
                         </div>
                     </div>
@@ -152,11 +151,15 @@
                                 if(sliderNumber==questionLimit)
                                 {
                                     $("#next").hide();
+                                    $("#skip").hide();
                                     $("#formSubmit").show();
+                                    $("#skipSubmit").show();
                                 }
                                 else{
                                     $("#next").show();
+                                    $("#skip").show();
                                     $("#formSubmit").hide();
+                                    $("#skipSubmit").hide();
                                 }
                             }
                         });
@@ -169,6 +172,23 @@
                             if ($(this).hasClass("active")) {
                                 $('#exam-count').text($(this).attr("slide"));
                                 var questionType = $(this).children(".questionType").val();
+
+                                var sliderNumber = $(this).attr("slide");
+                                if(sliderNumber==questionLimit)
+                                {
+                                    $("#next").hide();
+                                    $("#formSubmit").show();
+
+                                    $("#skip").hide();
+                                    $("#skipSubmit").show();
+                                }
+                                else{
+                                    $("#next").show();
+                                    $("#formSubmit").hide();
+
+                                    $("#skip").show();
+                                    $("#skipSubmit").hide();
+                                }
                             }
                         });
 
@@ -209,10 +229,16 @@
                                         {
                                             $("#next").hide();
                                             $("#formSubmit").show();
+
+                                            $("#skip").hide();
+                                            $("#skipSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
                                             $("#formSubmit").hide();
+
+                                            $("#skip").show();
+                                            $("#skipSubmit").hide();
                                         }
 
                                     }
@@ -246,10 +272,16 @@
                                         {
                                             $("#next").hide();
                                             $("#formSubmit").show();
+
+                                            $("#skip").hide();
+                                            $("#skipSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
                                             $("#formSubmit").hide();
+
+                                            $("#skip").show();
+                                            $("#skipSubmit").hide();
                                         }
                                     }
                                 }
@@ -279,10 +311,16 @@
                                         {
                                             $("#next").hide();
                                             $("#formSubmit").show();
+
+                                            $("#skip").hide();
+                                            $("#skipSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
                                             $("#formSubmit").hide();
+
+                                            $("#skip").show();
+                                            $("#skipSubmit").hide();
                                         }
                                     }
 
@@ -319,7 +357,7 @@
 
                                     }
 
-                                    if($("#accounting2credit_"+questionId).val()==0 || $("#accounting2Debit_"+questionId).val()==0)
+                                    if($("#accounting2credit_"+questionId).val()==0 || $("#accounting2Debit_"+questionId).val()==0 || ($("#accounting2credit_"+questionId).val() != $("#accounting2Debit_"+questionId).val()))
                                     {
 
                                         return event.preventDefault();
@@ -340,10 +378,16 @@
                                             {
                                                 $("#next").hide();
                                                 $("#formSubmit").show();
+
+                                                $("#skip").hide();
+                                                $("#skipSubmit").show();
                                             }
                                             else{
                                                 $("#next").show();
                                                 $("#formSubmit").hide();
+
+                                                $("#skip").show();
+                                                $("#skipSubmit").hide();
                                             }
                                         // }
                                     }
@@ -377,10 +421,16 @@
                                         {
                                             $("#next").hide();
                                             $("#formSubmit").show();
+
+                                            $("#skip").hide();
+                                            $("#skipSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
                                             $("#formSubmit").hide();
+
+                                            $("#skip").show();
+                                            $("#skipSubmit").hide();
                                         }
                                     }
                                 }
@@ -506,10 +556,16 @@
                                         {
                                             $("#next").hide();
                                             $("#formSubmit").show();
+
+                                            $("#skip").hide();
+                                            $("#skipSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
                                             $("#formSubmit").hide();
+
+                                            $("#skip").show();
+                                            $("#skipSubmit").hide();
                                         }
                                     }
                                 }
@@ -542,10 +598,16 @@
                                         {
                                             $("#next").hide();
                                             $("#formSubmit").show();
+
+                                            $("#skip").hide();
+                                            $("#skipSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
                                             $("#formSubmit").hide();
+
+                                            $("#skip").show();
+                                            $("#skipSubmit").hide();
                                         }
                                     }
                                 }
@@ -576,174 +638,22 @@
                                         {
                                             $("#next").hide();
                                             $("#formSubmit").show();
+
+                                            $("#skip").hide();
+                                            $("#skipSubmit").show();
                                         }
                                         else{
                                             $("#next").show();
                                             $("#formSubmit").hide();
+
+                                            $("#skip").show();
+                                            $("#skipSubmit").hide();
                                         }
                                     }
                                 }
                             }
                         });
                     });
-
-
-
-                    // myCarousel.addEventListener('slide.bs.carousel', function(event)
-                    // {
-                    //     $(".carousel-item").each(function()
-                    //     {
-                    //         if ($(this).hasClass("active"))
-                    //         {
-                    //             $('#exam-count').text($(this).attr("slide"));
-                    //             var questionType = $(this).children(".questionType").val();
-
-                    //             if (questionType === 'radio')
-                    //             {
-                    //                 console.log("Inner :"+buttonType);
-
-                    //                 var curInputs = $(this).find("input[type='radio']");
-                    //                 var check = true;
-                    //                 for (var i = 0; i < curInputs.length; i++)
-                    //                 {
-                    //                     var name = curInputs[i].name;
-                    //                     if($("input:radio[name="+name+"]:checked").length == 0){
-                    //                         check = false;
-                    //                     }
-                    //                 }
-
-                    //                 if(!check){
-                    //                     return event.preventDefault();
-                    //                 }
-
-                    //             }
-                    //             if (questionType === 'check') {
-                    //                 // var curInputs = $(this).find("input[type='checkbox']");
-                    //                 // var check = false;
-                    //                 // for (var i = 0; i < curInputs.length; i++)
-                    //                 // {
-                    //                 //     var name = curInputs[i].name;
-                    //                 //     if (curInputs[i].checked)
-                    //                 //     {
-                    //                 //         check = true;
-                    //                 //     }
-                    //                 // }
-
-                    //                 // if(!check){
-                    //                 //     return event.preventDefault();
-                    //                 // }
-                    //             }
-                    //             if (questionType === 'accounting1') {
-                    //                 // var curInputs = $(this).find("input[type='radio']");
-                    //                 // var check = true;
-                    //                 // for (var i = 0; i < curInputs.length; i++)
-                    //                 // {
-                    //                 //     var name = curInputs[i].name;
-                    //                 //     if($("input:radio[name="+name+"]:checked").length == 0){
-                    //                 //         check = false;
-                    //                 //     }
-                    //                 // }
-
-                    //                 // if(!check){
-                    //                 //     return event.preventDefault();
-                    //                 // }
-
-                    //             }
-                    //             if (questionType === 'accounting2') {
-                    //                 //    var curInputs = $(this).find("input[type='number'],input[type='radio'],select");
-                    //                 //    var check = true;
-                    //                 //     for (var i = 0; i < curInputs.length; i++)
-                    //                 //     {
-                    //                 //         var type = curInputs[i].type;
-                    //                 //         var name = curInputs[i].name;
-                    //                 //         var id = curInputs[i].id;
-                    //                 //         if(type != 'radio')
-                    //                 //         {
-                    //                 //             if($('#'+id).val()=='')
-                    //                 //             {
-                    //                 //                 check = false;
-                    //                 //             }
-                    //                 //         }
-                    //                 //         if(type == 'radio')
-                    //                 //         {
-                    //                 //             console.log('d');
-                    //                 //             if($("input:radio[name="+name+"]:checked").length == 0)
-                    //                 //             {
-
-                    //                 //                 check = false;
-                    //                 //                 console.log(i +"  "+ check);
-                    //                 //             }
-
-
-                    //                 //         }
-                    //                 //     }
-
-                    //                 //     if(!check){
-                    //                 //         return event.preventDefault();
-                    //                 //     }
-                    //             }
-                    //             if (questionType === 'accounting3')
-                    //             {
-                    //                 // var curInputs = $(this).find("select");
-                    //                 // var check = true;
-                    //                 // for (var i = 0; i < curInputs.length; i++)
-                    //                 // {
-                    //                 //     var name = curInputs[i].name;
-                    //                 //     var id = curInputs[i].id;
-                    //                 //     if($('#'+id).val()=='')
-                    //                 //     {
-                    //                 //         check = false;
-                    //                 //     }
-                    //                 // }
-
-                    //                 // if(!check){
-                    //                 //     return event.preventDefault();
-                    //                 // }
-
-                    //             }
-                    //             if (questionType === 'accounting4') {
-
-                    //             }
-                    //             if (questionType === 'accounting5') {
-                    //                 // var curInputs = $(this).find("select");
-                    //                 // var check = true;
-                    //                 // for (var i = 0; i < curInputs.length; i++)
-                    //                 // {
-                    //                 //     var name = curInputs[i].name;
-                    //                 //     var id = curInputs[i].id;
-                    //                 //     if($('#'+id).val()=='')
-                    //                 //     {
-                    //                 //         check = false;
-                    //                 //     }
-                    //                 // }
-
-                    //                 // if(!check){
-                    //                 //     return event.preventDefault();
-                    //                 // }
-                    //             }
-                    //             if (questionType === 'accounting6') {
-                    //                 // var curInputs = $(this).find("input[type='radio']");
-                    //                 // var check = true;
-                    //                 // for (var i = 0; i < curInputs.length; i++)
-                    //                 // {
-                    //                 //     var name = curInputs[i].name;
-                    //                 //     if($("input:radio[name="+name+"]:checked").length == 0){
-                    //                 //         check = false;
-                    //                 //     }
-                    //                 // }
-
-                    //                 // if(!check){
-                    //                 //     return event.preventDefault();
-                    //                 // }
-                    //             }
-                    //         }
-                    //     });
-
-                    // });
-
-
-
-
                 })
         }
 

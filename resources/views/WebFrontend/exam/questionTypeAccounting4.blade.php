@@ -1,5 +1,5 @@
 <div class="questionBlock">
-    <p>{{ $question->indexKey }}/Accounting4. {{ $question->qus }}</p>
+    <p>{{ $question->indexKey }}. {{ $question->qus }}</p>
     <div class="questionWorking">
         <div class="workingCap">
             <div class="wcHead">Assets</div>
