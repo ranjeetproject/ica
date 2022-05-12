@@ -6,6 +6,7 @@ use App\Course;
 use App\Http\Controllers\Controller;
 use App\StdCourse;
 use App\Cms;
+use App\HowItWork;
 use App\Testimonial;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,7 @@ class HomePageController extends Controller
         $data['courses'] = $course;
         $data['homeCms'] = Cms::find(6);
         $data['testimonial']=Testimonial::all();
+        $data['howItWork']=HowItWork::first();
 
         return view('WebFrontend.home', $data);
     }
