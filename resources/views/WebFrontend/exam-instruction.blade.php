@@ -31,7 +31,6 @@
 
                     </div>
                      
-                    {!! $data->exam_details!!}
                 </div>
 
             </div>
