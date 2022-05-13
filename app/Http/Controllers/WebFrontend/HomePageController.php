@@ -39,6 +39,7 @@ class HomePageController extends Controller
             }
             $data['courses'] = $course;
             $data['homeCms'] = Cms::find(6);
+            $data['homePageCourseHeader'] = Cms::find(7);
             $data['testimonial']=Testimonial::all();
             $data['howItWork']=HowItWork::first();
 

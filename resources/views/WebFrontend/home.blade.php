@@ -94,14 +94,10 @@
         <div class="row">
             <div class="col-md-5">
                 <p class="courses-tag">Courses </p>
-                <h2 class="course-head"> There are the following 20+ courses under depertment.</h2>
+                <h2 class="course-head"> {{$homePageCourseHeader->title}}</h2>
             </div>
             <div class="col-md-7">
-                <p class="corse-hints">Iste natus error sit Voluptatem Accusantium doloremque laudantium Nemo
-                    usantium dolore Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit, sed do eiusmod tempo rincididunt ut labore et dolore magna aliqua.
-                    Quis suspendisse
-                    onsectetur adipiscing.</p>
+                <p class="corse-hints">{{strip_tags($homePageCourseHeader->content)}}</p>
             </div>
         </div>
         <div class="home-courses">
