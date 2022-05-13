@@ -34,7 +34,7 @@
             </div>
 
             <div class="contents textalign_justify">
-                <p class="sub-para">Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
+                {{-- <p class="sub-para">Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
                     porro quisquam est, qui dolorem ipsum
                     quia dolor sit amet, Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
                     laboriosam, nisi ut
@@ -43,7 +43,7 @@
                     porro quisquam est, qui dolorem ipsum
                     quia dolor sit amet, Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
                     laboriosam, nisi ut
-                    aliquid ex ea commodi consequatur....</p>
+                    aliquid ex ea commodi consequatur....</p> --}}
                 <div class="title-part">
                     <span>About Courses</span>
                     <span class="bar"></span>
@@ -90,12 +90,12 @@
                         <span class="lesson-number">10 Lessons</span>
                     </div>
                 </div> --}}
-                <p class="">
+                {{-- <p class="">
                     Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
                     qui dolorem ipsum
                     quia dolor sit amet, Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
                     laboriosam, nisi ut
-                    aliquid ex ea commodi consequatur....</p>
+                    aliquid ex ea commodi consequatur....</p> --}}
             </div>
         </div>
     </section>
