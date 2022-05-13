@@ -15,9 +15,9 @@
                         <div class="qbSelect">
                             <select class="form-select" aria-label="Default select example" name="accounting4_{{$question->id}}_Assets_Increase_Option" id="accounting4_{{$question->id}}_Assets_Increase_Option">
                                 <option selected value="">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($question->reasonEquity as $reasonEquityValue)
+                                    <option value="{{ $reasonEquityValue->id }}">{{ $reasonEquityValue->reason_name	}}</option>
+                                @endForeach
                             </select>
                         </div>
                         <input type="text" class="form-control" name="accounting4_{{$question->id}}_Assets_Increase_Text" id="accounting4_{{$question->id}}_Assets_Increase_Text" />
@@ -34,9 +34,9 @@
                         <div class="qbSelect">
                             <select class="form-select" aria-label="Default select example" name="accounting4_{{$question->id}}_Assets_Decrease_Option" id="accounting4_{{$question->id}}_Assets_Decrease_Option">
                                 <option selected value="">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($question->reasonEquity as $reasonEquityValue)
+                                    <option value="{{ $reasonEquityValue->id }}">{{ $reasonEquityValue->reason_name	}}</option>
+                                @endForeach
                             </select>
                         </div>
                         <input type="text" class="form-control" name="accounting4_{{$question->id}}_Assets_Decrease_Text" id="accounting4_{{$question->id}}_Assets_Decrease_Text" />
@@ -68,15 +68,16 @@
                         <div class="qbSelect">
                             <select class="form-select" aria-label="Default select example" name="accounting4_{{$question->id}}_Liabilities_Increase_Option1" id="accounting4_{{$question->id}}_Liabilities_Increase_Option1">
                                 <option selected value="">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($question->reasonEquity as $reasonEquityValue)
+                                    <option value="{{ $reasonEquityValue->id }}">{{ $reasonEquityValue->reason_name	}}</option>
+                                @endForeach
                             </select>
                             <select class="form-select" aria-label="Default select example" name="accounting4_{{$question->id}}_Liabilities_Increase_Option2" id="accounting4_{{$question->id}}_Liabilities_Increase_Option2">
                                 <option selected value="">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($question->secondaryAccount as $secondaryAccountValue)
+                                    <option value="{{ $secondaryAccountValue->id }}">{{ $secondaryAccountValue->acc_name }}
+                                    </option>
+                                @endForeach
                             </select>
                         </div>
                         <input type="text" class="form-control" name="accounting4_{{$question->id}}_Liabilities_Increase_Text" id="accounting4_{{$question->id}}_Liabilities_Increase_Text" />
@@ -93,15 +94,16 @@
                         <div class="qbSelect">
                             <select class="form-select" aria-label="Default select example" name="accounting4_{{$question->id}}_Liabilities_Decrease_Option1" id="accounting4_{{$question->id}}_Liabilities_Decrease_Option1">
                                 <option selected value="">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($question->reasonEquity as $reasonEquityValue)
+                                    <option value="{{ $reasonEquityValue->id }}">{{ $reasonEquityValue->reason_name	}}</option>
+                                @endForeach
                             </select>
                             <select class="form-select" aria-label="Default select example" name="accounting4_{{$question->id}}_Liabilities_Decrease_Option2" id="accounting4_{{$question->id}}_Liabilities_Decrease_Option2">
                                 <option selected value="">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($question->secondaryAccount as $secondaryAccountValue)
+                                    <option value="{{ $secondaryAccountValue->id }}">{{ $secondaryAccountValue->acc_name }}
+                                    </option>
+                                @endForeach
                             </select>
                         </div>
                         <input type="text" class="form-control" name="accounting4_{{$question->id}}_Liabilities_Decrease_Text" id="accounting4_{{$question->id}}_Liabilities_Decrease_Text" />
@@ -132,15 +134,16 @@
                         <div class="qbSelect">
                             <select class="form-select" aria-label="Default select example" name="accounting4_{{$question->id}}_Equity_Increase_Option1" id="accounting4_{{$question->id}}_Equity_Increase_Option1">
                                 <option selected value="">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($question->reasonEquity as $reasonEquityValue)
+                                    <option value="{{ $reasonEquityValue->id }}">{{ $reasonEquityValue->reason_name	}}</option>
+                                @endForeach
                             </select>
                             <select class="form-select" aria-label="Default select example" name="accounting4_{{$question->id}}_Equity_Increase_Option2" id="accounting4_{{$question->id}}_Equity_Increase_Option2">
                                 <option selected value="">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($question->secondaryAccount as $secondaryAccountValue)
+                                    <option value="{{ $secondaryAccountValue->id }}">{{ $secondaryAccountValue->acc_name }}
+                                    </option>
+                                @endForeach
                             </select>
                         </div>
                         <input type="text" class="form-control" name="accounting4_{{$question->id}}_Equity_Increase_Text" id="accounting4_{{$question->id}}_Equity_Increase_Text" />
@@ -157,15 +160,16 @@
                         <div class="qbSelect">
                             <select class="form-select" aria-label="Default select example" name="accounting4_{{$question->id}}_Equity_Decrease_Option1" id="accounting4_{{$question->id}}_Equity_Decrease_Option1">
                                 <option selected value="">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($question->reasonEquity as $reasonEquityValue)
+                                    <option value="{{ $reasonEquityValue->id }}">{{ $reasonEquityValue->reason_name	}}</option>
+                                @endForeach
                             </select>
                             <select class="form-select" aria-label="Default select example" name="accounting4_{{$question->id}}_Equity_Decrease_Option2" id="accounting4_{{$question->id}}_Equity_Decrease_Option2">
                                 <option selected value="">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($question->secondaryAccount as $secondaryAccountValue)
+                                    <option value="{{ $secondaryAccountValue->id }}">{{ $secondaryAccountValue->acc_name }}
+                                    </option>
+                                @endForeach
                             </select>
                         </div>
                         <input type="text" class="form-control" name="accounting4_{{$question->id}}_Equity_Decrease_Text" id="accounting4_{{$question->id}}_Equity_Decrease_Text" />

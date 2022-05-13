@@ -3170,11 +3170,12 @@ li.selected .qaFormbg {
     position: relative;
     display: flex;
     border-radius: 5px;
+    font-size: 15px;
 
 }
 
 .detlTable ul li span {
-    background: #3BBCA7;
+    /*    background: #3BBCA7;*/
     /* display: inline-block; */
     width: 30px;
     position: absolute;
@@ -3184,7 +3185,7 @@ li.selected .qaFormbg {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: #3BBCA7;
     font-size: 20px;
     font-weight: 500;
     border-radius: 5px;
@@ -3243,6 +3244,72 @@ li.selected .qaFormbg {
 }
 
 /* ---------------Profile-end------------------ */
+
+
+/* ---------------Notification-modal-start------------------ */
+.notiModal .modal-header {
+    padding: 4px 10px;
+    background: #181e5c;
+}
+
+.notiModal .modal-header h5 {
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.notiModal .modal-header button {
+    background-image: none;
+    color: #fff;
+    opacity: 1;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 5px;
+    box-shadow: none !important;
+}
+
+.notiModal .modal-footer {
+    justify-content: center;
+}
+
+.notiModal .modal-footer button {
+    background: #2c368f;
+    color: #fff;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    box-shadow: none !important;
+}
+
+.notiModal .modal-footer button:hover {
+    background: #000;
+}
+
+.notiModal .modal-body h6 {
+    text-align: center;
+    color: #181e5c;
+}
+
+.notify {
+    width: 100%;
+    box-shadow: 0 0 5px #9da2d7;
+    padding: 7px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+}
+
+.notify p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 17px;
+    color: #333;
+}
+
+/* ---------------Notification-modal-end------------------ */
+
+
+
 .allCourse {
     width: 100%;
     padding: 50px 0;
@@ -3291,6 +3358,7 @@ li.selected .qaFormbg {
         width: 49%;
         margin-bottom: 10px;
     }
+
     .allCourse .course-card {
         width: 48%;
     }
@@ -3346,4 +3414,3 @@ li.selected .qaFormbg {
         width: 31%;
     }
 }
-
