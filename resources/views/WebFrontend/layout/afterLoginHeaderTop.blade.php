@@ -14,7 +14,9 @@
             <a href="{{$setting_data->video_link}}" class="social-link" target="_blank">
                 <img src="{{ asset('css/images/video-icon.svg') }}" class="img-fluid" /></a>
             <div class="notification-wrp">
-                <span class="num">1</span>
+                @if($notification_count > 0)
+                    <span class="num">{{$notification_count}}</span>
+                @endif
                 <a href="" class="social-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <img src="{{ asset('css/images/bell_icon.svg') }}" class="img-fluid" />
                 </a>
@@ -32,6 +34,7 @@
 
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="{{action('WebFrontend\DashboardController@profilePage')}}">Profile</a></li>
+                        <li><a class="dropdown-item" href="{{action('WebFrontend\ChartController@viewProgressChart')}}">Progress Report Card</a></li>
                         <li><a class="dropdown-item" href="{{action('WebFrontend\UserController@logout')}}">Logout</a></li>
                     </ul>
                 </div>

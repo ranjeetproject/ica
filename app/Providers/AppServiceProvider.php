@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 use App\SiteConfiguration;
+use App\Notification;
 use Illuminate\Support\ServiceProvider;
+use Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
         {
             $data=[];
             $data['setting_data']=SiteConfiguration::find(1);
+            $data['notification_count'] = Notification::count();
+            $data['notification_header_data'] = Notification::orderBy('id', 'desc')->take(3)->get();
             $view->with($data);
         });
 
