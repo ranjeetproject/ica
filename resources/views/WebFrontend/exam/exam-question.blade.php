@@ -122,6 +122,9 @@
         {
             $("#next").hide();
             $("#formSubmit").show();
+
+            $("#skip").hide();
+            $("#skipSubmit").show();
         }
 
         function fetch_data() {

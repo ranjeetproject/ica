@@ -23,10 +23,8 @@
                 </div>
                 <div>
                     <canvas id="myChart1"></canvas>
-                </div>               
-            </div>
-
-            
+                </div>                               
+            </div>            
             <div>
                 <canvas id="myChart2"></canvas>
             </div>
@@ -145,8 +143,8 @@
             config
         );
 
-        myChart.canvas.parentNode.style.height = '400px';
-        myChart.canvas.parentNode.style.width = '800px';
+        //myChart.canvas.parentNode.style.height = '400px';
+        //myChart.canvas.parentNode.style.width = '800px';
 
 
         const data1 = {
@@ -234,8 +232,8 @@
             config1
         );
 
-        myChart1.canvas.parentNode.style.height = '400px';
-        myChart1.canvas.parentNode.style.width = '800px';
+        //myChart1.canvas.parentNode.style.height = '400px';
+        //myChart1.canvas.parentNode.style.width = '800px';
 
 
          var labels2='{{$asseigmentProgress['chapterArray']}}';
@@ -248,22 +246,22 @@
                 label: 'Read',
                 data: [{{$asseigmentProgress['percentgeReadArray']}}],
                 backgroundColor: [
-                'rgba(17, 218, 238, 1)',
-                'rgba(17, 218, 238, 1)',
-                'rgba(17, 218, 238, 1)',
-                'rgba(17, 218, 238, 1)',
-                'rgba(17, 218, 238, 1)',
-                'rgba(17, 218, 238, 1)',
-                'rgba(17, 218, 238, 1)'
+                'rgba(0, 177, 106, 1)',
+                'rgba(0, 177, 106, 1)',
+                'rgba(0, 177, 106, 1)',
+                'rgba(0, 177, 106, 1)',
+                'rgba(0, 177, 106, 1)',
+                'rgba(0, 177, 106, 1)',
+                'rgba(0, 177, 106, 1)'
                 ],
                 borderColor: [
-                'rgb(17, 218, 238)',
-                'rgb(17, 218, 238)',
-                'rgb(17, 218, 238)',
-                'rgb(17, 218, 238)',
-                'rgb(17, 218, 238)',
-                'rgb(17, 218, 238)',
-                'rgb(17, 218, 238)'
+                'rgb(0, 177, 106)',
+                'rgb(0, 177, 106)',
+                'rgb(0, 177, 106)',
+                'rgb(0, 177, 106)',
+                'rgb(0, 177, 106)',
+                'rgb(0, 177, 106)',
+                'rgb(0, 177, 106)'
                 ],
                 borderWidth: 1
             },
