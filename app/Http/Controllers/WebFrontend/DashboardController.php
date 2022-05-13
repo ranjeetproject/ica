@@ -66,9 +66,9 @@ class DashboardController extends Controller
             //$destinationPath = 'https://learnersmall.in/android/public/profile_photo/' . $fileName;
 
             file_put_contents($destinationPath, $data);
-            $input['profile_image'] = $fileName;
+            $input['profile_image'] = asset('user_images/')."/".$fileName;
             $this->imageUpload($input);
-            return asset('user_images/' . $fileName);
+            return $input['profile_image'];
 
         }
 

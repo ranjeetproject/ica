@@ -70,13 +70,14 @@
                                 <div class="col-sm-10">
                                     <input type="email" readonly class="form-control" value="{{Auth::user()->email}}" />
                                 </div>
-                                <div class="mb-3 row">
+                                
+                            </div>
+                            <div class="mb-3 row">
                                     <label class="col-sm-2 col-form-label">Center Details</label>
                                     <div class="col-sm-10">
                                         <input type="text" readonly class="form-control" value="{{@$center->Center_code}} , {{@$center->Center_name}} , {{@$center->Center_address}}" />
                                     </div>
                                 </div>
-                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3 row">
@@ -256,7 +257,7 @@
                             $profileModal.modal('hide');
                             $("#progress").hide();
                             inputPreviewBox.src = xhr.responseText;
-
+                            $('#profile_image_header').attr('src',xhr.responseText);
                         } else {
                             $profileModal.modal('hide');
                             $("#progressBar").stop();
@@ -273,17 +274,7 @@
         });
     });
 
-    @if(Session::has('success'))
-    toastr.success("{{ Session::get('success') }}"); {
-        {
-            Session::forget('success')
-        }
-    };
-    @endif
-
-    @if(Session::has('error'))
-    toastr.error("{{ Session::get('error') }}");
-    @endif
+  
 
 </script>
 @endsection
