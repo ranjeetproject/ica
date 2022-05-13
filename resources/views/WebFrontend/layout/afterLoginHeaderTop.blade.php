@@ -15,9 +15,9 @@
                 <img src="{{ asset('css/images/video-icon.svg') }}" class="img-fluid" /></a>
             <div class="notification-wrp">
                 @if($notification_count > 0)
-                    <span class="num">{{$notification_count}}</span>
+                <span class="num">{{$notification_count}}</span>
                 @endif
-                <a href="" class="social-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <a href="" class="social-link" data-bs-toggle="modal" data-bs-target="#notificationModal">
                     <img src="{{ asset('css/images/bell_icon.svg') }}" class="img-fluid" />
                 </a>
             </div>

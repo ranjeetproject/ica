@@ -97,28 +97,28 @@
 
 
 <!-- Modal -->
-<div class="modal fade notiModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade notiModal" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
+                <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fal fa-times"></i></button>
             </div>
             <div class="modal-body">
                 @if(count($notification_header_data) > 0)
-                    @foreach ($notification_header_data as $notify)
-                        <div class="notify">
-                            <p>{!! Str::words($notify->message, 10, ' ...') !!}</p>
-                        </div>
-                    @endforeach
+                @foreach ($notification_header_data as $notify)
+                <div class="notify">
+                    <p>{!! Str::words($notify->message, 10, ' ...') !!}</p>
+                </div>
+                @endforeach
                 @else
-                    <h6>Sorry! Nothing new</h6>
+                <h6>Sorry! Nothing new</h6>
                 @endif
             </div>
             <div class="modal-footer">
                 <!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
                 {{-- <button type="button" class="btn btn-primary">Show All</button> --}}
-                    <a href="{{url('notification-list')}}" class="btn btn-primary">Show All</a>
+                <a href="{{url('notification-list')}}" class="btn btn-primary">Show All</a>
             </div>
         </div>
     </div>

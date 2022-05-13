@@ -17,17 +17,19 @@
                 <span class="blue-bar"></span>
             </h3>
 
-            <div style="display:flex;">
-                <div>
+            <div class="progressChart">
+                <div class="pgC">
                     <canvas id="myChart"></canvas>
                 </div>
-                <div>
+                <div class="pgC">
                     <canvas id="myChart1"></canvas>
-                </div>                               
-            </div>            
-            <div>
+                </div>  
+                                           
+            </div> 
+            <div class="pgcBtm">
                 <canvas id="myChart2"></canvas>
-            </div>
+            </div>             
+            
 
             
             

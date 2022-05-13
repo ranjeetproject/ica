@@ -3272,7 +3272,7 @@ li.selected .qaFormbg {
     justify-content: center;
 }
 
-.notiModal .modal-footer button {
+.notiModal .modal-footer a {
     background: #2c368f;
     color: #fff;
     width: 100%;
@@ -3289,6 +3289,10 @@ li.selected .qaFormbg {
 .notiModal .modal-body h6 {
     text-align: center;
     color: #181e5c;
+}
+
+.notiModal .modal-dialog {
+    max-width: 300px;
 }
 
 .notify {
@@ -3308,6 +3312,24 @@ li.selected .qaFormbg {
 
 /* ---------------Notification-modal-end------------------ */
 
+.progressChart {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.pgC {
+    width: 49%;
+    padding: 20px;
+    box-shadow: 0 0 5px #ccc;
+    margin-bottom: 25px;
+}
+
+.pgcBtm {
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 0 5px #ccc;
+}
 
 
 .allCourse {
@@ -3329,6 +3351,14 @@ li.selected .qaFormbg {
 
 
 @media screen and (max-width: 991px) {
+    .progressChart {
+        flex-direction: column;
+    }
+
+    .pgC {
+        width: 100%;
+    }
+
     .qbSelectB {
         width: 49%;
     }
