@@ -12,6 +12,7 @@ use App\StudentExam;
 use App\StdExam;
 use App\SecondaryAccount;
 use App\PrimaryAccount;
+use App\ReasonEquity;
 use App\Account;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
@@ -148,6 +149,11 @@ class ExamController extends Controller
                     $value->primaryAccount=PrimaryAccount::get();
                     $value->secondaryAccount=SecondaryAccount::get();
                     $value->account=Account::get();
+                }
+                if($value->type == "accounting4")
+                {
+                    $value->reasonEquity=ReasonEquity::get();
+                    $value->secondaryAccount=SecondaryAccount::get();
                 }
                 $fullMarks=$fullMarks+$value->marks;
             }
@@ -303,6 +309,11 @@ class ExamController extends Controller
                     $value->primaryAccount=PrimaryAccount::get();
                     $value->secondaryAccount=SecondaryAccount::get();
                     $value->account=Account::get();
+                }
+                if($value->type == "accounting4")
+                {
+                    $value->reasonEquity=ReasonEquity::get();
+                    $value->secondaryAccount=SecondaryAccount::get();
                 }
                 $fullMarks=$fullMarks+$value->marks;
             }
