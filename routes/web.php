@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 //Auth::routes();
 Route::get('/', 'WebFrontend\HomePageController@homePageDisplay');
 Route::middleware(['withoutLogin'])->group(function ()//this middleware used for if login redirect to dashboard
-{    
+{
     Route::get('/login', 'WebFrontend\UserController@loginForm')->name('login');
     Route::get('/sign-up', 'WebFrontend\UserController@signUp');
     Route::get('/check-otp', function(){
@@ -71,12 +71,14 @@ Route::middleware(['auth'])->group(function ()
     Route::get('exam-question/{id}','WebFrontend\ExamController@examQuestion')->name('exam-question');
     Route::post('exam-submit','WebFrontend\ExamController@examSubmit');
 
+    Route::get('chart','WebFrontend\ChartController@viewProgressChart');
+
 
    // Route::get('exam-question','WebFrontend\ExamController@examQuestion')->name('exam-question');
     Route::get('competitive-exam','WebFrontend\ExamController@competitiveExam')->name('competitive-exam');
     Route::get('competitive-exam-instruction/{id}','WebFrontend\ExamController@competitiveExamInstruction')->name('competitive-exam-instruction');
     Route::get('competitive-start-exam/{id}','WebFrontend\ExamController@competitiveExamStart')->name('competitive-start');
-    
+
     Route::get('notification-list','WebFrontend\NotificationController@list')->name('notification-list');
 
 
