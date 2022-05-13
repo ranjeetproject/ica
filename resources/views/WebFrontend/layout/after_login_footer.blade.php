@@ -69,22 +69,19 @@
                     </div>
                     <div class="col-md-6">
                         <a href="{{$setting_data->footer_twitter}}" class="quick-links-social" target="_blank">
-                            <img src="{{ asset('css/images/footer-twitter-icon.svg') }}" class="f-social-icon"
-                                alt="#" />
+                            <img src="{{ asset('css/images/footer-twitter-icon.svg') }}" class="f-social-icon" alt="#" />
                             Twitter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                     </div>
                     <div class="col-md-6">
                         <a href="{{$setting_data->footer_pinterest}}" class="quick-links-social" target="_blank">
-                            <img src="{{ asset('css/images/footer-pint-icon.svg') }}" class="f-social-icon"
-                                alt="#" />
+                            <img src="{{ asset('css/images/footer-pint-icon.svg') }}" class="f-social-icon" alt="#" />
                             Pinterest&nbsp;&nbsp;
                         </a>
                     </div>
                     <div class="col-md-6">
                         <a href="{{$setting_data->footer_instagram}}" class="quick-links-social" target="_blank">
-                            <img src="{{ asset('css/images/footer-insta-icon.svg') }}" class="f-social-icon"
-                                alt="#" />
+                            <img src="{{ asset('css/images/footer-insta-icon.svg') }}" class="f-social-icon" alt="#" />
                             Instagram
                         </a>
                     </div>
@@ -96,6 +93,33 @@
         </div>
     </div>
 </section>
+
+
+
+<!-- Modal -->
+<div class="modal fade notiModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fal fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <h6>Sorry! Nothing new</h6>
+                <div class="notify">
+                    <p>Demo text will be here. demo text will be here</p>
+                </div>
+                <div class="notify">
+                    <p>Demo text will be here. demo text will be here</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+                <button type="button" class="btn btn-primary">Show All</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="{{ asset('js/WebFrontend/jquery.js') }}"></script>
 <script src="{{ asset('js/WebFrontend/bootstrap.bundle.min.js') }}"></script>
