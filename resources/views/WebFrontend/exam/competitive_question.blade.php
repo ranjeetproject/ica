@@ -67,7 +67,7 @@
                             <button class="carousel-control-next-skip" id="skip" type="button"><span class="">Skip</span></button>
                             <button class="carousel-control-next-skip" id="skipSubmit" type="submit" style="display:none;"><span class="">Skip & Submit</span></button>
                             <button class="carousel-control-next" id="next" type="button"><span class="">Save & Next</span></button>
-                            <button class="carousel-control-next"  id="formSubmit" type="submit" style="display:none;"><span class="">Submit</span></button>
+                            <button class="carousel-control-next"  id="formSubmit" type="submit" style="display:none;"><span class="">Save & Submit</span></button>
                         </div>
                     </div>
                 </form>
