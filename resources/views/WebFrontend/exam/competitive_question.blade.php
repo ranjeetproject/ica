@@ -86,6 +86,9 @@
         {
             $("#next").hide();
             $("#formSubmit").show();
+
+            $("#skip").hide();
+            $("#skipSubmit").show();
         }
 
         function fetch_data() {
@@ -114,9 +117,9 @@
                                 $("#numberIcnButton_"+(sliderNumber-1)).addClass('ic1');
                                 if(sliderNumber==questionLimit)
                                 {
-                                    $("#next").hide();
-                                    $("#skip").hide();
+                                    $("#next").hide();                                    
                                     $("#formSubmit").show();
+                                    $("#skip").hide();
                                     $("#skipSubmit").show();
                                 }
                                 else{
