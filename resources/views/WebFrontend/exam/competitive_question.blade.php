@@ -48,7 +48,7 @@
                                             data-bs-dismiss="modal">{{$i+1}}</span>
                                         </button>
                                      @endfor
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                         <div class="carousel-inner" id="questionHolder">
                         </div>
                         <div class="carouselFlow">
-                            <button class="carousel-control-prev" type="button"><span class="">Previous</span></button>                       
+                            <button class="carousel-control-prev" type="button"><span class="">Previous</span></button>
                             <button class="carousel-control-next-skip" id="skip" type="button"><span class="">Skip</span></button>
                             <button class="carousel-control-next-skip" id="skipSubmit" type="submit" style="display:none;"><span class="">Skip & Submit</span></button>
                             <button class="carousel-control-next" id="next" type="button"><span class="">Save & Next</span></button>
@@ -117,7 +117,7 @@
                                 $("#numberIcnButton_"+(sliderNumber-1)).addClass('ic1');
                                 if(sliderNumber==questionLimit)
                                 {
-                                    $("#next").hide();                                    
+                                    $("#next").hide();
                                     $("#formSubmit").show();
                                     $("#skip").hide();
                                     $("#skipSubmit").show();
@@ -401,11 +401,11 @@
                                         }
                                     }
                                 }
-                                if (questionType === 'accounting4') 
+                                if (questionType === 'accounting4')
                                 {
-                                    var curInputs = $(this).find("input[type='radio'],select,input[type='text']");
-                                    var check = true; 
-                                    for (var i = 0; i < curInputs.length; i++) 
+                                    var curInputs = $(this).find("input[type='radio']");
+                                    var check = true;
+                                    for (var i = 0; i < curInputs.length; i++)
                                     {
                                         var type = curInputs[i].type;
                                         var name = curInputs[i].name;
@@ -415,51 +415,47 @@
                                             if($("input:radio[name="+name+"]:checked").length != 0)
                                             {
                                                 var radio_check = $("input[name="+name+"]:checked").val();
+                                                var radio_check_value_id = $("input[id="+id+"]:checked").val();
                                                 var account_typr = $("input[name="+name+"]:checked").attr('divType');
                                                 if(account_typr == 'assets' )
                                                 {
-                                                    if(radio_check == 1) 
-                                                    {                                                    
+                                                    if(radio_check == '1' && radio_check_value_id == '1')
+                                                    {
                                                         if($("#"+id+"_Option").find('option:selected').val() == ''){
-                                                            
+                                                            console.log('select');
                                                             check = false;
                                                         }
                                                         if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
-                                                            
+                                                            console.log('select 2');
                                                             check = false;
                                                         }
                                                     }
-                                                    if(radio_check == 2) 
+                                                    if(radio_check == '2' && radio_check_value_id == '2')
                                                     {
+                                                        console.log('select 3');
                                                         if($("#"+id+"_Option").find('option:selected').val() == ''){
-                                                            
-                                                            
                                                             check = false;
                                                         }
                                                         if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
-                                                           
                                                             check = false;
                                                         }
                                                     }
                                                 }
-                                                if(account_typr == 'liabilities' ) 
+                                                if(account_typr == 'liabilities' )
                                                 {
-                                                    if(radio_check == 1)
+                                                    if(radio_check == '1' && radio_check_value_id == '1')
                                                     {
                                                         if($("#"+id+"_Option1").find('option:selected').val() == ''){
-                                                           
                                                             check = false;
                                                         }
                                                         if($("#"+id+"_Option2").find('option:selected').val() == ''){
-                                                            
                                                             check = false;
                                                         }
                                                         if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
-                                                            
                                                             check = false;
                                                         }
                                                     }
-                                                    if(radio_check == 2) 
+                                                    if(radio_check == '2' && radio_check_value_id == '2')
                                                     {
                                                         if($("#"+id+"_Option1").find('option:selected').val() == ''){
                                                             check = false;
@@ -472,23 +468,10 @@
                                                         }
                                                     }
                                                 }
-                                                if(account_typr == 'equity' ) 
+                                                if(account_typr == 'equity' )
                                                 {
-                                                    if(radio_check == 1) 
-                                                    {                                                        
-                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
-                                                            check = false;
-                                                        }
-                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
-                                                            check = false;
-                                                        }
-                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
-                                                            check = false;
-                                                        }
-                                                    }
-                                                    if(radio_check == 2)
+                                                    if(radio_check == '1' && radio_check_value_id == '1')
                                                     {
-                                                        
                                                         if($("#"+id+"_Option1").find('option:selected').val() == ''){
                                                             check = false;
                                                         }
@@ -499,16 +482,28 @@
                                                             check = false;
                                                         }
                                                     }
-                                                }                                                
+                                                    if(radio_check == '2' && radio_check_value_id == '2')
+                                                    {
+                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                }
                                             }
                                             else
                                             {
-                                                check = false; 
+                                                check = false;
                                             }
                                         }
                                     }
                                     if(!check)
-                                    {                                       
+                                    {
                                         return event.preventDefault();
                                     }
                                     else
