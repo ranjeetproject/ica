@@ -39,13 +39,14 @@
                     <h2><strong>All Courses</strong></h2>
                     <div class="allCourseBlock" id="course-data">
                         @include('WebFrontend.all_courses_pagination')
-                        <div class="col-md-12">
+                        
+                    </div>
+                    <div class="col-md-12">
                             <div class="load-more" style="display:none">
                                 <img src="{{ asset('css/images/loadmore-icon.png') }}" class="img-fluid" />
                                 <p>Load more...</p>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
