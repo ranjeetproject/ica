@@ -220,6 +220,7 @@
                                 $profileModal.modal('hide');
                                 $("#progress").hide();
                                 inputPreviewBox.src = xhr.responseText;
+                                $('#profile_image_header').attr('src',xhr.responseText);
 
                             } else {
                                 $profileModal.modal('hide');
