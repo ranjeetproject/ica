@@ -21,11 +21,12 @@
             <div class="row" id="course-data">
                 @include('WebFrontend.all-course')
 
-                <div class="col-md-12">
-                    <div class="load-more" style="display:none">
-                        <img src="{{ asset('css/images/loadmore-icon.png') }}" class="img-fluid" />
-                        <p>Load more...</p>
-                    </div>
+                
+            </div>
+            <div class="col-md-12">
+                <div class="load-more" style="display:none">
+                    <img src="{{ asset('css/images/loadmore-icon.png') }}" class="img-fluid" />
+                    <p>Load more...</p>
                 </div>
             </div>
         </div>

@@ -181,34 +181,52 @@
             width: 600,
             height: 600
         });
+            cover_canvas.toBlob(function (blob) {
+                file = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
 
-        cover_canvas.toBlob(function(blob) {
-            file = URL.createObjectURL(blob);
-            var reader = new FileReader();
-            reader.readAsDataURL(blob);
+                var inputPreviewBox = document.getElementById('profile_picture_image');
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    var formData = new FormData();
+                    let url = "{{action('WebFrontend\DashboardController@profileImage')}}";
+                    formData.append('profile_picture', base64data);
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data:formData,
+                        cache:false,
+                        processData: false,  // tell jQuery not to process the data
+                        contentType: false,
+                        dataType: 'JSON',
+                        xhr: function () {
+                            $("#progress").show();
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function (evt) {
+                                if (evt.lengthComputable) {
+                                    var percentComplete = (evt.loaded / evt.total) * 100;
+                                    var percentValue = percentComplete + '%';
+                                    $("#progressBar").css('width', '' + percentValue + '');
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                        complete: function (xhr) {
+                            if (xhr.responseText && xhr.responseText != "error") {
+                                $profileModal.modal('hide');
+                                $("#progress").hide();
+                                inputPreviewBox.src = xhr.responseText;
+                                $('#profile_image_header').attr('src',xhr.responseText);
 
-            var inputPreviewBox = document.getElementById('profile_picture_image');
-            reader.onloadend = function() {
-                var base64data = reader.result;
-                var formData = new FormData();
-                let url = "{{action('WebFrontend\DashboardController@profileImage')}}";
-                formData.append('profile_picture', base64data);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData,
-                    cache: false,
-                    processData: false, // tell jQuery not to process the data
-                    contentType: false,
-                    dataType: 'JSON',
-                    xhr: function() {
-                        $("#progress").show();
-                        var xhr = new window.XMLHttpRequest();
-                        xhr.upload.addEventListener("progress", function(evt) {
-                            if (evt.lengthComputable) {
-                                var percentComplete = (evt.loaded / evt.total) * 100;
-                                var percentValue = percentComplete + '%';
-                                $("#progressBar").css('width', '' + percentValue + '');
+                            } else {
+                                $profileModal.modal('hide');
+                                $("#progressBar").stop();
+                                $("#progress").stop();
+                                $("#progress").hide();
+
+                                swal("OOPs, Something is wrong!", 'Problem in uploading file', "error");
+
                             }
                         }, false);
                         return xhr;
