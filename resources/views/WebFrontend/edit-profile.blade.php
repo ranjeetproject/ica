@@ -148,39 +148,40 @@
 @endsection
 @section('customJavascript')
 <script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        var $profileModal = $('#modal');
+        var profileImage = document.getElementById('profile_sample_image');
+        var profileCropper;
+
+        function uploadProfileImage() {
+            var profileFiles = document.getElementById('profile_picture').files[0];
+            profileImage.src = URL.createObjectURL(profileFiles);
+            $profileModal.modal('show');
         }
-    });
 
-    var $profileModal = $('#modal');
-    var profileImage = document.getElementById('profile_sample_image');
-    var profileCropper;
-
-    function uploadProfileImage() {
-        var profileFiles = document.getElementById('profile_picture').files[0];
-        profileImage.src = URL.createObjectURL(profileFiles);
-        $profileModal.modal('show');
-    }
-
-    $profileModal.on('shown.bs.modal', function() {
-        profileCropper = new Cropper(profileImage, {
-            aspectRatio: 1,
-            viewMode: 3,
-            preview: '.preview',
-            setDragMode: 'move'
+        $profileModal.on('shown.bs.modal', function () {
+            profileCropper = new Cropper(profileImage, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '.preview',
+                setDragMode: 'move'
+            });
+        }).on('hidden.bs.modal', function () {
+            profileCropper.destroy();
+            profileCropper = null;
         });
-    }).on('hidden.bs.modal', function() {
-        profileCropper.destroy();
-        profileCropper = null;
-    });
 
-    $('#crop').click(function() {
-        cover_canvas = profileCropper.getCroppedCanvas({
-            width: 600,
-            height: 600
-        });
+        $('#crop').click(function () {
+            cover_canvas = profileCropper.getCroppedCanvas({
+                width: 600,
+                height: 600
+            });
+
             cover_canvas.toBlob(function (blob) {
                 file = URL.createObjectURL(blob);
                 var reader = new FileReader();
@@ -226,31 +227,14 @@
                                 $("#progress").hide();
 
                                 swal("OOPs, Something is wrong!", 'Problem in uploading file', "error");
-
                             }
-                        }, false);
-                        return xhr;
-                    },
-                    complete: function(xhr) {
-                        if (xhr.responseText && xhr.responseText != "error") {
-                            $profileModal.modal('hide');
-                            $("#progress").hide();
-                            inputPreviewBox.src = xhr.responseText;
-
-                        } else {
-                            $profileModal.modal('hide');
-                            $("#progressBar").stop();
-                            $("#progress").stop();
-                            $("#progress").hide();
-
-                            swal("OOPs, Something is wrong!", 'Problem in uploading file', "error");
                         }
-                    }
-                });
-            };
+                    });
+                };
 
+            });
         });
-    });
-
 </script>
+
+
 @endsection
