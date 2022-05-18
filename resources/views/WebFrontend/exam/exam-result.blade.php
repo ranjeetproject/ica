@@ -48,12 +48,8 @@
                             <span>Percentage of Marks :</span>
                             <span>{{$studentExam->markPercentage}} %</span>
                         </div>
-
-
                     </div>
-
                 </div>
-
             </div>
         </div>
 
