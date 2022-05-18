@@ -39,13 +39,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{action('WebFrontend\HomePageController@homePageDisplay')}}">Home</a>
+                            <a class="nav-link {{ (request()->segment(1) == '') ? 'active' : '' }}" href="{{action('WebFrontend\HomePageController@homePageDisplay')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{action('WebFrontend\CmsController@aboutUs')}}">About Us</a>
+                            <a class="nav-link  {{ (request()->segment(1) == 'about-us') ? 'active' : '' }}" href="{{action('WebFrontend\CmsController@aboutUs')}}">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{action('WebFrontend\CmsController@contactUs')}}">Contact Us</a>
+                            <a class="nav-link {{ (request()->segment(1) == 'contact-us') ? 'active' : '' }}" href="{{action('WebFrontend\CmsController@contactUs')}}">Contact Us</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">More</a>

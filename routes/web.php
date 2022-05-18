@@ -52,6 +52,8 @@ Route::get('/terms-and-conditions','WebFrontend\CmsController@termsAndCondition'
 Route::get('/all-courses','WebFrontend\CourseController@allCourses')->name('all-courses');
 // Route::get('/home','WebFrontend\HomePageController@homePageDisplay')->name('home');
 Route::get('/course-exam-event','WebFrontend\UserController@courseExamEvent')->name('course-exam-event');
+Route::get('help','WebFrontend\HelpController@index')->name('help-form');
+Route::post('help','WebFrontend\HelpController@store')->name('save-help');
 
 Route::middleware(['auth'])->group(function ()
 {
@@ -80,7 +82,8 @@ Route::middleware(['auth'])->group(function ()
     Route::get('competitive-start-exam/{id}','WebFrontend\ExamController@competitiveExamStart')->name('competitive-start');
 
     Route::get('notification-list','WebFrontend\NotificationController@list')->name('notification-list');
-
+    
+   
 
 
     Route::get('logout', 'WebFrontend\UserController@logout');

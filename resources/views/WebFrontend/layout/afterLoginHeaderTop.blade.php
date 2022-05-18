@@ -9,7 +9,7 @@
             <div class="std-qt">study that gives you success</div>
         </div>
         <div class="rt-prt">
-            <a href="{{route('contactUs')}}" class="social-link">
+            <a href="{{route('help-form')}}" class="social-link">
                 <img src="{{ asset('css/images/q-mark.svg') }}" class="img-fluid" /></a>
             <a href="{{$setting_data->video_link}}" class="social-link" target="_blank">
                 <img src="{{ asset('css/images/video-icon.svg') }}" class="img-fluid" /></a>
