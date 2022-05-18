@@ -182,7 +182,7 @@ class ExamController extends Controller
                                 ->where('exams.exam_for', 2)
                                 ->where('exams.status', '1')
                                 ->get();
-        if (count($compExam) > 0) 
+        if (count($compExam) > 0)
         {
             foreach ($compExam as $value_ex)
             {
@@ -198,7 +198,7 @@ class ExamController extends Controller
                 $time = time() + 19800;
                 $st_time = mktime($stime_arr['0'],$stime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
                 $et_time = mktime($etime_arr['0'],$etime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
-                if ($value_ex->attempt_time!=0) 
+                if ($value_ex->attempt_time!=0)
                 {
                     $student_exam = StudentExam::where('student_id', Auth::user()->id)->where('exam_id', $value_ex->ex_id)->count();
                     if ($student_exam < $value_ex->attempt_time) {
@@ -209,7 +209,7 @@ class ExamController extends Controller
                             }
                         }
                     }
-                } 
+                }
                 else {
                     $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
                     if ($question > 0) {
