@@ -35,9 +35,8 @@
                     </div>
                 </div>
             </div>
-            <div class="profileHdn profsubhdn">
-                <h2>Basic</h2>
-            </div>
+            {{-- <div class="profileHdn profsubhdn">
+            </div> --}}
             <div class="profileForm">
                 <form action="{{ action('WebFrontend\DashboardController@updateProfilePage',[$profileData->id])}}" method="POST">
                     {{csrf_field()}}
@@ -45,32 +44,32 @@
                         <div class="col-md-6">
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">Code</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="code" value="{{$profileData->code}}" readonly />
+                                <div class="col-sm-10 newProfileform">
+                                    <input type="text" class="form-control" value="{{$profileData->code}}" readonly />
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="name" value="{{$profileData->name}}" readonly />
+                                <div class="col-sm-10 newProfileform">
+                                    <input type="text" class="form-control" value="{{$profileData->name}}" readonly />
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">Phone No.</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="mobile" value="{{$profileData->mobile}}" readonly />
+                                    <input type="text" class="form-control" name="mobile" value="{{$profileData->mobile}}"/>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" name="email" value="{{$profileData->email}}" readonly />
+                                    <input type="email" class="form-control" name="email" value="{{$profileData->email}}"/>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">Center Details</label>
-                                <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control" name="center" value="{{@$center->Center_code}} , {{@$center->Center_name}} , {{@$center->Center_address}}" />
+                                <div class="col-sm-10 newProfileform">
+                                    <input type="text" readonly class="form-control" value="{{@$center->Center_code}} , {{@$center->Center_name}} , {{@$center->Center_address}}" />
                                 </div>
                             </div>
                         </div>

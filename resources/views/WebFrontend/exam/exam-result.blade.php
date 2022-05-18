@@ -19,9 +19,7 @@
                 Your Result
                 <span class="blue-bar"></span>
             </h3>
-
         </div>
-
         <div class="inner_content_info">
             <div class="inner_content_view">
                 <div class="inner_block">
