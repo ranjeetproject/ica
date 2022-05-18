@@ -58,56 +58,56 @@
 
                 </div>
             </div>
-{{--            <div class="inner_content_info addmargintop ansdetails">--}}
-{{--                <div class="inner_content_view">--}}
-{{--                    <div class="inner_block">--}}
-{{--                        <div class="innerlist-item">--}}
-{{--                            <span class="countopt" >1</span>--}}
-{{--                            <div class="item_details"><p class="awsopt">What is Lorem Ipsum?</p>--}}
-{{--                             --}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="awsoptview">--}}
-{{--                            <div class="viewans definfo">--}}
-{{--                                <div class="headingopt">Correct Answer</div>--}}
-{{--                                <div class="ansinfo">True</div>--}}
-{{--                            </div>--}}
-{{--                            <div class="viewans yourans ">--}}
-{{--                                <div class="headingopt">Your Answer</div>--}}
-{{--                                <div class="ansinfo">True</div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+           <div class="inner_content_info addmargintop ansdetails">
+                <div class="inner_content_view">
+                    <div class="inner_block">
+                        <div class="innerlist-item">
+                            <span class="countopt" >1</span>
+                            <div class="item_details"><p class="awsopt">What is Lorem Ipsum?</p>
 
-{{--            <div class="inner_content_info addmargintop ansdetails">--}}
-{{--                <div class="inner_content_view">--}}
-{{--                    <div class="inner_block">--}}
-{{--                        <div class="innerlist-item">--}}
-{{--                            <span class="countopt" >1</span>--}}
-{{--                            <div class="item_details"><p class="awsopt">What is Lorem Ipsum?</p>--}}
-{{--                             --}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="awsoptview">--}}
-{{--                            <div class="viewans definfo">--}}
-{{--                                <div class="headingopt">Correct Answer</div>--}}
-{{--                                <div class="ansinfo">True</div>--}}
-{{--                            </div>--}}
-{{--                            <div class="viewans yourans ">--}}
-{{--                                <div class="headingopt">Your Answer</div>--}}
-{{--                                <div class="ansinfo">True</div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+                            </div>
+                        </div>
+                        <div class="awsoptview">
+                            <div class="viewans definfo">
+                                <div class="headingopt">Correct Answer</div>
+                                <div class="ansinfo">True</div>
+                            </div>
+                            <div class="viewans yourans ">
+                                <div class="headingopt">Your Answer</div>
+                                <div class="ansinfo">True</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-{{--            --}}
-{{--            <div class="def_btn_opt progress_opt">--}}
-{{--                <a href="#" class="def_btn">View Progress</a>--}}
-{{--            </div>--}}
+            <div class="inner_content_info addmargintop ansdetails">
+                <div class="inner_content_view">
+                    <div class="inner_block">
+                        <div class="innerlist-item">
+                            <span class="countopt" >1</span>
+                            <div class="item_details"><p class="awsopt">What is Lorem Ipsum?</p>
+
+                            </div>
+                        </div>
+                        <div class="awsoptview">
+                            <div class="viewans definfo">
+                                <div class="headingopt">Correct Answer</div>
+                                <div class="ansinfo">True</div>
+                            </div>
+                            <div class="viewans yourans ">
+                                <div class="headingopt">Your Answer</div>
+                                <div class="ansinfo">True</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="def_btn_opt progress_opt">
+                <a href="#" class="def_btn">View Progress</a>
+            </div>
 
 
         </div>

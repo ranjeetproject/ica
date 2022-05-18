@@ -1,6 +1,10 @@
 <div class="questionBlock">
     <p>{{ $question->indexKey }}. {{ $question->qus }}</p>
-    <div class="qslImg"><img src="{{ $question->qus_image }}" alt="" title="" /></div>
+    <div class="qslImg">
+        @if($question->qus_image!='' || $question->qus_image!=null)
+            <img src="{{ $question->qus_image }}" alt="" title="" />
+        @endif
+    </div>
     <div class="qbSelect">
         <div class="qbSelectB">
             <label>Primary Account</label>
@@ -101,7 +105,7 @@
             if(type==1)
             {
                 //debit
-                var html='<tr><td><a href="#" class="rowDel"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td>'+amount+'</td><td>0</td></tr><input type="hidden" name="accounting2_LineItem_'+questionId+'[]" value="{'+primaryAccountValue+','+secondaryAccountValue+','+accountNameValue+','+amount+','+type+'}">';
+                var html='<tr><td><a href="#" class="rowDel" deleteType="1"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td class="amount_track">'+amount+'</td><td>0</td></tr><input type="hidden" name="accounting2_LineItem_'+questionId+'[]" value="{'+primaryAccountValue+','+secondaryAccountValue+','+accountNameValue+','+amount+','+type+'}">';
                 var totalDebit=$("#accounting2Debit_"+questionId).val();
                 var totalDebit = parseInt(totalDebit)+parseInt(amount);
                 $("#accounting2Debit_"+questionId).val(totalDebit);
@@ -109,7 +113,7 @@
             }
             else{
                 //credit
-                var html='<tr><td><a href="#" class="rowDel"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td>0</td><td>'+amount+'</td></tr><input type="hidden" name="accounting2_LineItem_'+questionId+'[]" value="{'+primaryAccountValue+','+secondaryAccountValue+','+accountNameValue+','+amount+','+type+'}">';
+                var html='<tr><td><a href="#" class="rowDel" deleteType="2"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td>0</td><td class="amount_track">'+amount+'</td></tr><input type="hidden" name="accounting2_LineItem_'+questionId+'[]" value="{'+primaryAccountValue+','+secondaryAccountValue+','+accountNameValue+','+amount+','+type+'}">';
 
                 var totalCredit=$("#accounting2credit_"+questionId).val();
                 var totalCredit = parseInt(totalCredit)+parseInt(amount);
@@ -121,6 +125,9 @@
 
             $(".rowDel").click(function()
             {
+                var deleteType=$(this).attr('deleteType');
+                var amount=$(this).parent().siblings('.amount_track').html(); 
+
                 var that = $(this);
                 Swal.fire({
                     title: 'Are you sure?',
@@ -134,11 +141,26 @@
                     if (result.isConfirmed)
                     {
                         $(this).parent().parent().remove();
+                        if(deleteType==1)
+                        {
+                            var totalDebitAmount = $("#accounting2_totalDebit_"+questionId).html();
+                            totalDebitAmount = totalDebitAmount - amount;
+                            $("#accounting2_totalDebit_"+questionId).html(totalDebitAmount);
+                        }
+
+                        if(deleteType==2)
+                        {
+                            var totalCreditAmount = $("#accounting2_totalCredit_"+questionId).html();
+                            totalCreditAmount = totalCreditAmount - amount;   
+                            $("#accounting2_totalCredit_"+questionId).html(totalCreditAmount);                         
+                        }
+                        
+                       
                         Swal.fire(
                         'Deleted!',
                         'Your row has been deleted.',
                         'success'
-                        )
+                        );
                     }
                 })
             });

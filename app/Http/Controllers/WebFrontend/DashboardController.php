@@ -15,39 +15,112 @@ use Session;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Events\CourseAssign;
+use App\Events\ExamAssign;
 
 class DashboardController extends Controller
 {
-    public function dashboardPageDisplay()
+    public function dashboardPageDisplay(Request $request)
     {
-	    $dashboardCms=Cms::find(5);
-        $courses = Course::join('std_courses','std_courses.course','=','courses.id')
-            ->where('courses.entry_from','NEW')
-            ->where('std_courses.student', Auth::user()->id)->limit(3)
-            ->get();
         
-        $exams=[];
-        $examsData = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_code','exams.exam_name',
-        'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type','exams.exam_zone','exams.exam_for','exams.duration')
-        ->join('std_exam','std_exam.exam','=','exams.id')
-        ->where('std_exam.student','=', Auth::user()->id)
-        ->where('exams.exam_for','=',1)->where('exams.status','=',1)->get();
-        $i=0;
-        foreach ($examsData as $value_ex) 
+	    $dashboardCms=Cms::find(5);
+        // $courses = Course::join('std_courses','std_courses.course','=','courses.id')
+        //     ->where('courses.entry_from','NEW')
+        //     ->where('std_courses.student', Auth::user()->id)->limit(3)
+        //     ->get();
+        
+        // $exams=[];
+        // $examsData = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_code','exams.exam_name',
+        // 'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type','exams.exam_zone','exams.exam_for','exams.duration')
+        // ->join('std_exam','std_exam.exam','=','exams.id')
+        // ->where('std_exam.student','=', Auth::user()->id)
+        // ->where('exams.exam_for','=',1)->where('exams.status','=',1)->get();
+        // $i=0;
+        // foreach ($examsData as $value_ex) 
+        // {
+        //     $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
+        //     if ($question > 0) 
+        //     {     
+        //         if($i<=3)
+        //         {
+        //             $exams[] = $value_ex;
+        //         }
+        //         $i++;
+        //     }            
+        // }
+        //return $exams;
+        $afterLogin=0;
+        if($request->has('afterLogin'))
         {
-            $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
-            if ($question > 0) 
-            {     
-                if($i<=3)
-                {
-                    $exams[] = $value_ex;
-                }
-                $i++;
-            }
-            
+            $afterLogin=$request->get('afterLogin');
         }
-        return view('WebFrontend.dashboard',compact('courses','exams','dashboardCms'));
+        return view('WebFrontend.dashboard.dashboard',compact('dashboardCms','afterLogin'));
     }
+
+
+    public function dashboardCourseDisplay(Request $request)
+    {
+        if($request->ajax())
+        {
+            if($request->has('type'))
+            {
+                if($request->get('type')==1)
+                {
+                    event(new CourseAssign());                    
+                }
+            }
+            $courses = Course::join('std_courses','std_courses.course','=','courses.id')
+                        ->where('courses.entry_from','NEW')
+                        ->where('std_courses.student', Auth::user()->id)->limit(3)
+                        ->get();
+
+            $view = view('WebFrontend.dashboard.dashboard_courses',compact('courses'))->render();
+            return response()->json(['html' => $view]);
+        }
+        else{
+            return abort('404');
+        }
+    }
+
+    public function dashboardExamDisplay(Request $request)
+    {
+        if($request->ajax())
+        {
+            if($request->has('type'))
+            {
+                if($request->get('type')==1)
+                {
+                    event(new ExamAssign());
+                }
+            }
+
+            $exams=[];
+            $examsData = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_code','exams.exam_name',
+            'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type','exams.exam_zone','exams.exam_for','exams.duration')
+            ->join('std_exam','std_exam.exam','=','exams.id')
+            ->where('std_exam.student','=', Auth::user()->id)
+            ->where('exams.exam_for','=',1)->where('exams.status','=',1)->get();
+            $i=0;
+            foreach ($examsData as $value_ex) 
+            {
+                $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
+                if ($question > 0) 
+                {     
+                    if($i<=3)
+                    {
+                        $exams[] = $value_ex;
+                    }
+                    $i++;
+                }                
+            }
+            $view = view('WebFrontend.dashboard.dashboard_exams',compact('exams'))->render();
+            return response()->json(['html' => $view]);
+        }
+        else{
+            return abort('404');
+        }
+    }
+
     
     public function profileImage(Request $request)
     {
@@ -133,38 +206,6 @@ class DashboardController extends Controller
         }
     }
 
-    public function dashboardCourseDisplay()
-    {
-        $courses = Course::join('std_courses','std_courses.course','=','courses.id')
-            ->where('courses.entry_from','NEW')
-            ->where('std_courses.student', Auth::user()->id)->limit(3)
-            ->get();
-        return $courses;
-    }
-
-    public function dashboardExamDisplay()
-    {
-        $exams=[];
-        $examsData = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_code','exams.exam_name',
-        'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type','exams.exam_zone','exams.exam_for','exams.duration')
-        ->join('std_exam','std_exam.exam','=','exams.id')
-        ->where('std_exam.student','=', Auth::user()->id)
-        ->where('exams.exam_for','=',1)->where('exams.status','=',1)->get();
-        $i=0;
-        foreach ($examsData as $value_ex) 
-        {
-            $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
-            if ($question > 0) 
-            {     
-                if($i<=3)
-                {
-                    $exams[] = $value_ex;
-                }
-                $i++;
-            }
-            
-        }
-        return $exams;
-    }
+    
 
 }
