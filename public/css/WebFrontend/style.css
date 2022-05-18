@@ -2424,23 +2424,28 @@ p.awsopt {
 .headingopt {
     background: #FFD336;
     padding: 10px 15px;
-    text-align: center;
+    text-align: left;
     font-weight: 700;
     color: #072F60;
 
 }
 
 .ansinfo {
-    text-align: center;
-    padding: 15px 0;
+    text-align: left;
+    padding: 10px 15px;
     color: #072F60;
 
     background: #E3E8FA;
 }
 
+.ansinfo p {
+    margin: 0;
+}
+
 .viewans {
     margin-right: 10px;
-    width: 154px;
+    min-width: 154px;
+    max-width: 49%;
 }
 
 .yourans .headingopt {
@@ -2451,6 +2456,18 @@ p.awsopt {
 
 .yourans .ansinfo {
     background: #1D8A56;
+    color: #fff;
+
+}
+
+.wrongans .headingopt {
+    background: #c30505;
+    color: #fff;
+
+}
+
+.wrongans .ansinfo {
+    background: #ff4343;
     color: #fff;
 
 }
