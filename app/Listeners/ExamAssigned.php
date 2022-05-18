@@ -30,21 +30,6 @@ class ExamAssigned
      */
     public function handle(ExamAssign $event)
     {
-        //
-        //$student_id = Auth::user()->id;
-        // $allexams = Exam::where('tagging_for', ':All:')->get();
-        // foreach ($allexams as $allexam) {
-        //     $stdexam1 = StdExam::where('student', $student_id)->where('exam', $allexam->id)->count();
-        //     if ($stdexam1 == 0) {
-        //         $db1 = new StdExam();
-        //         $db1->student = $student_id;
-        //         $db1->exam = $allexam->id;
-        //         $db1->save();
-        //     }else{
-        //         return $stdexam1;
-        //     }
-        // }
-
         $userControllerObj = new UserController();
         $userControllerObj->examTagging();
     }

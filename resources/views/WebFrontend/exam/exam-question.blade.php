@@ -363,6 +363,11 @@
                                     if($("#accounting2credit_"+questionId).val()==0 || $("#accounting2Debit_"+questionId).val()==0 || ($("#accounting2credit_"+questionId).val() != $("#accounting2Debit_"+questionId).val()))
                                     {
 
+                                        Swal.fire(
+                                            'Oops!',
+                                            'Check your total Debit/Credit value is same and also graterthan 0.',
+                                            'error'
+                                            );
                                         return event.preventDefault();
                                     }
                                     else

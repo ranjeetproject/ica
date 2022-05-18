@@ -31,14 +31,20 @@
 
     <section class="db-block1 bg-1">
         <div class="container">
-            <div class="row">
+            <div class="row" id="courseHolder">
                 <div class="col-md-12">
                     <div class="db-top-part">
                         <h3 class="title">My Course</h3>
                         <a href="{{route('my-courses')}}" class="btn view-all">View all</a>
                     </div>
                 </div>
-                @foreach ($courses as $course)
+                <div class="col-md-12" id="courseLoader" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                
+                {{-- @foreach ($courses as $course)
                     <div class="col-md-4">
                         <div class="course-card db-cards">
                             @if ($course['course_photo'] != null)
@@ -54,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @endforeach --}}
             </div>
 
         </div>
@@ -62,21 +68,22 @@
     <!-- end My Course -->
     <section class="db-block1 exam">
         <div class="container">
-            <div class="row">
+            <div class="row" id="examHolder">
                 <div class="col-md-12">
                     <div class="db-top-part">
                         <h3 class="title">My Exam</h3>
-                        <a href="#" class="btn view-all">View all</a>
+                        <a href="{{route('my-exam')}}" class="btn view-all">View all</a>
                     </div>
                 </div>
-                @foreach ($exams as $exam)
+                <div class="col-md-12" id="examLoader" style="display: none;">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                {{-- @foreach ($exams as $exam)
                     <div class="col-md-4">
-                        <div class="course-card db-cards">
-                            {{-- @if ($exam->courseDetails->course_photo == null) --}}
-                                <img src="{{ asset('css/images/course-image.jpg') }}" class="course-image" alt="#">
-                            {{-- @else
-                                <img src="{{ $exam->courseDetails->course_photo }}" class="course-image" alt="#"> --}}
-                            {{-- @endif --}}
+                        <div class="course-card db-cards">                            
+                            <img src="{{ asset('css/images/course-image.jpg') }}" class="course-image" alt="#">                           
                             <div class="total-lesson">
                                 <img src="{{ asset('css/images/lesson-icon.png') }}" class="img-flid" alt="#">
                                 <span>{{ $exam->exam_code }}</span>
@@ -91,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @endforeach --}}
             </div>
 
         </div>
@@ -188,4 +195,77 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('customJavascript')
+<script>
+    var afterLogin={{$afterLogin}};
+    var courseUrl='{{action('WebFrontend\DashboardController@dashboardCourseDisplay')}}';
+    var examUrl='{{action('WebFrontend\DashboardController@dashboardExamDisplay')}}';
+    if(afterLogin==1){
+        Swal.fire({
+            title: 'Are you sure want to setup your Courses and Exams',
+            text: "New Courses & Exam are tagged for you",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Process it!'
+        }).then((result) => 
+            {
+                if (result.isConfirmed) 
+                {
+                    loadCoursesData(1); 
+                    loadExamsData(1); 
+                }
+                else{
+                    loadCoursesData(); 
+                    loadExamsData();
+                }
+            });
+    }
+
+
+    function loadCoursesData(type=0) 
+    {
+        $.ajax({
+                url: courseUrl+'?type='+type,
+                type: "get",
+                beforeSend: function() {
+                    $("#courseLoader").show();
+                }
+            })
+            .done(function(data) 
+            {
+                if (data.html != "") {
+                    $("#courseHolder").append(data.html);
+                    $("#courseLoader").hide();
+                } 
+            })
+            .fail(function(jqXHR, ajaxOptions, thrownError) {
+                alert('server not responding...');
+            });
+    }
+    function loadExamsData(type=0) 
+    {
+        $.ajax({
+                url: examUrl+'?type='+type,
+                type: "get",
+                beforeSend: function() {
+                    $("#examLoader").show();
+                }
+            })
+            .done(function(data) 
+            {
+                if (data.html != "") {
+                    $("#examHolder").append(data.html);
+                    $("#examLoader").hide();
+                } 
+            })
+            .fail(function(jqXHR, ajaxOptions, thrownError) {
+                alert('server not responding...');
+            });
+    }
+
+</script>
 @endsection

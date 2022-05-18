@@ -128,7 +128,7 @@ class ExamController extends Controller
         if($request->ajax())
         {
             if ($exams->question_limit > 0) {
-                //$data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting2')->inRandomOrder()->limit($exams->question_limit)->get();
+               // $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting2')->inRandomOrder()->limit($exams->question_limit)->get();
                 $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
             } else {
 
@@ -148,7 +148,7 @@ class ExamController extends Controller
                 {
                     $value->primaryAccount=PrimaryAccount::get();
                     $value->secondaryAccount=SecondaryAccount::get();
-                    $value->account=Account::get();
+                    $value->account=Account::where('question_id',$value->id)->get();
                 }
                 if($value->type == "accounting4")
                 {
@@ -172,16 +172,20 @@ class ExamController extends Controller
     public function competitiveExam(Request $request)
     {
         $data = [];
-        $compExam = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_code','exams.exam_name',
-         'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type',
-        'exams.exam_zone','exams.exam_for','exams.duration','exams.datet','exams.start_time','exams.end_time','exams.created_by','exams.tagging_for','exams.tagging_text','exams.quesstion_tag','exams.question_limit','exams.attempt_time')
-        ->join('std_exam','std_exam.exam','=','exams.id')
-        ->where('std_exam.student', Auth::user()->id)
-        ->where('exams.exam_for', 2)
-        ->where('exams.status', '1')
-        ->get();
-        if (count($compExam) > 0) {
-            foreach ($compExam as $value_ex) {
+        //'exams.exam_code','exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject',
+        //'exams.exam_zone','exams.exam_for','exams.created_by','exams.tagging_for','exams.tagging_text','exams.quesstion_tag',
+        $compExam = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_name',
+                                'exams.type','exams.duration','exams.datet','exams.start_time','exams.end_time',
+                                'exams.question_limit','exams.attempt_time')
+                                ->join('std_exam','std_exam.exam','=','exams.id')
+                                ->where('std_exam.student', Auth::user()->id)
+                                ->where('exams.exam_for', 2)
+                                ->where('exams.status', '1')
+                                ->get();
+        if (count($compExam) > 0)
+        {
+            foreach ($compExam as $value_ex)
+            {
                 $datet = $value_ex->datet;
                 $datet_arr = explode("-",$datet);
 
@@ -194,7 +198,8 @@ class ExamController extends Controller
                 $time = time() + 19800;
                 $st_time = mktime($stime_arr['0'],$stime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
                 $et_time = mktime($etime_arr['0'],$etime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
-                if ($value_ex->attempt_time!=0) {
+                if ($value_ex->attempt_time!=0)
+                {
                     $student_exam = StudentExam::where('student_id', Auth::user()->id)->where('exam_id', $value_ex->ex_id)->count();
                     if ($student_exam < $value_ex->attempt_time) {
                         if ($st_time < $time && $et_time > $time) {
@@ -204,7 +209,8 @@ class ExamController extends Controller
                             }
                         }
                     }
-                } else {
+                }
+                else {
                     $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
                     if ($question > 0) {
                         $data[] = $value_ex;
@@ -212,6 +218,7 @@ class ExamController extends Controller
                 }
             }
         }
+        //return $data;
 
          // Get current page form url e.x. &page=1
          $currentPage = LengthAwarePaginator::resolveCurrentPage();
@@ -949,7 +956,7 @@ class ExamController extends Controller
             $studentExam=StudentExam::find($studentExamId);
             if($studentExam)
             {
-                $studentExam->markPercentage=(($studentExam->obtain_marks/$studentExam->full_marks)*100);
+                $studentExam->markPercentage=round(($studentExam->obtain_marks/$studentExam->full_marks)*100);
                 $studentExam->exam=Exam::find($studentExam->exam_id);
                 $data['studentExam']=$studentExam;
                 return view('WebFrontend.exam.exam-result',$data);

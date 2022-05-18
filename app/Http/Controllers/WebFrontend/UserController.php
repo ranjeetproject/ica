@@ -17,7 +17,8 @@ use App\Events\CourseAssign;
 use App\Events\ExamAssign;
 use Illuminate\Support\Facades\Mail;
 use Hash;
-
+use App\Jobs\CoursesSetup;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -226,10 +227,14 @@ class UserController extends Controller
                 if ($student) {
                     $student->otp = rand(100000, 999999);
                     $student->save();
-                    event(new CourseAssign());
-                    event(new ExamAssign());
+
+                    // Log::debug('Start Writing in controller'); 
+                    // CoursesSetup::dispatch();
+                    // Log::debug('End Writing in controller'); 
+                   // event(new CourseAssign());
+                    //event(new ExamAssign());
                 }
-                return redirect()->action('WebFrontend\DashboardController@dashboardPageDisplay');
+                return redirect()->action('WebFrontend\DashboardController@dashboardPageDisplay',['afterLogin'=>1]);
             }
         } else {
             return redirect()->back()->with(['error' => 'Oops! You have entered invalid code or otp']);

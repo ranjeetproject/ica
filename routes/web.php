@@ -59,6 +59,11 @@ Route::middleware(['auth'])->group(function ()
 {
    // Route::get('/', 'WebFrontend\DashboardController@dashboardPageDisplay')->name('dashboard');
     Route::get('dashboard', 'WebFrontend\DashboardController@dashboardPageDisplay')->name('dashboard');
+    Route::get('dashboard-courses', 'WebFrontend\DashboardController@dashboardCourseDisplay');
+    Route::get('dashboard-exams', 'WebFrontend\DashboardController@dashboardExamDisplay');
+
+    
+
     Route::get('profile', 'WebFrontend\DashboardController@profilePage')->name('profile');
     Route::get('edit-profile/{id}', 'WebFrontend\DashboardController@editProfilePage');
     Route::post('update-profile/{id}', 'WebFrontend\DashboardController@updateProfilePage');
