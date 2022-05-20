@@ -224,6 +224,11 @@
                 }
             });
     }
+    else
+    {
+        loadCoursesData(); 
+        loadExamsData();
+    }
 
 
     function loadCoursesData(type=0) 
