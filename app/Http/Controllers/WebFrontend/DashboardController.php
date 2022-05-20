@@ -96,7 +96,7 @@ class DashboardController extends Controller
 
             $exams=[];
             $examsData = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_code','exams.exam_name',
-            'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type','exams.exam_zone','exams.exam_for','exams.duration')
+            'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type','exams.exam_zone','exams.exam_for','exams.duration','exams.exam_image')
             ->join('std_exam','std_exam.exam','=','exams.id')
             ->where('std_exam.student','=', Auth::user()->id)
             ->where('exams.exam_for','=',1)->where('exams.status','=',1)->get();
@@ -193,8 +193,15 @@ class DashboardController extends Controller
     public function updateProfilePage(Request $request,$id)
     {
         $row = Student::find($id);
+        $request->validate([
+            'mobile' => 'required|digits:10|numeric',
+            'email' => 'required|email',
+            'address' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'pincode' => 'required|numeric|min:6',
+        ]);
         $inputData = $request->all();
-        //dd($inputData);
         if ($row) {
             $row->update($inputData);
             Session::put('success', 'Your Profile Update Successfully');

@@ -40,9 +40,9 @@
                     </div>
                 </div>
             </div>
-            <div class="profileHdn profsubhdn">
+            {{-- <div class="profileHdn profsubhdn">
                 <h2>Basic</h2>
-            </div>
+            </div> --}}
             <div class="profileForm newProfileform">
                 <form>
                     <div class="row">

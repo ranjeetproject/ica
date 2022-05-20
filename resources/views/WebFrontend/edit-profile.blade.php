@@ -38,7 +38,7 @@
             {{-- <div class="profileHdn profsubhdn">
             </div> --}}
             <div class="profileForm">
-                <form action="{{ action('WebFrontend\DashboardController@updateProfilePage',[$profileData->id])}}" method="POST">
+                <form action="{{ action('WebFrontend\DashboardController@updateProfilePage',[$profileData->id])}}" method="POST" id="profileForm">
                     {{csrf_field()}}
                     <div class="row">
                         <div class="col-md-6">
@@ -58,12 +58,16 @@
                                 <label class="col-sm-2 col-form-label">Phone No.</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="mobile" value="{{$profileData->mobile}}"/>
+                                    <span class="form-text text-danger"
+                                                      id="error_mobile">{{ $errors->getBag('default')->first('mobile') }}</span>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control" name="email" value="{{$profileData->email}}"/>
+                                    <span class="form-text text-danger"
+                                                      id="error_email">{{ $errors->getBag('default')->first('email') }}</span>
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -78,24 +82,32 @@
                                 <label class="col-sm-2 col-form-label">State</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="state" value="{{$profileData->state}}" />
+                                <span class="form-text text-danger"
+                                                      id="error_state">{{ $errors->getBag('default')->first('state') }}</span>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">City</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="city" value="{{$profileData->city}}" />
+                                <span class="form-text text-danger"
+                                                      id="error_city">{{ $errors->getBag('default')->first('city') }}</span>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">Pincode</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="pincode" value="{{$profileData->pincode}}" />
+                                <span class="form-text text-danger"
+                                                      id="error_pincode">{{ $errors->getBag('default')->first('pincode') }}</span>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">Address</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="address" value="{{$profileData->address}}" />
+                                <span class="form-text text-danger"
+                                                      id="error_address">{{ $errors->getBag('default')->first('address') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -232,6 +244,60 @@
                 };
 
             });
+        });
+
+        $('#profileForm').validate({
+            rules: {
+                mobile: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                },
+                state: {
+                    required: true,
+                },
+                city: {
+                    required: true
+                },
+                state: {
+                    required: true
+                },
+                city: {
+                    required: true
+                },
+                pincode: {
+                    required: true
+                },
+                address: {
+                    required: true
+                }
+
+            },
+            messages: {
+
+                mobile: {
+                    required: "Mobile No field is required",
+                    remote: "Mobile No is already registered with us"
+                },
+                email: {
+                    required: "Email field is required",
+                },
+                state: {
+                    required: "State is required"
+                },
+                city: {
+                    required: "City field is required"
+                },
+                pincode: {
+                    required: "Pincode is required"
+                },
+                address: {
+                    required: "Address field is required"
+                }
+            },
+            errorElement: "span",
+            errorClass: "form-text text-danger is-invalid"
         });
 </script>
 
