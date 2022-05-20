@@ -3643,6 +3643,10 @@ li.selected .qaFormbg {
 }
 
 /* --------------------------chat-end------------------------ */
+.brdColor {
+    background: #072f60 !important;
+    padding: 10px;
+}
 
 
 @media screen and (max-width: 991px) {
