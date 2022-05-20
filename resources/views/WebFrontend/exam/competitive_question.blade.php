@@ -106,30 +106,48 @@
                     var myCarousel = document.getElementById('carouselExampleIndicators');
                     var carousel = bootstrap.Carousel.getInstance(myCarousel);
 
-                    $('.carousel-control-next-skip').click(function() {
-                        $('#carouselExampleIndicators').carousel('next');
+                    $('.carousel-control-next-skip').click(function() 
+                    {
+                        var ifSliderSame=false;
                         $(".carousel-item").each(function()
                         {
                             if ($(this).hasClass("active"))
-                            {
-                                $('#exam-count').text($(this).attr("slide"));
-                                var sliderNumber = $(this).attr("slide");
-                                $("#numberIcnButton_"+(sliderNumber-1)).addClass('ic1');
+                            {                       
+                                var sliderNumber = $(this).attr("slide");                               
                                 if(sliderNumber==questionLimit)
                                 {
-                                    $("#next").hide();
-                                    $("#formSubmit").show();
-                                    $("#skip").hide();
-                                    $("#skipSubmit").show();
+                                    ifSliderSame=true;                                  
                                 }
                                 else{
-                                    $("#next").show();
-                                    $("#skip").show();
-                                    $("#formSubmit").hide();
-                                    $("#skipSubmit").hide();
+                                    ifSliderSame=false;
                                 }
                             }
                         });
+                        if(!ifSliderSame){
+                            $('#carouselExampleIndicators').carousel('next');
+                            $(".carousel-item").each(function()
+                            {
+                                if ($(this).hasClass("active"))
+                                {
+                                    $('#exam-count').text($(this).attr("slide"));
+                                    var sliderNumber = $(this).attr("slide");
+                                    $("#numberIcnButton_"+(sliderNumber-1)).addClass('ic1');
+                                    if(sliderNumber==questionLimit)
+                                    {
+                                        $("#next").hide();
+                                        $("#skip").hide();
+                                        $("#formSubmit").show();
+                                        $("#skipSubmit").show();
+                                    }
+                                    else{
+                                        $("#next").show();
+                                        $("#skip").show();
+                                        $("#formSubmit").hide();
+                                        $("#skipSubmit").hide();
+                                    }
+                                }
+                            });
+                        }
 
                     });
 
@@ -163,12 +181,27 @@
 
                     $('.carousel-control-next').click(function()
                     {
+                        var ifSliderSame=false;
+                        $(".carousel-item").each(function()
+                        {
+                            if ($(this).hasClass("active"))
+                            {                       
+                                var sliderNumber = $(this).attr("slide");                               
+                                if(sliderNumber==questionLimit)
+                                {
+                                    ifSliderSame=true;                                  
+                                }
+                                else{
+                                    ifSliderSame=false;
+                                }
+                            }
+                        });
+                        
                         $(".carousel-item").each(function()
                         {
                             if ($(this).hasClass("active"))
                             {
                                 var questionType = $(this).children(".questionType").val();
-
                                 if (questionType === 'radio')
                                 {
                                     var curInputs = $(this).find("input[type='radio']");
@@ -181,33 +214,40 @@
                                         }
                                     }
 
-                                    if(!check){
-
+                                    if(!check)
+                                    {
+                                        Swal.fire(
+                                            'Oops!',
+                                            'If you want to answer this question, please click one of the radio, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'info'
+                                        );
                                         return event.preventDefault();
                                     }
                                     else{
-                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
-                                        $('#carouselExampleIndicators').carousel('next');
-                                        var sliderNumber = $(this).attr("slide");
-                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+                                        if(!ifSliderSame){ 
+                                            $('#exam-count').text(parseInt($(this).attr("slide"))+1);
+                                            $('#carouselExampleIndicators').carousel('next');
+                                            var sliderNumber = $(this).attr("slide");
+                                            $("#numberIcnButton_"+sliderNumber).addClass('ic2');
 
 
-                                        if(questionLimit==(parseInt(sliderNumber)+1))
-                                        {
-                                            $("#next").hide();
-                                            $("#formSubmit").show();
+                                            if(questionLimit==(parseInt(sliderNumber)+1))
+                                            {
+                                                $("#next").hide();
+                                                $("#formSubmit").show();
 
-                                            $("#skip").hide();
-                                            $("#skipSubmit").show();
+                                                $("#skip").hide();
+                                                $("#skipSubmit").show();
+                                            }
+                                            else{
+                                                $("#next").show();
+                                                $("#formSubmit").hide();
+
+                                                $("#skip").show();
+                                                $("#skipSubmit").hide();
+                                            }
                                         }
-                                        else{
-                                            $("#next").show();
-                                            $("#formSubmit").hide();
-
-                                            $("#skip").show();
-                                            $("#skipSubmit").hide();
-                                        }
-
+                                        return false;
                                     }
                                 }
                                 if (questionType === 'check')
@@ -224,32 +264,40 @@
                                     }
 
                                     if(!check){
-
+                                        Swal.fire(
+                                            'Oops!',
+                                            'If you want to answer this question, please select the checkbox first, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'info'
+                                        );
                                         return event.preventDefault();
                                     }
                                     else
-                                    {
-                                        $('#carouselExampleIndicators').carousel('next');
-                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
-
-                                        var sliderNumber = $(this).attr("slide");
-                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
-
-                                        if(questionLimit==(parseInt(sliderNumber)+1))
+                                    {                                        
+                                        if(!ifSliderSame)
                                         {
-                                            $("#next").hide();
-                                            $("#formSubmit").show();
+                                            $('#carouselExampleIndicators').carousel('next');
+                                            $('#exam-count').text(parseInt($(this).attr("slide"))+1);
 
-                                            $("#skip").hide();
-                                            $("#skipSubmit").show();
-                                        }
-                                        else{
-                                            $("#next").show();
-                                            $("#formSubmit").hide();
+                                            var sliderNumber = $(this).attr("slide");
+                                            $("#numberIcnButton_"+sliderNumber).addClass('ic2');
 
-                                            $("#skip").show();
-                                            $("#skipSubmit").hide();
-                                        }
+                                            if(questionLimit==(parseInt(sliderNumber)+1))
+                                            {
+                                                $("#next").hide();
+                                                $("#formSubmit").show();
+
+                                                $("#skip").hide();
+                                                $("#skipSubmit").show();
+                                            }
+                                            else{
+                                                $("#next").show();
+                                                $("#formSubmit").hide();
+
+                                                $("#skip").show();
+                                                $("#skipSubmit").hide();
+                                            }
+                                        }                                        
+                                        return false;
                                     }
                                 }
                                 if (questionType === 'accounting1')
@@ -265,30 +313,39 @@
                                     }
 
                                     if(!check){
-
+                                        Swal.fire(
+                                            'Oops!',
+                                            'If you want to answer this question, please select the checkbox first, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'info'
+                                        );
                                         return event.preventDefault();
                                     }
                                     else{
-                                        $('#carouselExampleIndicators').carousel('next');
-                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
 
-                                        var sliderNumber = $(this).attr("slide");
-                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
-                                        if(questionLimit==(parseInt(sliderNumber)+1))
+                                        if(!ifSliderSame)
                                         {
-                                            $("#next").hide();
-                                            $("#formSubmit").show();
+                                            $('#carouselExampleIndicators').carousel('next');
+                                            $('#exam-count').text(parseInt($(this).attr("slide"))+1);
 
-                                            $("#skip").hide();
-                                            $("#skipSubmit").show();
-                                        }
-                                        else{
-                                            $("#next").show();
-                                            $("#formSubmit").hide();
+                                            var sliderNumber = $(this).attr("slide");
+                                            $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+                                            if(questionLimit==(parseInt(sliderNumber)+1))
+                                            {
+                                                $("#next").hide();
+                                                $("#formSubmit").show();
 
-                                            $("#skip").show();
-                                            $("#skipSubmit").hide();
-                                        }
+                                                $("#skip").hide();
+                                                $("#skipSubmit").show();
+                                            }
+                                            else{
+                                                $("#next").show();
+                                                $("#formSubmit").hide();
+
+                                                $("#skip").show();
+                                                $("#skipSubmit").hide();
+                                            }
+                                        }                                        
+                                        return false;
                                     }
 
                                 }
@@ -304,8 +361,6 @@
 
                                         var curInputNammeArray = id.split("_");
                                         var questionId=curInputNammeArray[1];
-
-
 
                                         if(type != 'radio')
                                         {
@@ -327,15 +382,16 @@
                                     if($("#accounting2credit_"+questionId).val()==0 || $("#accounting2Debit_"+questionId).val()==0 || ($("#accounting2credit_"+questionId).val() != $("#accounting2Debit_"+questionId).val()))
                                     {
 
-                                        return event.preventDefault();
+                                        Swal.fire(
+                                            'Oops!',
+                                            'Check your total Debit/Credit value is same and also graterthan 0.',
+                                            'error'
+                                            );
+                                        return event.preventDefault();                                        
                                     }
                                     else
-                                    {
-                                        // if(!check){
-                                        //     return event.preventDefault();
-                                        // }
-                                        // else
-                                        // {
+                                    {      
+                                        if(!ifSliderSame){   
                                             $('#carouselExampleIndicators').carousel('next');
                                             $('#exam-count').text(parseInt($(this).attr("slide"))+1);
 
@@ -356,7 +412,8 @@
                                                 $("#skip").show();
                                                 $("#skipSubmit").hide();
                                             }
-                                        // }
+                                        }  
+                                        return false;
                                     }
                                 }
                                 if (questionType === 'accounting3')
@@ -374,31 +431,39 @@
                                     }
 
                                     if(!check){
-
+                                        Swal.fire(
+                                            'Oops!',
+                                            'If you want to answer this question, please select the value first, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'info'
+                                        );
                                         return event.preventDefault();
                                     }
                                     else{
-                                        $('#carouselExampleIndicators').carousel('next');
-                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
-
-                                        var sliderNumber = $(this).attr("slide");
-                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
-
-                                        if(questionLimit==(parseInt(sliderNumber)+1))
+                                        if(!ifSliderSame)
                                         {
-                                            $("#next").hide();
-                                            $("#formSubmit").show();
+                                            $('#carouselExampleIndicators').carousel('next');
+                                            $('#exam-count').text(parseInt($(this).attr("slide"))+1);
 
-                                            $("#skip").hide();
-                                            $("#skipSubmit").show();
-                                        }
-                                        else{
-                                            $("#next").show();
-                                            $("#formSubmit").hide();
+                                            var sliderNumber = $(this).attr("slide");
+                                            $("#numberIcnButton_"+sliderNumber).addClass('ic2');
 
-                                            $("#skip").show();
-                                            $("#skipSubmit").hide();
-                                        }
+                                            if(questionLimit==(parseInt(sliderNumber)+1))
+                                            {
+                                                $("#next").hide();
+                                                $("#formSubmit").show();
+
+                                                $("#skip").hide();
+                                                $("#skipSubmit").show();
+                                            }
+                                            else{
+                                                $("#next").show();
+                                                $("#formSubmit").hide();
+
+                                                $("#skip").show();
+                                                $("#skipSubmit").hide();
+                                            }
+                                        }                                        
+                                        return false;
                                     }
                                 }
                                 if (questionType === 'accounting4')
@@ -504,31 +569,40 @@
                                     }
                                     if(!check)
                                     {
+                                        Swal.fire(
+                                            'Oops!',
+                                            'If you want to answer this question, please select the value first, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'info'
+                                        );
                                         return event.preventDefault();
                                     }
                                     else
                                     {
-                                        $('#carouselExampleIndicators').carousel('next');
-                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
-
-                                        var sliderNumber = $(this).attr("slide");
-                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
-
-                                        if(questionLimit==(parseInt(sliderNumber)+1))
+                                        if(!ifSliderSame)
                                         {
-                                            $("#next").hide();
-                                            $("#formSubmit").show();
+                                            $('#carouselExampleIndicators').carousel('next');
+                                            $('#exam-count').text(parseInt($(this).attr("slide"))+1);
 
-                                            $("#skip").hide();
-                                            $("#skipSubmit").show();
-                                        }
-                                        else{
-                                            $("#next").show();
-                                            $("#formSubmit").hide();
+                                            var sliderNumber = $(this).attr("slide");
+                                            $("#numberIcnButton_"+sliderNumber).addClass('ic2');
 
-                                            $("#skip").show();
-                                            $("#skipSubmit").hide();
-                                        }
+                                            if(questionLimit==(parseInt(sliderNumber)+1))
+                                            {
+                                                $("#next").hide();
+                                                $("#formSubmit").show();
+
+                                                $("#skip").hide();
+                                                $("#skipSubmit").show();
+                                            }
+                                            else{
+                                                $("#next").show();
+                                                $("#formSubmit").hide();
+
+                                                $("#skip").show();
+                                                $("#skipSubmit").hide();
+                                            }
+                                        }                                        
+                                        return false;
                                     }
                                 }
                                 if (questionType === 'accounting5')
@@ -546,31 +620,40 @@
                                     }
 
                                     if(!check){
-
+                                        Swal.fire(
+                                            'Oops!',
+                                            'If you want to answer this question, please select the value first, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'info'
+                                        );
                                         return event.preventDefault();
                                     }
                                     else{
-                                        $('#carouselExampleIndicators').carousel('next');
-                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
 
-                                        var sliderNumber = $(this).attr("slide");
-                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
-
-                                        if(questionLimit==(parseInt(sliderNumber)+1))
+                                        if(!ifSliderSame)
                                         {
-                                            $("#next").hide();
-                                            $("#formSubmit").show();
+                                            $('#carouselExampleIndicators').carousel('next');
+                                            $('#exam-count').text(parseInt($(this).attr("slide"))+1);
 
-                                            $("#skip").hide();
-                                            $("#skipSubmit").show();
-                                        }
-                                        else{
-                                            $("#next").show();
-                                            $("#formSubmit").hide();
+                                            var sliderNumber = $(this).attr("slide");
+                                            $("#numberIcnButton_"+sliderNumber).addClass('ic2');
 
-                                            $("#skip").show();
-                                            $("#skipSubmit").hide();
-                                        }
+                                            if(questionLimit==(parseInt(sliderNumber)+1))
+                                            {
+                                                $("#next").hide();
+                                                $("#formSubmit").show();
+
+                                                $("#skip").hide();
+                                                $("#skipSubmit").show();
+                                            }
+                                            else{
+                                                $("#next").show();
+                                                $("#formSubmit").hide();
+
+                                                $("#skip").show();
+                                                $("#skipSubmit").hide();
+                                            }
+                                        }                                        
+                                        return false;
                                     }
                                 }
                                 if (questionType === 'accounting6')
@@ -586,35 +669,46 @@
                                     }
 
                                     if(!check){
-
+                                        Swal.fire(
+                                            'Oops!',
+                                            'If you want to answer this question, please select the value first, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'info'
+                                        );
                                         return event.preventDefault();
                                     }
                                     else{
-                                        $('#carouselExampleIndicators').carousel('next');
-                                        $('#exam-count').text(parseInt($(this).attr("slide"))+1);
 
-                                        var sliderNumber = $(this).attr("slide");
-                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
-
-                                        if(questionLimit==(parseInt(sliderNumber)+1))
+                                        if(!ifSliderSame)
                                         {
-                                            $("#next").hide();
-                                            $("#formSubmit").show();
+                                            $('#carouselExampleIndicators').carousel('next');
+                                            $('#exam-count').text(parseInt($(this).attr("slide"))+1);
 
-                                            $("#skip").hide();
-                                            $("#skipSubmit").show();
-                                        }
-                                        else{
-                                            $("#next").show();
-                                            $("#formSubmit").hide();
+                                            var sliderNumber = $(this).attr("slide");
+                                            $("#numberIcnButton_"+sliderNumber).addClass('ic2');
 
-                                            $("#skip").show();
-                                            $("#skipSubmit").hide();
-                                        }
+                                            if(questionLimit==(parseInt(sliderNumber)+1))
+                                            {
+                                                $("#next").hide();
+                                                $("#formSubmit").show();
+
+                                                $("#skip").hide();
+                                                $("#skipSubmit").show();
+                                            }
+                                            else{
+                                                $("#next").show();
+                                                $("#formSubmit").hide();
+
+                                                $("#skip").show();
+                                                $("#skipSubmit").hide();
+                                            }
+                                        }                                        
+                                        return false;
                                     }
                                 }
                             }
+                            
                         });
+                        
                     });
                 })
         }

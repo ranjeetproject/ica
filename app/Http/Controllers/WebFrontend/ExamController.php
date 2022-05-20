@@ -128,8 +128,8 @@ class ExamController extends Controller
         if($request->ajax())
         {
             if ($exams->question_limit > 0) {
-               // $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting2')->inRandomOrder()->limit($exams->question_limit)->get();
-                $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
+                $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting2')->inRandomOrder()->limit($exams->question_limit)->get();
+               // $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
             } else {
 
                 $data = Question::where('exam_id',  $id)->where('state', 1)->orderBy('id', 'ASC')->get();
@@ -137,7 +137,8 @@ class ExamController extends Controller
             foreach ($data as $key=>$value)
             {
                 $value->indexKey=  $key+1;
-                if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || $value->type == "accounting3" || $value->type == "accounting5") {
+                if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || $value->type == "accounting3" || $value->type == "accounting5") 
+                {
                     $value->qus_option = explode("=><",$value->qus_option);
                     if($value->type == "accounting5")
                     {
@@ -959,6 +960,111 @@ class ExamController extends Controller
                 $studentExam->markPercentage=round(($studentExam->obtain_marks/$studentExam->full_marks)*100);
                 $studentExam->exam=Exam::find($studentExam->exam_id);
                 $data['studentExam']=$studentExam;
+
+                $studentAnswer=StudentAnswer::where('student_exam_id',$studentExam->id)->get();
+                foreach($studentAnswer as $studentAnsValue)
+                {
+                    $question=Question::find($studentAnsValue->question_id);
+                    if($question)
+                    {                        
+                        $studentAnsValue->qustionText = $question->qus;
+                        $studentAnsValue->qustionOption = explode("=><",$question->qus_option);    
+                        if($question->type=='check')
+                        {
+                            $studentAnsValue->questionOldAnswer=explode(",",$studentAnsValue->ques_old_answer);
+                            $studentAnsValue->questionYourAnswer=explode(",",$studentAnsValue->ques_answer);
+                        }    
+                        if($question->type=='accounting1')
+                        {
+                            $studentAnsValue->questionOldAnswer=explode(",",$studentAnsValue->ques_old_answer);
+                            $studentAnsValue->questionYourAnswer=explode(",",$studentAnsValue->ques_answer);
+                        } 
+                        if($question->type =="accounting2")
+                        {
+                            $studentOldAnsValueData=explode("},{",trim($studentAnsValue->ques_old_answer,'[{}]'));
+                            $questionOldAnswer=[];
+                            foreach($studentOldAnsValueData as $oldAnsvalue)
+                            {
+                                $questionOldAnswer[]=explode(',',$oldAnsvalue);
+                            }
+                            $studentAnsValue->questionOldAnswer=$questionOldAnswer;
+                            $studentAnsValueData=explode("},{",trim($studentAnsValue->ques_answer,'[{}]'));
+                            $questionYourAnswer=[];
+                            foreach($studentAnsValueData as $YourAnsvalue)
+                            {
+                                $questionYourAnswer[]=explode(',',$YourAnsvalue);
+                            }
+                            $studentAnsValue->questionYourAnswer=$questionYourAnswer;
+
+                            $studentAnsValue->primaryAccount=PrimaryAccount::get();
+                            $studentAnsValue->secondaryAccount=SecondaryAccount::get();
+                            $studentAnsValue->account=Account::where('question_id',$question->id)->get();
+
+                           
+                        } 
+                        if($question->type == "accounting4")
+                        {
+                            $studentAnsValue->qustionOption=['Increase','Decrease','No-Impact'];
+                            $studentAnsValue->qustionTextArray = explode("=><",$question->qus);
+                            
+
+                            $oldAnswer=[];
+                            $oldAnswerArray=explode('{',trim($studentAnsValue->ques_old_answer,'[]'));                        
+                            foreach($oldAnswerArray as $key=>$oldAnsValue)
+                            {
+                                if($key!=0)
+                                {
+                                    if($key==2 || $key==4 || $key==6)
+                                    {
+                                        $oldAnswer[]=explode(',',trim($oldAnsValue,':}},'));
+                                    }
+                                    else{
+                                        $oldAnswer[]=trim($oldAnsValue,':}},');
+                                    }
+                                }                                    
+                            } 
+                            $studentAnsValue->questionOldAnswer=$oldAnswer;
+                            
+                            
+                            $yourAnswer=[];
+                            $yourAnswerArray=explode('{',trim($studentAnsValue->ques_answer,'[]'));                        
+                            foreach($yourAnswerArray as $key=>$youeAnsValue)
+                            {
+                                if($key!=0)
+                                {
+                                    if($key==2 || $key==4 || $key==6)
+                                    {
+                                        $yourAnswer[]=explode(',',trim($youeAnsValue,':}},'));
+                                    }
+                                    else{
+                                        $yourAnswer[]=trim($youeAnsValue,':}},');
+                                    }
+                                    
+                                }                                    
+                            }    
+                            $studentAnsValue->questionYourAnswer=$yourAnswer;
+
+
+
+                            $studentAnsValue->reasonEquity=ReasonEquity::get();
+                            $studentAnsValue->secondaryAccount=SecondaryAccount::get();
+                        }                   
+                        if($question->type == "accounting5")
+                        {
+                            $studentAnsValue->qustionTextArray = explode("=><",$question->qus);
+                            $studentAnsValue->questionOldAnswer=explode(",",$studentAnsValue->ques_old_answer);
+                            $studentAnsValue->questionYourAnswer=explode(",",$studentAnsValue->ques_answer);
+                        }
+                        if($question->type=='accounting6')
+                        {
+                            $studentAnsValue->questionOldAnswer=explode(",",$studentAnsValue->ques_old_answer);
+                            $studentAnsValue->questionYourAnswer=explode(",",$studentAnsValue->ques_answer);
+                        }
+                    }
+                }
+                $data['correctWrongAnswer']=$studentAnswer;
+                //return $studentAnswer;
+
                 return view('WebFrontend.exam.exam-result',$data);
             }
             else{
