@@ -3649,6 +3649,52 @@ li.selected .qaFormbg {
 }
 
 
+/* --------------------------exam-list-must-know-start------------------------ */
+.mustKnowbg ul {
+    padding: 0;
+}
+
+.mustKnowbg ul li {
+    display: flex;
+    background: #E8ECF6;
+    padding: 10px 15px 10px 56px;
+    border-radius: 5px;
+    position: relative;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+.mustKnowbg ul li span {
+    width: 43px;
+    background: #3BBCA7;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+    color: #fff;
+    margin-right: 15px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+
+}
+
+.mustKnowbg h5 {
+    padding: 0px 0px 0px;
+    margin-bottom: 15px;
+    color: #FF3614;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+
+/* --------------------------exam-list-must-know-end------------------------ */
+
+
 @media screen and (max-width: 991px) {
     .progressChart {
         flex-direction: column;
