@@ -14,7 +14,7 @@
                 <h4 class="course-name">
                     {{ $exam->exam_name }}    
                 </h4>
-                <a href="#">
+                <a href="{{url('exam-instruction',$exam->ex_id)}}">
                     <img src="{{ asset('css/images/plus-icon.svg') }}" class="img-fluid" />
                 </a>
             </div>
