@@ -127,7 +127,7 @@
                     <h3>Course Details</h3>
                     <ul>
                         @foreach ($courses as $course)
-                        <li><span><i class="far fa-angle-double-right"></i></span> {{$course->course_name}}</li>
+                        <li><span><i class="far fa-angle-double-right"></i></span> <a href="#">{{$course->course_name}}</a></li>
                         @endforeach
                     </ul>
                 </div>
