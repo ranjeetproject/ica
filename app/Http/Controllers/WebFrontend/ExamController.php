@@ -960,6 +960,34 @@ class ExamController extends Controller
             {
                 $studentExam->markPercentage=round(($studentExam->obtain_marks/$studentExam->full_marks)*100);
                 $studentExam->exam=Exam::find($studentExam->exam_id);
+                if ($studentExam->exam->exam_for == 2) { //checking for competition/competitive 
+                    if ($studentExam->exam->attempt_time!=0) {
+                        $exam_end_date_time = new Carbon( $studentExam->exam->datet." ".$studentExam->exam->end_time);
+                        $today = Carbon::now();
+                        if($today > $exam_end_date_time) {
+                            $studentExam->status = 'Completed';
+                        } else {
+                            $studentExam->status ="In progress";
+                        }
+        
+                    } else {
+                        $studentExam->status ="In progress1";
+                    }
+                } else{
+                    $studentExam->status ="In progress2";
+                }
+
+                $competitive_exams = StudentExam::where('exam_id', 2)->where('exam_for',2)->orderBy('obtain_marks', 'DESC')->orderBy('total_duration', 'ASC')->get();
+                $rank = 1;
+                foreach ($competitive_exams as $value) {
+                    if($value->student_id == Auth::user()->id) {
+                        $studentExam->rank = $rank;
+                    } else {
+                        $rank++;
+                    }
+                }
+                $studentExam->rank = $rank;
+
                 $data['studentExam']=$studentExam;
 
                 $studentAnswer=StudentAnswer::where('student_exam_id',$studentExam->id)->get();
@@ -1079,43 +1107,5 @@ class ExamController extends Controller
     ///////////////////************* exam save end *****************//////////////////////////
 
 
-    //Student Rank and Status checking
-
-    public function rankStatus()
-    {
-        //-----start Status checking-----//
-        $student_exam =Exam::find(2);
-        if ($student_exam->exam_for == 2) { //checking for competition/competitive 
-            if ($student_exam->attempt_time!=0) {
-                $exam_end_date_time = new Carbon( $student_exam->date." ".$student_exam->end_time.":"."00");
-                $today = Carbon::now();
-                if($today > $exam_end_date_time) {
-                    dd('Completed');
-                } else {
-                    dd("In progress");
-                }
-
-            } else {
-                dd("In progress");
-            }
-        } else{
-            dd("In progress");
-        }
-
-        //-----end Status checking-----//
-
-        //---start of rank calculation----//
-        
-        $competitive_exams = StudentExam::where('exam_id', 2)->where('exam_for',2)->orderBy('obtain_marks', 'DESC')->orderBy('total_duration', 'ASC')->get();
-        $rank = 1;
-        foreach ($competitive_exams as $value) {
-            if($value->student_id == Auth::user()->id) {
-                $my_rank = $rank;
-            } else {
-                $rank++;
-            }
-        }
-
-        //---end of rank calculation----//
-    }
+   
 }
