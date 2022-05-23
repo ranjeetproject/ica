@@ -1,0 +1,778 @@
+@media screen and (min-width:1920px) {
+    .banner-wrp {
+        max-width: 1588px;
+        margin: auto;
+    }
+
+    .ban-content {
+        max-width: 720px;
+        padding: 85px 0 145px 90px;
+    }
+
+    .db-banner .ban-content {
+        max-width: 680px;
+    }
+}
+
+@media screen and (max-width: 1640px) {
+    .container {
+        max-width: 90%;
+    }
+
+    .ban-content {
+        max-width: 720px;
+        padding: 100px 0 145px 90px;
+    }
+
+    .ban-content .cont-head {
+        font-size: 40px;
+    }
+
+    .banner-wrp {
+        background-position: 100% top;
+    }
+
+    .ban-content::after {
+        right: -190px;
+        width: 190px;
+    }
+}
+
+@media screen and (max-width: 1460px) {
+    .banner-wrp {
+        background-position: 100% top;
+    }
+
+    .ban-content::after {
+        right: -147px;
+        width: 148px;
+    }
+
+    .ban-content .but-wrap {
+        max-width: 85%;
+    }
+
+    .ban-content {
+        padding: 80px 0 85px 85px;
+    }
+
+    .ban-content .cont-head {
+        font-size: 38px;
+    }
+
+    .ban-content .cont-para {
+        margin: 35px 0 50px;
+    }
+
+    .how-it-works {
+        padding: 50px 0 80px;
+    }
+
+    .how-it-works .h-header-wrp p {
+        font-size: 17px;
+    }
+
+    .how-it-works .h-header-wrp h3 {
+        font-size: 24px;
+    }
+
+    .how-it-works .h-cards-wrp .card .card-body {
+        padding: 20px 20px;
+    }
+
+    .how-it-works .h-cards-wrp .card .count-no {
+        font-size: 48px;
+    }
+
+    .how-it-works .h-cards-wrp .content .c-text {
+        font-size: 18px;
+    }
+
+    .how-it-works .h-cards-wrp .card .card-body .content {
+        margin-left: 10px;
+    }
+
+    .how-it-works .h-cards-wrp .card {
+        width: 22%;
+    }
+
+    .courses-wrap {
+        padding: 50px 0;
+    }
+
+    .courses-wrap .course-head {
+        font-size: 24px;
+        line-height: 35px;
+    }
+
+    .courses-wrap .corse-hints {
+        font-size: 16px;
+    }
+
+    .home-courses .slick-slide {
+        margin: 16px;
+    }
+
+    .course-card .course-image {
+        height: 150px;
+    }
+
+    .course-card .course-name {
+        font-size: 16px;
+        margin: 14px 0 10px 0;
+    }
+
+    .course-card {
+        padding: 20px;
+    }
+
+    .common-button {
+        font-size: 16px;
+        padding: 10px 26px;
+    }
+
+    .signup-wrapper .signup-container {
+        max-width: 90%;
+    }
+
+    .course-card.db-cards {
+        padding: 25px;
+    }
+
+    .exam .db-cards .course-image {
+        height: 268px;
+    }
+
+    .crs-dtls-wrp .contents .sub-para {
+        font-size: 22px;
+        line-height: 34px;
+        margin-bottom: 40px;
+    }
+
+    .crs-dtls-wrp .contents .para-text {
+        font-size: 20px;
+        margin-bottom: 40px;
+        line-height: 32px;
+    }
+
+    .crs-dtls-wrp .contents .title-part {
+        color: #072F60;
+        font-weight: 800;
+        font-size: 28px;
+    }
+
+    .crs-dtls-wrp .contents .about-list .nav-item {
+        font-size: 20px;
+        line-height: 28px;
+        background-size: 27px;
+        padding-left: 60px;
+        margin-bottom: 12px
+    }
+
+    .crs-dtls-wrp .module-content .count-number {
+        width: 50px;
+        height: 48px;
+    }
+
+    .crs-dtls-wrp .module-content p {
+        margin: 0;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    .crs-dtls-wrp .module-content .lesson-prt {
+        padding: 10px 20px;
+    }
+
+    .crs-dtls-wrp .module-content .lesson-prt .lesson-number {
+        font-size: 16px;
+    }
+
+    .crs-dtls-wrp {
+        padding: 40px 0 70px;
+    }
+
+    .exam-list-wr .e-title {
+        font-size: 28px;
+        margin-bottom: 35px;
+    }
+
+    .exam-list-wr .list-item {
+        margin-bottom: 35px;
+    }
+
+    .exam-list-wr .list-item span {
+        width: 80px;
+        height: 78px;
+        font-size: 34px;
+    }
+
+    .exam-list-wr .list-item p {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 1368px) {
+    .ban-content {
+        max-width: 630px;
+    }
+
+    .ban-content .cont-head {
+        font-size: 32px;
+    }
+
+    .header .rt-prt .free-sec .regis {
+        font-size: 16px;
+    }
+
+    .progress-sec,
+    .progress-wrap .award-part {
+        padding: 25px;
+    }
+
+    .progress-wrap .total-completed {
+        margin-top: 20px;
+    }
+
+    .progress-wrap .row {
+        --bs-gutter-x: 30px;
+    }
+
+    .progress-sec h4 {
+        font-size: 25px;
+        margin: 0 0 25px 0;
+    }
+
+    .progress-wrap .cat-progress .progress {
+        height: 40px;
+    }
+
+    .progress-wrap .cat-progress .progress-bar {
+        font-size: 12px;
+    }
+
+    .progress-wrap .cat-progress .v-percentage {
+        font-size: 14px;
+    }
+
+    .progress-wrap .award-part h4 {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+
+    .progress-wrap .award-part input {
+        height: 50px;
+    }
+
+    .progress-wrap .award-part .search-res .tests {
+        padding: 0 12px;
+        font-size: 16px;
+    }
+
+    .top-cont .lt-prt .log-ar .text-part {
+        margin-left: 20px;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .top-cont .lt-prt .log-ar .text-part {
+        font-size: 18px;
+        margin-left: 20px;
+    }
+
+    .top-cont .lt-prt .std-qt {
+        font-size: 13px;
+    }
+
+    .inner-content-modi .innerinfo_left p:first-child {
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 28px;
+        font-weight: 600;
+    }
+
+    .contents.textalign_justify p {
+        font-size: 16px;
+        margin-bottom: 40px;
+        line-height: 24px;
+    }
+
+    .contents.textalign_justify ul li {
+        font-size: 16px;
+        color: #071739;
+        font-weight: 400;
+        line-height: 24px;
+
+
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .top-cont {
+        flex-wrap: wrap;
+    }
+
+    .top-cont .lt-prt {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .header .rt-prt {
+        width: 100%;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .header-bottom .navbar .nav-link {
+        padding-right: 20px;
+    }
+
+    .how-it-works .h-cards-wrp {
+        flex-wrap: wrap;
+    }
+
+    .how-it-works .h-cards-wrp .card {
+        margin-bottom: 6%;
+        width: 47%;
+    }
+
+    .how-it-works .h-cards-wrp .card:nth-child(2) .conntector {
+        display: none;
+    }
+
+    .footer-wrapper .social-wrap {
+        flex-wrap: wrap;
+    }
+
+    .footer-wrapper .footer-so-li {
+        margin-left: 335px;
+    }
+
+    .footer-wrapper {
+        padding: 30px 0 40px;
+    }
+
+    .signup-wrapper .sig-card-wpr {
+        flex-wrap: wrap;
+    }
+
+    .signup-wrapper .sig-card-wpr .form-part {
+        width: 100%;
+    }
+
+    .signup-wrapper .content-part .cont-inner {
+        margin-top: 280px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .crs-dtls-wrp .contents .sub-para {
+        font-size: 18px;
+        line-height: 32px;
+        margin-bottom: 25px;
+    }
+
+    .banner-wrp {
+        background-position: 80% top;
+        padding-top: 74%;
+        background-size: 150%;
+    }
+
+    .ban-content::after {
+        display: none;
+    }
+
+    .ban-content {
+        max-width: 100%;
+    }
+
+    .how-it-works .h-header-wrp {
+        width: 100%;
+    }
+
+    .footer-wrapper .footer-logo-wrap,
+    .footer-wrapper .footer-quick-links,
+    .footer-wrapper .footer-so-li,
+    .footer-wrapper .footer-address {
+        width: 100%;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .footer-wrapper .add-bar .label {
+        flex: inherit;
+    }
+
+    .footer-wrapper .add-bar {
+        justify-content: center;
+    }
+
+    .footer-wrapper .text-prt {
+        font-size: 16px;
+    }
+
+    .footer-wrapper .btn-about {
+        font-size: 16px;
+        padding: 8px 35px;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+
+    .header-bottom .navbar {
+        padding: 0;
+    }
+
+    .header-bottom .navbar-collapse {
+        padding: 20px 0;
+    }
+
+    .banner-wrp.db-banner {
+        padding-top: 59%;
+        background-size: 100%;
+    }
+
+    .db-block1 .col-md-4 {
+        width: 49%;
+    }
+
+    .progress-wrap .col-md-6 {
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .course-card.db-cards {
+        margin-bottom: 40px;
+    }
+
+    section.banner-wrp.inner-banner {
+        background-position: 92% top;
+        padding-top: 75%;
+        background-size: 262%;
+    }
+
+    section.banner-wrp {
+        background-size: 138% !important;
+
+    }
+
+    section.banner-wrp.inner-banner {
+        background-size: 259% !important;
+    }
+
+}
+
+@media screen and (max-width:767px) {
+
+    .top-cont .lt-prt .log-ar .text-part {
+        font-size: 13px;
+        margin-left: 20px;
+    }
+
+    .contactfrom_details {
+
+        flex-direction: column-reverse;
+    }
+
+    .header .rt-prt .login-btn {
+        font-size: 12px;
+        margin-left: 0px;
+    }
+
+    .header .rt-prt .free-sec .regis {
+        font-size: 12px;
+    }
+
+    .header .rt-prt img {
+        margin-right: 5px;
+        width: 30px;
+    }
+
+    .top-cont .lt-prt .std-qt {
+        margin: 8px 0 0 0;
+        padding: 8px 16px;
+    }
+
+    .top-cont .lt-prt {
+        flex-direction: column;
+    }
+
+    .ban-content {
+        padding: 20px;
+    }
+
+    .ban-content .cont-head {
+        font-size: 24px;
+    }
+
+    .ban-content .cont-para {
+        margin: 21px 0 30px;
+        font-size: 18px;
+    }
+
+    .ban-content .point-arrow {
+        display: none;
+    }
+
+    .ban-content .bottom_icon {
+        display: none;
+    }
+
+    .how-it-works .h-header-wrp h3 {
+        font-size: 18px;
+    }
+
+    .how-it-works .h-cards-wrp .card {
+        margin-bottom: 0;
+        width: 100%;
+        margin-top: 60px;
+    }
+
+    .how-it-works .h-cards-wrp .card .conntector {
+        display: none;
+    }
+
+    .how-it-works .h-cards-wrp .card .count-no {
+        font-size: 48px;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -137%);
+    }
+
+    .courses-wrap .courses-tag {
+        font-size: 16px;
+    }
+
+    .courses-wrap .course-head {
+        font-size: 22px;
+        line-height: inherit;
+    }
+
+    .courses-wrap .corse-hints {
+        font-size: 15px;
+        margin: 0;
+    }
+
+    .home-courses .slick-slide {
+        margin: 10px;
+    }
+
+    .courses-wrap .home-courses .slick-prev {
+        width: 15px;
+        height: 20px;
+        left: -15px;
+    }
+
+    .courses-wrap .home-courses .slick-next {
+        width: 15px;
+        height: 20px;
+        right: -18px;
+    }
+
+    .course-card {
+        box-shadow: 0px 4px 8px #ededed;
+    }
+
+    .course-card.db-cards {
+        margin-bottom: 30px;
+        padding: 30px;
+    }
+
+    .progress-sec .grade-level {
+        margin-bottom: 20px;
+    }
+
+    .progress-wrap .total-completed {
+        margin-top: 16px;
+    }
+
+    .progress-sec {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .progress-wrap .award-part {
+        padding: 20px;
+    }
+
+    .row {
+        --bs-gutter-x: 24px;
+    }
+
+    .progress-wrap .award-part .search-res .tests {
+        padding: 0 8px;
+    }
+
+    .progress-wrap {
+        padding: 50px 0 70px;
+    }
+
+    .footer-wrapper .add-bar {
+        flex-direction: column;
+    }
+
+    .footer-wrapper .add-bar .add-icon {
+        margin: 10px auto;
+    }
+
+    .footer-wrapper .add-bar .label span,
+    .footer-wrapper .add-bar .label a {
+        margin: 0;
+    }
+
+    .footer-wrapper .add-bar .label span br {
+        display: none;
+    }
+
+    .footer-wrapper .add-bar .label {
+        margin: auto;
+    }
+
+    .signup-wrapper {
+        padding: 20px 0 30px;
+    }
+
+    .signup-wrapper .sig-card-wpr .content-part {
+        padding: 20px;
+    }
+
+    .signup-wrapper .content-part .cont-inner h5 {
+        font-size: 30px;
+    }
+
+    .signup-wrapper .content-part .cont-inner h3 {
+        font-size: 50px;
+    }
+
+    .signup-wrapper .content-part .cont-inner h4 {
+        font-size: 40px;
+    }
+
+    .signup-wrapper .content-part .cont-inner p {
+        font-size: 18px;
+    }
+
+    .signup-wrapper .form-part .snup-logo-wrap {
+        padding: 10px;
+        flex-direction: column;
+    }
+
+    .signup-wrapper .form-part .snup-logo-wrap .snup-logo {
+        margin: auto;
+    }
+
+    .signup-wrapper .form-part .form {
+        padding: 0 10px;
+    }
+
+    .form-control {
+        height: 56px;
+        font-size: 16px;
+    }
+
+    .signup-wrapper .form-part .signup {
+        padding: 10px;
+    }
+
+    .signup-wrapper .already-account {
+        margin: 30px 10px;
+    }
+
+    .login-wrapper .cont-inner .nav .nav-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .login-wrapper .cont-inner .nav .nav-item .num {
+        margin: 0px 0px 20px 0;
+    }
+
+    .login-wrapper .reqOtp {
+        padding: 8px 16px;
+    }
+
+    .navbar-toggler {
+        padding: 0;
+        position: relative;
+        right: -15px;
+    }
+
+    .navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .db-block1 .col-md-4 {
+        width: 100%;
+    }
+
+    .exam .db-cards .course-image {
+        height: 200px;
+    }
+
+    .crs-dtls-wrp .contents .about-list .nav-item {
+        font-size: 16px;
+        padding-left: 45px;
+    }
+
+    .crs-dtls-wrp .contents .para-text {
+        font-size: 17px;
+        margin-bottom: 26px;
+        line-height: 26px;
+    }
+
+    .crs-dtls-wrp .contents .title-part {
+        font-size: 20px;
+    }
+
+    .crs-dtls-wrp .contents .rating-star {
+        margin-left: 6px;
+    }
+
+    .crs-dtls-wrp .contents .title-part .bar {
+        width: 40px;
+        height: 4px;
+    }
+
+    .crs-dtls-wrp .module-content {
+        flex-direction: column;
+    }
+
+    .crs-dtls-wrp .module-content p {
+        text-align: center;
+        font-size: 16px;
+        line-height: 20px;
+        margin: 10px 0;
+    }
+
+    .crs-dtls-wrp .module-content .count-number,
+    .crs-dtls-wrp .module-content .lesson-prt {
+        margin: 0;
+    }
+
+    .video-wrp {
+        padding: 16px;
+    }
+
+    .video-wrp .btnplay img {
+        max-width: 60%;
+    }
+
+    .exam-list-wr .list-item span {
+        width: 66px;
+        height: 64px;
+        font-size: 26px;
+    }
+
+    .exam-list-wr .list-item p {
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .page-item .page-link,
+    .page-item.disabled .page-link {
+        font-size: 18px;
+    }
+}
