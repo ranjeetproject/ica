@@ -317,7 +317,7 @@ class ExamController extends Controller
                 {
                     $value->primaryAccount=PrimaryAccount::get();
                     $value->secondaryAccount=SecondaryAccount::get();
-                    $value->account=Account::get();
+                    $value->account=Account::where('question_id',$value->id)->get();
                 }
                 if($value->type == "accounting4")
                 {
