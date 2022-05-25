@@ -2,7 +2,11 @@
     <div class="col-md-4">
         <div class="course-card db-cards">
             {{-- @if ($exam->courseDetails->course_photo == null) --}}
+            @if($exam->exam_image!='')
                 <img src="{{$exam->exam_image}}" class="course-image" alt="#">
+            @else
+                <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="exam-image">
+            @endif
             {{-- @else
                 <img src="{{ $exam->courseDetails->course_photo }}" class="course-image" alt="#"> --}}
             {{-- @endif --}}
