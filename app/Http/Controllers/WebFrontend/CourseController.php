@@ -47,7 +47,7 @@ class CourseController extends Controller
                 $chapter_read_status_count =  StudentChapterRead::where('chapter', $chapter->id)
                                             ->where('student_id', Auth::user()->id)->where('read_status', 1)->count();
 
-                $chapter->read_count_percentage = (($chapter_read_status_count/$chapter->topicsCount)/100);
+                $chapter->read_count_percentage = (($chapter_read_status_count/$chapter->topicsCount)*100);
             }
             $course->courseChapter=$courseChapter;
             return view('WebFrontend.courseDetails',compact('course'));
