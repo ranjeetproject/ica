@@ -40,9 +40,9 @@
                     </div>
                 </div>
             </div>
-            <div class="profileHdn profsubhdn">
+            {{-- <div class="profileHdn profsubhdn">
                 <h2>Basic</h2>
-            </div>
+            </div> --}}
             <div class="profileForm newProfileform">
                 <form>
                     <div class="row">
@@ -127,7 +127,7 @@
                     <h3>Course Details</h3>
                     <ul>
                         @foreach ($courses as $course)
-                        <li><span><i class="far fa-angle-double-right"></i></span> {{$course->course_name}}</li>
+                        <li><span><i class="far fa-angle-double-right"></i></span> <a href="{{ url('course-details', $course->course) }}">{{$course->course_name}}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -273,6 +273,24 @@
 
         });
     });
+    @if(Session::has('success'))
+        toastr.success("{{ Session::get('success') }}");
+        {{ Session::forget('success') }};
+    @endif
 
+
+    @if(Session::has('info'))
+        toastr.info("{{ Session::get('info') }}");
+    @endif
+
+
+    @if(Session::has('warning'))
+        toastr.warning("{{ Session::get('warning') }}");
+    @endif
+
+
+    @if(Session::has('error'))
+        toastr.error("{{ Session::get('error') }}");
+    @endif
 </script>
 @endsection

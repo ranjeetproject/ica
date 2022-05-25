@@ -87,7 +87,7 @@
             <div class="module-content">
                 <span class="count-number">{{ $key + 1 }}</span>
 
-                <p>{{ $chapter->chapter_name }}</p>
+                <p>{{ $chapter->chapter_name }}<span class="chapProgress"><span>50%</span> Progress</span></p>
 
                 <div class="lesson-prt">
                     <img src="{{ asset('css/images/lesson-icon.png') }}" class="img-fluid" />
@@ -97,7 +97,7 @@
             @endforeach
             {{-- <div class="module-content">
                     <span class="count-number">1</span>
-                    <p>Minima veniam, quis nostrum Exercitation.</p>
+                    <p>Minima veniam, quis nostrum Exercitation. <span class="chapProgress"><span>50%</span> Progress</span></p>
                     <div class="lesson-prt">
                         <img src="{{asset('css/images/lesson-icon.png')}}" class="img-fluid" />
             <span class="lesson-number">10 Lessons</span>
@@ -105,7 +105,7 @@
     </div>
     <div class="module-content">
         <span class="count-number">1</span>
-        <p>Quis nostrum Exercitationem ullam Corpori</p>
+        <p>Quis nostrum Exercitationem ullam Corpori <span class="chapProgress"><span>50%</span> Progress</span></p>
         <div class="lesson-prt">
             <img src="{{asset('css/images/lesson-icon.png')}}" class="img-fluid" />
             <span class="lesson-number">10 Lessons</span>

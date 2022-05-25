@@ -88,8 +88,6 @@ Route::middleware(['auth'])->group(function ()
 
     Route::get('notification-list','WebFrontend\NotificationController@list')->name('notification-list');
     
-   
-
 
     Route::get('logout', 'WebFrontend\UserController@logout');
 });

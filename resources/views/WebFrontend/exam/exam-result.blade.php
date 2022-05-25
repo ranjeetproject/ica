@@ -48,6 +48,16 @@
                             <span>Percentage of Marks :</span>
                             <span>{{$studentExam->markPercentage}} %</span>
                         </div>
+                        @if($studentExam->exam->exam_for == 2)
+                            <div class="result_des">
+                                <span>Rank :</span>
+                                <span>{{$studentExam->rank}}</span>
+                            </div>
+                            <div class="result_des">
+                                <span>Status :</span>
+                                <span>{{$studentExam->status}}</span>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

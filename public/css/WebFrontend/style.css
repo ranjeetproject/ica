@@ -1749,6 +1749,23 @@ select.form-control:focus {
     padding: 20px;
 }
 
+.noDt {
+    font-weight: 500 !important;
+    font-size: 26px !important;
+    text-align: center;
+}
+
+.exlist p {
+    font-size: 20px !important;
+    line-height: 27px !important;
+    font-weight: 400 !important;
+}
+
+.exlist span {
+    width: 93px !important;
+    height: 93px !important;
+}
+
 .exam-list-wr .e-title {
     font-style: normal;
     font-weight: 800;
@@ -3086,7 +3103,7 @@ li.selected .qaFormbg {
     position: absolute;
     right: 100%;
     top: 15px;
-    width: 100px;
+    width: 300px;
     height: 5px;
     background: #116EEE;
     margin-right: 10px;
@@ -3096,7 +3113,7 @@ li.selected .qaFormbg {
 .profileHdn h2::after {
     content: "";
     position: absolute;
-    width: 100px;
+    width: 300px;
     top: 15px;
     height: 5px;
     background: #116EEE;
@@ -3279,6 +3296,15 @@ li.selected .qaFormbg {
     border-radius: 5px;
     font-size: 15px;
 
+}
+
+.detlTable ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.detlTable ul li a:hover {
+    color: #0a8974;
 }
 
 .detlTable ul li span {
@@ -3648,6 +3674,86 @@ li.selected .qaFormbg {
     padding: 10px;
 }
 
+
+/* --------------------------exam-list-must-know-start------------------------ */
+.mustKnowbg ul {
+    padding: 0;
+}
+
+.mustKnowbg ul li {
+    display: flex;
+    background: #E8ECF6;
+    padding: 10px 15px 10px 56px;
+    border-radius: 5px;
+    position: relative;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+.mustKnowbg ul li p {
+    width: 43px;
+    background: #3BBCA7;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+    color: #fff;
+    margin-right: 15px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+
+}
+
+.mustKnowbg h3 {
+    padding: 0px 0px 0px;
+    margin-bottom: 15px;
+    color: #FF3614;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+
+/* --------------------------exam-list-must-know-end------------------------ */
+
+
+#courseLoader,
+#examLoader {
+    text-align: center;
+    position: relative;
+    padding-bottom: 30px;
+}
+
+
+#courseLoader::after,
+#examLoader::after {
+    content: "Loading...";
+    position: absolute;
+    left: 48%;
+    bottom: 0;
+    z-index: 1;
+    font-size: 15px;
+    color: #333;
+    font-weight: 500;
+}
+
+.chapProgress {
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #646464;
+}
+
+.chapProgress span {
+    font-size: 17px;
+    font-weight: 600;
+    color: #23ab95;
+}
 
 @media screen and (max-width: 991px) {
     .progressChart {

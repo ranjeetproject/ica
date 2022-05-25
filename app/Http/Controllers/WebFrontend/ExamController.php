@@ -18,6 +18,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\StudentAnswer;
+use Illuminate\Support\Carbon;
 
 
 class ExamController extends Controller
@@ -128,8 +129,8 @@ class ExamController extends Controller
         if($request->ajax())
         {
             if ($exams->question_limit > 0) {
-                $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting2')->inRandomOrder()->limit($exams->question_limit)->get();
-               // $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
+                // $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting2')->inRandomOrder()->limit($exams->question_limit)->get();
+                $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
             } else {
 
                 $data = Question::where('exam_id',  $id)->where('state', 1)->orderBy('id', 'ASC')->get();
@@ -316,7 +317,7 @@ class ExamController extends Controller
                 {
                     $value->primaryAccount=PrimaryAccount::get();
                     $value->secondaryAccount=SecondaryAccount::get();
-                    $value->account=Account::get();
+                    $value->account=Account::where('question_id',$value->id)->get();
                 }
                 if($value->type == "accounting4")
                 {
@@ -959,6 +960,34 @@ class ExamController extends Controller
             {
                 $studentExam->markPercentage=round(($studentExam->obtain_marks/$studentExam->full_marks)*100);
                 $studentExam->exam=Exam::find($studentExam->exam_id);
+                if ($studentExam->exam->exam_for == 2) { //checking for competition/competitive 
+                    if ($studentExam->exam->attempt_time!=0) {
+                        $exam_end_date_time = new Carbon( $studentExam->exam->datet." ".$studentExam->exam->end_time);
+                        $today = Carbon::now();
+                        if($today > $exam_end_date_time) {
+                            $studentExam->status = 'Completed';
+                        } else {
+                            $studentExam->status ="In progress";
+                        }
+        
+                    } else {
+                        $studentExam->status ="In progress";
+                    }
+                } else{
+                    $studentExam->status ="In progress";
+                }
+
+                $competitive_exams = StudentExam::where('exam_id', 2)->where('exam_for',2)->orderBy('obtain_marks', 'DESC')->orderBy('total_duration', 'ASC')->get();
+                $rank = 1;
+                foreach ($competitive_exams as $value) {
+                    if($value->student_id == Auth::user()->id) {
+                        $studentExam->rank = $rank;
+                    } else {
+                        $rank++;
+                    }
+                }
+                $studentExam->rank = $rank;
+
                 $data['studentExam']=$studentExam;
 
                 $studentAnswer=StudentAnswer::where('student_exam_id',$studentExam->id)->get();
@@ -1076,4 +1105,7 @@ class ExamController extends Controller
         }
     }
     ///////////////////************* exam save end *****************//////////////////////////
+
+
+   
 }

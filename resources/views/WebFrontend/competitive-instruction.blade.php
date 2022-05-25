@@ -22,7 +22,9 @@
                     MUST KNOW
                 </h4>
                 <div class="inner_content_view">
-                     {!!$data->exam_for_web!!}
+                    <div class="inner_block mustKnowbg">
+                        {!!$data->exam_for_web!!}
+                    </div>
 
                     <div class="def_btn_opt">
                         <a href="{{url('competitive-start-exam',$id)}}" class="def_btn">Start Exam</a>
