@@ -87,7 +87,7 @@
             <div class="module-content">
                 <span class="count-number">{{ $key + 1 }}</span>
 
-                <p>{{ $chapter->chapter_name }}<span class="chapProgress"><span>50%</span> Progress</span></p>
+                <p>{{ $chapter->chapter_name }}<span class="chapProgress"><span>{{$chapter->read_count_percentage}}%</span> Progress</span></p>
 
                 <div class="lesson-prt">
                     <img src="{{ asset('css/images/lesson-icon.png') }}" class="img-fluid" />

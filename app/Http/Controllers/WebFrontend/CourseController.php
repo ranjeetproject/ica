@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Course;
 use App\Chapter;
 use App\ChapterDetail;
+use App\StudentChapterRead;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -37,11 +38,16 @@ class CourseController extends Controller
         $topics = [];
         $course = Course::find($id);
         if($course){
-            $courseChapter = Chapter::where('course_id','=',$course->id)->get();
+            $courseChapter = Chapter::where('course_id','=',$course->id)->where('status', "1")->orderBy('chapter_order', 'ASC')->get();
             foreach($courseChapter as $chapter)
             {
                 $chapter->topicsCount = ChapterDetail::where('course','=',$course->id)
                     ->where('chapter','=',$chapter->id)->count();
+
+                $chapter_read_status_count =  StudentChapterRead::where('chapter', $chapter->id)
+                                            ->where('student_id', Auth::user()->id)->where('read_status', 1)->count();
+
+                $chapter->read_count_percentage = (($chapter_read_status_count/$chapter->topicsCount)/100);
             }
             $course->courseChapter=$courseChapter;
             return view('WebFrontend.courseDetails',compact('course'));
