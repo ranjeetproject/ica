@@ -97,13 +97,17 @@
         var accountName=$("#accounting2AccountName_"+questionId+" option:selected").text();
         var amount=$("#accounting2Amount_"+questionId).val();
 
+        
+
         var radioNameString="accounting2DebitCredit_"+questionId;
         var type=$('input[name='+radioNameString+']:checked').val();
 
-        if(amount > 0){
+        if(amount > 0)
+        {
             var html='';
             if(type==1)
             {
+                console.log("Debit Add : "+amount);
                 //debit
                 var html='<tr><td><a href="#" class="rowDel" deleteType="1"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td class="amount_track">'+amount+'</td><td>0</td></tr><input type="hidden" name="accounting2_LineItem_'+questionId+'[]" value="{'+primaryAccountValue+','+secondaryAccountValue+','+accountNameValue+','+amount+','+type+'}">';
                 var totalDebit=$("#accounting2Debit_"+questionId).val();
@@ -113,6 +117,7 @@
             }
             else{
                 //credit
+                console.log("Credit Add : "+amount);
                 var html='<tr><td><a href="#" class="rowDel" deleteType="2"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td>0</td><td class="amount_track">'+amount+'</td></tr><input type="hidden" name="accounting2_LineItem_'+questionId+'[]" value="{'+primaryAccountValue+','+secondaryAccountValue+','+accountNameValue+','+amount+','+type+'}">';
 
                 var totalCredit=$("#accounting2credit_"+questionId).val();
@@ -122,6 +127,13 @@
             }
 
             $("#accounting2TableBody_"+questionId).append(html);
+
+            
+
+            $("#accounting2PrimaryAccount_"+questionId).val('');
+            $("#accounting2SecondaryAccount_"+questionId).val('');
+            $("#accounting2AccountName_"+questionId).val('');
+            $("#accounting2Amount_"+questionId).val('');
 
             $(".rowDel").click(function()
             {
@@ -146,13 +158,17 @@
                             var totalDebitAmount = $("#accounting2_totalDebit_"+questionId).html();
                             totalDebitAmount = totalDebitAmount - amount;
                             $("#accounting2_totalDebit_"+questionId).html(totalDebitAmount);
+                            $("#accounting2Debit_"+questionId).val(totalDebitAmount);
+                            
                         }
 
                         if(deleteType==2)
                         {
                             var totalCreditAmount = $("#accounting2_totalCredit_"+questionId).html();
                             totalCreditAmount = totalCreditAmount - amount;   
-                            $("#accounting2_totalCredit_"+questionId).html(totalCreditAmount);                         
+                            $("#accounting2_totalCredit_"+questionId).html(totalCreditAmount);    
+                            $("#accounting2credit_"+questionId).val(totalCreditAmount);    
+                                                 
                         }
                         
                        
@@ -164,11 +180,6 @@
                     }
                 })
             });
-
-            $("#accounting2PrimaryAccount_"+questionId).val('');
-            $("#accounting2SecondaryAccount_"+questionId).val('');
-            $("#accounting2AccountName_"+questionId).val('');
-            $("#accounting2Amount_"+questionId).val('');
         }
     }
 </script>
