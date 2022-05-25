@@ -3741,6 +3741,20 @@ li.selected .qaFormbg {
     font-weight: 500;
 }
 
+.chapProgress {
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #646464;
+}
+
+.chapProgress span {
+    font-size: 17px;
+    font-weight: 600;
+    color: #23ab95;
+}
+
 @media screen and (max-width: 991px) {
     .progressChart {
         flex-direction: column;
