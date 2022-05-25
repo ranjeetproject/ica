@@ -317,7 +317,7 @@ class ExamController extends Controller
                 {
                     $value->primaryAccount=PrimaryAccount::get();
                     $value->secondaryAccount=SecondaryAccount::get();
-                    $value->account=Account::get();
+                    $value->account=Account::where('question_id',$value->id)->get();
                 }
                 if($value->type == "accounting4")
                 {
@@ -971,10 +971,10 @@ class ExamController extends Controller
                         }
         
                     } else {
-                        $studentExam->status ="In progress1";
+                        $studentExam->status ="In progress";
                     }
                 } else{
-                    $studentExam->status ="In progress2";
+                    $studentExam->status ="In progress";
                 }
 
                 $competitive_exams = StudentExam::where('exam_id', 2)->where('exam_for',2)->orderBy('obtain_marks', 'DESC')->orderBy('total_duration', 'ASC')->get();
