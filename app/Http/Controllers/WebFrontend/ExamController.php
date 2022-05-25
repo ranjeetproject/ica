@@ -856,7 +856,12 @@ class ExamController extends Controller
 
         $db->ques_type = $question->type;
         $db->ques_old_answer = $question->ans;
-        $db->ques_answer = $answerData;
+        if(($answerData==null || $answerData=='') && $question->type=='accounting3'){
+            $db->ques_answer = 0;
+        }
+        else{
+            $db->ques_answer = $answerData;
+        }        
         $db->ques_correct=0;
         $db->obtain_marks =0;
         if($answerStatus=='true')
