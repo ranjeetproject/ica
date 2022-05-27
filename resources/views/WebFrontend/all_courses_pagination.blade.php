@@ -1,6 +1,10 @@
 @foreach ($data as $course)
     <div class="course-card">
+    @if($course->course_photo!='')
         <img src="{{$course->course_photo}}" class="course-image" alt="#" />
+    @else
+        <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#">
+    @endif
         <div class="total-lesson">
             <img src="{{asset('css/images/lesson-icon.png')}}" class="img-flid" alt="#">
             <span>{{count($course->lessons)}} Lessons</span>
