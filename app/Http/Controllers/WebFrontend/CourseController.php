@@ -50,6 +50,7 @@ class CourseController extends Controller
                 $chapter->read_count_percentage = (($chapter_read_status_count/$chapter->topicsCount)*100);
             }
             $course->courseChapter=$courseChapter;
+            //return $course;
             return view('WebFrontend.courseDetails',compact('course'));
         }
         else
@@ -69,4 +70,15 @@ class CourseController extends Controller
         }
         return view('WebFrontend.all_courses',compact('data'));
     }
+
+    public function chapterDetails($chapterId,$courseId)
+    {
+        $data = [];
+        return view('WebFrontend.chapterDetails.lesson',$data);
+    }
+
+
+
+
+
 }
