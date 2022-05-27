@@ -87,7 +87,13 @@ Route::middleware(['auth'])->group(function ()
     Route::get('competitive-start-exam/{id}','WebFrontend\ExamController@competitiveExamStart')->name('competitive-start');
 
     Route::get('notification-list','WebFrontend\NotificationController@list')->name('notification-list');
+
+    Route::get('chapter-details/{chapterId}/{courseId}','WebFrontend\CourseController@chapterDetails')->name('chapter-details');
     
 
     Route::get('logout', 'WebFrontend\UserController@logout');
 });
+
+// Route::get('chapter-details/{chapterId}/{courseId}',function(){
+//     dd('test');
+// })->name('chapter-details');

@@ -88,10 +88,14 @@
                 <span class="count-number">{{ $key + 1 }}</span>
 
                 <p>{{ $chapter->chapter_name }}<span class="chapProgress"><span>{{$chapter->read_count_percentage}}%</span> Progress</span></p>
-
-                <a class="lesson-prt" href="#">
+                
+                <a class="lesson-prt" href="{{route('chapter-details',[$chapter->id,$chapter->course_id])}}">
                     <img src="{{ asset('css/images/lesson-icon.png') }}" class="img-fluid" />
+                    @if($chapter->topicsCount>1)
                     <span class="lesson-number">{{ $chapter->topicsCount }} Lessons</span>
+                    @else
+                    <span class="lesson-number">{{ $chapter->topicsCount }} Lesson</span>
+                    @endif
                 </a>
             </div>
             @endforeach
