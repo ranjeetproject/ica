@@ -1,6 +1,8 @@
 <div class="questionBlock">
     <p>{{ $question->indexKey }}. {{ $question->qus }}</p>
-    <div class="qslImg"><img src="{{ $question->qus_image }}" alt="" title="" /></div>
+    @if($question->qus_image!=null)
+        <div class="qslImg"><img src="{{ $question->qus_image }}" alt="" title="" /></div>
+    @endif
     <div class="qbSelect nullSelect">
         <div class="qbSelectB">
             <label>Choose correct account type</label>

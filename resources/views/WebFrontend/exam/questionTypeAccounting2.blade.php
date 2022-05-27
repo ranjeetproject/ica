@@ -109,7 +109,7 @@
             {
                 console.log("Debit Add : "+amount);
                 //debit
-                var html='<tr><td><a href="#" class="rowDel" deleteType="1"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td class="amount_track">'+amount+'</td><td>0</td></tr><input type="hidden" name="accounting2_LineItem_'+questionId+'[]" value="{'+primaryAccountValue+','+secondaryAccountValue+','+accountNameValue+','+amount+','+type+'}">';
+                var html='<tr><td><a href="#" class="rowDel" deleteType="1"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td class="amount_track">'+amount+'</td><td>0<input type="hidden" name="accounting2_LineItem_'+questionId+'[]" value="{'+primaryAccountValue+','+secondaryAccountValue+','+accountNameValue+','+amount+','+type+'}"></td></tr>';
                 var totalDebit=$("#accounting2Debit_"+questionId).val();
                 var totalDebit = parseInt(totalDebit)+parseInt(amount);
                 $("#accounting2Debit_"+questionId).val(totalDebit);
@@ -118,7 +118,7 @@
             else{
                 //credit
                 console.log("Credit Add : "+amount);
-                var html='<tr><td><a href="#" class="rowDel" deleteType="2"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td>0</td><td class="amount_track">'+amount+'</td></tr><input type="hidden" name="accounting2_LineItem_'+questionId+'[]" value="{'+primaryAccountValue+','+secondaryAccountValue+','+accountNameValue+','+amount+','+type+'}">';
+                var html='<tr><td><a href="#" class="rowDel" deleteType="2"><i class="fas fa-trash-alt"></i></a></td><td>'+accountName+'</td><td>0</td><td class="amount_track">'+amount+'<input type="hidden" name="accounting2_LineItem_'+questionId+'[]" value="{'+primaryAccountValue+','+secondaryAccountValue+','+accountNameValue+','+amount+','+type+'}"></td></tr>';
 
                 var totalCredit=$("#accounting2credit_"+questionId).val();
                 var totalCredit = parseInt(totalCredit)+parseInt(amount);

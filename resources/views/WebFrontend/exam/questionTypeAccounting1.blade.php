@@ -1,5 +1,8 @@
 <div class="questionBlock">
     <p>{{ $question->indexKey }}. {{ $question->qus }}</p>
+    @if($question->qus_image!=null)
+        <div class="qslImg"><img src="{{ $question->qus_image }}" alt="" title="" /></div>
+    @endif
     <div class="questionWorking">
         <div class="workingCap">
             <div class="wcHead">Assets</div>

@@ -43,50 +43,42 @@ class ExamController extends Controller
     public function examInstruction($id)
     {
         $studentId = Auth::user()->id;
-        //$stdcors = StdCourse::where('student', $request->student)->get();
         $value = StdExam::where('student', $studentId)->where('exam',$id)->first();
         $data = array();
-        if($value) {
-        $value_ex =  Exam::where('id', $value->exam)->where('exam_for', 1)
-                        ->where('status', '1')->first();
-
-                if ($value_ex) {
-                    $datet = $value_ex->datet;
-                    $datet_arr = explode("-",$datet);
-
-                    $stime = $value_ex->start_time;
-                    $stime_arr = explode(":",$stime);
-
-                    $etime = $value_ex->end_time;
-                    $etime_arr = explode(":",$etime);
-
-                    $time = time() + 19800;
-                    $st_time = mktime($stime_arr['0'],$stime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
-                    $et_time = mktime($etime_arr['0'],$etime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
-
-                    if ($value_ex->attempt_time!=0) {
-                        $student_exam = StudentExam::where('student_id', $studentId)->where('exam_id', $value_ex->id)->count();
-                        //echo $student_exam;
-                        if ($student_exam < $value_ex->attempt_time) {
-                            if ($st_time < $time && $et_time > $time) {
-                                $question = Question::where('exam_id', $value->exam)->where('state', '1')->count();
-                                if ($question > 0) {
-                                    $data = $value_ex;
-                                }
-                            }
-                        }
-                    } else {
+        if($value) 
+        {
+            $exam =  Exam::where('id', $value->exam)->where('exam_for', 1)->where('status', '1')->first();
+            if ($exam) 
+            {
+                if ($exam->attempt_time>0) 
+                {
+                    $student_exam = StudentExam::where('student_id', $studentId)->where('exam_id', $exam->id)->count();
+                    if ($student_exam < $exam->attempt_time) 
+                    {                        
                         $question = Question::where('exam_id', $value->exam)->where('state', '1')->count();
                         if ($question > 0) {
-                            $data = $value_ex;
+                            $data = $exam;
+                            return view('WebFrontend.exam-instruction',compact('id','data'));
+                        }
+                        else{
+                            abort('404');
                         }
                     }
+                    else{
+                        abort('404');
+                    }
                 }
-
-
+                else{
+                    abort('404');
+                }
+            }
+            else{
+                abort('404');
+            }
         }
-        //return $data;
-        return view('WebFrontend.exam-instruction',compact('id','data'));
+        else{
+            abort('404');
+        }
     }
 
     public function examStart(Request $request, $id)
@@ -123,52 +115,73 @@ class ExamController extends Controller
 
     public function examQuestion(Request $request,$id)
     {
-        $data=[];
-        $exams = Exam::where('id', $id)->first();
-        $fullMarks=0;
-        if($request->ajax())
+        $studentId = Auth::user()->id;
+        $studentExam = StdExam::where('student', $studentId)->where('exam',$id)->first();
+        if($studentExam) 
         {
-            if ($exams->question_limit > 0) {
-                // $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting2')->inRandomOrder()->limit($exams->question_limit)->get();
-                $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
-            } else {
-
-                $data = Question::where('exam_id',  $id)->where('state', 1)->orderBy('id', 'ASC')->get();
-            }
-            foreach ($data as $key=>$value)
+            $data=[];
+            $exams = Exam::where('id', $id)->first();
+            if ($exams->attempt_time>0) 
             {
-                $value->indexKey=  $key+1;
-                if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || $value->type == "accounting3" || $value->type == "accounting5") 
-                {
-                    $value->qus_option = explode("=><",$value->qus_option);
-                    if($value->type == "accounting5")
+                $studentExamCount = StudentExam::where('student_id', $studentId)->where('exam_id', $exams->id)->count();
+                if ($exams->attempt_time > $studentExamCount) 
+                { 
+                    $fullMarks=0;
+                    if($request->ajax())
                     {
-                        $value->qus = explode("=><",$value->qus);
+                        if ($exams->question_limit > 0) {
+                            // $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting2')->inRandomOrder()->limit($exams->question_limit)->get();
+                            $data = Question::where('exam_id',  $id)->where('state', 1)->inRandomOrder()->limit($exams->question_limit)->get();
+                        } else {
+            
+                            $data = Question::where('exam_id',  $id)->where('state', 1)->orderBy('id', 'ASC')->get();
+                        }
+                        foreach ($data as $key=>$value)
+                        {
+                            $value->indexKey=  $key+1;
+                            if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || $value->type == "accounting3" || $value->type == "accounting5") 
+                            {
+                                $value->qus_option = explode("=><",$value->qus_option);
+                                if($value->type == "accounting5")
+                                {
+                                    $value->qus = explode("=><",$value->qus);
+                                }
+                            }
+                            if($value->type == "accounting2")
+                            {
+                                $value->primaryAccount=PrimaryAccount::get();
+                                $value->secondaryAccount=SecondaryAccount::get();
+                                $value->account=Account::where('question_id',$value->id)->get();
+                            }
+                            if($value->type == "accounting4")
+                            {
+                                $value->reasonEquity=ReasonEquity::get();
+                                $value->secondaryAccount=SecondaryAccount::get();
+                            }
+                            $fullMarks=$fullMarks+$value->marks;
+                        }
+            
+                        $html = view('WebFrontend.exam.examInnerQuestion', compact('data','fullMarks'))->render();
+                        return response()->json(['html'=>$html]);
                     }
+                    $data['examName'] = $exams->exam_name;
+                    $data['id'] = $id;
+                    $data['duration'] = $exams->duration;
+                    $data['questionLimit'] = $exams->question_limit;
+                    return view('WebFrontend.exam.exam-question',$data);
                 }
-                if($value->type == "accounting2")
+                else
                 {
-                    $value->primaryAccount=PrimaryAccount::get();
-                    $value->secondaryAccount=SecondaryAccount::get();
-                    $value->account=Account::where('question_id',$value->id)->get();
+                    abort('404');
                 }
-                if($value->type == "accounting4")
-                {
-                    $value->reasonEquity=ReasonEquity::get();
-                    $value->secondaryAccount=SecondaryAccount::get();
-                }
-                $fullMarks=$fullMarks+$value->marks;
             }
-
-            $html = view('WebFrontend.exam.examInnerQuestion', compact('data','fullMarks'))->render();
-            return response()->json(['html'=>$html]);
+            else{
+                abort('404');
+            }
         }
-        $data['examName'] = $exams->exam_name;
-        $data['id'] = $id;
-        $data['duration'] = $exams->duration;
-        $data['questionLimit'] = $exams->question_limit;
-        //$data['questionLimit'] = 3;
-        return view('WebFrontend.exam.exam-question',$data);
+        else{
+            abort('404');
+        }
     }
 
     public function competitiveExam(Request $request)
@@ -200,11 +213,13 @@ class ExamController extends Controller
                 $time = time() + 19800;
                 $st_time = mktime($stime_arr['0'],$stime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
                 $et_time = mktime($etime_arr['0'],$etime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
-                if ($value_ex->attempt_time!=0)
-                {
-                    $student_exam = StudentExam::where('student_id', Auth::user()->id)->where('exam_id', $value_ex->ex_id)->count();
-                    if ($student_exam < $value_ex->attempt_time) {
-                        if ($st_time < $time && $et_time > $time) {
+                if ($value_ex->attempt_time > 0)
+                {                    
+                    $student_exam = StudentExam::where('student_id', Auth::user()->id)->where('exam_id', $value_ex->ex_id)->count();                    
+                    if ($student_exam < $value_ex->attempt_time) 
+                    {
+                        if ($st_time < $time && $et_time > $time) 
+                        {
                             $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
                             if ($question > 0) {
                                 $data[] = $value_ex;
@@ -212,12 +227,14 @@ class ExamController extends Controller
                         }
                     }
                 }
-                else {
+                else
+                {
                     $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
-                    if ($question > 0) {
-                        $data[] = $value_ex;
-                    }
+                            if ($question > 0) {
+                                $data[] = $value_ex;
+                            }
                 }
+                
             }
         }
         //return $data;
@@ -909,7 +926,7 @@ class ExamController extends Controller
                             $data['id'] = $studentdExam->id;
                             $data['status'] = true;
                             $data['mes']= 0;
-                            return ('404');
+                            return abort('404');
                         }
                     }
                 }
