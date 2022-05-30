@@ -960,7 +960,15 @@ class ExamController extends Controller
                     $data['status'] = true;
                     $data['mes']= 0;
                 }
-                return redirect()->action('WebFrontend\ExamController@examResult',['id'=>$data['id']]);
+                if($request->has('exam_type') && $request->get('exam_type')==3)
+                {
+                    return redirect()->action('WebFrontend\ExamController@examResult',['id'=>$data['id'],'examType'=>3]); 
+                }
+                else{
+                    return redirect()->action('WebFrontend\ExamController@examResult',['id'=>$data['id']]);
+                }
+
+                
             }
             else{
                 return abort('404');
@@ -973,7 +981,7 @@ class ExamController extends Controller
     /**
      * this function are used for exam result
      */
-    public function examResult($studentExamId)
+    public function examResult($studentExamId,$examType=null)
     {
         if($studentExamId>0)
         {
@@ -1116,7 +1124,15 @@ class ExamController extends Controller
                 $data['correctWrongAnswer']=$studentAnswer;
                 //return $studentAnswer;
 
-                return view('WebFrontend.exam.exam-result',$data);
+               // return $data;
+
+                if($examType==3)
+                {
+                    return view('WebFrontend.chapterDetails.assignment-exam-result',$data);
+                }
+                else{
+                    return view('WebFrontend.exam.exam-result',$data);
+                }               
             }
             else{
                 abort('404');
@@ -1127,6 +1143,62 @@ class ExamController extends Controller
         }
     }
     ///////////////////************* exam save end *****************//////////////////////////
+
+
+
+    ////////////////////***** Assignment Start*****////////////////////////////////
+
+    public function assignmentExamQuestion(Request $request,$courseId,$chapterId)
+    {
+        $studentId = Auth::user()->id;
+        $data=[];
+        $fullMarks=0;
+        $exam =  Exam::where('Course', $courseId)->where('chapter',$chapterId)->where('exam_for', 3)->where('status', '1')->first();
+        if($request->ajax())
+        {
+            if ($exam->question_limit > 0) {
+                // $data = Question::where('exam_id',  $id)->where('state', 1)->where('type','accounting2')->inRandomOrder()->limit($exams->question_limit)->get();
+                $data = Question::where('exam_id',  $exam->id)->where('state', 1)->inRandomOrder()->limit($exam->question_limit)->get();
+            } else {
+                $data = Question::where('exam_id',  $exam->id)->where('state', 1)->orderBy('id', 'ASC')->get();
+            }
+            foreach ($data as $key=>$value)
+            {
+                $value->indexKey=  $key+1;
+                if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || $value->type == "accounting3" || $value->type == "accounting5") 
+                {
+                    $value->qus_option = explode("=><",$value->qus_option);
+                    if($value->type == "accounting5")
+                    {
+                        $value->qus = explode("=><",$value->qus);
+                    }
+                }
+                if($value->type == "accounting2")
+                {
+                    $value->primaryAccount=PrimaryAccount::get();
+                    $value->secondaryAccount=SecondaryAccount::get();
+                    $value->account=Account::where('question_id',$value->id)->get();
+                }
+                if($value->type == "accounting4")
+                {
+                    $value->reasonEquity=ReasonEquity::get();
+                    $value->secondaryAccount=SecondaryAccount::get();
+                }
+                $fullMarks=$fullMarks+$value->marks;
+            }
+
+            $html = view('WebFrontend.exam.examInnerQuestion', compact('data','fullMarks'))->render();
+            return response()->json(['html'=>$html]);
+        }
+        $data['examName'] = $exam->exam_name;
+        $data['id'] = $exam->id;
+        $data['courseId'] = $courseId;
+        $data['chapterId'] = $chapterId;
+        $data['duration'] = $exam->duration;
+        $data['questionLimit'] = $exam->question_limit;
+        return view('WebFrontend.chapterDetails.assignment-exam-question',$data);            
+        
+    }
 
 
    
