@@ -37,6 +37,7 @@ class CourseController extends Controller
         $course = Course::find($id);
         if($course){
             $courseChapter = Chapter::where('course_id','=',$course->id)->where('status', "1")->orderBy('chapter_order', 'ASC')->get();
+            $previousChapterCompletePercentage=100;
             foreach($courseChapter as $chapter)
             {
                 $chapter->topicsCount = ChapterDetail::where('course','=',$course->id)
@@ -46,6 +47,14 @@ class CourseController extends Controller
                                             ->where('student_id', Auth::user()->id)->where('read_status', 1)->count();
 
                 $chapter->read_count_percentage = (($chapter_read_status_count/$chapter->topicsCount)*100);
+                if($previousChapterCompletePercentage==100){
+                    $chapter->displayOrNot=1;
+                }
+                else{
+                    $chapter->displayOrNot=0;
+                }
+                $previousChapterCompletePercentage=$chapter->read_count_percentage;
+                
             }
             $course->courseChapter=$courseChapter;
             //return $course;
