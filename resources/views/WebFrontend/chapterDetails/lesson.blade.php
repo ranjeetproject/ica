@@ -34,9 +34,9 @@
                         
                         @if($capterValue->details_img!=null)
                           @if($capterValue->extention==='pdf')
-                            <embed src="https://learnersmall.in/android/public/course_photo/1581589504.pdf" type="application/pdf" frameBorder="0" scrolling="auto" width="100%" />
+                            <embed src="{{$capterValue->details_img}}" type="application/pdf" frameBorder="0" scrolling="auto" width="100%" />
                           @else
-                            <img src="http://learnersmall.in/android/public/course_photo/1588148747.png" alt="" />
+                            <img src="{{$capterValue->details_img}}" alt="" />
                           @endif                         
                         @endif
 
