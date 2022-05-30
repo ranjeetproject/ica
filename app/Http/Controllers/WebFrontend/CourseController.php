@@ -104,6 +104,18 @@ class CourseController extends Controller
                 $imageDataArray=explode('.',$value->details_video);
                 $value->extention=$imageDataArray[2];
             }
+
+
+            $studentChapterReadObj = new StudentChapterRead();
+            $studentChapterReadObj->student_id = Auth::user()->id;
+            $studentChapterReadObj->chapter_details_id = $value->id;
+            $studentChapterReadObj->course = $courseId;
+            $studentChapterReadObj->subject = $value->subject;
+            $studentChapterReadObj->chapter = $chapterId;
+            $studentChapterReadObj->read_status = 1;
+            $studentChapterReadObj->save();
+
+
         }
         $data['chapterDetails']=$chapterDetails;
 
