@@ -326,8 +326,21 @@
         @endforeach
         <div class="exBg">
             <div class="exBtn">
-                <button type="button" onclick="location.href = '{{action('WebFrontend\CourseController@courseDetail',[$studentExam->exam->course])}}';">Previous</button>
-                <button type="button" onclick="location.href = '{{action('WebFrontend\CourseController@courseDetail',[$studentExam->exam->course])}}';">Next</button>
+                @if(@$assignmentPageUrl!=null || $assignmentPageUrl!='')
+                    <button type="button" onclick="location.href = '{{$assignmentPageUrl}}';">
+                        Previous
+                    </button>
+                    <button type="button" onclick="location.href = '{{$assignmentPageUrl}}';">
+                        Next
+                    </button>
+                @else
+                    <button type="button" onclick="location.href = '{{action('WebFrontend\CourseController@courseDetail',[$studentExam->exam->course])}}';">
+                        Previous
+                    </button>
+                    <button type="button" onclick="location.href = '{{action('WebFrontend\CourseController@courseDetail',[$studentExam->exam->course])}}';">
+                        Next
+                    </button>
+                @endif    
             </div>
         </div>
     </div>

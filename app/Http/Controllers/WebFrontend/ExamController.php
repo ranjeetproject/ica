@@ -19,6 +19,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\StudentAnswer;
 use Illuminate\Support\Carbon;
+use Session;
 
 
 class ExamController extends Controller
@@ -1128,6 +1129,7 @@ class ExamController extends Controller
 
                 if($examType==3)
                 {
+                    $data['assignmentPageUrl']=session()->get('assignment_url');                    
                     return view('WebFrontend.chapterDetails.assignment-exam-result',$data);
                 }
                 else{
@@ -1150,10 +1152,11 @@ class ExamController extends Controller
 
     public function assignmentExamQuestion(Request $request,$courseId,$chapterId)
     {
+       
         $studentId = Auth::user()->id;
         $data=[];
         $fullMarks=0;
-        $exam =  Exam::where('Course', $courseId)->where('chapter',$chapterId)->where('exam_for', 3)->where('status', '1')->first();
+        $exam =  Exam::where('Course', $courseId)->where('chapter',$chapterId)->where('exam_for', 3)->where('status', '1')->first();  
         if($request->ajax())
         {
             if ($exam->question_limit > 0) {
@@ -1190,14 +1193,16 @@ class ExamController extends Controller
             $html = view('WebFrontend.exam.examInnerQuestion', compact('data','fullMarks'))->render();
             return response()->json(['html'=>$html]);
         }
+        else{
+            session()->put('assignment_url', url()->previous());
+        }
         $data['examName'] = $exam->exam_name;
         $data['id'] = $exam->id;
         $data['courseId'] = $courseId;
         $data['chapterId'] = $chapterId;
         $data['duration'] = $exam->duration;
         $data['questionLimit'] = $exam->question_limit;
-        return view('WebFrontend.chapterDetails.assignment-exam-question',$data);            
-        
+        return view('WebFrontend.chapterDetails.assignment-exam-question',$data);  
     }
 
 
