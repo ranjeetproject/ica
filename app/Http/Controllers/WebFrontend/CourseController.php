@@ -102,7 +102,14 @@ class CourseController extends Controller
             if($value->details_video!='')
             {
                 $imageDataArray=explode('.',$value->details_video);
-                $value->extention=$imageDataArray[2];
+                if(isset($imageDataArray[2]))
+                {
+                    $value->extention=$imageDataArray[2];
+                }
+                else{
+                    $value->extention='mp4';
+                }
+               
             }
 
             $readcount = StudentChapterRead::where('chapter_details_id', $value->id)->where('student_id',Auth::user()->id)->get()->count();
