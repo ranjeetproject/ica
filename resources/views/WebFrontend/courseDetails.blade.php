@@ -99,7 +99,7 @@
                         @endif
                     </a>
                 @else
-                    <a class="lesson-prt" href="javascript:void(0);">
+                    <a class="lesson-prt" href="javascript:void(0);" onclick="infoMessage();">
                         <img src="{{ asset('css/images/lesson-icon.png') }}" class="img-fluid" />
                         @if($chapter->topicsCount>1)
                         <span class="lesson-number">{{ $chapter->topicsCount }} Lessons</span>
@@ -110,29 +110,22 @@
                 @endif    
             </div>
             @endforeach
-            {{-- <div class="module-content">
-                    <span class="count-number">1</span>
-                    <p>Minima veniam, quis nostrum Exercitation. <span class="chapProgress"><span>50%</span> Progress</span></p>
-                    <div class="lesson-prt">
-                        <img src="{{asset('css/images/lesson-icon.png')}}" class="img-fluid" />
-            <span class="lesson-number">10 Lessons</span>
-        </div>
-    </div>
-    <div class="module-content">
-        <span class="count-number">1</span>
-        <p>Quis nostrum Exercitationem ullam Corpori <span class="chapProgress"><span>50%</span> Progress</span></p>
-        <div class="lesson-prt">
-            <img src="{{asset('css/images/lesson-icon.png')}}" class="img-fluid" />
-            <span class="lesson-number">10 Lessons</span>
-        </div>
-    </div> --}}
-    {{-- <p class="">
-                    Quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-                    qui dolorem ipsum
-                    quia dolor sit amet, Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
-                    laboriosam, nisi ut
-                    aliquid ex ea commodi consequatur....</p> --}}
+          
     </div>
     </div>
 </section>
+@endsection
+
+@section('customJavascript')
+<script>
+    function infoMessage()
+    {
+        Swal.fire(
+            'oops!',
+            'Plese complete previous lession first, after that you can able to display this chapter.',
+            'info'
+        )
+    }
+</script>
+
 @endsection
