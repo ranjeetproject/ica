@@ -87,7 +87,7 @@
             <div class="module-content">
                 <span class="count-number">{{ $key + 1 }}</span>
 
-                <p>{{ $chapter->chapter_name }}<span class="chapProgress"><span>{{round($chapter->read_count_percentage,2)}}%</span> Progress</span></p>
+                <p>{{ $chapter->chapter_name }}<span class="chapProgress"><span>{{round($chapter->read_count_percentage,0)}}%</span> Progress</span></p>
                 
                 @if($chapter->displayOrNot==1)
                     <a class="lesson-prt" href="{{route('chapter-details',[$chapter->course_id,$chapter->id])}}">
