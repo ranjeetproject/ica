@@ -74,7 +74,7 @@ Route::middleware(['auth'])->group(function ()
     Route::get('exam-instruction/{id}','WebFrontend\ExamController@examInstruction')->name('exam-instruction');
     Route::get('exam-start/{id}','WebFrontend\ExamController@examStart')->name('exam-start');
     Route::get('pagination/fetch', 'WebFrontend\ExamController@fetch')->name('pagination-fetch');
-    Route::get('exam-result/{id}','WebFrontend\ExamController@examResult')->name('exam-result');
+    Route::get('exam-result/{id}/{examType?}','WebFrontend\ExamController@examResult')->name('exam-result');
     Route::get('exam-question/{id}','WebFrontend\ExamController@examQuestion')->name('exam-question');
     Route::post('exam-submit','WebFrontend\ExamController@examSubmit');
 
@@ -86,9 +86,14 @@ Route::middleware(['auth'])->group(function ()
     Route::get('competitive-exam-instruction/{id}','WebFrontend\ExamController@competitiveExamInstruction')->name('competitive-exam-instruction');
     Route::get('competitive-start-exam/{id}','WebFrontend\ExamController@competitiveExamStart')->name('competitive-start');
 
+
+   
+    
+
     Route::get('notification-list','WebFrontend\NotificationController@list')->name('notification-list');
 
-    Route::get('chapter-details/{chapterId}/{courseId}','WebFrontend\CourseController@chapterDetails')->name('chapter-details');
+    Route::get('chapter-details/{courseId}/{chapterId}','WebFrontend\CourseController@chapterLessionDisplay')->name('chapter-details');
+    Route::get('assignment-exam/{courseId}/{chapterId}','WebFrontend\ExamController@assignmentExamQuestion')->name('assignment-exam');
     
 
     Route::get('logout', 'WebFrontend\UserController@logout');

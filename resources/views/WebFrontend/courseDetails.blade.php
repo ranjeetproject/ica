@@ -89,7 +89,7 @@
 
                 <p>{{ $chapter->chapter_name }}<span class="chapProgress"><span>{{$chapter->read_count_percentage}}%</span> Progress</span></p>
                 
-                <a class="lesson-prt" href="{{route('chapter-details',[$chapter->id,$chapter->course_id])}}">
+                <a class="lesson-prt" href="{{route('chapter-details',[$chapter->course_id,$chapter->id])}}">
                     <img src="{{ asset('css/images/lesson-icon.png') }}" class="img-fluid" />
                     @if($chapter->topicsCount>1)
                     <span class="lesson-number">{{ $chapter->topicsCount }} Lessons</span>

@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-
-
 class CourseController extends Controller
 {
 
@@ -71,9 +69,61 @@ class CourseController extends Controller
         return view('WebFrontend.all_courses',compact('data'));
     }
 
-    public function chapterDetails($chapterId,$courseId)
+    public function chapterLessionDisplay(Request $request, $courseId, $chapterId)
     {
         $data = [];
+        if ($request->has('type')) 
+        {
+            $chapterDetails= ChapterDetail::where('chapter',  $chapterId)->where('type',  $request->get('type'))
+            ->orderBy('chapter_order','ASC')->get();
+        } else {
+            $chapterDetails= ChapterDetail::where('chapter',  $chapterId)->orderBy('chapter_order','ASC')->paginate(1);
+        }
+       // $data['chapter']=Chapter::find($chapterId);
+
+
+        foreach($chapterDetails as $value)
+        {
+            if($value->details_img!=null)
+            {
+                $imageDataArray=explode('.',$value->details_img);
+                $value->extention=$imageDataArray[2];
+            } 
+
+            if($value->details_video!='')
+            {
+                $imageDataArray=explode('.',$value->details_video);
+                $value->extention=$imageDataArray[2];
+            }
+        }
+        $data['chapterDetails']=$chapterDetails;
+
+        $path=action('WebFrontend\CourseController@courseDetail',[$courseId]);
+        if($chapterDetails->previousPageUrl()==null){
+            $data['previousPageUrl']=$path; 
+        }
+        else{
+            $data['previousPageUrl']=$chapterDetails->previousPageUrl(); 
+        }
+        if($chapterDetails->nextPageUrl()==null)
+        {
+            $data['nextPageUrl']=$path; 
+        }
+        else{
+            $data['nextPageUrl']=$chapterDetails->nextPageUrl(); 
+        }
+        
+
+
+        
+       
+        $data['lastPage']=$chapterDetails->LastPage(); 
+        $data['hasMorePages']=$chapterDetails->hasMorePages(); 
+        $data['currentPage']=$chapterDetails->currentPage(); 
+        $data['page']=$path;
+        $data['courseId']=$courseId;
+        $data['chapterId']=$chapterId;
+       // return $data;
         return view('WebFrontend.chapterDetails.lesson',$data);
     }
 
