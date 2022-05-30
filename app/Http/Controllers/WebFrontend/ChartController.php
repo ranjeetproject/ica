@@ -9,7 +9,7 @@ use App\StudentExam;
 use App\StdCourse;
 use App\Subject;
 use App\Chapter;
-use App\Chapter_details;
+use App\ChapterDetail;
 use App\StudentChapterRead;
 use App\Exam;
 
@@ -78,7 +78,7 @@ class ChartController extends Controller
                 {
                     $ans_data1 = [];
                     $chapters = Chapter::where('subject_id', $subject->id)->where('status', "1")->get();
-                    $chapter_count =  Chapter_details::where('chapter', $chapter->id)->get()->count();
+                    $chapter_count =  ChapterDetail::where('chapter', $chapter->id)->get()->count();
                     $chapter_read_status_count =  StudentChapterRead::where('chapter', $chapter->id)->where('student_id', Auth::user()->id)->where('read_status', 1)->get()->count();
                     if ($chapter_count != 0) 
                     {                        
