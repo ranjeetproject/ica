@@ -105,15 +105,17 @@ class CourseController extends Controller
                 $value->extention=$imageDataArray[2];
             }
 
-
-            $studentChapterReadObj = new StudentChapterRead();
-            $studentChapterReadObj->student_id = Auth::user()->id;
-            $studentChapterReadObj->chapter_details_id = $value->id;
-            $studentChapterReadObj->course = $courseId;
-            $studentChapterReadObj->subject = $value->subject;
-            $studentChapterReadObj->chapter = $chapterId;
-            $studentChapterReadObj->read_status = 1;
-            $studentChapterReadObj->save();
+            $readcount = StudentChapterRead::where('chapter_details_id', $value->id)->where('student_id',Auth::user()->id)->get()->count();
+            if($readcount==0){
+                $studentChapterReadObj = new StudentChapterRead();
+                $studentChapterReadObj->student_id = Auth::user()->id;
+                $studentChapterReadObj->chapter_details_id = $value->id;
+                $studentChapterReadObj->course = $courseId;
+                $studentChapterReadObj->subject = $value->subject;
+                $studentChapterReadObj->chapter = $chapterId;
+                $studentChapterReadObj->read_status = 1;
+                $studentChapterReadObj->save();
+            }
         }
         $data['chapterDetails']=$chapterDetails;
 
