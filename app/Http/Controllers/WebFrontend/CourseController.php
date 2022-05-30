@@ -114,8 +114,6 @@ class CourseController extends Controller
             $studentChapterReadObj->chapter = $chapterId;
             $studentChapterReadObj->read_status = 1;
             $studentChapterReadObj->save();
-
-
         }
         $data['chapterDetails']=$chapterDetails;
 
