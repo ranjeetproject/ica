@@ -41,7 +41,8 @@
                         @endif
 
                         @if($capterValue->exam_id>0)
-                            <button class="exsubmit" onclick="location.href = '{{ action('WebFrontend\ExamController@assignmentExamQuestion', ['courseId' => $courseId,'chapterId'=>$chapterId]) }}';">Button</button> 
+                            <button class="exsubmit" onclick="location.href = '{{ action('WebFrontend\ExamController@assignmentExamQuestion', ['courseId' => $courseId,'chapterId'=>$chapterId]) }}';">GO FOR ASSESSMENT</button> 
+                            <br>
                         @endif
                         
                     </div>
