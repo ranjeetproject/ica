@@ -24,7 +24,7 @@
 
                         @if($capterValue->details_video != '')
                             <div class="exvid">
-                                <video width="" height="" controls>
+                                <video width="" height="" controls autoplay>
                                     <source src="{{$capterValue->details_video}}" type="video/{{$capterValue->extention}}">
                                 </video>
                             </div>
@@ -34,7 +34,7 @@
                         
                         @if($capterValue->details_img!=null)
                           @if($capterValue->extention==='pdf')
-                            <embed src="{{$capterValue->details_img}}" type="application/pdf" frameBorder="0" scrolling="auto" width="100%" />
+                            <embed src="{{$capterValue->details_img}}#toolbar=0" type="application/pdf" frameBorder="0" scrolling="auto" width="100%" />
                           @else
                             <img src="{{$capterValue->details_img}}" alt="" />
                           @endif                         
