@@ -420,7 +420,7 @@ h2 {
 }
 
 .courses-wrap {
-    padding: 110px 0;
+    padding: 110px 0 50px;
 }
 
 .courses-wrap .home-courses .slick-prev {
@@ -501,7 +501,7 @@ section.courses-wrap .course-card {
 
     margin-top: 0px;
     POSITION: relative;
-    margin-top: 0px;
+    padding-top: 30px;
 }
 
 .course-card .course-image {
@@ -1721,14 +1721,20 @@ select.form-control:focus {
     background: #fff;
     border-radius: 5px;
     display: flex;
-    margin-bottom: 45px;
+    margin-bottom: 16px;
     align-items: center;
     box-shadow: 0px 20px 50px 0px #9CA3C533;
 }
 
 .exam-list-wr .list-item span {
+    /*
     width: 115px;
     height: 112px;
+*/
+    width: 52px;
+    height: 50px;
+    font-size: 19px;
+    line-height: 27px;
     background: #3BBCA7;
     border-radius: 5px;
     display: flex;
@@ -1736,20 +1742,18 @@ select.form-control:focus {
     justify-content: center;
     font-style: normal;
     font-weight: bold;
-    font-size: 40px;
-    line-height: 37px;
     text-align: center;
     color: #fff;
 }
 
 .exam-list-wr .list-item p {
     font-weight: 600;
-    font-size: 35px;
-    line-height: 37px;
+    font-size: 19px;
+    line-height: 26px;
     margin: 0;
     color: #072F60;
     flex: 1;
-    padding: 20px;
+    padding: 0px;
 }
 
 .noDt {
@@ -3385,7 +3389,7 @@ li.selected .qaFormbg {
 /* ---------------Notification-modal-start------------------ */
 .notiModal .modal-header {
     padding: 4px 10px;
-    background: #181e5c;
+    background: #072F60;
 }
 
 .notiModal .modal-header h5 {
@@ -3409,13 +3413,14 @@ li.selected .qaFormbg {
 }
 
 .notiModal .modal-footer a {
-    background: #2c368f;
+    background: #072F60;
     color: #fff;
-    width: 100%;
+    width: 300px;
     font-size: 14px;
     line-height: 20px;
     font-weight: 600;
     box-shadow: none !important;
+    border: none;
 }
 
 .notiModal .modal-footer button:hover {
@@ -3428,7 +3433,7 @@ li.selected .qaFormbg {
 }
 
 .notiModal .modal-dialog {
-    max-width: 300px;
+    max-width: 650px;
 }
 
 .notify {
@@ -3768,7 +3773,7 @@ li.selected .qaFormbg {
 
 .exTop {
     width: 100%;
-    /*    padding: 15px 15px;*/
+    padding: 15px 15px;
     /*    background: #d2e1f3;*/
     text-align: center;
     border-bottom: 1px solid #ccc;
