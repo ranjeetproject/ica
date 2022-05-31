@@ -24,7 +24,7 @@
 
                         @if($capterValue->details_video != '')
                             <div class="exvid">
-                                <video width="" height="" controls autoplay>
+                                <video width="" height="" controls autoplay controlsList="nodownload">
                                     <source src="{{$capterValue->details_video}}" type="video/{{$capterValue->extention}}">
                                 </video>
                             </div>
