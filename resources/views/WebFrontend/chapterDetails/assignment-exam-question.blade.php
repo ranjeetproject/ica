@@ -20,8 +20,9 @@
                 </h3>
                 <div class="dateoption">
                     <div class="dateinfo"><span>Date : </span><strong> {{ date('d-m-Y') }}</strong></div>
-                    <div class="timeinfo"><span class="clockimg"><img src="{{asset('css/images/clockimg.png')}}" alt="">
-                        </span> <strong id="countdown">  </strong> <span> Remaining</span></div>
+                    {{-- <div class="timeinfo"><span class="clockimg"><img src="{{asset('css/images/clockimg.png')}}" alt="">
+                        </span> <strong id="countdown">  </strong> <span> Remaining</span>
+                    </div> --}}
                 </div>
             </div>
 
@@ -65,10 +66,10 @@
                         <div class="carouselFlow">
                             <button class="carousel-control-prev" type="button"><span class="">Previous</span>
                             </button>                        
-                            <button class="carousel-control-next-skip" id="skip" type="button"><span class="">Skip</span>
+                            <button class="carousel-control-next" id="skip" type="button"><span class="">Skip</span>
                             </button>
-                            <button class="carousel-control-next-skip" id="skipSubmit" type="submit" style="display:none;"><span class="">Skip & Submit</span>
-                            </button>
+                            {{-- <button class="carousel-control-next-skip" id="skipSubmit" type="submit" style="display:none;"><span class="">Skip & Submit</span>
+                            </button> --}}
                             <button class="carousel-control-next" id="next" type="button"><span class="">Save & Next</span>
                             </button>
                             <button class="carousel-control-next"  id="formSubmit" type="submit" style="display:none;"><span class="">Save & Submit</span>
@@ -108,7 +109,7 @@
                 })
                 .done(function(response) {
                     $('#questionHolder').html(response.html);
-                    updateCountdown();
+                  //  updateCountdown();
 
                     var myCarousel = document.getElementById('carouselExampleIndicators');
                     var carousel = bootstrap.Carousel.getInstance(myCarousel);
@@ -732,22 +733,22 @@
 
 
 
-        const startingMinuites = 10;
-        let time = startingMinuites * 60;
-        const countdownEl = document.getElementById('countdown')
-        const interval =setInterval(updateCountdown,1000);
-        function updateCountdown()
-        {
-            const minute = Math.floor(time/60);
-            let second = time % 60
-            countdownEl.innerText = `${(minute<10)?'0'+ minute:minute}: ${(second<10)?'0'+ second:second}`
-            if(time==0){
-                clearInterval(interval)
-            }else{
-                time--;
-            }
+        // const startingMinuites = 10;
+        // let time = startingMinuites * 60;
+        // const countdownEl = document.getElementById('countdown')
+        // const interval =setInterval(updateCountdown,1000);
+        // function updateCountdown()
+        // {
+        //     const minute = Math.floor(time/60);
+        //     let second = time % 60
+        //     countdownEl.innerText = `${(minute<10)?'0'+ minute:minute}: ${(second<10)?'0'+ second:second}`
+        //     if(time==0){
+        //         clearInterval(interval)
+        //     }else{
+        //         time--;
+        //     }
 
-        }
+        // }
 
     </script>
 

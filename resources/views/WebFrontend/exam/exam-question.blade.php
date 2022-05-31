@@ -84,7 +84,7 @@
                     </div>
                 </div>
 
-                <form action="{{action('WebFrontend\ExamController@examSubmit')}}" method="post" >
+                <form action="{{action('WebFrontend\ExamController@examSubmit')}}" method="post" id="examForm">
                     @csrf
                     <input type="hidden" name="examId" value="{{$id}}">
 
@@ -761,7 +761,7 @@
 
 
 
-        const startingMinuites = 10;
+        const startingMinuites = {{$duration}};
         let time = startingMinuites * 60;
         const countdownEl = document.getElementById('countdown')
         const interval =setInterval(updateCountdown,1000);
@@ -771,7 +771,8 @@
             let second = time % 60
             countdownEl.innerText = `${(minute<10)?'0'+ minute:minute}: ${(second<10)?'0'+ second:second}`
             if(time==0){
-                clearInterval(interval)
+                clearInterval(interval);
+                $("#examForm").submit();
             }else{
                 time--;
             }
