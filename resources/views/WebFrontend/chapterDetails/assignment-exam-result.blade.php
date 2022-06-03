@@ -30,12 +30,12 @@
                         </div>
                         <div class="result_des">
                             <span>No of Question :</span>
-                            <span>{{$studentExam->exam->question_limit}}</span>
+                            <span>{{$questionLimit}}</span>
                         </div>
-                        <div class="result_des">
+                        {{-- <div class="result_des">
                             <span>Time :</span>
                             <span>{{$studentExam->total_duration}}</span>
-                        </div>
+                        </div> --}}
                         <div class="result_des">
                             <span>Total Marks :</span>
                             <span>{{$studentExam->full_marks}}</span>
