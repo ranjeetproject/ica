@@ -2926,7 +2926,8 @@ p.awsopt {
 }
 
 .qslImg img {
-    width: 200px;
+    /*    width: 200px;*/
+    max-width: 600px;
     padding: 3px;
     border: 1px solid #ccc;
     background: #fff;
