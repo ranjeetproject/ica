@@ -21,6 +21,7 @@ class CourseController extends Controller
         $data = Course::join('std_courses','std_courses.course','=','courses.id')
             ->where('courses.entry_from','NEW')
             ->where('std_courses.student', Auth::user()->id)
+            ->groupBy('courses.id')
             ->paginate(8);
 
         // return $data;

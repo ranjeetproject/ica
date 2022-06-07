@@ -149,7 +149,21 @@ class ExamController extends Controller
                             $value->indexKey=  $key+1;
                             if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || $value->type == "accounting3" || $value->type == "accounting5") 
                             {
-                                $value->qus_option = explode("=><",$value->qus_option);
+                               // $value->qus_option = explode("=><",$value->qus_option);
+
+                                if(strstr($value->qus_option,'=><'))
+                                {
+                                    $value->qus_option = explode("=><",$value->qus_option);
+                                }
+                                elseif(strstr($value->qus_option,'>=<'))
+                                {
+                                    $value->qus_option = explode(">=<",$value->qus_option);
+                                }                    
+                                elseif(strstr($value->qus_option,'><'))
+                                {
+                                    $value->qus_option = explode("><",$value->qus_option);
+                                }
+
                                 if($value->type == "accounting5")
                                 {
                                     $value->qus = explode("=><",$value->qus);
@@ -392,7 +406,22 @@ class ExamController extends Controller
             {
                 $value->indexKey=  $key+1;
                 if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || $value->type == "accounting3" || $value->type == "accounting5") {
-                    $value->qus_option = explode("=><",$value->qus_option);
+                    //$value->qus_option = explode("=><",$value->qus_option);
+
+                    if(strstr($value->qus_option,'=><'))
+                    {
+                        $value->qus_option = explode("=><",$value->qus_option);
+                    }
+                    elseif(strstr($value->qus_option,'>=<'))
+                    {
+                        $value->qus_option = explode(">=<",$value->qus_option);
+                    }                    
+                    elseif(strstr($value->qus_option,'><'))
+                    {
+                        $value->qus_option = explode("><",$value->qus_option);
+                    }
+
+
                     if($value->type == "accounting5")
                     {
                         $value->qus = explode("=><",$value->qus);
@@ -1249,7 +1278,20 @@ class ExamController extends Controller
                 $value->indexKey=  $key+1;
                 if ($value->type == "check" || $value->type == "radio" || $value->type == "accounting1" || $value->type == "accounting3" || $value->type == "accounting5") 
                 {
-                    $value->qus_option = explode("=><",$value->qus_option);
+                    
+                    if(strstr($value->qus_option,'=><'))
+                    {
+                        $value->qus_option = explode("=><",$value->qus_option);
+                    }
+                    elseif(strstr($value->qus_option,'>=<'))
+                    {
+                        $value->qus_option = explode(">=<",$value->qus_option);
+                    }                    
+                    elseif(strstr($value->qus_option,'><'))
+                    {
+                        $value->qus_option = explode("><",$value->qus_option);
+                    }
+                    
                     if($value->type == "accounting5")
                     {
                         $value->qus = explode("=><",$value->qus);
