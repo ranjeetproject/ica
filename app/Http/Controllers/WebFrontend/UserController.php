@@ -183,7 +183,7 @@ class UserController extends Controller
                 $response = curl_exec($ch);
                 curl_close($ch);
                 $data['status'] = true;
-                $data['message'] = "OTP sent to E-mail ID";
+                $data['message'] = "OTP sent to registered Email Id.";
                 return $data;
             }
         } else {
@@ -203,7 +203,7 @@ class UserController extends Controller
         $checkStudentOtp = Student::where('code', '=', $input['code'])->where('otp', $input['verify_Otp'])->count();
         if ($checkStudentOtp > 0) {
             $data['status'] = true;
-            $data['message'] = "Otp verify successfully";
+            $data['message'] = "OTP verified successfully";
             return $data;
         } else {
             $data['status'] = false;
