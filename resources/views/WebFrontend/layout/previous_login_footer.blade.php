@@ -3,7 +3,7 @@
         <div class="social-wrap">
             <div class="footer-logo-wrap">
                 <img src="{{asset('css/images/logo-footer.svg')}}" class="footer-logo" alt="#"/>
-                <p class="text-prt">{!!$setting_data->footer_text!!}</p>
+                <p class="text-prt"></p>
 
                 <a href="{{action('WebFrontend\CmsController@aboutUs')}}" class="btn btn-about">About us</a>
             </div>

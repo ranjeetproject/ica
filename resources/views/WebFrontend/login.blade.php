@@ -9,15 +9,15 @@
                     <ul class="nav flex-direction">
                         <li class="nav-item">
                             <div class="num">1</div>
-                            <span>ICA Students, use your student code</span>
+                            <span>Enter your Student Code and Login (for ICA Students)</span>
                         </li>
                         <li class="nav-item">
                             <div class="num">2</div>
-                            <span>Tutor Regitered Students, please put the code provided by your tutor</span>
+                            <span>Enter your Contact Number (for Non-ICA Students)</span>
                         </li>
                         <li class="nav-item">
                             <div class="num active">3</div>
-                            <span>Other students, please use the system generated code</span>
+                            <span>Enter your Code provided by Tutor/College (for Tutor/College Students)</span>
                         </li>
                     </ul>
                 </div>
@@ -32,9 +32,8 @@
                 <div class="snup-logo-wrap">
                     <img src="{{asset('css/./images/logo-signup.png')}}" class="snup-logo" alt="#">
                     <div class="s-content">
-                        <h3>Other Students<span>login</span></h3>
-                        <p>Iste Natus Error sit Voluptatem AccusantiumQuis autem
-                            eum iure reprehenderit qui in ea vol.....</p>
+                        <h3>Learnersmall <span>Login</span></h3>
+                        <p>Enter the Student Code provided by ICA and request for OTP.</p>
                     </div>
                 </div>
                 @if (session('error'))

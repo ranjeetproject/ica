@@ -15,12 +15,10 @@
         <img src="{{ asset('css/images/dot-group-top.png') }}" class="img-fluid top_icon" alt="#">
         <div class="ban-content">
             <h1 class="cont-head">
-                Over <span>20,000+ </span>online
-                courses & <span>1000+</span> Quizes
-                from best instructor
+                Welcome <span>to </span>Learnersmall <span>!!! Your Digital </span> Classroom
             </h1>
             <p class="cont-para">
-                Iste Natus Error sit Voluptatem Accusantium....
+                Learn the Courses with Fun.......
             </p>
             <div class="but-wrap">
                 <img src="{{ asset('css/images/dot-group.png') }}" class="img-fluid bottom_icon" alt="#">

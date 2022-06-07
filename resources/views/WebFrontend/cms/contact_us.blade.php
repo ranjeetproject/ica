@@ -42,8 +42,7 @@
                         <div class="add-bar">
                             <img src="{{asset('css/images/location-icon.svg')}}" class="add-icon">
                             <div class="label">
-                                <span>Teum iure reprehenderit qui in<br>
-                                    eaderit qui in, Canada</span>
+                                <span>{{$setting_data->footer_address}}</span>
                             </div>
                         </div>
                        
@@ -52,7 +51,7 @@
                             <div class="label">
                                
                                 <a href="mailto: jasonlokau@gmail.oom">
-                                    jasonlokau@gmail.oom
+                                    {{$setting_data->footer_email}}
                                 </a>
                             </div>
                         </div>
@@ -60,10 +59,10 @@
                             <img src="{{asset('css/images/call-icon.svg')}}" class="add-icon">
                             <div class="label">
                                 <a href="tel:+160 4825 6769">
-                                    +160 4825 6769</a>
+                                    {{$setting_data->footer_phone}}</a>
                             </div>
                         </div>
-                       {!!@$content!!}
+                       {{-- {!!@$content!!} --}}
                     </div>
                     <div class="contactfrom_right">
                         <div class="title-part">

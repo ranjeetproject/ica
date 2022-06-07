@@ -18,12 +18,11 @@
     <img src="{{asset('css/images/dot-group-top.png')}}" class="img-fluid top_icon" alt="#">
     <div class="ban-content">
         <h1 class="cont-head">
-            Over <span>20,000+ </span>online
-            courses & <span>1000+</span> Quizes
-            from best instructor
+            100% Job <span>Guarantee Online </span>& Offline Courses<span> with 1000+Quizes</span> from India’s
+            No. 1 Vocational Training Institute
         </h1>
         <p class="cont-para">
-            Iste Natus Error sit Voluptatem Accusantium....
+           Industry-oriented Accounts & Finance Courses
         </p>
         <div class="but-wrap">
             <img src="{{asset('css/images/point-arrow.svg')}}" class="img-fluid point-arrow" alt="#">
@@ -151,8 +150,8 @@
     <div class="container">
         <div class="top-head">
             <p class="courses-tag">Testimonials </p>
-            <h2 class="course-head">The cleaners came within
-                the timeframe
+            <h2 class="course-head">You can go through the testimonials of different students, who was placed
+            after completing these courses from ICA.
             </h2>
         </div>
 

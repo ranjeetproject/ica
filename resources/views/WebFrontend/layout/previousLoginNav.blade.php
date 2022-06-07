@@ -6,7 +6,7 @@
                     <div class="log-ar">
                         <a href="{{action('WebFrontend\HomePageController@homePageDisplay')}}" >
                         <img class="img-fluid" src="{{asset('css/images/logo.svg')}}" alt="logo" /></a>
-                        <div class="text-part">Student<span>Home page</span></div>
+                        <div class="text-part">Learner<span>small</span></div>
                     </div>
                     <div class="std-qt">study that gives you success</div>
                 </div>
@@ -47,9 +47,9 @@
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->segment(1) == 'contact-us') ? 'active' : '' }}" href="{{action('WebFrontend\CmsController@contactUs')}}">Contact Us</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="#">More</a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <div class="follow-us">
                         <span>Follow us</span>
