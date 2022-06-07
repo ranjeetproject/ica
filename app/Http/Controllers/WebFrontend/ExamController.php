@@ -1196,6 +1196,13 @@ class ExamController extends Controller
                     }
                 }
                 $data['correctWrongAnswer']=$studentAnswer;
+                if ($studentExam->exam['question_limit'] == 0) {
+                    $questionLimit = Question::where('exam_id',  $studentExam->exam_id)->where('state', 1)->orderBy('id', 'ASC')->count();
+                    $data['questionLimit'] = $questionLimit;
+                }
+                else{
+                    $data['questionLimit'] = $studentExam->exam['question_limit'];
+                } 
                 //return $studentAnswer;
 
                // return $data;
