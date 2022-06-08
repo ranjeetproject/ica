@@ -238,7 +238,7 @@ h2 {
 
 .ban-content .cont-head {
     color: #fff;
-    font-size: 55px;
+    font-size: 40px;
     font-weight: 800;
 }
 
@@ -305,7 +305,8 @@ h2 {
 .how-it-works .h-header-wrp h3 {
     font-weight: 800;
     color: #072F60;
-    font-size: 28px;
+    font-size: 32px;
+    line-height: 35px;
 }
 
 .how-it-works .h-cards-wrp {
@@ -460,8 +461,8 @@ h2 {
 
 .courses-wrap .course-head {
     color: #071739;
-    font-size: 45px;
-    line-height: 50px;
+    font-size: 30px;
+    line-height: 40px;
     font-weight: 700;
 }
 
@@ -752,7 +753,7 @@ section.courses-wrap .course-card {
     color: #3BBCA7;
     font-size: 16px;
     border: 2px solid #3BBCA7;
-    padding: 12px 40px;
+    padding: 10px 24px;
     font-weight: 800;
 }
 
@@ -836,6 +837,10 @@ section.courses-wrap .course-card {
 
 .footer-wrapper .footer-logo-wrap {
     width: 240px;
+}
+
+.footer-wrapper .footer-logo-wrap img {
+    width: 123px;
 }
 
 .footer-wrapper .footer-address {
@@ -1782,6 +1787,7 @@ select.form-control:focus {
     color: #072F60;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .exam-list-wr .e-title .blue-bar {
