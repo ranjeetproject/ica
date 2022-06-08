@@ -131,6 +131,7 @@
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://unpkg.com/cropperjs"></script>
+<script src="{{ asset('js/WebFrontend/jquery.jqZoom.js') }}"></script>
 <script>
 //$("body").on("contextmenu",function(){
 //    return false;
