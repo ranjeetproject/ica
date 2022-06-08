@@ -131,6 +131,14 @@
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://unpkg.com/cropperjs"></script>
+<script>
+//$("body").on("contextmenu",function(){
+//    return false;
+//});
+//$("img").on("contextmenu",function(){
+ //   return false;
+//});
+</script>
 @yield('customJavascript')
 </body>
 
