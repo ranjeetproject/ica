@@ -1,7 +1,7 @@
 <div class="questionBlock">
     <p>{{ $question->indexKey }}. Select appropriate option from dropdown list</p>
     @if($question->qus_image!=null)
-        <div class="qslImg"><img src="{{ $question->qus_image }}" alt="" title="" /></div>
+        <div class="qslImg img-zome"><img src="{{ $question->qus_image }}" alt="" title="" /></div>
     @endif
     <div class="qbSelect">
        
@@ -20,3 +20,13 @@
         
     </div>
 </div>
+<script>
+    $(function(){
+        $("#img-zome").jqZoom({
+            selectorWidth: 30,
+            selectorHeight: 30,
+            viewerWidth: 400,
+            viewerHeight: 300
+        });
+    })
+</script>
