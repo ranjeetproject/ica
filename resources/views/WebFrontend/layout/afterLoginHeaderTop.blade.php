@@ -4,7 +4,7 @@
             <div class="log-ar">
                 <a href="{{action('WebFrontend\HomePageController@homePageDisplay')}}">
                     <img class="img-fluid" src="{{ asset('css//images/logo.svg') }}" alt="logo" /></a>
-                <div class="text-part">Learner<span>small</span></div>
+                <div class="text-part">Learners<span>mall</span></div>
             </div>
             <div class="std-qt">study that gives you success</div>
         </div>

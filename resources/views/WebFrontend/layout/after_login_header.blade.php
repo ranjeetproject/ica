@@ -13,7 +13,7 @@
     <link href="{{ asset('css/WebFrontend/progress.css') }}" rel="stylesheet">
     <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
-
+    <link href="{{ asset('css/WebFrontend/jquery.jqZoom.css') }}" rel="stylesheet">
 
     <title>Ica Educations</title>
 </head>
