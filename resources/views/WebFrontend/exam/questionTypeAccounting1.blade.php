@@ -1,7 +1,7 @@
 <div class="questionBlock">
     <p>{{ $question->indexKey }}. {{ $question->qus }}</p>
     @if($question->qus_image!=null)
-        <div class="qslImg zoom-box"><img src="{{ $question->qus_image }}" alt="" title="" id="img-zome"/></div>
+        <div class="qslImg img-zome"><img src="{{ $question->qus_image }}" alt="" title="" id="img-zome"/></div>
     @endif
     <div class="questionWorking">
         <div class="workingCap">
