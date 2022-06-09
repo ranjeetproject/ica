@@ -19,10 +19,7 @@
                     <span class="blue-bar"></span>
                 </h3>
                 <div class="dateoption">
-                    <div class="dateinfo"><span>Date : </span><strong> {{ date('d-m-Y') }}</strong></div>
-                    {{-- <div class="timeinfo"><span class="clockimg"><img src="{{asset('css/images/clockimg.png')}}" alt="">
-                        </span> <strong id="countdown">  </strong> <span> Remaining</span>
-                    </div> --}}
+                    <div class="dateinfo"><span>Date : </span><strong> {{ date('d-m-Y') }}</strong></div>                    
                 </div>
             </div>
 
@@ -66,13 +63,15 @@
                         <div class="carouselFlow">
                             <button class="carousel-control-prev" type="button"><span class="">Previous</span>
                             </button>                        
-                            <button class="carousel-control-next" id="skip" type="button"><span class="">Skip</span>
-                            </button>
+                            {{-- <button class="carousel-control-next" id="skip" type="button"><span class="">Skip</span>
+                            </button> --}}
                             {{-- <button class="carousel-control-next-skip" id="skipSubmit" type="submit" style="display:none;"><span class="">Skip & Submit</span>
                             </button> --}}
+                            <button class="carousel-control-next-skip" id="skip" type="button"><span class="">Skip</span>
+                            </button>
                             <button class="carousel-control-next" id="next" type="button"><span class="">Save & Next</span>
                             </button>
-                            <button class="carousel-control-next"  id="formSubmit" type="submit" style="display:none;"><span class="">Save & Submit</span>
+                            <button class="carousal-save" id="formSubmit" type="submit" style="display:none;"><span class="">Save & Submit</span>
                             </button>
                         </div>
                     </div>
@@ -718,6 +717,299 @@
                         });
                         
                     });
+
+                    $('.carousal-save').click(function()
+                    {
+                        $(".carousel-item").each(function()
+                        {
+                            var questionType = $(this).children(".questionType").val();
+                            var questionNumber=$(this).attr("slide");
+                            if (questionType === 'radio')
+                            {
+                                var curInputs = $(this).find("input[type='radio']");
+                                var check = true;
+                                for (var i = 0; i < curInputs.length; i++)
+                                {
+                                    var name = curInputs[i].name;
+                                    if($("input:radio[name="+name+"]:checked").length == 0){
+                                        check = false;
+                                    }
+                                }
+
+                                if(!check)
+                                {
+                                    Swal.fire(
+                                        'Oops!',
+                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'info'
+                                    );
+                                    return event.preventDefault();
+                                }
+                            }
+                            if (questionType === 'check')
+                            {
+                                var curInputs = $(this).find("input[type='checkbox']");
+                                var check = false;
+                                for (var i = 0; i < curInputs.length; i++)
+                                {
+                                    var name = curInputs[i].name;
+                                    if (curInputs[i].checked)
+                                    {
+                                        check = true;
+                                    }
+                                }
+
+                                if(!check){
+                                    Swal.fire(
+                                        'Oops!',
+                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'info'
+                                    );
+                                    return event.preventDefault();
+                                }
+                            }
+                            if (questionType === 'accounting1')
+                            {
+                                var curInputs = $(this).find("input[type='radio']");
+                                var check = true;
+                                for (var i = 0; i < curInputs.length; i++)
+                                {
+                                    var name = curInputs[i].name;
+                                    if($("input:radio[name="+name+"]:checked").length == 0){
+                                        check = false;
+                                    }
+                                }
+
+                                if(!check){
+                                    Swal.fire(
+                                        'Oops!',
+                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'info'
+                                    );
+                                    return event.preventDefault();
+                                }
+                            }
+                            if (questionType === 'accounting2')
+                            {
+                                var curInputs = $(this).find("input[type='number'],input[type='radio'],select");
+                                var check = true;
+                                for (var i = 0; i < curInputs.length; i++)
+                                {
+                                    var type = curInputs[i].type;
+                                    var name = curInputs[i].name;
+                                    var id = curInputs[i].id;
+
+                                    var curInputNammeArray = id.split("_");
+                                    var questionId=curInputNammeArray[1];
+
+                                    if(type != 'radio')
+                                    {
+                                        if($('#'+id).val()=='')
+                                        {
+                                            check = false;
+                                        }
+                                    }
+                                    if(type == 'radio')
+                                    {
+                                        if($("input:radio[name="+name+"]:checked").length == 0)
+                                        {
+                                            check = false;
+                                        }
+                                    }
+
+                                }
+
+                                if($("#accounting2credit_"+questionId).val()==0 || $("#accounting2Debit_"+questionId).val()==0 || ($("#accounting2credit_"+questionId).val() != $("#accounting2Debit_"+questionId).val()))
+                                {
+                                    Swal.fire(
+                                        'Oops!',
+                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'info'
+                                    );     
+                                    return event.preventDefault();                                        
+                                }
+                            }
+                            if (questionType === 'accounting3')
+                            {
+                                var curInputs = $(this).find("select");
+                                var check = true;
+                                for (var i = 0; i < curInputs.length; i++)
+                                {
+                                    var name = curInputs[i].name;
+                                    var id = curInputs[i].id;
+                                    if($('#'+id).val()=='')
+                                    {
+                                        check = false;
+                                    }
+                                }
+
+                                if(!check){
+                                    Swal.fire(
+                                        'Oops!',
+                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'info'
+                                    );
+                                    return event.preventDefault();
+                                }
+                            }
+                            if (questionType === 'accounting4')
+                            {
+                                var curInputs = $(this).find("input[type='radio']");
+                                var check = true;
+                                for (var i = 0; i < curInputs.length; i++)
+                                {
+                                    var type = curInputs[i].type;
+                                    var name = curInputs[i].name;
+                                    var id = curInputs[i].id;
+                                    if(type == 'radio')
+                                    {
+                                        if($("input:radio[name="+name+"]:checked").length != 0)
+                                        {
+                                            var radio_check = $("input[name="+name+"]:checked").val();
+                                            var radio_check_value_id = $("input[id="+id+"]:checked").val();
+                                            var account_typr = $("input[name="+name+"]:checked").attr('divType');
+                                            if(account_typr == 'assets' )
+                                            {
+                                                if(radio_check == '1' && radio_check_value_id == '1')
+                                                {
+                                                    if($("#"+id+"_Option").find('option:selected').val() == ''){
+                                                        console.log('select');
+                                                        check = false;
+                                                    }
+                                                    if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                        console.log('select 2');
+                                                        check = false;
+                                                    }
+                                                }
+                                                if(radio_check == '2' && radio_check_value_id == '2')
+                                                {
+                                                    console.log('select 3');
+                                                    if($("#"+id+"_Option").find('option:selected').val() == ''){
+                                                        check = false;
+                                                    }
+                                                    if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                        check = false;
+                                                    }
+                                                }
+                                            }
+                                            if(account_typr == 'liabilities' )
+                                            {
+                                                if(radio_check == '1' && radio_check_value_id == '1')
+                                                {
+                                                    if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                        check = false;
+                                                    }
+                                                    if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                        check = false;
+                                                    }
+                                                    if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                        check = false;
+                                                    }
+                                                }
+                                                if(radio_check == '2' && radio_check_value_id == '2')
+                                                {
+                                                    if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                        check = false;
+                                                    }
+                                                    if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                        check = false;
+                                                    }
+                                                    if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                        check = false;
+                                                    }
+                                                }
+                                            }
+                                            if(account_typr == 'equity' )
+                                            {
+                                                if(radio_check == '1' && radio_check_value_id == '1')
+                                                {
+                                                    if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                        check = false;
+                                                    }
+                                                    if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                        check = false;
+                                                    }
+                                                    if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                        check = false;
+                                                    }
+                                                }
+                                                if(radio_check == '2' && radio_check_value_id == '2')
+                                                {
+                                                    if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                        check = false;
+                                                    }
+                                                    if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                        check = false;
+                                                    }
+                                                    if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                        check = false;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            check = false;
+                                        }
+                                    }
+                                }
+                                if(!check)
+                                {
+                                    Swal.fire(
+                                        'Oops!',
+                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'info'
+                                    );
+                                    return event.preventDefault();
+                                }
+                            }
+                            if (questionType === 'accounting5')
+                            {
+                                var curInputs = $(this).find("select");
+                                var check = true;
+                                for (var i = 0; i < curInputs.length; i++)
+                                {
+                                    //var name = curInputs[i].name;
+                                    var id = curInputs[i].id;
+                                    if($('#'+id).val()=='')
+                                    {
+                                        check = false;
+                                    }
+                                }
+
+                                if(!check){
+                                    Swal.fire(
+                                        'Oops!',
+                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'info'
+                                    );
+                                    return event.preventDefault();
+                                }
+                            }
+                            if (questionType === 'accounting6')
+                            {
+                                var curInputs = $(this).find("input[type='radio']");
+                                var check = true;
+                                for (var i = 0; i < curInputs.length; i++)
+                                {
+                                    var name = curInputs[i].name;
+                                    if($("input:radio[name="+name+"]:checked").length == 0){
+                                        check = false;
+                                    }
+                                }
+
+                                if(!check){
+                                    Swal.fire(
+                                        'Oops!',
+                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'info'
+                                    );
+                                    return event.preventDefault();
+                                }
+                            }                            
+                        });
+                        
+                    });
                 })
         }
 
@@ -728,28 +1020,6 @@
                 $('#exam-count').text(button);
             });
         });
-
-
-
-
-
-        // const startingMinuites = 10;
-        // let time = startingMinuites * 60;
-        // const countdownEl = document.getElementById('countdown')
-        // const interval =setInterval(updateCountdown,1000);
-        // function updateCountdown()
-        // {
-        //     const minute = Math.floor(time/60);
-        //     let second = time % 60
-        //     countdownEl.innerText = `${(minute<10)?'0'+ minute:minute}: ${(second<10)?'0'+ second:second}`
-        //     if(time==0){
-        //         clearInterval(interval)
-        //     }else{
-        //         time--;
-        //     }
-
-        // }
-
     </script>
 
 
