@@ -133,9 +133,9 @@
 <script src="https://unpkg.com/cropperjs"></script>
 <script src="{{ asset('js/WebFrontend/jquery.jqZoom.js') }}"></script>
 <script>
-$("body").on("contextmenu",function(){
-   return false;
-});
+// $("body").on("contextmenu",function(){
+//    return false;
+// });
 $("img").on("contextmenu",function(){
    return false;
 });
