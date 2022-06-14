@@ -1,8 +1,8 @@
 <div class="questionBlock">
     <p>{{ $question->indexKey }}. {{ $question->qus }}</p>
-    <div class="qslImg img-zome">
+    <div class="qslImg imgZoom">
         @if($question->qus_image!='' || $question->qus_image!=null)
-            <img src="{{ $question->qus_image }}" alt="" title="" />
+            <img src="{{ $question->qus_image }}" alt="" title=""/>
         @endif
     </div>
     <div class="qbSelect">
@@ -182,12 +182,4 @@
             });
         }
     }
-    $(function(){
-        $("#img-zome").jqZoom({
-            selectorWidth: 30,
-            selectorHeight: 30,
-            viewerWidth: 400,
-            viewerHeight: 300
-        });
-    })
 </script>
