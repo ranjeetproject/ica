@@ -202,13 +202,13 @@
     var examUrl='{{action('WebFrontend\DashboardController@dashboardExamDisplay')}}';
     if(afterLogin==1){
         Swal.fire({
-            title: 'Are you sure want to setup your Courses and Exams',
-            text: "New Courses & Exam are tagged for you",
+            title: 'Welcome to Learnersmall !!!Thank You for Login. Click on the Continue button to access all the features',
+            text: "Happy Learning !!!",
             icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, Process it!'
+            confirmButtonText: 'Continue'
         }).then((result) => 
             {
                 if (result.isConfirmed) 

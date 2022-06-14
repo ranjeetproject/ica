@@ -24,20 +24,29 @@ use Session;
 
 class ExamController extends Controller
 {
-    public function myExam()
+    public function myExam(Request $request)
     {
-        $exams = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_code','exams.exam_name',
-        'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type','exams.exam_zone','exams.exam_for','exams.duration')
-        ->join('std_exam','std_exam.exam','=','exams.id')
-        ->where('std_exam.student','=', Auth::user()->id)
-        ->where('exams.exam_for','=',1)->where('exams.status','=',1)->paginate(8);
-        foreach($exams as $exam)
+        if($request->ajax())
         {
-            $question = Question::where('exam_id', $exam->ex_id)->where('state', '1')->count();
-            if($question>0){
-                return view('WebFrontend.exam-list',compact('exams'));
+            if($request->has('page'))
+            {
+                $exams = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_code','exams.exam_name',
+                'exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject','exams.type','exams.exam_zone','exams.exam_for','exams.duration')
+                ->join('std_exam','std_exam.exam','=','exams.id')
+                ->where('std_exam.student','=', Auth::user()->id)
+                ->where('exams.exam_for','=',1)->where('exams.status','=',1)->paginate(8);
+                foreach($exams as $exam)
+                {
+                    $question = Question::where('exam_id', $exam->ex_id)->where('state', '1')->count();
+                    if($question>0){
+                        $html = view('WebFrontend.custom-exam-list-pagination', compact('exams'))->render();
+                        return response()->json(['page'=>$exams->currentPage()+1,'last_page'=>$exams->lastPage(),'html'=>$html]);
+                    }
+                }
+               
             }
         }
+        return view('WebFrontend.exam-list');   
     }
 
 
