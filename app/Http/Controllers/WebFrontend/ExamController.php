@@ -35,14 +35,16 @@ class ExamController extends Controller
                 ->join('std_exam','std_exam.exam','=','exams.id')
                 ->where('std_exam.student','=', Auth::user()->id)
                 ->where('exams.exam_for','=',1)->where('exams.status','=',1)->paginate(8);
-                foreach($exams as $exam)
-                {
-                    $question = Question::where('exam_id', $exam->ex_id)->where('state', '1')->count();
-                    if($question>0){
-                        $html = view('WebFrontend.custom-exam-list-pagination', compact('exams'))->render();
-                        return response()->json(['page'=>$exams->currentPage()+1,'last_page'=>$exams->lastPage(),'html'=>$html]);
-                    }
-                }
+                // foreach($exams as $exam)
+                // {
+                //     $question = Question::where('exam_id', $exam->ex_id)->where('state', '1')->count();
+                //     if($question>0){
+                        
+                //     }
+                // }
+                $initializeNumber=8*($exams->currentPage()-1);
+                $html = view('WebFrontend.custom-exam-list-pagination', compact('exams','initializeNumber'))->render();
+                return response()->json(['page'=>$exams->currentPage()+1,'last_page'=>$exams->lastPage(),'html'=>$html]);
                
             }
         }

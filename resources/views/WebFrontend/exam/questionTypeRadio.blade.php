@@ -1,7 +1,7 @@
 <div class="questionBlock">
     <p>{{ $question->indexKey }}. {{ $question->qus }}</p>
     @if($question->qus_image!=null)
-        <div class="qslImg imgZoom"><img src="{{ $question->qus_image }}" alt="" title=""/></div>
+        <div class="qslImg"><img class="imgZoom" src="{{ $question->qus_image }}" alt="" title=""/></div>
     @endif
     <div class="item_desc">
         <div class="item_morecontent">
@@ -14,11 +14,6 @@
                     </div>
                 @endforeach
             </div>
-            {{-- <div class="actionview">
-                <button type="button" class="btn ansbtn">Answered</button>
-                <button type="button" class="btn skippedbtn">Skipped</button>
-                <button type="button" class="btn revdbtn">Marked for Review</button>
-            </div> --}}
         </div>
     </div>
 </div>

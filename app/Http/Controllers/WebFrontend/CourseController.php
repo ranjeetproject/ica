@@ -18,18 +18,16 @@ class CourseController extends Controller
     public function myCourses(Request $request)
     {
         $data = [];
-        $data = Course::join('std_courses','std_courses.course','=','courses.id')
+        if($request->ajax()){
+            $data = Course::join('std_courses','std_courses.course','=','courses.id')
             ->where('courses.entry_from','NEW')
             ->where('std_courses.student', Auth::user()->id)
             ->groupBy('courses.id')
             ->paginate(8);
-
-        // return $data;
-        if($request->ajax()){
             $view = view('WebFrontend.all-course',compact('data'))->render();
-            return response()->json(['html' => $view]);
+            return response()->json(['last_page'=>$data->lastPage(),'html' => $view]);
         }
-        return view('WebFrontend.myCourse',compact('data'));
+        return view('WebFrontend.myCourse',$data);
     }
 
     public function courseDetail($id)

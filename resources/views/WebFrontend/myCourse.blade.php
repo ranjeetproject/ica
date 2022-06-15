@@ -18,10 +18,7 @@
     </section>
     <section class="couses-wrap">
         <div class="container">
-            <div class="row" id="course-data">
-                @include('WebFrontend.all-course')
-
-                
+            <div class="row" id="course-data">                
             </div>
             <div class="col-md-12">
                 <div class="load-more" style="display:none">
@@ -34,7 +31,28 @@
 @endsection
 @section('customJavascript')
     <script>
-        function loadMoreData(page) {
+        let currentPage = 1;
+        let scroll = false;
+        let lastPage=10;
+
+        $(function () {
+            loadMoreData(currentPage);
+            $(window).on('scroll', onScroll);
+        });
+
+        function onScroll() {
+            var trackScroll = $(window).scrollTop() + window.innerHeight >= document.body.scrollHeight
+            if (trackScroll) {
+                if (lastPage >= currentPage && scroll) {
+                    console.log("On scroll :"+currentPage);
+                    loadMoreData(currentPage);
+                }
+            }
+        }
+
+        function loadMoreData(page) 
+        {
+            scroll = false;
             $.ajax({
                     url: '?page=' + page,
                     type: "get",
@@ -46,6 +64,9 @@
                     if (data.html != "") {
                         $("#course-data").append(data.html);
                         $('.load-more').hide();
+                        currentPage++;
+                        lastPage = data.last_page;
+                        scroll = true;
                     } else {
                         $('.load-more').html("No more records found");
                         return;
@@ -56,13 +77,5 @@
                     alert('server not responding...');
                 });
         }
-
-        var page = 1;
-        $(window).scroll(function() {
-            if ($(window).scrollTop() + $(window).height() + 50 >= $(document).height()) {
-                page++;
-                loadMoreData(page);
-            }
-        });
     </script>
 @endsection

@@ -1,8 +1,8 @@
 <div class="questionBlock">
     <p>{{ $question->indexKey }}. {{ $question->qus }}</p>
-    <div class="qslImg imgZoom">
+    <div class="qslImg">
         @if($question->qus_image!='' || $question->qus_image!=null)
-            <img src="{{ $question->qus_image }}" alt="" title=""/>
+            <img class="imgZoom" src="{{ $question->qus_image }}" alt="" title=""/>
         @endif
     </div>
     <div class="qbSelect">
