@@ -93,6 +93,8 @@ Route::middleware(['auth'])->group(function ()
     Route::get('notification-list','WebFrontend\NotificationController@list')->name('notification-list');
     Route::get('chapter-details/{courseId}/{chapterId}','WebFrontend\CourseController@chapterLessionDisplay')->name('chapter-details');
     Route::get('assignment-exam/{courseId}/{chapterId}','WebFrontend\ExamController@assignmentExamQuestion')->name('assignment-exam');
+    
+    Route::get('rank-history','WebFrontend\RankHistoryController@rankHistoryList')->name('rank-history');
 
     Route::get('academic-details','WebFrontend\CourseController@academicDetailsFetch');
     Route::get('academic-detail-fetch/{id}','WebFrontend\CourseController@particulerAcademicDetailFetch');
