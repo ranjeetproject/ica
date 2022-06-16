@@ -176,7 +176,34 @@ class DashboardController extends Controller
             ->where('courses.entry_from','NEW')
             ->where('std_courses.student', Auth::user()->id)
             ->get();
-        return view('WebFrontend.profile',compact('courses','batch','center'));
+
+
+        $studentCode='"'.Auth::user()->code.'"';
+        $postFields='{
+            "StudentCode":'.$studentCode.'
+        }';
+        $data=[];
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://new.icaerp.com/api/Data/searchstudent',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>$postFields,
+            CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json'
+            ),
+        ));
+        
+        $response = curl_exec($curl);
+        
+        curl_close($curl);
+        $apiData=json_decode($response,true);    
+        return view('WebFrontend.profile',compact('courses','batch','center','apiData'));
     }
 
     public function editProfilePage($id)

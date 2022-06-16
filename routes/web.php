@@ -76,11 +76,11 @@ Route::middleware(['auth'])->group(function ()
     Route::get('pagination/fetch', 'WebFrontend\ExamController@fetch')->name('pagination-fetch');
     Route::get('exam-result/{id}/{examType?}','WebFrontend\ExamController@examResult')->name('exam-result');
     Route::get('exam-question/{id}','WebFrontend\ExamController@examQuestion')->name('exam-question');
-    Route::post('exam-submit','WebFrontend\ExamController@examSubmit');
+
+
+    
 
     Route::get('chart','WebFrontend\ChartController@viewProgressChart');
-
-
    // Route::get('exam-question','WebFrontend\ExamController@examQuestion')->name('exam-question');
     Route::get('competitive-exam','WebFrontend\ExamController@competitiveExam')->name('competitive-exam');
     Route::get('competitive-exam-instruction/{id}','WebFrontend\ExamController@competitiveExamInstruction')->name('competitive-exam-instruction');
@@ -91,13 +91,17 @@ Route::middleware(['auth'])->group(function ()
     
 
     Route::get('notification-list','WebFrontend\NotificationController@list')->name('notification-list');
-
     Route::get('chapter-details/{courseId}/{chapterId}','WebFrontend\CourseController@chapterLessionDisplay')->name('chapter-details');
     Route::get('assignment-exam/{courseId}/{chapterId}','WebFrontend\ExamController@assignmentExamQuestion')->name('assignment-exam');
     
     Route::get('rank-history','WebFrontend\RankHistoryController@rankHistoryList')->name('rank-history');
 
+    Route::get('academic-details','WebFrontend\CourseController@academicDetailsFetch');
+    Route::get('academic-detail-fetch/{id}','WebFrontend\CourseController@particulerAcademicDetailFetch');
+
+
     Route::get('logout', 'WebFrontend\UserController@logout');
+    Route::post('exam-submit','WebFrontend\ExamController@examSubmit');
 });
 
 // Route::get('chapter-details/{chapterId}/{courseId}',function(){
