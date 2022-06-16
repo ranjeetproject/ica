@@ -20,6 +20,12 @@
                 <li class="nav-item">
                     <a class="nav-link {{ (request()->segment(1) == 'competitive-exam') ? 'active' : '' }}" href="{{action('WebFrontend\ExamController@competitiveExam')}}">Competitive</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{action('WebFrontend\CourseController@academicDetailsFetch')}}">Acedemic Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{action('WebFrontend\ExamController@competitiveExam')}}">My Rank</a>
+                </li>
             </ul>
             <div class="follow-us">
                 <span>Follow us</span>

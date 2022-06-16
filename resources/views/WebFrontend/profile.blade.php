@@ -125,11 +125,24 @@
                 @if(count($courses)>0)
                 <div class="detlTable">
                     <h3>Course Details</h3>
-                    <ul>
+                    {{-- <ul>
                         @foreach ($courses as $course)
                         <li><span><i class="far fa-angle-double-right"></i></span> <a href="{{ url('course-details', $course->course) }}">{{$course->course_name}}</a></li>
                         @endforeach
-                    </ul>
+                    </ul> --}}
+                    <div class="inner_cont_wap">
+                        @foreach($apiData['courses'] as $value)
+                            <a href="{{action('WebFrontend\CourseController@particulerAcademicDetailFetch',['id'=>@$value['courseid']])}}">
+                                <div class="list-item certified_opt">
+                                    <div class="item_details">
+                                        <p class="titleopt">{{@$value['coursename']}} </p>
+                                        <p class="date_opt">Admission Date : {{@$value['admission']}}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                        
+                    </div>
                 </div>
                 @endif
             </div>
