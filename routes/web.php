@@ -95,6 +95,7 @@ Route::middleware(['auth'])->group(function ()
     Route::get('chapter-details/{courseId}/{chapterId}','WebFrontend\CourseController@chapterLessionDisplay')->name('chapter-details');
     Route::get('assignment-exam/{courseId}/{chapterId}','WebFrontend\ExamController@assignmentExamQuestion')->name('assignment-exam');
     
+    Route::get('rank-history','WebFrontend\RankHistoryController@rankHistoryList')->name('rank-history');
 
     Route::get('logout', 'WebFrontend\UserController@logout');
 });

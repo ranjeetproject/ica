@@ -3987,3 +3987,114 @@ li.selected .qaFormbg {
         width: 31%;
     }
 }
+
+
+
+
+/* 15.06.2022 */
+
+.certified_opt .item_details {
+    flex: 1;
+    background: url(../images/pagi-nxt.png) no-repeat right center;
+    margin: 0px 10px 0 5px ;
+    background-size: 8px;
+    padding: 10px;
+}
+.list-item.certified_opt {
+    position: relative;
+}
+.certified_opt .titleopt {
+    font-weight: 700 !important;
+}
+.certified_opt .date_opt {
+    font-size: 14px;
+}
+.certified_opt .moduleinfo_text {
+    font-size: 14px;
+}
+.certified_opt span.count_num {
+    position: absolute;
+    left: 0px;
+    top: 0;
+}
+.certified_opt.list-item span {
+    height: 60px !important;
+}
+
+
+.list-item.certified_opt.rankhistory .item_details {
+    margin: 3px 10px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.history_info {
+    flex: 1;
+}
+.rankdetails {
+    display: flex;
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
+}
+.rankdetails p {
+    flex: none !important;
+    padding: 6px 14px 6px 0 !important;
+    margin: 11px;
+}
+.inner_cont_wap p.rankopt {
+    color: red !important;
+}
+
+.inner_cont_wap .nav-tabs .nav-item.show .nav-link, .inner_cont_wap .nav-tabs .nav-link.active {
+    color: #ffffff;
+    background-color: #072f60;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+.inner_cont_wap .nav-tabs .nav-link:focus, .inner_cont_wap .nav-tabs .nav-link:hover {
+    border-color: transparent transparent transparent;
+    isolation: isolate;
+}
+.inner_cont_wap .nav-link {
+  
+    color: #072f60;
+}
+.inner_cont_wap .tab-content {
+    padding: 20px 0;
+}
+.mobule_opt {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+.mobuledef_opt {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.pending_opt {
+    width: 15px;
+    height: 15px;
+    background: #f00;
+    border-radius: 50%;
+}
+.running_opt {
+    width: 15px;
+    height: 15px;
+    background:#FCD100;
+    border-radius: 50%;
+}
+.completed_opt{
+    width: 15px;
+    height: 15px;
+    background:#004E4A;
+    border-radius: 50%;
+}
+.mobuledef_opt .pending_opt,.mobuledef_opt .running_opt,.mobuledef_opt .completed_opt{
+    margin-right: 5px;
+}
+@media screen and (max-width: 767px){
+.rankhistory p {
+    padding: 0px 0px 5px !important; 
+}
+}
