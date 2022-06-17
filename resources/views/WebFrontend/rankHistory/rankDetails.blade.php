@@ -20,7 +20,7 @@
                 <span class="blue-bar"></span>
             </h3>
         </div>
-        <div>
+        <div class="rank_pic_view">
             @if($studentExam['rank'] == 1)
                 <img src="{{ asset('css/images/rankpic1.png')}}" alt="">
             @elseif($studentExam['rank'] == 2)
@@ -32,6 +32,7 @@
             @endif
         </div>
         <div class="inner_content_info">
+       
             <div class="inner_content_view">
                 <div class="inner_block">
                     <div class="result_info ">

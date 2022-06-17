@@ -4093,8 +4093,52 @@ li.selected .qaFormbg {
 .mobuledef_opt .pending_opt,.mobuledef_opt .running_opt,.mobuledef_opt .completed_opt{
     margin-right: 5px;
 }
+
+.inner_cont_wap a {
+    text-decoration: none !important; 
+}
+.list-item.certified_opt p {
+    color: #072F60;
+}
+.courseDetlMain .list-item.certified_opt {
+    border-bottom: 1px solid #f3f3f3;
+}
+.courseDetlMain .list-item.certified_opt .item_details {
+       padding: 10px 5px;
+}
+.rankpic.leargimg img {
+    max-width: 100%;
+}
+.rankpic.leargimg {
+    width: 82px;
+}
+.rank_pic_view {
+    text-align: center;
+    /* background: #fff; */
+        margin-top: -45px;
+        position: relative;
+        width: 170px;
+        margin-left: auto;
+        margin-right: auto;  
+}
+.rank_pic_view img {
+    width: auto;
+    max-width: 100%;
+}
+
+
+
+
 @media screen and (max-width: 767px){
 .rankhistory p {
     padding: 0px 0px 5px !important; 
+}
+.exam-list-wr .list-item p {
+    font-size: 15px;
+    padding: 10px;
+}
+.rankdetails {
+   
+    flex-direction: column;
 }
 }
