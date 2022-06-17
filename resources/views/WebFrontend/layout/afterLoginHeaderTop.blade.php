@@ -35,7 +35,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="{{action('WebFrontend\DashboardController@profilePage')}}">Profile</a></li>
                         <li><a class="dropdown-item" href="{{action('WebFrontend\ChartController@viewProgressChart')}}">Progress Report Card</a></li>
-                        <li><a class="dropdown-item" href="{{action('WebFrontend\RankHistoryController@rankHistoryList')}}">Rank History</a></li>
+                        {{-- <li><a class="dropdown-item" href="{{action('WebFrontend\RankHistoryController@rankHistoryList')}}">Rank History</a></li> --}}
                         <li><a class="dropdown-item" href="{{action('WebFrontend\UserController@logout')}}">Logout</a></li>
                     </ul>
                 </div>
