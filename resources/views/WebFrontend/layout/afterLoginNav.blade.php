@@ -23,9 +23,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{action('WebFrontend\CourseController@academicDetailsFetch')}}">Acedemic Details</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="{{action('WebFrontend\RankHistoryController@rankHistoryList')}}">My Rank</a>
-                </li>
+                </li> --}}
             </ul>
             <div class="follow-us">
                 <span>Follow us</span>

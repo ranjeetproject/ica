@@ -95,7 +95,7 @@ Route::middleware(['auth'])->group(function ()
     Route::get('assignment-exam/{courseId}/{chapterId}','WebFrontend\ExamController@assignmentExamQuestion')->name('assignment-exam');
     
     Route::get('rank-history','WebFrontend\RankHistoryController@rankHistoryList')->name('rank-history');
-    Route::get('rank-history-details/{id}','WebFrontend\RankHistoryController@examResult');
+    Route::get('rank-history-details/{id}/{exam_name}/{exam_for}/{full_marks}/{obtain_marks}/{marks_percent}/{rank}/{time_taken}/{status}','WebFrontend\RankHistoryController@examResult');
 
     Route::get('academic-details','WebFrontend\CourseController@academicDetailsFetch');
     Route::get('academic-detail-fetch/{id}','WebFrontend\CourseController@particulerAcademicDetailFetch');

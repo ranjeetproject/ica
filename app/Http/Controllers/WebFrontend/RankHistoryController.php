@@ -84,163 +84,29 @@ class RankHistoryController extends Controller
         return view('WebFrontend.rankHistory.rank-history-list',compact('res_array'));
     }
 
-    public function examResult($studentExamId)
+    public function examResult($studentExamId,$studentExamName,$exam_for,$full_marks,$obtain_marks,$marks_percent,$rank,$time_taken,$status)
     {
-        if($studentExamId>0)
-        {
-            $studentExam=StudentExam::find($studentExamId);
-            if($studentExam)
-            {
-                $studentExam->markPercentage=round(($studentExam->obtain_marks/$studentExam->full_marks)*100);
-                $studentExam->exam=Exam::find($studentExam->exam_id);
-                if ($studentExam->exam->exam_for == 2) { //checking for competition/competitive 
-                    if ($studentExam->exam->attempt_time!=0) {
-                        $exam_end_date_time = new Carbon( $studentExam->exam->datet." ".$studentExam->exam->end_time);
-                        $today = Carbon::now();
-                        if($today > $exam_end_date_time) {
-                            $studentExam->status = 'Completed';
-                        } else {
-                            $studentExam->status ="In progress";
-                        }
-        
-                    } else {
-                        $studentExam->status ="In progress";
-                    }
-                } else{
-                    $studentExam->status ="In progress";
-                }
-
-                $competitive_exams = StudentExam::where('exam_id', 2)->where('exam_for',2)->orderBy('obtain_marks', 'DESC')->orderBy('total_duration', 'ASC')->get();
-                $rank = 1;
-                foreach ($competitive_exams as $value) {
-                    if($value->student_id == Auth::user()->id) {
-                        $studentExam->rank = $rank;
-                    } else {
-                        $rank++;
-                    }
-                }
-                $studentExam->rank = $rank;
-
-                $data['studentExam']=$studentExam;
-
-                $studentAnswer=StudentAnswer::where('student_exam_id',$studentExam->id)->get();
-                foreach($studentAnswer as $studentAnsValue)
-                {
-                    $question=Question::find($studentAnsValue->question_id);
-                    if($question)
-                    {                        
-                        $studentAnsValue->qustionText = $question->qus;
-                        $studentAnsValue->qustionOption = explode("=><",$question->qus_option);    
-                        if($question->type=='check')
-                        {
-                            $studentAnsValue->questionOldAnswer=explode(",",$studentAnsValue->ques_old_answer);
-                            $studentAnsValue->questionYourAnswer=explode(",",$studentAnsValue->ques_answer);
-                        }    
-                        if($question->type=='accounting1')
-                        {
-                            $studentAnsValue->questionOldAnswer=explode(",",$studentAnsValue->ques_old_answer);
-                            $studentAnsValue->questionYourAnswer=explode(",",$studentAnsValue->ques_answer);
-                        } 
-                        if($question->type =="accounting2")
-                        {
-                            $studentOldAnsValueData=explode("},{",trim($studentAnsValue->ques_old_answer,'[{}]'));
-                            $questionOldAnswer=[];
-                            foreach($studentOldAnsValueData as $oldAnsvalue)
-                            {
-                                $questionOldAnswer[]=explode(',',$oldAnsvalue);
-                            }
-                            $studentAnsValue->questionOldAnswer=$questionOldAnswer;
-                            $studentAnsValueData=explode("},{",trim($studentAnsValue->ques_answer,'[{}]'));
-                            $questionYourAnswer=[];
-                            foreach($studentAnsValueData as $YourAnsvalue)
-                            {
-                                $questionYourAnswer[]=explode(',',$YourAnsvalue);
-                            }
-                            $studentAnsValue->questionYourAnswer=$questionYourAnswer;
-
-                            $studentAnsValue->primaryAccount=PrimaryAccount::get();
-                            $studentAnsValue->secondaryAccount=SecondaryAccount::get();
-                            $studentAnsValue->account=Account::where('question_id',$question->id)->get();
-
-                           
-                        } 
-                        if($question->type == "accounting4")
-                        {
-                            $studentAnsValue->qustionOption=['Increase','Decrease','No-Impact'];
-                            $studentAnsValue->qustionTextArray = explode("=><",$question->qus);
-                            
-
-                            $oldAnswer=[];
-                            $oldAnswerArray=explode('{',trim($studentAnsValue->ques_old_answer,'[]'));                        
-                            foreach($oldAnswerArray as $key=>$oldAnsValue)
-                            {
-                                if($key!=0)
-                                {
-                                    if($key==2 || $key==4 || $key==6)
-                                    {
-                                        $oldAnswer[]=explode(',',trim($oldAnsValue,':}},'));
-                                    }
-                                    else{
-                                        $oldAnswer[]=trim($oldAnsValue,':}},');
-                                    }
-                                }                                    
-                            } 
-                            $studentAnsValue->questionOldAnswer=$oldAnswer;
-                            
-                            
-                            $yourAnswer=[];
-                            $yourAnswerArray=explode('{',trim($studentAnsValue->ques_answer,'[]'));                        
-                            foreach($yourAnswerArray as $key=>$youeAnsValue)
-                            {
-                                if($key!=0)
-                                {
-                                    if($key==2 || $key==4 || $key==6)
-                                    {
-                                        $yourAnswer[]=explode(',',trim($youeAnsValue,':}},'));
-                                    }
-                                    else{
-                                        $yourAnswer[]=trim($youeAnsValue,':}},');
-                                    }
-                                    
-                                }                                    
-                            }    
-                            $studentAnsValue->questionYourAnswer=$yourAnswer;
-
-
-
-                            $studentAnsValue->reasonEquity=ReasonEquity::get();
-                            $studentAnsValue->secondaryAccount=SecondaryAccount::get();
-                        }                   
-                        if($question->type == "accounting5")
-                        {
-                            $studentAnsValue->qustionTextArray = explode("=><",$question->qus);
-                            $studentAnsValue->questionOldAnswer=explode(",",$studentAnsValue->ques_old_answer);
-                            $studentAnsValue->questionYourAnswer=explode(",",$studentAnsValue->ques_answer);
-                        }
-                        if($question->type=='accounting6')
-                        {
-                            $studentAnsValue->questionOldAnswer=explode(",",$studentAnsValue->ques_old_answer);
-                            $studentAnsValue->questionYourAnswer=explode(",",$studentAnsValue->ques_answer);
-                        }
-                    }
-                }
-                $data['correctWrongAnswer']=$studentAnswer;
-                if ($studentExam->exam['question_limit'] == 0) {
-                    $questionLimit = Question::where('exam_id',  $studentExam->exam_id)->where('state', 1)->orderBy('id', 'ASC')->count();
-                    $data['questionLimit'] = $questionLimit;
-                }
-                else{
-                    $data['questionLimit'] = $studentExam->exam['question_limit'];
-                } 
-
-                return view('WebFrontend.rankHistory.rankDetails',$data);              
-            }
-            else{
-                abort('404');
-            }
+        $studentExam = StudentExam::find($studentExamId);
+        $examDetails = Exam::find($studentExam->exam_id);
+        $data = [];
+        if ($examDetails->question_limit == 0) {
+            $questionLimit = Question::where('exam_id',  $examDetails->id)->where('state', 1)->orderBy('id', 'ASC')->count();
+            $data['questionLimit'] = $questionLimit;
         }
         else{
-            abort('404');
-        }
+            $data['questionLimit'] = $examDetails->question_limit;
+        } 
+        $data['exam_name'] = $studentExamName;
+        $data['exam_for'] = $exam_for;
+        $data['full_marks'] = $full_marks;
+        $data['obtain_marks'] = $obtain_marks;
+        $data['marks_percent'] = $marks_percent;
+        $data['rank'] = $rank;
+        $data['time_taken'] = $time_taken;
+        $data['date_time'] = $examDetails->created_at;
+        $data['status'] = $status;
+
+        return view('WebFrontend.rankHistory.rankDetails',$data);              
+            
     }
 }
