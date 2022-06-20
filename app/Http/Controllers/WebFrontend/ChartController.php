@@ -12,6 +12,7 @@ use App\Chapter;
 use App\ChapterDetail;
 use App\StudentChapterRead;
 use App\Exam;
+use App\Course;
 
 
 class ChartController extends Controller
@@ -128,5 +129,15 @@ class ChartController extends Controller
         $result['asseigmentProgress'] = $asseigmentProgressArray;
         
         return $result;
+    }
+
+    public function courseProgressList()
+    {
+        $courses = Course::join('std_courses','std_courses.course','=','courses.id')
+        ->where('courses.entry_from','NEW')
+        ->where('std_courses.student', Auth::user()->id)
+        ->get();
+
+        return view('WebFrontend.chart.courseWiseProgessList',compact('courses'));
     }
 }

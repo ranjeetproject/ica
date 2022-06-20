@@ -49,7 +49,8 @@
                         <span id="error_code" style="color:#ed0f12;padding:10px;"></span>
                         <span id="otp_success_message" style="color:#82ff80;padding:10px;"></span>
                         <span id="otp_error_message" style="color:#ed0f12;padding:10px;"></span>
-      
+                        <span class="form-text text-danger"
+                                                      id="error_code">{{ $errors->getBag('default')->first('code') }}</span>
                         <button type="button" class="btn reqOtp" id="sendOtp">
                             Request OTP <img src="{{ asset('css/images/Spinner-1s-23px.gif') }}" class="img-fluid" id="sendOtp-loader"  style="display:none"/>
                         </button>
@@ -104,6 +105,8 @@
                             <span id="error_verify_ot" style="color:#ed0f12;padding:10px;"></span>
                             <span id="verify_success_message" style="color:#82ff80;padding:10px;"></span>
                             <span id="verify_error_message" style="color:#ed0f12;padding:10px;"></span>
+                            <span class="form-text text-danger"
+                                                      id="error_verify_Otp">{{ $errors->getBag('default')->first('verify_Otp') }}</span>
                         </div>
                     </div>
                 
