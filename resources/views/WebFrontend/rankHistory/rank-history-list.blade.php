@@ -19,7 +19,7 @@
             </h3>
             <div class="inner_cont_wap">
                 @foreach ($res_array as $rank)
-                    <a href="{{action('WebFrontend\RankHistoryController@examResult',['id'=>$rank['id']])}}">
+                    <a href="{{action('WebFrontend\RankHistoryController@examResult',['id'=>$rank['id'],'exam_name'=>$rank['exam_name'],'exam_for'=>$rank['exam_for'],'full_marks'=>$rank['full_marks'],'obtain_marks'=>$rank['obtain_marks'],'marks_percent'=>$rank['marks_percent'],'rank'=>$rank['rank'],'time_taken'=>$rank['time_taken'],'status'=>$rank['status']])}}">
                         <div class="list-item certified_opt rankhistory">
                             <div class="item_details">
                                 <div class="history_info">
@@ -54,3 +54,4 @@
     </section> 
 @endsection
 @section('customJavascript')
+@endsection

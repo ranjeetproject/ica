@@ -140,4 +140,188 @@ class ChartController extends Controller
 
         return view('WebFrontend.chart.courseWiseProgessList',compact('courses'));
     }
+
+    public function allCourseProgress($studentId)
+    {
+        $return=[];
+        // return view('WebFrontend.chart.courseProgress',$return);
+        $studentCourse = StdCourse::where('student', $studentId)->get();
+        $result1 = [];
+        $result2 = [];
+        $result3 = [];
+        foreach ($studentCourse as $course) 
+        {
+            $n_count = 0;
+            $val1 = 0;
+            $val2 = 0;
+            $val3 = 0;
+            $result2_det = [];
+
+            $coursedet = Course::where('id', $course->course)->first();
+            $subjects = Subject::where('course_id', $course->course)->get();
+            foreach ($subjects as $subject) 
+            {
+                $chapters = Chapter::where('subject_id', $subject->id)->where('status', "1")->get();
+                foreach( $chapters as $chapter ) 
+                {
+                    $ans_data1 = [];
+                    $chapters = Chapter::where('subject_id', $subject->id)->where('status', "1")->get();
+                    $chapter_count =  ChapterDetail::where('chapter', $chapter->id)->get()->count();
+                    if ($chapter_count != 0) 
+                    {
+                        $chapter_read_status_count = StudentChapterRead::where('chapter', $chapter->id)->where('student_id', $studentId)
+                                                    ->where('read_status', 1)->count();
+                        
+                        $ans_data1['id'] = $chapter->id;
+                        $ans_data1['course'] = $course->course;
+                        $ans_data1['course_name'] = $coursedet->course_name;
+                        $ans_data1['chapter_name'] = $chapter->chapter_name;
+                        $ans_data1['count'] = $chapter_count;
+                        $ans_data1['read_count'] = $chapter_read_status_count;
+                        $percent = ($chapter_read_status_count * 100 / $chapter_count);
+                        $ans_data1['percentge_read']= ceil($percent);
+                        $total_percent = $percent;
+                        
+                        $exams = Exam::where('chapter', $chapter->id)->get();
+                        $obtain_marks = 0;
+                        $full_marks = 0;
+                        $result3_det = [];
+                        foreach( $exams as $exam ) 
+                        {
+                            $student_exam = StudentExam::where('student_id', $studentId)->where('exam_id', $exam->id)->where('exam_for', '3')->get();
+                            foreach ($student_exam as $value) {
+                                $obtain_marks += $value->obtain_marks;
+                                $full_marks += $value->full_marks;
+                            }
+                            
+                            $result3_det['id'] = $exam->id;
+                            $result3_det['exam_name'] = $exam->exam_name;
+                            $result3_det['course'] = $course->course;
+                            $result3_det['course_name'] = $coursedet->course_name;
+                            $result3_det['chapter'] = $chapter->id;
+                            $result3_det['chapter_name'] = $chapter->chapter_name;
+                            
+                            $last_obmarks = 0;
+                            $last_fmarks = 0;
+                            $lstudent_exam = StudentExam::where('student_id', $studentId)->where('exam_id', $exam->id)->where('exam_for', '3')->orderBy('id', 'DESC')->first();
+                            if ($lstudent_exam != '') 
+                            {
+                                $last_obmarks = $lstudent_exam->obtain_marks;
+                                $last_fmarks = $lstudent_exam->full_marks;
+                                $lassess_percent = 0;
+                                if ($last_fmarks != 0) {
+                                    $lassess_percent = ($last_obmarks * 100 / $last_fmarks);
+                                }
+                                $result3_det['obtain_marks'] = $last_obmarks;
+                                $result3_det['full_marks'] = $last_fmarks;
+                                $result3_det['mark_per'] = round($lassess_percent);
+                                
+                                array_push($result3, $result3_det);
+                            }
+                        }
+                        
+                        $assess_percent = 0;
+                        if ($full_marks != 0) {
+                            $assess_percent = ($obtain_marks * 100 / $full_marks);
+                            $total_percent = ($percent + $assess_percent) / 2;
+                        }
+                        $ans_data1['percentge_assessment']= ceil($assess_percent);
+                        $ans_data1['percentge_total']= ceil($total_percent);
+                        
+                        $n_count++;
+                        $val1 += $percent;
+                        $val2 += $assess_percent;
+                        $val3 += $total_percent;
+                        
+                        array_push($result1, $ans_data1);
+                    }
+                }
+            }
+            
+         
+            
+            $cper_read = 0;
+            $cper_asses = 0;
+            $cper_tot = 0;
+            
+            if ($n_count>0) {
+            
+                $cper_read = $val1 / $n_count;
+                $cper_asses = $val2 / $n_count;
+                $cper_tot = $val3 / $n_count;
+            }
+            
+           
+            
+            $result2_det['course_id'] = $course->course;
+            $result2_det['course_name'] = $coursedet->course_name;
+            $result2_det['per_read'] = ceil($cper_read);
+            $result2_det['per_assess'] = ceil($cper_asses);
+            $result2_det['per_tot'] = ceil($cper_tot);            
+            array_push($result2, $result2_det);
+            
+        }
+
+       $courseName=[];
+       $readPercentage=[];
+       $assignmentPercentage=[];
+       $courseBackgroundColor=[];
+       $assignmentBackgroundColor=[];
+       foreach($result2 as $courseData)
+       {
+            $courseName[]=$courseData['course_name'];
+            $readPercentage[]=$courseData['per_read'];
+            $assignmentPercentage[]=$courseData['per_assess'];
+            if($courseData['per_read']<21)
+            {
+                $courseBackgroundColor[]='#fe0000';
+            }
+            elseif($courseData['per_read']>20 && $courseData['per_read']<41)
+            {
+                $courseBackgroundColor[]='#fda501';              
+            }
+            elseif($courseData['per_read']>40 && $courseData['per_read']<61)
+            {
+                $courseBackgroundColor[]='#fefd07';
+            }
+            elseif($courseData['per_read']>60 && $courseData['per_read']<81)
+            {
+                $courseBackgroundColor[]='#04fc03';
+            }
+            elseif($courseData['per_read']>80)
+            {
+                $courseBackgroundColor[]='#00584c';
+            }
+
+
+
+            if($courseData['per_assess']<21)
+            {
+                $assignmentBackgroundColor[]='#fe0000';
+            }
+            elseif($courseData['per_assess']>20 && $courseData['per_assess']<41)
+            {
+                $assignmentBackgroundColor[]='#fda501';
+            }
+            elseif($courseData['per_assess']>40 && $courseData['per_assess']<61)
+            {
+                $assignmentBackgroundColor[]='#fefd07';
+            }
+            elseif($courseData['per_assess']>60 && $courseData['per_assess']<81)
+            {
+                $assignmentBackgroundColor[]='#04fc03';
+            }
+            elseif($courseData['per_assess']>80)
+            {
+                $assignmentBackgroundColor[]='#00584c';
+            }
+        }
+        $courseProgressArray['courseName']=implode(',',$courseName);
+        $courseProgressArray['readPercentageArray']=implode(',',$readPercentage);
+        $courseProgressArray['assessmentPercentgeArray']=implode(',',$assignmentPercentage);
+        $courseProgressArray['courseBackgroundColor']=implode(',',$courseBackgroundColor);
+        $courseProgressArray['assignmentBackgroundColor']=implode(',',$assignmentBackgroundColor);
+        $return['coursesProgress'] = $courseProgressArray;        
+        return view('WebFrontend.chart.courseProgress',$return);
+    }
 }
