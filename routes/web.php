@@ -81,6 +81,7 @@ Route::middleware(['auth'])->group(function ()
     
 
     Route::get('chart','WebFrontend\ChartController@viewProgressChart');
+    Route::get('all-course-progress/{studentId}','WebFrontend\ChartController@allCourseProgress');
    // Route::get('exam-question','WebFrontend\ExamController@examQuestion')->name('exam-question');
     Route::get('competitive-exam','WebFrontend\ExamController@competitiveExam')->name('competitive-exam');
     Route::get('competitive-exam-instruction/{id}','WebFrontend\ExamController@competitiveExamInstruction')->name('competitive-exam-instruction');
