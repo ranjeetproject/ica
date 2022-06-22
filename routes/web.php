@@ -101,7 +101,12 @@ Route::middleware(['auth'])->group(function ()
     Route::get('academic-details','WebFrontend\CourseController@academicDetailsFetch');
     Route::get('academic-detail-fetch/{id}','WebFrontend\CourseController@particulerAcademicDetailFetch');
 
-    Route::get('course-progress-list','WebFrontend\ChartController@courseProgressList')->name('course-progress-list');
+    // Route::get('chapter-wise-progress','WebFrontend\ChartController@chapterWiseProgressList')->name('chapter-progress-list');
+    // Route::get('chapter-wise-progress-details/{courseId}','WebFrontend\ChartController@chapterProgress')->name('chapter-progress-details');
+
+    Route::get('chapter-wise-progress','WebFrontend\ChartController@chapterWiseProgressList');
+    Route::get('chapter-wise-progress-chart/{courseId}','WebFrontend\ChartController@chaptereWiseProgressChart')->name('course-progress-chart');
+
 
     Route::get('logout', 'WebFrontend\UserController@logout');
     Route::post('exam-submit','WebFrontend\ExamController@examSubmit');
