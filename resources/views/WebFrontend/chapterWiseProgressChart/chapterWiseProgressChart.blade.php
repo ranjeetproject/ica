@@ -95,7 +95,7 @@
                 },
                 title: {
                     display: true,
-                    text: 'Course Progress'
+                    text: 'Chapter Progress'
                 }
                 }
             },
