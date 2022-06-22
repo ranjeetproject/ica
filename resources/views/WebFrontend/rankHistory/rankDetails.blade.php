@@ -46,7 +46,7 @@
                         </div>
                         <div class="result_des">
                             <span>Time :</span>
-                            <span>{{$time_taken}}</span>
+                            <span>{{date('H:i', mktime(0,$time_taken))}}</span>
                         </div>
                         <div class="result_des">
                             <span>Total Marks :</span>
