@@ -136,6 +136,7 @@ class ChartController extends Controller
         $return=[];
         // return view('WebFrontend.chart.courseProgress',$return);
         $studentCourse = StdCourse::where('student', $studentId)->get();
+       // return $studentCourse;
         $result1 = [];
         $result2 = [];
         $result3 = [];
