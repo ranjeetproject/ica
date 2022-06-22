@@ -449,5 +449,5 @@ class ChartController extends Controller
         $return['chapterProgress'] = $chapterProgressArray;     
         
         return $return;
-    }
+    } 
 }
