@@ -17,7 +17,7 @@
                 <span class="blue-bar"></span>
             </h3>
             <div class="prgMain">
-           <h5>Tally</h5>
+           <h5>{{$chapterProgress['courseName']}}</h5>
             <div class="prg">
                 <span>Progress</span>
                 <span>Below 20</span>

@@ -331,10 +331,10 @@ class ChartController extends Controller
         return view('WebFrontend.chapterWiseProgressChart.chapterWiseProgressChart',$data);
     }
 
-    public function chapterWiseProgress($courseWiseId)
+    public function chapterWiseProgress($courseId)
     {
         $student_course = StdCourse::where('student', Auth::user()->id)
-        ->where('course', $courseWiseId)
+        ->where('course', $courseId)
         ->get();
         
         $result1 = [];
@@ -439,6 +439,8 @@ class ChartController extends Controller
                 $assignmentBackgroundColor[]='#00584c';
             }
         }
+        $courseName = Course::find($courseId)->course_name;
+        $chapterProgressArray['courseName']=$courseName;
         $chapterProgressArray['chapterName']=implode(',',$chapterName);
         $chapterProgressArray['readPercentageArray']=implode(',',$readPercentage);
         $chapterProgressArray['assessmentPercentageArray']=implode(',',$assignmentPercentage);
