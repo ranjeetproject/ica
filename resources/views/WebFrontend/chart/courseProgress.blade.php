@@ -16,6 +16,17 @@
                 Course Progress
                 <span class="blue-bar"></span>
             </h3>
+            <div class="prgMain">
+           <!-- <h5>Tally</h5> -->
+            <div class="prg">
+                <span>Progress</span>
+                <span>Below 20</span>
+                <span>20-40</span>
+                <span>40-60</span>
+                <span>60-80</span>
+                <span>80-100</span>
+            </div>
+        </div>
             <div class="pgcBtm">
                 <canvas id="courseProgress"></canvas>
             </div> 
