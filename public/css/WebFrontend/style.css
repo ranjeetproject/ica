@@ -3992,7 +3992,7 @@ li.selected .qaFormbg {
     }
 
     .allCourse .course-card {
-        width: 48%;
+        width: 48% !important;
     }
 }
 
@@ -4022,7 +4022,7 @@ li.selected .qaFormbg {
     }
 
     .allCourse .course-card {
-        width: 100%;
+        width: 100% !important;
     }
 }
 
