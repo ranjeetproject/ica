@@ -320,6 +320,7 @@ class ChartController extends Controller
         $courses = Course::join('std_courses','std_courses.course','=','courses.id')
         ->where('courses.entry_from','NEW')
         ->where('std_courses.student', Auth::user()->id)
+        ->groupBy('courses.id')
         ->get();
 
         return view('WebFrontend.chapterWiseProgressChart.courseWiseProgressList',compact('courses'));
