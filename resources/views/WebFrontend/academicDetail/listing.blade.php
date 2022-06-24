@@ -32,7 +32,7 @@
                 @endforeach
             @else
             
-                <p class="noDt">No data available</p>
+                <p class="noDt">No Data Available</p>
         
             @endif
 
