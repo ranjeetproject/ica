@@ -18,6 +18,8 @@
             </h3>
 
             <div class="inner_cont_wap">
+            @if (isset($apiData['courses']))
+            
                 @foreach($apiData['courses'] as $value)
                     <a href="{{action('WebFrontend\CourseController@particulerAcademicDetailFetch',['id'=>@$value['courseid']])}}">
                         <div class="list-item certified_opt">
@@ -28,6 +30,12 @@
                         </div>
                     </a>
                 @endforeach
+            @else
+            
+                <p class="noDt">No data available</p>
+        
+            @endif
+
                 
             </div>
         </div>
