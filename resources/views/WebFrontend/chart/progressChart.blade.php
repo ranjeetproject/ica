@@ -127,12 +127,14 @@
                             display: true,
                             text: 'Percentage of Marks',
                             color: '#072f60',
+                            // position: 'relative',
+                            // left: '-20px',
                             font: {
-                                size: 18,
+                                size: 15,
                                 style: 'normal',
                                 lineHeight: 1.2
                             },
-                            padding: {top: 30, left: 0, right: 0, bottom: 0}
+                            padding: {top: 0, left: 0, right: 30, bottom: 0},
                         }
                     }
                 }
@@ -191,7 +193,7 @@
                         text: 'Last 10 Compeatation Progress',
                         color: '#072F60',
                         font: {
-                            size: 25,
+                            size: 20,
                             weight: 'normal'                       
                         },
                     }
@@ -218,11 +220,11 @@
                             text: 'Percentage of Marks',
                             color: '#072f60',
                             font: {
-                                size: 18,
+                                size: 15,
                                 style: 'normal',
                                 lineHeight: 1.2
                             },
-                            padding: {top: 30, left: 0, right: 0, bottom: 0}
+                            padding: {top: 0, left: 0, right: 30, bottom: 0}
                         }
                     }
                 }
@@ -330,7 +332,7 @@
                         text: 'Course Progress',
                         color: '#072F60',
                         font: {
-                            size: 25,
+                            size: 20,
                             weight: 'normal'                       
                         },
                     }
@@ -356,12 +358,14 @@
                             display: true,
                             text: 'Percentage of Marks',
                             color: '#072f60',
+                            position: 'relative',
+                            left: '-20px',
                             font: {
-                                size: 18,
+                                size: 15,
                                 style: 'normal',
                                 lineHeight: 1.2
                             },
-                            padding: {top: 30, left: 0, right: 0, bottom: 0}
+                            padding: {top: 0, left: 0, right: 30, bottom: 0}
                         }
                     }
                 }
