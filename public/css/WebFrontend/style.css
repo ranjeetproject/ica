@@ -4261,7 +4261,7 @@ li.selected .qaFormbg {
 }
 
 
- embed {
+ /* embed {
     width: 100% !important;
     height: 100% !important;
     position: relative;
@@ -4269,7 +4269,7 @@ li.selected .qaFormbg {
     display: block;
     overflow: hidden;
     resize: none;
-}
+} */
 
 .disableSave {
     -webkit-user-select:none;
