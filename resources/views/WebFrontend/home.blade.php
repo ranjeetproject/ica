@@ -321,9 +321,9 @@
                 </div>
             </div> -->
         </div>
-        <div class="view-all-course">
+        {{-- <div class="view-all-course">
             <a href="#" class="btn common-button">View All</a>
-        </div>
+        </div> --}}
     </div>
 </section>
 
