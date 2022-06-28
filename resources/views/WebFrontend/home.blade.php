@@ -96,7 +96,7 @@
                 <h2 class="course-head"> {{$homePageCourseHeader->title}}</h2>
             </div>
             <div class="col-md-7">
-                <p class="corse-hints">{{strip_tags($homePageCourseHeader->content)}}</p>
+                <p class="corse-hints">{!!$homePageCourseHeader->content!!}</p>
             </div>
         </div>
         <div class="home-courses">
