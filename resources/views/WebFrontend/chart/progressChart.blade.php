@@ -190,7 +190,7 @@
                     },
                     title: {
                         display: true,
-                        text: 'Last 10 Compeatation Progress',
+                        text: 'Last 10 Competition Progress',
                         color: '#072F60',
                         font: {
                             size: 20,
@@ -329,7 +329,7 @@
                     },
                     title: {
                         display: true,
-                        text: 'Course Progress',
+                        text: 'Courses Progress',
                         color: '#072F60',
                         font: {
                             size: 20,
@@ -342,7 +342,7 @@
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Cources',
+                            text: 'Courses',
                             color: '#072f60',
                             font: {
                                 size: 18,

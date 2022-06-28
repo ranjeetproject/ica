@@ -24,7 +24,8 @@ class HomePageController extends Controller
             return redirect()->action('WebFrontend\DashboardController@dashboardPageDisplay');
         }
         else{
-            $course = Course::with('user')->whereHas('user')->with('lessons')->where('entry_from', 'NEW')->orderBy('created_at', 'DESC')->limit(12)->get();
+            //$course = Course::with('user')->whereHas('user')->with('lessons')->where('entry_from', 'NEW')->orderBy('created_at', 'DESC')->limit(12)->get();
+            $course = Course::with('user')->whereHas('user')->with('lessons')->where('entry_from', 'NEW')->whereIn('id', [24,495,563,701,474,707,566,569,684])->orderBy('created_at', 'DESC')->get();
             $data = [];
             foreach ($course as $value)
             {

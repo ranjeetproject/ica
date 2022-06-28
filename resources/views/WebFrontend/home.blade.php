@@ -101,6 +101,7 @@
         </div>
         <div class="home-courses">
             @foreach($courses as $value)
+            <a class="nav-link" href="{{route('all-courses')}}">
             <div class="course-card">
                 @if($value->course_photo == null)
                 <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
@@ -138,6 +139,7 @@
                     </div>
                 </div>
             </div>
+            </a>
             @endforeach
         </div>
         <div class="view-all-course">

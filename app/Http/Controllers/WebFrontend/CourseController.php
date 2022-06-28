@@ -68,13 +68,19 @@ class CourseController extends Controller
 
     public function allCourses(Request $request)
     {	
-        $data = []; 
-        $data = Course::with('user')->whereHas('user')->with('lessons')->where('entry_from', 'NEW')->orderBy('created_at', 'DESC')->paginate(8);
-        if($request->ajax()){
-            $view = view('WebFrontend.all_courses_pagination',compact('data'))->render();
-            return response()->json(['html' => $view]);
+        if(Auth::check())
+        {
+            $data = []; 
+            $data = Course::with('user')->whereHas('user')->with('lessons')->where('entry_from', 'NEW')->orderBy('created_at', 'DESC')->paginate(8);
+            if($request->ajax()){
+                $view = view('WebFrontend.all_courses_pagination',compact('data'))->render();
+                return response()->json(['html' => $view]);
+            }
+            return view('WebFrontend.all_courses',compact('data'));
+        }else{
+            return redirect()->action('WebFrontend\DashboardController@dashboardPageDisplay');
         }
-        return view('WebFrontend.all_courses',compact('data'));
+        
     }
 
     public function chapterLessionDisplay(Request $request, $courseId, $chapterId)
