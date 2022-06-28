@@ -49,9 +49,11 @@
                         </div>
                         <div class="mb-3">
                             <input type="number" class="form-control" placeholder="Mobile Number" id="mobile" name="mobile" value="{{ old('mobile') }}">
-                            @if ($errors->has('mobile'))
+                            <span class="form-text text-danger"
+                                                      id="error_mobile">{{ $errors->getBag('default')->first('mobile') }}</span>
+                            {{-- @if ($errors->has('mobile'))
                                 <span class="text-danger">{{ $errors->first('mobile') }}</span>
-                            @endif
+                            @endif --}}
                         </div>
                         <div class="mb-3">
                             <input type="text" class="form-control" placeholder="Address" id="address" name="address" value="{{ old('address') }}">
@@ -79,7 +81,7 @@
                                 <span class="text-danger">{{ $errors->first('pincode') }}</span>
                             @endif
                         </div>
-                        <button type="submit" class="btn signup">Procceed</button>
+                        <button type="submit" class="btn signup">Proceed</button>
                     </form>
 
                     <p class="already-account">Already have an account? <a href="{{route('login')}}"> LOGIN</a></p>
@@ -105,6 +107,8 @@
                 },
                 mobile: {
                     required: true,
+                    minlength:10,
+                    maxlength:10,
                     remote: '{{route("checkMobileIsPresentOrNot")}}'
                 },
                 address: {
@@ -117,7 +121,9 @@
                     required: true
                 },
                 pincode: {
-                    required: true
+                    required: true,
+                     minlength:6,
+                    maxlength:6,
                 }
 
             },
@@ -132,7 +138,9 @@
                 },
                 mobile: {
                     required: "Mobile No field is required",
-                    remote: "Mobile No is already registered with us"
+                    remote: "Mobile No is already registered with us",
+                    maxlength: "Please enter mobile number at least 10 digits.",
+                    minlength:"Please enter mobile number at least 10 digits."
                 },
                 address: {
                     required: "Address field is required"
@@ -144,7 +152,9 @@
                     required: "City field is required"
                 },
                 pincode: {
-                    required: "Pincode is required"
+                    required: "Pincode is required",
+                    maxlength: "Please enter pincode  at least 6 digits.",
+                    minlength:"Please enter pincode  at least 6 digits."
                 }
             },
             errorElement: "span",

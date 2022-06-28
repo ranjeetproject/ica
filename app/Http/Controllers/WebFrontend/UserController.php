@@ -38,12 +38,13 @@ class UserController extends Controller
             'state' => 'required',
             'city' => 'required',
             'pincode' => 'required|integer',
-            'mobile' => 'required|unique:students'
+            'mobile' => 'required|digits:10|unique:students'
         ], [
             'name.required' => 'Name is required',
             'address' => 'Address is required',
             'pincode.integer' => 'Pin Code should be a number',
-            'mobile' => 'Mobile No is required'
+            'mobile' => 'Mobile No is required',
+            'mobile' => 'Mobile No is max 10 digit'
         ]);
         $otp = rand(100000, 999999);
         $studentRegistration = Student::create([
