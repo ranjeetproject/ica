@@ -34,7 +34,7 @@
                         
                         @if($capterValue->details_img!=null)
                           @if($capterValue->extention==='pdf')
-                            <embed oncontextmenu="return false"; src="{{$capterValue->details_img}}#toolbar=0" type="application/pdf" frameBorder="0" scrolling="auto" width="100%" />
+                            <embed src="{{$capterValue->details_img}}#toolbar=0" type="application/pdf" frameBorder="0" scrolling="auto" width="100%" />
                           @else
                             <img src="{{$capterValue->details_img}}" alt="" />
                           @endif                         
