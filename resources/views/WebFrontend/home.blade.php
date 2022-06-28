@@ -95,7 +95,7 @@
                 <p class="courses-tag">Courses </p>
                 <h2 class="course-head"> {{$homePageCourseHeader->title}}</h2>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7 textmidf">
                 <p class="corse-hints">{!!$homePageCourseHeader->content!!}</p>
             </div>
         </div>
