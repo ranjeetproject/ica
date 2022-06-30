@@ -225,7 +225,7 @@
                                     {
                                         Swal.fire(
                                             'Oops!',
-                                            'If you want to answer this question, please click one of the radio, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'Click on at least one answer to proceed to the next question, or else click on Skip button',
                                             'info'
                                         );
                                         return event.preventDefault();
@@ -273,7 +273,7 @@
                                     if(!check){
                                         Swal.fire(
                                             'Oops!',
-                                            'If you want to answer this question, please select the checkbox first, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'Click on at least one answer to proceed to the next question, or else click on Skip button',
                                             'info'
                                         );
                                         return event.preventDefault();
@@ -322,7 +322,7 @@
                                     if(!check){
                                         Swal.fire(
                                             'Oops!',
-                                            'If you want to answer this question, please select the checkbox first, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'Click on at least one answer to proceed to the next question, or else click on Skip button',
                                             'info'
                                         );
                                         return event.preventDefault();
@@ -440,7 +440,7 @@
                                     if(!check){
                                         Swal.fire(
                                             'Oops!',
-                                            'If you want to answer this question, please select the value first, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'Click on at least one answer to proceed to the next question, or else click on Skip button',
                                             'info'
                                         );
                                         return event.preventDefault();
@@ -578,7 +578,7 @@
                                     {
                                         Swal.fire(
                                             'Oops!',
-                                            'If you want to answer this question, please select the value first, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'Click on at least one answer to proceed to the next question, or else click on Skip button',
                                             'info'
                                         );
                                         return event.preventDefault();
@@ -629,7 +629,7 @@
                                     if(!check){
                                         Swal.fire(
                                             'Oops!',
-                                            'If you want to answer this question, please select the value first, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'Click on at least one answer to proceed to the next question, or else click on Skip button',
                                             'info'
                                         );
                                         return event.preventDefault();
@@ -678,7 +678,7 @@
                                     if(!check){
                                         Swal.fire(
                                             'Oops!',
-                                            'If you want to answer this question, please select the value first, after that you can click Save Button. Otherwise you can click Skip Button',
+                                            'Click on at least one answer to proceed to the next question, or else click on Skip button',
                                             'info'
                                         );
                                         return event.preventDefault();
@@ -740,7 +740,7 @@
                                 {
                                     Swal.fire(
                                         'Oops!',
-                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'Please answer Question No.:'+questionNumber+' and then click on Save & Next button.',
                                         'info'
                                     );
                                     return event.preventDefault();
@@ -762,7 +762,7 @@
                                 if(!check){
                                     Swal.fire(
                                         'Oops!',
-                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'Please answer Question No.:'+questionNumber+' and then click on Save & Next button.',
                                         'info'
                                     );
                                     return event.preventDefault();
@@ -783,7 +783,7 @@
                                 if(!check){
                                     Swal.fire(
                                         'Oops!',
-                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'Please answer Question No.:'+questionNumber+' and then click on Save & Next button.',
                                         'info'
                                     );
                                     return event.preventDefault();
@@ -823,7 +823,7 @@
                                 {
                                     Swal.fire(
                                         'Oops!',
-                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'Please answer Question No.:'+questionNumber+' and then click on Save & Next button.',
                                         'info'
                                     );     
                                     return event.preventDefault();                                        
@@ -846,7 +846,7 @@
                                 if(!check){
                                     Swal.fire(
                                         'Oops!',
-                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'Please answer Question No.:'+questionNumber+' and then click on Save & Next button.',
                                         'info'
                                     );
                                     return event.preventDefault();
@@ -957,7 +957,7 @@
                                 {
                                     Swal.fire(
                                         'Oops!',
-                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'Please answer Question No.:'+questionNumber+' and then click on Save & Next button.',
                                         'info'
                                     );
                                     return event.preventDefault();
@@ -980,7 +980,7 @@
                                 if(!check){
                                     Swal.fire(
                                         'Oops!',
-                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'Please answer Question No.:'+questionNumber+' and then click on Save & Next button.',
                                         'info'
                                     );
                                     return event.preventDefault();
@@ -1001,7 +1001,7 @@
                                 if(!check){
                                     Swal.fire(
                                         'Oops!',
-                                        'Please fill the value Question Number :'+questionNumber+' after that you can click Save Button.',
+                                        'Please answer Question No.:'+questionNumber+' and then click on Save & Next button.',
                                         'info'
                                     );
                                     return event.preventDefault();

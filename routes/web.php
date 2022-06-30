@@ -103,7 +103,8 @@ Route::middleware(['auth'])->group(function ()
 
     Route::get('chapter-wise-progress','WebFrontend\ChartController@chapterWiseProgressList');
     Route::get('chapter-wise-progress-chart/{courseId}','WebFrontend\ChartController@chaptereWiseProgressChart');
-
+    
+    Route::get('view-all-my-courses', 'WebFrontend\CourseController@viewAllMyCourses')->name('view-all-my-courses');
 
     Route::get('logout', 'WebFrontend\UserController@logout');
     Route::post('exam-submit','WebFrontend\ExamController@examSubmit');

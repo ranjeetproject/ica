@@ -165,7 +165,7 @@ class ChartController extends Controller
                         
                         $ans_data1['id'] = $chapter->id;
                         $ans_data1['course'] = $course->course;
-                        $ans_data1['course_name'] = $coursedet->course_name;
+                        $ans_data1['course_name'] = (isset($coursedet->course_name))?$coursedet->course_name:"";
                         $ans_data1['chapter_name'] = $chapter->chapter_name;
                         $ans_data1['count'] = $chapter_count;
                         $ans_data1['read_count'] = $chapter_read_status_count;
@@ -188,7 +188,7 @@ class ChartController extends Controller
                             $result3_det['id'] = $exam->id;
                             $result3_det['exam_name'] = $exam->exam_name;
                             $result3_det['course'] = $course->course;
-                            $result3_det['course_name'] = $coursedet->course_name;
+                            $result3_det['course_name'] = (isset($coursedet->course_name))?$coursedet->course_name:"";
                             $result3_det['chapter'] = $chapter->id;
                             $result3_det['chapter_name'] = $chapter->chapter_name;
                             
@@ -245,7 +245,7 @@ class ChartController extends Controller
            
             
             $result2_det['course_id'] = $course->course;
-            $result2_det['course_name'] = $coursedet->course_name;
+            $result2_det['course_name'] = (isset($coursedet->course_name))?$coursedet->course_name:"";
             $result2_det['per_read'] = ceil($cper_read);
             $result2_det['per_assess'] = ceil($cper_asses);
             $result2_det['per_tot'] = ceil($cper_tot);            

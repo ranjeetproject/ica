@@ -247,7 +247,18 @@ class CourseController extends Controller
         return view('WebFrontend.academicDetail.detail',$data);
     }
 
-
+    public function viewAllMyCourses()
+    {
+        $data = [];
+        $data = Course::join('std_courses','std_courses.course','=','courses.id')
+        ->where('courses.entry_from','NEW')
+        ->where('std_courses.student', Auth::user()->id)
+        ->groupBy('courses.id')
+        ->get();
+            
+       
+        return view('WebFrontend.view-all-courses',compact('data'));
+    }
 
 
 
