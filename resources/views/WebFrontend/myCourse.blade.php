@@ -18,7 +18,11 @@
     </section>
     <section class="couses-wrap">
         <div class="container">
-            <a href="{{route('view-all-my-courses')}}" class="btn view-all">View all Courses</a>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{route('view-all-my-courses')}}" class="btn view-all" style="float:right;margin-bottom:20px;color:white">View All Courses</a>
+                </div>
+            </div>
             <div class="row" id="course-data">                
             </div>
             
