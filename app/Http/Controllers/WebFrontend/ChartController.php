@@ -136,6 +136,7 @@ class ChartController extends Controller
         $return=[];
         // return view('WebFrontend.chart.courseProgress',$return);
         $studentCourse = StdCourse::where('student', $studentId)->get();
+       // return $studentCourse;
         $result1 = [];
         $result2 = [];
         $result3 = [];
@@ -164,7 +165,7 @@ class ChartController extends Controller
                         
                         $ans_data1['id'] = $chapter->id;
                         $ans_data1['course'] = $course->course;
-                        $ans_data1['course_name'] = $coursedet->course_name;
+                        $ans_data1['course_name'] = (isset($coursedet->course_name))?$coursedet->course_name:"";
                         $ans_data1['chapter_name'] = $chapter->chapter_name;
                         $ans_data1['count'] = $chapter_count;
                         $ans_data1['read_count'] = $chapter_read_status_count;
@@ -187,7 +188,7 @@ class ChartController extends Controller
                             $result3_det['id'] = $exam->id;
                             $result3_det['exam_name'] = $exam->exam_name;
                             $result3_det['course'] = $course->course;
-                            $result3_det['course_name'] = $coursedet->course_name;
+                            $result3_det['course_name'] = (isset($coursedet->course_name))?$coursedet->course_name:"";
                             $result3_det['chapter'] = $chapter->id;
                             $result3_det['chapter_name'] = $chapter->chapter_name;
                             
@@ -244,7 +245,7 @@ class ChartController extends Controller
            
             
             $result2_det['course_id'] = $course->course;
-            $result2_det['course_name'] = $coursedet->course_name;
+            $result2_det['course_name'] = (isset($coursedet->course_name))?$coursedet->course_name:"";
             $result2_det['per_read'] = ceil($cper_read);
             $result2_det['per_assess'] = ceil($cper_asses);
             $result2_det['per_tot'] = ceil($cper_tot);            
@@ -314,4 +315,140 @@ class ChartController extends Controller
         $return['coursesProgress'] = $courseProgressArray;        
         return view('WebFrontend.chart.courseProgress',$return);
     }
+    public function chapterWiseProgressList()
+    {
+        $courses = Course::join('std_courses','std_courses.course','=','courses.id')
+        ->where('courses.entry_from','NEW')
+        ->where('std_courses.student', Auth::user()->id)
+        ->groupBy('courses.id')
+        ->get();
+
+        return view('WebFrontend.chapterWiseProgressChart.courseWiseProgressList',compact('courses'));
+    }
+    public function chaptereWiseProgressChart($courseId)
+    {
+        $data=$this->chapterWiseProgress($courseId);
+        //return $data;
+        return view('WebFrontend.chapterWiseProgressChart.chapterWiseProgressChart',$data);
+    }
+
+    public function chapterWiseProgress($courseId)
+    {
+        $student_course = StdCourse::where('student', Auth::user()->id)
+        ->where('course', $courseId)
+        ->get();
+        
+        $result1 = [];
+        $m = 0;
+        foreach ($student_course as $course) {
+            $subjects = Subject::where('course_id', $course->course)->get();
+            foreach ($subjects as $subject) {
+                $chapters = Chapter::where('subject_id', $subject->id)->where('status', "1")->get();
+                foreach( $chapters as $chapter ) {
+                    $ans_data1 = [];
+                    $chapters = Chapter::where('subject_id', $subject->id)->where('status', "1")->get();
+                    $chapter_count =  ChapterDetail::where('chapter', $chapter->id)->get()->count();
+                    $chapter_read_status_count =  StudentChapterRead::where('chapter', $chapter->id)->where('student_id', Auth::user()->id)->where('read_status', 1)->count();
+                    if ($chapter_count != 0) {
+                        $ans_data1['id'] = $chapter->id;
+                        $ans_data1['chapter_name'] = $chapter->chapter_name;
+                        $ans_data1['count'] = $chapter_count;
+                        $ans_data1['read_count'] = $chapter_read_status_count;
+                        $percent = ($chapter_read_status_count * 100 / $chapter_count);
+                        $ans_data1['percentge_read']= $percent;
+                        $total_percent = $percent;
+                        
+                        $exams = Exam::where('chapter', $chapter->id)->get();
+                        $obtain_marks = 0;
+                        $full_marks = 0;
+                        foreach( $exams as $exam ) {
+                            $student_exam = StudentExam::where('student_id', Auth::user()->id)->where('exam_id', $exam->id)->where('exam_for', '3')->get();
+                            foreach ($student_exam as $value) {
+                                $obtain_marks += $value->obtain_marks;
+                                $full_marks += $value->full_marks;
+                            }
+                        }
+                        
+                        $assess_percent = 0;
+                        if ($full_marks != 0) {
+                            $assess_percent = ($obtain_marks * 100 / $full_marks);
+                            $total_percent = ($percent + $assess_percent) / 2;
+                        }
+                        $ans_data1['percentge_assessment']= $assess_percent;
+                        $ans_data1['percentge_total']= $total_percent;
+                        
+                        array_push($result1, $ans_data1);
+                        $m++;
+                        if ($m==10) 
+                            break;
+                    }
+                }
+            }
+        }
+       // return $result1;
+       $chapterName=[];
+       $readPercentage=[];
+       $assignmentPercentage=[];
+       $chapterBackgroundColor=[];
+       $assignmentBackgroundColor=[];
+       foreach($result1 as $chapterData)
+       {
+            $chapterName[]=$chapterData['chapter_name'];
+            $readPercentage[]=$chapterData['percentge_read'];
+            $assignmentPercentage[]=$chapterData['percentge_assessment'];
+            if($chapterData['percentge_read']<21)
+            {
+                $chapterBackgroundColor[]='#fe0000';
+            }
+            elseif($chapterData['percentge_read']>20 && $chapterData['percentge_read']<41)
+            {
+                $chapterBackgroundColor[]='#fda501';              
+            }
+            elseif($chapterData['percentge_read']>40 && $chapterData['percentge_read']<61)
+            {
+                $chapterBackgroundColor[]='#fefd07';
+            }
+            elseif($chapterData['percentge_read']>60 && $chapterData['percentge_read']<81)
+            {
+                $chapterBackgroundColor[]='#04fc03';
+            }
+            elseif($chapterData['percentge_read']>80)
+            {
+                $chapterBackgroundColor[]='#00584c';
+            }
+
+
+
+            if($chapterData['percentge_assessment']<21)
+            {
+                $assignmentBackgroundColor[]='#fe0000';
+            }
+            elseif($chapterData['percentge_assessment']>20 && $chapterData['percentge_assessment']<41)
+            {
+                $assignmentBackgroundColor[]='#fda501';
+            }
+            elseif($chapterData['percentge_assessment']>40 && $chapterData['percentge_assessment']<61)
+            {
+                $assignmentBackgroundColor[]='#fefd07';
+            }
+            elseif($chapterData['percentge_assessment']>60 && $chapterData['percentge_assessment']<81)
+            {
+                $assignmentBackgroundColor[]='#04fc03';
+            }
+            elseif($chapterData['percentge_assessment']>80)
+            {
+                $assignmentBackgroundColor[]='#00584c';
+            }
+        }
+        $courseName = Course::find($courseId)->course_name;
+        $chapterProgressArray['courseName']=$courseName;
+        $chapterProgressArray['chapterName']=implode(',',$chapterName);
+        $chapterProgressArray['readPercentageArray']=implode(',',$readPercentage);
+        $chapterProgressArray['assessmentPercentageArray']=implode(',',$assignmentPercentage);
+        $chapterProgressArray['chapterBackgroundColor']=implode(',',$chapterBackgroundColor);
+        $chapterProgressArray['assignmentBackgroundColor']=implode(',',$assignmentBackgroundColor);
+        $return['chapterProgress'] = $chapterProgressArray;     
+        
+        return $return;
+    } 
 }

@@ -10,18 +10,17 @@
 
 </section>
 <!-- end header -->
-<section class="banner-wrp inner-banner" style="background: url('https://demos.mydevfactory.com/android/public/cms_images/5af933a1227e4e6f1194f5927e0680c1.jpg') no-repeat top right;
+<section class="banner-wrp inner-banner" style="background: url('{{$course->banner_image}}') no-repeat top right;
 ">
 
 
     <img src="{{asset('css/images/dot-group-top.png')}}" class="img-fluid top_icon" alt="#">
     <div class="ban-content">
         <h1 class="cont-head">
-            Over <span>Course details</span> dolores
-            eos qui ratione volupta temdolored eod...
+            {{$course->banner_title}}
         </h1>
         <p class="cont-para">
-            Iste Natus Error sit Voluptatem Accusantium....
+            {{$course->banner_description}}
         </p>
         <div class="but-wrap">
             <img src="{{asset('css/images/dot-group.png')}}" class="img-fluid bottom_icon" alt="#">

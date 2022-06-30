@@ -13,12 +13,30 @@
 
 <section class="exam-list-wr">
     <div class="container">
-        <div class="innertitle ">
+        {{-- <div class="innertitle ">
             <h3 class="e-title">
                 <span class="blue-bar addbar"></span>
                 Your Result
                 <span class="blue-bar"></span>
             </h3>
+        </div> --}}
+        <div class="innertitle ">
+            <h3 class="e-title">
+                <span class="blue-bar addbar"></span>
+                Your Achievement
+                <span class="blue-bar"></span>
+            </h3>
+        </div>
+        <div class="rank_pic_view">
+            @if($studentExam->rank == 1)
+                <img src="{{ asset('css/images/rankpic1.png')}}" alt="">
+            @elseif($studentExam->rank == 2)
+                <img src="{{ asset('css/images/rankpic2.jpg')}}" alt="">
+            @elseif($studentExam->rank == 3)
+                <img src="{{ asset('css/images/rankpic3.jpg')}}" alt="">
+            @else
+                <img src="{{ asset('css/images/rankpic4.png')}}" alt="">
+            @endif
         </div>
         <div class="inner_content_info">
             <div class="inner_content_view">

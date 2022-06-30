@@ -27,7 +27,7 @@
                                     <div class="rankdetails">
                                         <p class="rankopt">Rank : {{$rank['rank']}}</p>
                                         <p>Marks (%) : {{$rank['marks_percent']}}</p>
-                                        <p>Time Taken: {{date('H:i', mktime(0,$rank['time_taken']))}}</p>
+                                        <p>Time Taken: {{date('H:i:s', mktime(0,$rank['time_taken']))}}</p>
                                         <p>Date: {{$rank['date_time']}}</p>
                                     </div>
                                 

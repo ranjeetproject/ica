@@ -95,12 +95,13 @@
                 <p class="courses-tag">Courses </p>
                 <h2 class="course-head"> {{$homePageCourseHeader->title}}</h2>
             </div>
-            <div class="col-md-7">
-                <p class="corse-hints">{{strip_tags($homePageCourseHeader->content)}}</p>
+            <div class="col-md-7 textmidf">
+                <p class="corse-hints">{!!$homePageCourseHeader->content!!}</p>
             </div>
         </div>
         <div class="home-courses">
             @foreach($courses as $value)
+            <a class="nav-link" href="{{route('all-courses')}}">
             <div class="course-card">
                 @if($value->course_photo == null)
                 <img src="{{asset('css/images/course-image.jpg')}}" class="course-image" alt="#" />
@@ -138,6 +139,7 @@
                     </div>
                 </div>
             </div>
+            </a>
             @endforeach
         </div>
         <div class="view-all-course">
@@ -321,9 +323,9 @@
                 </div>
             </div> -->
         </div>
-        <div class="view-all-course">
+        {{-- <div class="view-all-course">
             <a href="#" class="btn common-button">View All</a>
-        </div>
+        </div> --}}
     </div>
 </section>
 

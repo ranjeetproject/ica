@@ -35,6 +35,9 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="{{action('WebFrontend\DashboardController@profilePage')}}">Profile</a></li>
                         <li><a class="dropdown-item" href="{{action('WebFrontend\ChartController@viewProgressChart')}}">Progress Report Card</a></li>
+                        <li><a class="dropdown-item" href="{{action('WebFrontend\ChartController@allCourseProgress',['studentId'=>Auth::user()->id])}}">Course Progress</a></li>
+                        <li><a class="dropdown-item" href="{{action('WebFrontend\ChartController@chapterWiseProgressList')}}">Chapter Wise Progress</a></li>
+                        <li><a class="dropdown-item" href="{{action('WebFrontend\CourseController@academicDetailsFetch')}}">Academic Details</a></li>
                         <li><a class="dropdown-item" href="{{action('WebFrontend\RankHistoryController@rankHistoryList')}}">Rank History</a></li>
                         <li><a class="dropdown-item" href="{{action('WebFrontend\UserController@logout')}}">Logout</a></li>
                     </ul>

@@ -18,8 +18,10 @@
     </section>
     <section class="couses-wrap">
         <div class="container">
+            <a href="{{route('view-all-my-courses')}}" class="btn view-all">View all Courses</a>
             <div class="row" id="course-data">                
             </div>
+            
             <div class="col-md-12">
                 <div class="load-more" style="display:none">
                     <img src="{{ asset('css/images/loadmore-icon.png') }}" class="img-fluid" />

@@ -19,11 +19,10 @@
         <img src="{{asset('css/images/dot-group-top.png')}}" class="img-fluid top_icon" alt="#">
         <div class="ban-content">
             <h1 class="cont-head">
-                Over <span>Contact Us</span> dolores
-                eos qui ratione volupta temdolored eod...
+                We are always <span>happy to Help !!!</span> Get in touch with us today......
             </h1>
             <p class="cont-para">
-                Iste Natus Error sit Voluptatem Accusantium....
+                Ready to assist you anytime, anywhere.
             </p>
             <div class="but-wrap">
                 <img src="{{asset('css/images/dot-group.png')}}" class="img-fluid bottom_icon" alt="#">

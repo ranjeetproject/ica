@@ -106,7 +106,7 @@ class DashboardController extends Controller
                 $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
                 if ($question > 0) 
                 {     
-                    if($i<=3)
+                    if($i<=5)
                     {
                         $exams[] = $value_ex;
                     }

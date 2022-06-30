@@ -68,13 +68,19 @@ class CourseController extends Controller
 
     public function allCourses(Request $request)
     {	
-        $data = []; 
-        $data = Course::with('user')->whereHas('user')->with('lessons')->where('entry_from', 'NEW')->orderBy('created_at', 'DESC')->paginate(8);
-        if($request->ajax()){
-            $view = view('WebFrontend.all_courses_pagination',compact('data'))->render();
-            return response()->json(['html' => $view]);
+        if(Auth::check())
+        {
+            $data = []; 
+            $data = Course::with('user')->whereHas('user')->with('lessons')->where('entry_from', 'NEW')->orderBy('created_at', 'DESC')->paginate(8);
+            if($request->ajax()){
+                $view = view('WebFrontend.all_courses_pagination',compact('data'))->render();
+                return response()->json(['html' => $view]);
+            }
+            return view('WebFrontend.all_courses',compact('data'));
+        }else{
+            return redirect()->action('WebFrontend\DashboardController@dashboardPageDisplay');
         }
-        return view('WebFrontend.all_courses',compact('data'));
+        
     }
 
     public function chapterLessionDisplay(Request $request, $courseId, $chapterId)
@@ -241,7 +247,18 @@ class CourseController extends Controller
         return view('WebFrontend.academicDetail.detail',$data);
     }
 
-
+    public function viewAllMyCourses()
+    {
+        $data = [];
+        $data = Course::join('std_courses','std_courses.course','=','courses.id')
+        ->where('courses.entry_from','NEW')
+        ->where('std_courses.student', Auth::user()->id)
+        ->groupBy('courses.id')
+        ->get();
+            
+       
+        return view('WebFrontend.view-all-courses',compact('data'));
+    }
 
 
 

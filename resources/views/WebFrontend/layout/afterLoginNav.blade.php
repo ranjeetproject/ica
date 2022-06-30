@@ -20,9 +20,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ (request()->segment(1) == 'competitive-exam') ? 'active' : '' }}" href="{{action('WebFrontend\ExamController@competitiveExam')}}">Competitive</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="{{action('WebFrontend\CourseController@academicDetailsFetch')}}">Acedemic Details</a>
-                </li>
+                </li> --}}
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="{{action('WebFrontend\RankHistoryController@rankHistoryList')}}">My Rank</a>
                 </li> --}}
