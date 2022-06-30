@@ -16,7 +16,7 @@
                 Course Progress
                 <span class="blue-bar"></span>
             </h3>
-            <div class="pgcBtm">
+            <div class="">
                 <canvas id="courseProgress"></canvas>
             </div> 
         </div>
