@@ -722,6 +722,267 @@
                     {
                         $(".carousel-item").each(function()
                         {
+                            if ($(this).hasClass("active"))
+                            {
+                                var questionType = $(this).children(".questionType").val();
+                                if (questionType === 'radio')
+                                {
+                                    var curInputs = $(this).find("input[type='radio']");
+                                    var check = true;
+                                    for (var i = 0; i < curInputs.length; i++)
+                                    {
+                                        var name = curInputs[i].name;
+                                        if($("input:radio[name="+name+"]:checked").length == 0){
+                                            check = false;
+                                        }
+                                    }
+
+                                    if(check)
+                                    {
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+                                    }
+                                }
+                                if (questionType === 'check')
+                                {
+                                    var curInputs = $(this).find("input[type='checkbox']");
+                                    var check = false;
+                                    for (var i = 0; i < curInputs.length; i++)
+                                    {
+                                        var name = curInputs[i].name;
+                                        if (curInputs[i].checked)
+                                        {
+                                            check = true;
+                                        }
+                                    }
+
+                                    if(check){
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+                                    }
+                                }
+                                if (questionType === 'accounting1')
+                                {
+                                    var curInputs = $(this).find("input[type='radio']");
+                                    var check = true;
+                                    for (var i = 0; i < curInputs.length; i++)
+                                    {
+                                        var name = curInputs[i].name;
+                                        if($("input:radio[name="+name+"]:checked").length == 0){
+                                            check = false;
+                                        }
+                                    }
+
+                                    if(check){
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+                                    }
+
+                                }
+                                if (questionType === 'accounting2')
+                                {
+                                    var curInputs = $(this).find("input[type='number'],input[type='radio'],select");
+                                    var check = true;
+                                    for (var i = 0; i < curInputs.length; i++)
+                                    {
+                                        var type = curInputs[i].type;
+                                        var name = curInputs[i].name;
+                                        var id = curInputs[i].id;
+
+                                        var curInputNammeArray = id.split("_");
+                                        var questionId=curInputNammeArray[1];
+
+                                        if(type != 'radio')
+                                        {
+                                            if($('#'+id).val()=='')
+                                            {
+                                                check = false;
+                                            }
+                                        }
+                                        if(type == 'radio')
+                                        {
+                                            if($("input:radio[name="+name+"]:checked").length == 0)
+                                            {
+                                                check = false;
+                                            }
+                                        }
+
+                                    }
+
+                                    if($("#accounting2credit_"+questionId).val()!=0 && $("#accounting2Debit_"+questionId).val()!=0 && ($("#accounting2credit_"+questionId).val() == $("#accounting2Debit_"+questionId).val()))
+                                    {
+
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');                                       
+                                    }
+                                }
+                                if (questionType === 'accounting3')
+                                {
+                                    var curInputs = $(this).find("select");
+                                    var check = true;
+                                    for (var i = 0; i < curInputs.length; i++)
+                                    {
+                                        var name = curInputs[i].name;
+                                        var id = curInputs[i].id;
+                                        if($('#'+id).val()=='')
+                                        {
+                                            check = false;
+                                        }
+                                    }
+
+                                    if(check){
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+                                    }
+                                }
+                                if (questionType === 'accounting4')
+                                {
+                                    var curInputs = $(this).find("input[type='radio']");
+                                    var check = true;
+                                    for (var i = 0; i < curInputs.length; i++)
+                                    {
+                                        var type = curInputs[i].type;
+                                        var name = curInputs[i].name;
+                                        var id = curInputs[i].id;
+                                        if(type == 'radio')
+                                        {
+                                            if($("input:radio[name="+name+"]:checked").length != 0)
+                                            {
+                                                var radio_check = $("input[name="+name+"]:checked").val();
+                                                var radio_check_value_id = $("input[id="+id+"]:checked").val();
+                                                var account_typr = $("input[name="+name+"]:checked").attr('divType');
+                                                if(account_typr == 'assets' )
+                                                {
+                                                    if(radio_check == '1' && radio_check_value_id == '1')
+                                                    {
+                                                        if($("#"+id+"_Option").find('option:selected').val() == ''){
+                                                            console.log('select');
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            console.log('select 2');
+                                                            check = false;
+                                                        }
+                                                    }
+                                                    if(radio_check == '2' && radio_check_value_id == '2')
+                                                    {
+                                                        console.log('select 3');
+                                                        if($("#"+id+"_Option").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                }
+                                                if(account_typr == 'liabilities' )
+                                                {
+                                                    if(radio_check == '1' && radio_check_value_id == '1')
+                                                    {
+                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                    if(radio_check == '2' && radio_check_value_id == '2')
+                                                    {
+                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                }
+                                                if(account_typr == 'equity' )
+                                                {
+                                                    if(radio_check == '1' && radio_check_value_id == '1')
+                                                    {
+                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                    if(radio_check == '2' && radio_check_value_id == '2')
+                                                    {
+                                                        if($("#"+id+"_Option1").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Option2").find('option:selected').val() == ''){
+                                                            check = false;
+                                                        }
+                                                        if($("#"+id+"_Text").val() == undefined || $("input:text").val() == '') {
+                                                            check = false;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                check = false;
+                                            }
+                                        }
+                                    }
+                                    if(check)
+                                    {
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+                                    }
+                                }
+                                if (questionType === 'accounting5')
+                                {
+                                    var curInputs = $(this).find("select");
+                                    var check = true;
+                                    for (var i = 0; i < curInputs.length; i++)
+                                    {
+                                        //var name = curInputs[i].name;
+                                        var id = curInputs[i].id;
+                                        if($('#'+id).val()=='')
+                                        {
+                                            check = false;
+                                        }
+                                    }
+
+                                    if(check){
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+                                    }
+                                }
+                                if (questionType === 'accounting6')
+                                {
+                                    var curInputs = $(this).find("input[type='radio']");
+                                    var check = true;
+                                    for (var i = 0; i < curInputs.length; i++)
+                                    {
+                                        var name = curInputs[i].name;
+                                        if($("input:radio[name="+name+"]:checked").length == 0){
+                                            check = false;
+                                        }
+                                    }
+
+                                    if(check){
+                                        var sliderNumber = $(this).attr("slide");
+                                        $("#numberIcnButton_"+sliderNumber).addClass('ic2');
+                                    }
+                                }
+                            }                            
+                        });
+
+                        $(".carousel-item").each(function()
+                        {
                             var questionType = $(this).children(".questionType").val();
                             var questionNumber=$(this).attr("slide");
                             if (questionType === 'radio')
@@ -1018,6 +1279,19 @@
             $(".numberIcn").click(function() {
                 var button = $(this).text();
                 $('#exam-count').text(button);
+
+                if(parseInt(questionLimit)===parseInt(button))
+                {                    
+                    $("#formSubmit").show();
+                    $("#skip").hide();
+                    $("#next").hide();
+                }
+                else{                   
+                    $("#formSubmit").hide();
+
+                    $("#skip").show();
+                    $("#next").show();
+                }
             });
         });
     </script>
