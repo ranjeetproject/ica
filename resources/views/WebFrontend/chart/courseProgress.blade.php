@@ -29,14 +29,14 @@
         </div>
             <div class="pgcBtm">
                 <canvas id="courseProgress"></canvas>
-            </div> 
+            </div>
         </div>
     </section>
 @endsection
 @section('customJavascript')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://www.chartjs.org/samples/2.9.4/utils.js"></script>    
-    <script>       
+    <script src="https://www.chartjs.org/samples/2.9.4/utils.js"></script>
+    <script>
         let labels = '{{$coursesProgress['courseName']}}';
         labels=labels.split(',');
         let courseBackground='{{@$coursesProgress['courseBackgroundColor']}}';
@@ -61,8 +61,8 @@
                 }
 
             ]
-        };     
-        
+        };
+
 
         const config = {
             type: 'bar',
@@ -90,7 +90,7 @@
             },
             };
 
-        
+
         const myChart = new Chart(
             document.getElementById('courseProgress'),
             config

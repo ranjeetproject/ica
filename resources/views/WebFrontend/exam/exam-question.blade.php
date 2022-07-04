@@ -754,6 +754,21 @@
             $(".numberIcn").click(function() {
                 var button = $(this).text();
                 $('#exam-count').text(button);
+                if(parseInt(questionLimit)===parseInt(button))
+                {
+                    $("#skipSubmit").show();
+                    $("#formSubmit").show();
+
+                    $("#skip").hide();
+                    $("#next").hide();
+                }
+                else{
+                    $("#skipSubmit").hide();
+                    $("#formSubmit").hide();
+
+                    $("#skip").show();
+                    $("#next").show();
+                }
             });
         });
 
