@@ -18,6 +18,7 @@ use App\Events\ExamAssign;
 use Illuminate\Support\Facades\Mail;
 use Hash;
 use App\Jobs\CoursesSetup;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -222,28 +223,36 @@ class UserController extends Controller
         $input = $request->all();
         $checkStudentOtp = Student::where('code', '=', $input['code'])->where('otp', $input['verify_Otp'])->first();
         if ($checkStudentOtp) {
-            Auth::login($checkStudentOtp);
-            if (Auth::check()) {
-                $student = Student::find($checkStudentOtp->id);
-                if ($student) {
-                    $student->otp = rand(100000, 999999);
-                    $student->save();
+            if ($checkStudentOtp->is_login_web!=1) {
+                Auth::login($checkStudentOtp);
+                if (Auth::check()) {
+                    $student = Student::find($checkStudentOtp->id);
+                    if ($student) {
+                        $student->otp = rand(100000, 999999);
+                        $student->is_login_web = 1;
+                        $student->web_login_ip_address = $_SERVER['REMOTE_ADDR'];
+                        $student->web_login_datetime = Carbon::now();
+                        $student->save();
 
-                    // Log::debug('Start Writing in controller'); 
-                    // CoursesSetup::dispatch();
-                    // Log::debug('End Writing in controller'); 
-                   // event(new CourseAssign());
-                    //event(new ExamAssign());
+                        // Log::debug('Start Writing in controller'); 
+                        // CoursesSetup::dispatch();
+                        // Log::debug('End Writing in controller'); 
+                    // event(new CourseAssign());
+                        //event(new ExamAssign());
+                    }
+                    return redirect()->action('WebFrontend\DashboardController@dashboardPageDisplay',['afterLogin'=>1]);
                 }
-                return redirect()->action('WebFrontend\DashboardController@dashboardPageDisplay',['afterLogin'=>1]);
+            } else {
+                return redirect()->back()->with(['error' => 'Oops! You have already login another device']);
             }
-        } else {
+        }else {
             return redirect()->back()->with(['error' => 'Oops! You have entered invalid code or otp']);
         }
     }
 
     public function logout()
     {
+        $student = Student::Where('id',Auth::user()->id)->update(['is_login_web' => 0,'web_login_ip_address'=>Null,'web_login_datetime'=>Null]);
         Auth::logout();
         return redirect()->action('WebFrontend\UserController@loginForm');
     }
