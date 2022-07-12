@@ -1337,13 +1337,13 @@ class ExamController extends Controller
         else{
             session()->put('assignment_url', url()->previous());
         }
-        $data['examName'] = $exam->exam_name;
-        $data['id'] = $exam->id;
+        $data['examName'] = (@$exam->exam_name!='')?$exam->exam_name:'';
+        $data['id'] = (@$exam->id!='')?$exam->id:'';
         $data['courseId'] = $courseId;
         $data['chapterId'] = $chapterId;
-        $data['duration'] = $exam->duration;
-        if ($exam->question_limit == 0) {
-            $questionLimit = Question::where('exam_id',  $exam->id)->where('state', 1)->orderBy('id', 'ASC')->count(); 
+        $data['duration'] = (@$exam->duration!='')?$exam->duration:'';
+        if (@$exam->question_limit == 0) {
+            $questionLimit = Question::where('exam_id',  (@$exam->id!='')?$exam->id:'')->where('state', 1)->orderBy('id', 'ASC')->count(); 
             $data['questionLimit'] = $questionLimit;
         }
         else{
