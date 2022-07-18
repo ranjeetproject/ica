@@ -253,8 +253,13 @@ class UserController extends Controller
     public function logout()
     {
         $student = Student::Where('id',Auth::user()->id)->update(['is_login_web' => 0,'web_login_ip_address'=>Null,'web_login_datetime'=>Null]);
-        Auth::logout();
-        return redirect()->action('WebFrontend\UserController@loginForm');
+        if($student){
+            Auth::logout();
+            return redirect()->action('WebFrontend\UserController@loginForm');
+        }else{
+            return abort('404');
+        }
+        
     }
 
 
