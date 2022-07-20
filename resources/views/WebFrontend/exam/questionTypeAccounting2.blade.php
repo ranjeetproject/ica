@@ -156,7 +156,7 @@
                         if(deleteType==1)
                         {
                             var totalDebitAmount = $("#accounting2_totalDebit_"+questionId).html();
-                            totalDebitAmount = totalDebitAmount - amount;
+                            totalDebitAmount = parseInt(totalDebitAmount) - parseInt(amount);
                             $("#accounting2_totalDebit_"+questionId).html(totalDebitAmount);
                             $("#accounting2Debit_"+questionId).val(totalDebitAmount);
                             
@@ -165,7 +165,7 @@
                         if(deleteType==2)
                         {
                             var totalCreditAmount = $("#accounting2_totalCredit_"+questionId).html();
-                            totalCreditAmount = totalCreditAmount - amount;   
+                            totalCreditAmount = parseInt(totalCreditAmount) - parseInt(amount);
                             $("#accounting2_totalCredit_"+questionId).html(totalCreditAmount);    
                             $("#accounting2credit_"+questionId).val(totalCreditAmount);    
                                                  
