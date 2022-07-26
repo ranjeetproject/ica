@@ -54,6 +54,8 @@ Route::get('/all-courses','WebFrontend\CourseController@allCourses')->name('all-
 Route::get('/course-exam-event','WebFrontend\UserController@courseExamEvent')->name('course-exam-event');
 Route::get('help','WebFrontend\HelpController@index')->name('help-form');
 Route::post('help','WebFrontend\HelpController@store')->name('save-help');
+Route::get('all-testimonial','WebFrontend\HomePageController@allTestimonials')->name('all-testimonial');
+
 
 Route::middleware(['auth'])->group(function ()
 {

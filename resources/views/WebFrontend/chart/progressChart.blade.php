@@ -154,7 +154,7 @@
         const data1 = {
             labels: labels,
             datasets: [{
-                label: 'Courses',
+                label: 'Competition',
                 data: [{{$competitiveProgressPercentage}}],
                 backgroundColor: [
                 'rgba(96, 7, 93, 1)',

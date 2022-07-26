@@ -164,6 +164,8 @@
                     <img src="{{asset('css/images/quote_icon.svg')}}" class="img-fluid quote-icon" />
                     <h3>{{$value->title}}</h3>
                     {!!$value->description!!}
+                   <a  onclick="getData({{$value->id}})" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="readMore">Read More</a>
+
                 </div>
                 <div class="course-by-wrp">
                     <img src="https://demos.mydevfactory.com/android/public/testimonial_images/{{$value->user_image}}" class="ins-avt" alt="#" />
@@ -175,6 +177,12 @@
                 </div>
             </div>
             @endforeach
+            <!-- Button trigger modal -->
+        
+
+        <!-- Modal -->
+        
+
             <!-- <div class="course-card">
                 <div class="t-quotes-card">
                     <img src="{{asset('css/images/quote_icon.svg')}}" class="img-fluid quote-icon" />
@@ -328,5 +336,45 @@
         </div> --}}
     </div>
 </section>
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="testimonialTitle"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                <div class="modal-body" id="testimonialDescription">
+                </div>
+                {{-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div> --}}
+                </div>
+            </div>
+        </div>
+@endsection
+@section('customJavascript')
+<script>
+function getData(id){
+    var dataValue = {
+                    id: id,
+                }
+    var baseUrl = '{{action("WebFrontend\HomePageController@allTestimonials")}}';
+                $.ajax({
+                    type: 'get',
+                    url: baseUrl,
+                    data: dataValue,
+                    success: function (data) {
+                        if (data.success == true) {
+                            $("#testimonialTitle").html(data.testimonial.title);
+                            $("#testimonialDescription").html(data.testimonial.description);
+                        }else{
+                            $("#testimonialTitle").html('');
+                            $("#testimonialTitle").html('');
 
+                        }
+                    }
+                });
+}
+</script>
 @endsection

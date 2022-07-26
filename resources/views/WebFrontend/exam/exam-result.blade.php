@@ -81,7 +81,7 @@
             </div>
         </div>
 
-
+    @if($studentExam->exam_for!=2)
         @foreach($correctWrongAnswer as $particularQuestion)
             <div class="inner_content_info addmargintop ansdetails">
                 <div class="inner_content_view">
@@ -343,6 +343,7 @@
                 </div>
             </div>
         @endforeach
+    @endif
 
         {{-- <div class="inner_content_info addmargintop ansdetails">
             <div class="inner_content_view">

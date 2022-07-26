@@ -60,4 +60,15 @@ class HomePageController extends Controller
         }
         return view('WebFrontend.all_courses',compact('data'));
     }
+
+    public function allTestimonials(Request $request){
+       
+        if ($request->has('id') && $request->get('id') > 0) {
+            $testimonialId = $request->get('id');
+            $testimonialData = Testimonial::find($testimonialId);
+            return ['success' => true, 'testimonial' =>$testimonialData];
+        }else{
+            return ['success' => false];
+        }
+    }
 }
