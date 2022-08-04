@@ -2958,14 +2958,14 @@ p.awsopt {
 
 .qBtnB input[type="radio"] {
     background-color: #fff;
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
 }
 
 .qBtnB input[type="radio"]:checked {
     border: 1px solid #4196a6;
     box-shadow: none;
-    background: url("../images/radiodot.png") 2px 2px no-repeat;
+    background: url("../images/radiodot.png") 3px 3px no-repeat;
 }
 
 .qBtnB {
