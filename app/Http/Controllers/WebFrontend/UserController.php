@@ -229,9 +229,9 @@ class UserController extends Controller
                     $student = Student::find($checkStudentOtp->id);
                     if ($student) {
                         $student->otp = rand(100000, 999999);
-                        $student->is_login_web = 1;
-                        $student->web_login_ip_address = $_SERVER['REMOTE_ADDR'];
-                        $student->web_login_datetime = Carbon::now();
+                        // $student->is_login_web = 1;
+                        // $student->web_login_ip_address = $_SERVER['REMOTE_ADDR'];
+                        // $student->web_login_datetime = Carbon::now();
                         $student->save();
 
                         // Log::debug('Start Writing in controller'); 
@@ -252,14 +252,8 @@ class UserController extends Controller
 
     public function logout()
     {
-        $student = Student::Where('id',Auth::user()->id)->update(['is_login_web' => 0,'web_login_ip_address'=>Null,'web_login_datetime'=>Null]);
-        if($student){
-            Auth::logout();
-            return redirect()->action('WebFrontend\UserController@loginForm');
-        }else{
-            return abort('404');
-        }
-        
+        Auth::logout();
+        return redirect()->action('WebFrontend\UserController@loginForm');     
     }
 
 
