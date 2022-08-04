@@ -223,7 +223,7 @@ class UserController extends Controller
         $input = $request->all();
         $checkStudentOtp = Student::where('code', '=', $input['code'])->where('otp', $input['verify_Otp'])->first();
         if ($checkStudentOtp) {
-            if ($checkStudentOtp->is_login_web!=1) {
+           
                 Auth::login($checkStudentOtp);
                 if (Auth::check()) {
                     $student = Student::find($checkStudentOtp->id);
@@ -242,9 +242,9 @@ class UserController extends Controller
                     }
                     return redirect()->action('WebFrontend\DashboardController@dashboardPageDisplay',['afterLogin'=>1]);
                 }
-            } else {
-                return redirect()->back()->with(['error' => 'Oops! You have already login another device']);
-            }
+            // } else {
+            //     return redirect()->back()->with(['error' => 'Oops! You have already login another device']);
+            // }
         }else {
             return redirect()->back()->with(['error' => 'Oops! You have entered invalid code or otp']);
         }
