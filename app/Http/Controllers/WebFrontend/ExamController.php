@@ -272,15 +272,96 @@ class ExamController extends Controller
         }
     }
 
+    // public function competitiveExam(Request $request)
+    // {
+    //     $data = [];
+    //     if($request->ajax())
+    //     {
+    //         if($request->has('page'))
+    //         {
+    //             //'exams.exam_code','exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject',
+    //             //'exams.exam_zone','exams.exam_for','exams.created_by','exams.tagging_for','exams.tagging_text','exams.quesstion_tag',
+    //             $compExam = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_name',
+    //                                     'exams.type','exams.duration','exams.datet','exams.start_time','exams.end_time',
+    //                                     'exams.question_limit','exams.attempt_time')
+    //                                     ->join('std_exam','std_exam.exam','=','exams.id')
+    //                                     ->where('std_exam.student', Auth::user()->id)
+    //                                     ->where('exams.exam_for', 2)
+    //                                     ->where('exams.status', '1')
+    //                                     ->paginate(8);
+    //             if (count($compExam) > 0)
+    //             {
+    //                 foreach ($compExam as $value_ex)
+    //                 {
+    //                     $datet = $value_ex->datet;
+    //                     $datet_arr = explode("-",$datet);
+
+    //                     $stime = $value_ex->start_time;
+    //                     $stime_arr = explode(":",$stime);
+
+    //                     $etime = $value_ex->end_time;
+    //                     $etime_arr = explode(":",$etime);
+
+    //                     $time = time() + 19800;
+    //                     $st_time = mktime($stime_arr['0'],$stime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
+    //                     $et_time = mktime($etime_arr['0'],$etime_arr['1'],0,$datet_arr['1'],$datet_arr['2'],$datet_arr['0']);
+    //                     if ($value_ex->attempt_time > 0)
+    //                     {                    
+    //                         $student_exam = StudentExam::where('student_id', Auth::user()->id)->where('exam_id', $value_ex->ex_id)->count();                    
+    //                         if ($student_exam < $value_ex->attempt_time) 
+    //                         {
+    //                             if ($st_time < $time && $et_time > $time) 
+    //                             {
+    //                                 $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
+    //                                 if ($question > 0) {
+    //                                     $data[] = $value_ex;
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                     else
+    //                     {
+    //                         $question = Question::where('exam_id', $value_ex->ex_id)->where('state', '1')->count();
+    //                         if ($question > 0) {
+    //                             $data[] = $value_ex;
+    //                         }
+    //                     }
+                        
+    //                 }
+    //             }
+    //             $initializeNumber=8*($compExam->currentPage()-1);
+    //             $view = view('WebFrontend.custom-competitive-exam-pagination',compact('data','initializeNumber'))->render();
+    //             return response()->json(['page'=>$compExam->currentPage()+1,'last_page'=>$compExam->lastPage(),'html' => $view]);
+    //         }
+    //     }
+    //     //return $data;
+
+    //      // Get current page form url e.x. &page=1
+    //     //$currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+    //      // Create a new Laravel collection from the array data
+    //    // $productCollection = collect($data);
+
+    //      // Define how many products we want to be visible in each page
+    //     //$perPage = 10;
+
+    //      // Slice the collection to get the products to display in current page
+    //    // $currentPageproducts = $productCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+
+    //      // Create our paginator and pass it to the view
+    //     //$comExam= new LengthAwarePaginator($currentPageproducts , count($productCollection), $perPage);
+
+    //      // set url path for generted links
+    //     //$comExam->setPath($request->url());
+
+    //     return view('WebFrontend.competitive-exam-list');
+
+    // }
+
     public function competitiveExam(Request $request)
     {
         $data = [];
-        if($request->ajax())
-        {
-            if($request->has('page'))
-            {
-                //'exams.exam_code','exams.exam_details','exams.course','exams.centre','exams.chapter','exams.subject',
-                //'exams.exam_zone','exams.exam_for','exams.created_by','exams.tagging_for','exams.tagging_text','exams.quesstion_tag',
+       
                 $compExam = Exam::select('exams.id as ex_id','std_exam.id as std_exam_id','exams.exam_name',
                                         'exams.type','exams.duration','exams.datet','exams.start_time','exams.end_time',
                                         'exams.question_limit','exams.attempt_time')
@@ -288,7 +369,7 @@ class ExamController extends Controller
                                         ->where('std_exam.student', Auth::user()->id)
                                         ->where('exams.exam_for', 2)
                                         ->where('exams.status', '1')
-                                        ->paginate(8);
+                                        ->get();
                 if (count($compExam) > 0)
                 {
                     foreach ($compExam as $value_ex)
@@ -329,32 +410,12 @@ class ExamController extends Controller
                         
                     }
                 }
-                $initializeNumber=8*($compExam->currentPage()-1);
-                $view = view('WebFrontend.custom-competitive-exam-pagination',compact('data','initializeNumber'))->render();
-                return response()->json(['page'=>$compExam->currentPage()+1,'last_page'=>$compExam->lastPage(),'html' => $view]);
-            }
-        }
+                
+               
+                                        
         //return $data;
 
-         // Get current page form url e.x. &page=1
-        //$currentPage = LengthAwarePaginator::resolveCurrentPage();
-
-         // Create a new Laravel collection from the array data
-       // $productCollection = collect($data);
-
-         // Define how many products we want to be visible in each page
-        //$perPage = 10;
-
-         // Slice the collection to get the products to display in current page
-       // $currentPageproducts = $productCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-
-         // Create our paginator and pass it to the view
-        //$comExam= new LengthAwarePaginator($currentPageproducts , count($productCollection), $perPage);
-
-         // set url path for generted links
-        //$comExam->setPath($request->url());
-
-        return view('WebFrontend.competitive-exam-list');
+        return view('WebFrontend.competitive-exam-list',compact('data'));
 
     }
     public function competitiveExamInstruction($id)
