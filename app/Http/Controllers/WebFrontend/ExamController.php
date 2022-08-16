@@ -1319,7 +1319,8 @@ class ExamController extends Controller
 
                 if($examType==3)
                 {
-                    $data['assignmentPageUrl']=session()->get('assignment_url');                    
+                    $data['assignmentPageUrl']=session()->get('assignment_url'); 
+                    //return $data;                
                     return view('WebFrontend.chapterDetails.assignment-exam-result',$data);
                 }
                 else{

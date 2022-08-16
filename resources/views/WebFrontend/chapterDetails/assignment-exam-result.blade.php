@@ -64,6 +64,7 @@
         </div>
 
         @foreach($correctWrongAnswer as $particularQuestion)
+
             <div class="inner_content_info addmargintop ansdetails">
                 <div class="inner_content_view">
                     <div class="inner_block">
@@ -73,6 +74,8 @@
                                 @if($particularQuestion->ques_type=='radio' || $particularQuestion->ques_type=='check' 
                                     || $particularQuestion->ques_type=='accounting1' || $particularQuestion->ques_type=='accounting4' || $particularQuestion->ques_type=='accounting6')
                                     <p class="awsopt">{{@$particularQuestion->qustionText}}</p>
+                                @elseif($particularQuestion->ques_type=='accounting2')
+                                    <p class="awsopt">{{@$particularQuestion->qustionText}}</p>
                                 @elseif($particularQuestion->ques_type=='accounting3')
                                     <p class="awsopt"><img src="{{@$particularQuestion->qus_image}}"></p>
                                 @elseif($particularQuestion->ques_type=='accounting5')
@@ -80,7 +83,6 @@
                                 @endIf
                             </div>
                         </div>
-
                         @if($particularQuestion->ques_type=='radio')
                             <div class="awsoptview">
                                 <div class="viewans definfo">
@@ -303,7 +305,7 @@
                                 </div>
                             </div>        
                         @elseif($particularQuestion->ques_type=='accounting6')
-                            <div class="awsoptview">
+                            {{-- <div class="awsoptview">
                                 <div class="viewans definfo">
                                     <div class="headingopt">Correct Answer</div>
                                     <div class="ansinfo"> Assets : {{@$particularQuestion->qustionOption[$particularQuestion->questionOldAnswer[0]-1]}}</div>
@@ -317,6 +319,78 @@
                                     <div class="ansinfo">Liabilities : {{@$particularQuestion->qustionOption[$particularQuestion->questionYourAnswer[1]-1]}}</div>
                                     <div class="ansinfo">Income : {{@$particularQuestion->qustionOption[$particularQuestion->questionYourAnswer[2]-1]}}</div> 
                                     <div class="ansinfo">Expenses : {{@$particularQuestion->qustionOption[$particularQuestion->questionYourAnswer[3]-1]}}</div>                                    
+                                </div>
+                            </div> --}}
+                              <div class="awsoptview">
+                                <div class="viewans definfo">
+                                    <div class="headingopt">Correct Answer</div>
+                                    <div class="ansinfo"> Assets : @if(@$particularQuestion->questionOldAnswer[0]==1) 
+                                                                     Increase       
+                                                                   @elseif(@$particularQuestion->questionOldAnswer[0]==2)
+                                                                      Decrease
+                                                                   @elseif(@$particularQuestion->questionOldAnswer[0]==3)
+                                                                   No-Impact
+                                                                   @endif
+                                    </div>
+                                    <div class="ansinfo">Liabilities : @if(@$particularQuestion->questionOldAnswer[1]==1) 
+                                                                     Increase       
+                                                                   @elseif(@$particularQuestion->questionOldAnswer[1]==2)
+                                                                      Decrease
+                                                                   @elseif(@$particularQuestion->questionOldAnswer[1]==3)
+                                                                   No-Impact
+                                                                   @endif
+                                    </div>
+                                    <div class="ansinfo">Income : @if(@$particularQuestion->questionOldAnswer[2]==1) 
+                                                                     Increase       
+                                                                   @elseif(@$particularQuestion->questionOldAnswer[2]==2)
+                                                                      Decrease
+                                                                   @elseif(@$particularQuestion->questionOldAnswer[2]==3)
+                                                                   No-Impact
+                                                                   @endif
+                                    </div>
+                                    <div class="ansinfo">Expenses : @if(@$particularQuestion->questionOldAnswer[3]==1) 
+                                                                     Increase       
+                                                                   @elseif(@$particularQuestion->questionOldAnswer[3]==2)
+                                                                      Decrease
+                                                                   @elseif(@$particularQuestion->questionOldAnswer[3]==3)
+                                                                   No-Impact
+                                                                   @endif
+                                    </div>                                      
+                                </div>
+                                <div class="viewans @if($particularQuestion->ques_old_answer==$particularQuestion->ques_answer) yourans @else wrongans @endif">
+                                    <div class="headingopt">Your Answer</div>
+                                    <div class="ansinfo"> Assets : @if(@$particularQuestion->questionYourAnswer[0]==1) 
+                                                                     Increase       
+                                                                   @elseif(@$particularQuestion->questionYourAnswer[0]==2)
+                                                                      Decrease
+                                                                   @elseif(@$particularQuestion->questionYourAnswer[0]==3)
+                                                                   No-Impact
+                                                                   @endif
+                                    </div>
+                                    <div class="ansinfo">Liabilities : @if(@$particularQuestion->questionYourAnswer[1]==1) 
+                                                                     Increase       
+                                                                   @elseif(@$particularQuestion->questionYourAnswer[1]==2)
+                                                                      Decrease
+                                                                   @elseif(@$particularQuestion->questionYourAnswer[1]==3)
+                                                                   No-Impact
+                                                                   @endif
+                                    </div>
+                                    <div class="ansinfo">Income :  @if(@$particularQuestion->questionYourAnswer[2]==1) 
+                                                                     Increase       
+                                                                   @elseif(@$particularQuestion->questionYourAnswer[2]==2)
+                                                                      Decrease
+                                                                   @elseif(@$particularQuestion->questionYourAnswer[2]==3)
+                                                                   No-Impact
+                                                                   @endif
+                                    </div> 
+                                    <div class="ansinfo">Expenses :  @if(@$particularQuestion->questionYourAnswer[3]==1) 
+                                                                     Increase       
+                                                                   @elseif(@$particularQuestion->questionYourAnswer[3]==2)
+                                                                      Decrease
+                                                                   @elseif(@$particularQuestion->questionYourAnswer[3]==3)
+                                                                   No-Impact
+                                                                   @endif
+                                    </div>                                    
                                 </div>
                             </div>
                         @endIf
